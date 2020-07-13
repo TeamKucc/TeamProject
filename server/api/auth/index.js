@@ -1,8 +1,9 @@
 import express from 'express'
-import ctrl from './auth.ctrl'
+import * as authctrl from './auth.ctrl'
 
-const router =express.Router()
+const router = express.Router()
 
-router.post('/register',ctrl.register)
+router.post('/register', authctrl.register)
+router.post('/login',authctrl.login)
 
-module.exports =router
+export default router;
