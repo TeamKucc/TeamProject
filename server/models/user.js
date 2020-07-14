@@ -17,6 +17,7 @@ UserSchema.statics.create = function(username,password){
 }
 
 UserSchema.statics.findByUsername = function(username){
+    console.log(username)
     return this.findOne({username})
 }
 
@@ -25,6 +26,7 @@ UserSchema.methods.verify = function(password){
 }
 
 UserSchema.methods.assignAdmin = function(){
+    console.log("admin call")
     this.admin = true
     return this.save()
 }
