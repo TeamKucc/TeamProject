@@ -1,6 +1,8 @@
+require('dotenv').config()
 import User from '../../models/user'
-import jwt from 'jsonwebtoken'
-import e from 'express'
+import jwt, { decode } from 'jsonwebtoken'
+
+const {JWT_SECRET} = process.env
 
 export const register = (req, res) => {
     const { username, password } = req.body
@@ -54,7 +56,8 @@ export const register = (req, res) => {
 
 export const login = (req, res) => {
     const { username, password } = req.body
-    const { JWT_SECRET } = process.env
+
+
     const check = (user) => {
         if (!user) {
             throw new Error('login 실패');
@@ -70,11 +73,43 @@ export const login = (req, res) => {
                         JWT_SECRET,
                         {
                             expiresIn: '7d',
-                            
-                        }
-                    )
+                            issuer:'teamkucc',
+                            subject:'userinfo'
+                        },(err,token)=>{
+                            if(err)rej(err)
+                            res(token)
+                        })
                 })
+                return pass
+            }else{
+                throw new Error('login failed')
             }
         }
     }
+
+    const respond = (token)=>{
+        res.json({
+            message:'login success',
+            token
+        })
+    }
+
+    const onError = (err)=>{
+        res.status(403).json({
+            message:err.message
+        })
+    }
+
+    User.findByUsername(username)
+    .then(check)
+    .then(respond)
+    .catch(onError)
 }
+
+export const check =(req,res)=>{
+    res.json({
+        success:true,
+        info:req.decode
+    })
+}
+
