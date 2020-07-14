@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import { Button } from 'antd';
+import React, { Component } from "react"
+import styled from "styled-components"
+import { Button } from "antd"
 
 class Header extends Component {
   render() {
@@ -16,24 +16,27 @@ class Header extends Component {
         </Logo> */}
         <NavList>
           <NavItem>
-            <h2>소개</h2>
+            <h2>로고</h2>
           </NavItem>
           <NavItem>
-            <h2>게시판</h2>
+            <h2>홈</h2>
           </NavItem>
           <NavItem>
-            <h2>Etc</h2>
+            <h2>지역</h2>
+          </NavItem>
+          <NavItem>
+            <h2>가이드</h2>
           </NavItem>
           <Button type="primary" shape="round">
             로그인
           </Button>
         </NavList>
       </Nav>
-    );
+    )
   }
 }
 
-export default Header;
+export default Header
 // const Logo = styled.div`
 //   position: fixed;
 //   width: 200px;
@@ -41,23 +44,23 @@ export default Header;
 // `;
 
 const Nav = styled.div`
-  display:flex;
+  display: flex;
   width: 100%;
   height: 100px;
   margin: 10px;
   padding: 20px 20px;
   border-bottom: 1px solid #d1d8e4;
-`;
+`
 
 const NavList = styled.ul`
   width: 1080px;
   height: 100px;
   display: flex;
   margin: 0 auto;
-`;
+`
 
 const NavItem = styled.li`
   width: 100px;
   margin: 0 auto;
   display: flex;
-`;
+`
