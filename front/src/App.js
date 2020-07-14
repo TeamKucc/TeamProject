@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import Header from './components/common/Header';
-import Footer from './components/common/Footer';
+import React, { Component } from "react"
+import styled from "styled-components"
+import Header from "./components/common/Header"
+import Footer from "./components/common/Footer"
+import DealPage from "./pages/DealRegisterPage"
 
 class App extends Component {
   render() {
@@ -9,9 +10,10 @@ class App extends Component {
       <Layout>
         <Header />
         <hr />
+        <DealPage />
         <Footer />
       </Layout>
-    );
+    )
   }
 }
 
@@ -20,6 +22,6 @@ const Layout = styled.div`
   display: flex;
   width: 100%;
   flex-flow: row wrap;
-`;
+`
 
-export default App;
+export default App
