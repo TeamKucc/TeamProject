@@ -2,6 +2,28 @@ import React, { Component } from "react"
 import styled from "styled-components"
 import { Button } from "antd"
 
+const Nav = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100px;
+  margin: 10px;
+  padding: 20px 20px;
+  border-bottom: 1px solid #d1d8e4;
+`
+
+const NavList = styled.ul`
+  width: 1080px;
+  height: 100px;
+  display: flex;
+  margin: 0 auto;
+`
+
+const NavItem = styled.li`
+  width: 100px;
+  margin: 0 auto;
+  display: flex;
+`
+
 class Header extends Component {
   render() {
     return (
@@ -43,24 +65,4 @@ export default Header
 //   height: 80px;
 // `;
 
-const Nav = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100px;
-  margin: 10px;
-  padding: 20px 20px;
-  border-bottom: 1px solid #d1d8e4;
-`
 
-const NavList = styled.ul`
-  width: 1080px;
-  height: 100px;
-  display: flex;
-  margin: 0 auto;
-`
-
-const NavItem = styled.li`
-  width: 100px;
-  margin: 0 auto;
-  display: flex;
-`

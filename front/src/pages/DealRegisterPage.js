@@ -1,8 +1,8 @@
-import React from "react"
-import DealRegisterContainer from "../containers/deal/DealRegisterContainer"
+import React from 'react';
+import DealRegisterContainer from '../containers/deal/DealRegisterContainer';
 
 const DealRegisterPage = () => {
-  return <DealRegisterContainer />
-}
+  return <DealRegisterContainer />;
+};
 
-export default DealRegisterPage
+export default DealRegisterPage;
