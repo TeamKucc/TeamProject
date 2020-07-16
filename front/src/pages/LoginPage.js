@@ -1,10 +1,13 @@
 import React from 'react';
+import LoginForm from '../container/auth/LoginForm';
+import Template from '../components/auth/Template';
 
 const LoginPage = () => {
   return (
-    <>
-      <div>로그인 페이지</div>
-    </>
+    <Template>
+      <LoginForm/>
+    </Template>
+
   );
 };
 

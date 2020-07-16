@@ -1,10 +1,12 @@
 import React from 'react';
+import BuyerRegisterForm from '../container/auth/BuyerRegisterForm';
+import Template from '../components/auth/Template';
 
 const BuyerRegisterPage = () => {
   return (
-    <>
-      <div>구매자 회원가입 페이지</div>
-    </>
+    <Template>
+      <BuyerRegisterForm />
+    </Template>
   );
 };
 

@@ -1,34 +1,15 @@
-import React, { Component } from "react"
-import styled from "styled-components"
-import { Button } from "antd"
+import React, { useEffect} from 'react';
+import styled from 'styled-components';
+import { Button } from 'antd';
+import { Link } from 'react-router-dom';
 
-const Nav = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100px;
-  margin: 10px;
-  padding: 20px 20px;
-  border-bottom: 1px solid #d1d8e4;
-`
+const Header = () => {
+  
+  const user = localStorage.getItem('userID')
 
-const NavList = styled.ul`
-  width: 1080px;
-  height: 100px;
-  display: flex;
-  margin: 0 auto;
-`
-
-const NavItem = styled.li`
-  width: 100px;
-  margin: 0 auto;
-  display: flex;
-`
-
-class Header extends Component {
-  render() {
-    return (
-      <Nav>
-        {/* <Logo>
+  return (
+    <Nav>
+      {/* <Logo>
           <img
             width="50%"
             height="100%"
@@ -36,33 +17,62 @@ class Header extends Component {
             alt="logo"
           />
         </Logo> */}
-        <NavList>
-          <NavItem>
-            <h2>로고</h2>
-          </NavItem>
-          <NavItem>
-            <h2>홈</h2>
-          </NavItem>
-          <NavItem>
-            <h2>지역</h2>
-          </NavItem>
-          <NavItem>
-            <h2>가이드</h2>
-          </NavItem>
-          <Button type="primary" shape="round">
-            로그인
-          </Button>
-        </NavList>
-      </Nav>
-    )
-  }
+      <NavList>
+        <NavItem>
+          <h2>소개</h2>
+        </NavItem>
+        <NavItem>
+          <h2>게시판</h2>
+        </NavItem>
+        <NavItem>
+          <h2>Etc</h2>
+        </NavItem>
+        {user ?
+          (
+            <div>
+              <Button type="primary" shape="round">
+                <Link to="/logout" >로그아웃</Link>
+              </Button>
+            </div>
+          ) : (
+            <div>{user}
+            <Button type="primary" shape="round">
+              <Link to="/login" >로그인</Link>
+            </Button>
+            </div>
+          )}
+
+      </NavList>
+    </Nav>
+  );
+
 }
 
-export default Header
+export default Header;
 // const Logo = styled.div`
 //   position: fixed;
 //   width: 200px;
 //   height: 80px;
 // `;
 
+const Nav = styled.div`
+  display:flex;
+  width: 100%;
+  height: 100px;
+  margin: 10px;
+  padding: 20px 20px;
+  border-bottom: 1px solid #d1d8e4;
+`;
 
+const NavList = styled.ul`
+  width: 1080px;
+  height: 100px;
+  display: flex;
+  margin: 0 auto;
+`;
+
+const NavItem = styled.li`
+  width: 100px;
+  margin: 0 auto;
+  display: flex;
+`;
