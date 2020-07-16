@@ -1,12 +1,15 @@
-import React, { Component } from 'react';
+import React, { useEffect} from 'react';
 import styled from 'styled-components';
 import { Button } from 'antd';
+import { Link } from 'react-router-dom';
 
-class Header extends Component {
-  render() {
-    return (
-      <Nav>
-        {/* <Logo>
+const Header = () => {
+  
+  const user = localStorage.getItem('userID')
+
+  return (
+    <Nav>
+      {/* <Logo>
           <img
             width="50%"
             height="100%"
@@ -14,23 +17,35 @@ class Header extends Component {
             alt="logo"
           />
         </Logo> */}
-        <NavList>
-          <NavItem>
-            <h2>소개</h2>
-          </NavItem>
-          <NavItem>
-            <h2>게시판</h2>
-          </NavItem>
-          <NavItem>
-            <h2>Etc</h2>
-          </NavItem>
-          <Button type="primary" shape="round">
-            로그인
-          </Button>
-        </NavList>
-      </Nav>
-    );
-  }
+      <NavList>
+        <NavItem>
+          <h2>소개</h2>
+        </NavItem>
+        <NavItem>
+          <h2>게시판</h2>
+        </NavItem>
+        <NavItem>
+          <h2>Etc</h2>
+        </NavItem>
+        {user ?
+          (
+            <div>
+              <Button type="primary" shape="round">
+                <Link to="/logout" >로그아웃</Link>
+              </Button>
+            </div>
+          ) : (
+            <div>{user}
+            <Button type="primary" shape="round">
+              <Link to="/login" >로그인</Link>
+            </Button>
+            </div>
+          )}
+
+      </NavList>
+    </Nav>
+  );
+
 }
 
 export default Header;
