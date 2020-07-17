@@ -1,11 +1,14 @@
-import React, { useEffect} from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Button } from 'antd';
 import { Link } from 'react-router-dom';
 
-const Header = () => {
-  
-  const user = localStorage.getItem('userID')
+const f1=()=>{
+  localStorage.removeItem('userId')
+}
+
+const Header = ({onLogout,user}) => {
+
 
   return (
     <Nav>
@@ -25,20 +28,20 @@ const Header = () => {
           <h2>게시판</h2>
         </NavItem>
         <NavItem>
-          <h2>Etc</h2>
+          <button onClick={f1}></button>
         </NavItem>
         {user ?
           (
             <div>
-              <Button type="primary" shape="round">
-                <Link to="/logout" >로그아웃</Link>
+              <Button type="primary" shape="round" onClick={onLogout}>
+                 로그아웃
               </Button>
             </div>
           ) : (
             <div>{user}
-            <Button type="primary" shape="round">
-              <Link to="/login" >로그인</Link>
-            </Button>
+              <Button type="primary" shape="round">
+                <Link to="/login" >로그인</Link>
+              </Button>
             </div>
           )}
 

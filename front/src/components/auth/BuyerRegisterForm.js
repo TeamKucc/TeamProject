@@ -21,7 +21,7 @@ const RegisterForm = (type, form, onChange, onSubmit, error) => {
                 <TextField id="standard-basic" name="userID" label="ID" value={form.userID} onChange={onChange} />
                 <TextField id="standard-basic" name="name" label="Name" value={form.name} onChange={onChange} />
                 <TextField id="standard-basic" name="password" label="password" value={form.password} onChange={onChange} />
-                <TextField id="standard-basic" name="password" label="password" value={form.username} onChange={onChange} />
+                <TextField id="standard-basic" name="passwordconfirm" label="password-confirm" value={form.confirm} onChange={onChange} />
                 <TextField id="standard-basic" name="email" label="Email" value={form.email} onChange={onChange} />
             </form>
             <button type="submit">완료</button>

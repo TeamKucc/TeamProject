@@ -67,7 +67,6 @@ const auth = handleActions(
             ...state,
             authError: null,
             auth,
-            
         }),
         
         [LOGIN_FAILURE]: (state, { payload: error }) => ({

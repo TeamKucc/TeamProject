@@ -50,7 +50,6 @@ const BuyerRegisterForm = ({ history }) => {
         if (auth) {
             console.log('회원가입성공');;
             console.log(auth);;
-            dispatch(check());
         }
         if (authError) {
             if (authError.response.status === 409) {

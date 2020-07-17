@@ -1,14 +1,21 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from '../../components/common/Header';
-import { dark } from '@material-ui/core/styles/createPalette';
-import user from '../../modules/user';
+import { logout } from '../../modules/user'
+import {withRouter} from 'react-router-dom'
+import Cookies from 'react-cookies'
+const HeaderContainer = ({history}) => {
 
-const HeaderContainer = () => {
-    const {user} = useSelector(({user})=>({
-        
-    }))
-    return <Header auth={auth} />
+    const {user}=useSelector(({user})=>({user:user.user}))
+    const dispatch = useDispatch()
+
+    const onLogout = () => {
+        console.log('logout call')
+        dispatch(logout())
+        history.push('/')
+    }
+
+    return <Header onLogout={onLogout} user={user} />
 }
 
-export default HeaderContainer;
+export default withRouter(HeaderContainer);
