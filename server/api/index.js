@@ -1,12 +1,10 @@
 import express from 'express';
-import auth from './auth'
-import user from './user'
-import authMiddleware from '../lib/jwtmiddleware';
+import user from './user/index';
+import product from './product/index';
 
-const router =express.Router();
+const router = express.Router();
 
-router.use('/auth',auth);
-router.use('/user',authMiddleware);
-router.use('/user',user)
+router.use('/user', user);
+router.use('/product', product);
 
 export default router;
