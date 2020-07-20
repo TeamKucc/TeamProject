@@ -2,114 +2,62 @@ require('dotenv').config()
 import User from '../../models/user'
 import jwt, { decode } from 'jsonwebtoken'
 
-const {JWT_SECRET} = process.env
+const { JWT_SECRET } = process.env
 
-export const register = (req, res) => {
-    const { username, password } = req.body
-    let newUser = null
+export const auth = (req, res) => {
 
-    const create = (user) => {
-        if (user) {
-            throw new Error('username exists')
+}
+
+export const register = async (req, res) => {
+    const user = new User(req.body);
+    const {userID} = user
+
+    await User.findOne({ userID: userID }, (err, userID) => {
+        if (userID) {
+            res.status(409).json({
+                message: "ID already exist"
+            })
         } else {
-            return User.create(username, password)
+            user.save((err, doc) => {
+                if (err) return res.json({ success: false, err });
+                return res.status(200).json({
+                    success: true
+                })
+            })
         }
-    }
+    })
 
-    const count = (user) => {
-        newUser = user
-        return User.countDocuments({}).exec()
-    }
-
-
-    const assign = (count) => {
-        if (count === 1) {
-            return newUser.assignAdmin()
-        } else {
-            return Promise.resolve(false)
-        }
-    }
-
-    const respond = (isAdmin) => {
-        res.json({
-            message: 'registered successfully',
-            admin: isAdmin ? true : false
-        })
-    }
-
-    // run when there is an error (username exists)
-    const onError = (error) => {
-        res.status(409).json({
-            message: error.message
-        })
-    }
-
-    // check username duplication
-    User.findByUsername(username)
-        .then(create)
-        .then(count)
-        .then(assign)
-        .then(respond)
-        .catch(onError)
 }
 
 
 export const login = (req, res) => {
-    const { username, password } = req.body
 
+    User.findOne({ userID: req.body.userID }, (err, user) => {
+        if (!user) return res.json({
+            loginSuccess: false,
+            message: "Login Failed,ID not Found"
+        });
+        user.verify(req.body.password, (err, isMatch) => {
+            if (!isMatch) return res.json({ login: false, maessage: "wrong password" });
 
-    const check = (user) => {
-        if (!user) {
-            throw new Error('login 실패');
-        } else {
-            if (user.verify(password)) {
-                const pass = new Promise((res, rej) => {
-                    jwt.sign(
-                        {
-                            _id: user._id,
-                            username: user.username,
-                            admin: user.admin
-                        },
-                        JWT_SECRET,
-                        {
-                            expiresIn: '7d',
-                            issuer:'teamkucc',
-                            subject:'userinfo'
-                        },(err,token)=>{
-                            if(err)rej(err)
-                            res(token)
-                        })
-                })
-                return pass
-            }else{
-                throw new Error('login failed')
-            }
-        }
-    }
-
-    const respond = (token)=>{
-        res.json({
-            message:'login success',
-            token
+            user.generateToken((err, user) => {
+                if (err) return res.status(400).send(err);
+                res.cookie("w_authExp", user.tokenExp);
+                res.cookie("w_auth", user.token)
+                    .status(200)
+                    .json({
+                        login: true, userId: user._id
+                    })
+            })
         })
-    }
-
-    const onError = (err)=>{
-        res.status(403).json({
-            message:err.message
-        })
-    }
-
-    User.findByUsername(username)
-    .then(check)
-    .then(respond)
-    .catch(onError)
-}
-
-export const check =(req,res)=>{
-    res.json({
-        success:true,
-        info:req.decode
     })
 }
 
+export const logout = (req, res) => {
+    User.findOneAndUpdate({ _id: req.body._id }, { token: "", tokenExp: "" }, (err, doc) => {
+        if (err) return res.json({ success: false, err })
+        return res.status(200).send({
+            logoutsuccess: true
+        })
+    })
+}

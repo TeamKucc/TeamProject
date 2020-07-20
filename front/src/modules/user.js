@@ -6,15 +6,11 @@ import createRequestSaga,{createRequestActionTypes} from '../lib/createRequestsa
 
 const TEMP_SET_USER = 'user/TEMP_SET_USER';
 const LOGOUT = 'user/LOGOUT'
-const [
-    USERINFO,
-    USERINFO_SUCCESS,
-    USERINFO_FAILURE
-]=createRequestActionTypes('user/USERINFO')
+
 
 export const tempSetUser = createAction(TEMP_SET_USER, user => user)
 export const logout = createAction(LOGOUT);
-export const userInfo = createAction(USERINFO)
+
 
 
 function* logoutSaga() {
@@ -27,7 +23,7 @@ function* logoutSaga() {
         console.log(error)
     }
 }
-const userInfoSaga=createRequestSaga(USERINFO)
+
 
 export function* userSaga() {
     yield takeLatest(LOGOUT,logoutSaga);

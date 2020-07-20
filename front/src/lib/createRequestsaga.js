@@ -21,8 +21,6 @@ export default function createRequestSaga(type,request){
                 console.log('save Data')
                 localStorage.setItem('userId',JSON.stringify(response.data.userId))
             }
-
-            
             yield put({
                 type:SUCCESS,
                 payload:response.data,

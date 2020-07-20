@@ -4,6 +4,7 @@ import * as userCtrl from './user.ctrl'
 const router = express.Router();
 
 router.get('/list',userCtrl.list)
-router.post('/assign-admin/:username',userCtrl.assignAdmin)
+router.get('/userinfo/:_id',userCtrl.userInfo)
+router.post('/userUpdate',userCtrl.userUpdate)
 
 export default router;

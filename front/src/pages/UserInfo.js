@@ -1,11 +1,12 @@
 import React from 'react';
-import user from '../modules/user';
+import Template from '../components/auth/Template';
+import UserInfoContainer from '../container/auth/UserInfoContainer'
 
 const UserInfo =()=>{
     return(
-        <div>
-
-        </div>
+        <Template>
+            <UserInfoContainer/>
+        </Template>
     )
 }
 

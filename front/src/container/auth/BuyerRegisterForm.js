@@ -29,18 +29,20 @@ const BuyerRegisterForm = ({ history }) => {
 
     const onSubmit = e => {
         e.preventDefault();
-        const { username, password, passwordConfirm } = form;
+        const { userID,name, password,passwordConfirm,email } = form;
 
-        if ([username, password, passwordConfirm].includes('')) {
+        if ([userID,name,password,passwordConfirm,email].includes('')) {
             setError('빈칸을 모두 입력해주세요')
             return
         }
-
         if (password !== passwordConfirm) {
+            setError('비밀번호가 다릅니다')
             return
         }
-        dispatch(register({ username, password }));
+        console.log('call')
+        dispatch(register({ userID,name,password,email }));
     }
+
     //컴포넌트가 처음 렌더링 될때 폼 초기화
     useEffect(() => {
         dispatch(initializeForm('register'))
@@ -50,6 +52,7 @@ const BuyerRegisterForm = ({ history }) => {
         if (auth) {
             console.log('회원가입성공');;
             console.log(auth);;
+            history.push('/')
         }
         if (authError) {
             if (authError.response.status === 409) {
