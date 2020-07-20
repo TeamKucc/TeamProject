@@ -27,7 +27,7 @@ const AuthForm = ({ form, onChange, onSubmit }) => {
         <>
             <AuthFormBlock>
                 <form className={classes.root} noValidate autoComplete="off" onSubmit={onSubmit}>
-                    <TextField id="standard-basic" name="userID" label="ID" value={form.username} onChange={onChange}/>
+                    <TextField id="standard-required" name="userID" label="ID" value={form.username} onChange={onChange} />
                     <TextField
                         id="standard-password-input"
                         name="password"

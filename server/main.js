@@ -3,6 +3,7 @@ import express from 'express';
 import asyncify from 'express-asyncify'
 import bodyparser, { urlencoded } from 'body-parser';
 import mongoose from 'mongoose';
+import cookieParser from 'cookie-parser'
 import api from './api/index'
 
 const app = express();
@@ -18,8 +19,9 @@ mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true },
     }
 )
 
-app.use(bodyparser.urlencoded({ extended: false }))
+app.use(bodyparser.urlencoded({ extended: true }))
 app.use(bodyparser.json());
+app.use(cookieParser())
 
 app.use('/api', api);
 

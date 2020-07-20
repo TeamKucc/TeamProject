@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Route } from 'react-router-dom';
 import { changeField, initializeForm, login } from '../../modules/auth'
 import AuthForm from '../../components/auth/LoginForm'
 import { check, tempSetUser } from '../../modules/user'
@@ -27,7 +27,7 @@ const LoginForm = ({ history }) => {
     }
 
     const onSubmit = e => {
-        e.preventDefault();
+        e.preventDefault()
         const { userID, password } = form;
         console.log(form)
         dispatch(login({ userID, password }))
@@ -46,11 +46,11 @@ const LoginForm = ({ history }) => {
             return
         }
         if (auth) {
-            history.push('/')
+            if (auth.login) {history.push('/')};
         }
-    }, [auth, authError]);
+    }, [auth, authError,history]);
 
-    
+
 
     return (
         <>

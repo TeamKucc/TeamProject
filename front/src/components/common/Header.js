@@ -1,12 +1,17 @@
-import React, { useEffect} from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Button } from 'antd';
 import { Link } from 'react-router-dom';
+import queryString from  'query-string'
 
-const Header = () => {
-  
-  const user = localStorage.getItem('userID')
 
+const Header = ({onLogout,user}) => {
+
+
+  const userId = user.replace(/['"]+/g, '')
+ const f1=()=>{
+   console.log(userId)
+ }
   return (
     <Nav>
       {/* <Logo>
@@ -25,20 +30,21 @@ const Header = () => {
           <h2>게시판</h2>
         </NavItem>
         <NavItem>
-          <h2>Etc</h2>
+          <Link to={`/userInfo/${userId}`}>내정보</Link>
+          <Button onClick={f1}>Check</Button>
         </NavItem>
         {user ?
           (
             <div>
-              <Button type="primary" shape="round">
-                <Link to="/logout" >로그아웃</Link>
+              <Button type="primary" shape="round" onClick={onLogout}>
+                 로그아웃
               </Button>
             </div>
           ) : (
             <div>{user}
-            <Button type="primary" shape="round">
-              <Link to="/login" >로그인</Link>
-            </Button>
+              <Button type="primary" shape="round">
+                <Link to="/login" >로그인</Link>
+              </Button>
             </div>
           )}
 

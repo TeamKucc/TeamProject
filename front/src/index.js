@@ -5,6 +5,7 @@ import * as serviceWorker from './serviceWorker';
 import 'antd/dist/antd.css';
 import {BrowserRouter} from 'react-router-dom'
 
+
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -18,10 +19,10 @@ const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaM
 
 function loadUser(){
   try {
-    const user = localStorage.getItem('user');
+    const user = localStorage.getItem('userId');
     if(!user) return 
     store.dispatch(tempSetUser(user));
-    store.dispatch(check());
+    console.log(user)
   } catch (e) {
     console.log('local Error')
   }

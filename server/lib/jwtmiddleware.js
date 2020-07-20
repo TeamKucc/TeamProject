@@ -4,7 +4,8 @@ const {JWT_SECRET} = process.env
 
 const authMiddleware =(req,res,next)=>{
     const token = req.headers['x-access-token']||req.query.token
-    
+    console.log(token)
+
     if(!token){
         return res.status(403).json({
             success:false,
