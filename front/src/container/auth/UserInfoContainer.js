@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import UserInfo from '../../components/auth/UserInfo';
 import { changeField, userInfo, } from '../../modules/auth';
-
+import {userUpdate} from '../../modules/user'
+import produce from 'immer'
 
 const UserInfoContainer = ({match}) => {
     
     const dispatch = useDispatch();
     const [error, setError] = useState(null)
-    const { form, auth, authError, user } = useSelector(({ auth, user }) => ({
+    const { form, auth, authError, user } = useSelector(({ auth }) => ({
         form: auth.userInfo,
         auth: auth.auth,
         authError: auth.authError,
@@ -29,6 +30,7 @@ const UserInfoContainer = ({match}) => {
         const userId = localStorage.getItem('userId').replace(/['"]+/g, '')
         dispatch(userInfo(userId))
     },[])
+
     const onSubmit = e => {
         e.preventDefault();
         const { userID, name, password, passwordConfirm, email } = form;
@@ -42,14 +44,14 @@ const UserInfoContainer = ({match}) => {
             return
         }
         console.log('call')
-        dispatch(userInfo({ userID, name, password, email }));
+        dispatch(userUpdate({ userID, name, password, email }));
     }
-
     
+ 
 
     return (
         <>
-            <UserInfo onSubmit={onSubmit} onChange={onChange} form={form} user={user} />
+            <UserInfo onSubmit={onSubmit} onChange={onChange} form={form} user={user} error={error}  />
             
         </>
     )

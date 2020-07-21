@@ -106,6 +106,7 @@ const auth = handleActions(
         [USERINFO_SUCCESS]:(state,{payload:user})=>({
             ...state,
             user:user,
+            userInfo:user,
             error:null,
         }),
         [USERINFO_FAILURE]:(state,{payload:error})=>({

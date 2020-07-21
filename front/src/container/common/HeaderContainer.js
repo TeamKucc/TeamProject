@@ -4,6 +4,7 @@ import Header from '../../components/common/Header';
 import { logout } from '../../modules/user'
 import {withRouter} from 'react-router-dom'
 import Cookies from 'react-cookies'
+import HEAD from '../../components/common/HEAD'
 const HeaderContainer = ({history}) => {
 
     const {user}=useSelector(({user})=>({user:user.user}))
@@ -15,7 +16,7 @@ const HeaderContainer = ({history}) => {
         history.push('/')
     }
 
-    return <Header onLogout={onLogout} user={user} />
+    return <HEAD onLogout={onLogout} user={user} />
 }
 
 export default withRouter(HeaderContainer);

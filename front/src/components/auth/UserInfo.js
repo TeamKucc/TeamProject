@@ -1,6 +1,26 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField'
 import { makeStyles } from '@material-ui/core'
+import styled from 'styled-components';
+
+const UserInfoBlock = styled.div`
+    position:absolute;
+    top:4rem;
+    left:0;
+    right:0;
+    bottom:0;
+    background: white;
+    display: flex;
+    flex-direction: colum;
+    justify-content: center;
+     align-items: center;
+`
+const FormBox = styled.div`
+padding: 2rem;
+width: 360px;
+background: white;
+boder-radius: 2px;
+`
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -8,27 +28,26 @@ const useStyles = makeStyles((theme) => ({
             margin: theme.spacing(1),
             width: '25ch',
         },
+        textAlign:'center'
     },
 }));
 
-const UserInfo = ({ onSubmit, onChange, form, user }) => {
+const UserInfo = ({ onSubmit, form, user, onChange }) => {
     const classes = useStyles()
-    const f1 = () => {
-        console.log(user.name)
-    }
-    
+
     return (
-        <div>
-            <form className={classes.root} noValidate autoComplete="off" onSubmit={onSubmit}>
-                <TextField id="standard-basic" name="userID" label="ID" value={form.userID} onChange={onChange}  />
-                <TextField id="standard-basic" name="name" label="Name" value={form.name} onChange={onChange} />
-                <TextField id="standard-basic" name="password" label="password" type="password" value={form.password} onChange={onChange} />
-                <TextField id="standard-basic" name="passwordConfirm" label="password-confirm" type="password" value={form.passwordConfirm} onChange={onChange} />
-                <TextField id="standard-basic" name="email" label="Email" value={form.email} onChange={onChange} />
-                <button type="submit">완료</button>
-            </form>
-            <button onClick={f1}>check</button>
-        </div>
+        <UserInfoBlock>
+            <FormBox>
+                <form className={classes.root} noValidate autoComplete="off" onSubmit={onSubmit}>
+                    <TextField id="standard-basic" name="userID" label="ID" value={form.userID} onChange={onChange} />
+                    <TextField id="standard-basic" name="name" label="Name" value={form.name} onChange={onChange} />
+                    <TextField id="standard-basic" name="password" label="password" type="password"  onChange={onChange} />
+                    <TextField id="standard-basic" name="passwordConfirm" label="password-confirm" type="password"  onChange={onChange} />
+                    <TextField id="standard-basic" name="email" label="Email" value={form.email} onChange={onChange} />
+                    <button type="submit">완료</button>
+                </form>
+            </FormBox>
+        </UserInfoBlock>
     )
 }
 export default UserInfo

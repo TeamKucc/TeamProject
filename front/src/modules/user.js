@@ -6,11 +6,15 @@ import createRequestSaga,{createRequestActionTypes} from '../lib/createRequestsa
 
 const TEMP_SET_USER = 'user/TEMP_SET_USER';
 const LOGOUT = 'user/LOGOUT'
-
+const [
+    USER_UPDATE,
+    USER_UPDATE_SUCCESS,
+    USER_UPDATE_FAILURE,
+]=createRequestActionTypes('user/USER_UPDATE')
 
 export const tempSetUser = createAction(TEMP_SET_USER, user => user)
 export const logout = createAction(LOGOUT);
-
+export const userUpdate =createAction(USER_UPDATE,)
 
 
 function* logoutSaga() {
