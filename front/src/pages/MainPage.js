@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import Header from '../components/common/Header'
 import HeaderContainer from '../container/common/HeaderContainer';
+import { withRouter } from 'react-router-dom';
+
 const MainPage = () => {
-  useEffect(()=>{
-    
-  },[])
+  
+
   return (
    <>
    <HeaderContainer/>
@@ -13,4 +13,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default withRouter(MainPage);

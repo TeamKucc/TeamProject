@@ -5,7 +5,7 @@ import { changeField, initializeForm, login } from '../../modules/auth'
 import AuthForm from '../../components/auth/LoginForm'
 import { check, tempSetUser } from '../../modules/user'
 
-const LoginForm = ({ history }) => {
+const LoginForm = (props) => {
     const [error, setError] = useState(null)
     const dispatch = useDispatch();
     const { form, auth, authError, user } = useSelector(({ auth, user }) => ({
@@ -46,9 +46,14 @@ const LoginForm = ({ history }) => {
             return
         }
         if (auth) {
-            if (auth.login) {history.push('/')};
+            if (auth.login) {
+                setTimeout(() => {
+                    props.history.push('/')
+                },500)
+            };
+
         }
-    }, [auth, authError,history]);
+    }, [auth, authError]);
 
 
 

@@ -2,16 +2,18 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Button } from 'antd';
 import { Link } from 'react-router-dom';
-import queryString from  'query-string'
+import queryString from 'query-string'
 
 
-const Header = ({onLogout,user}) => {
+const Header = ({ onLogout, user }) => {
+  const userId = null;
+
+  if (user) {
+    userId = user.replace(/['"]+/g, '')
+  }
 
 
-  const userId = user.replace(/['"]+/g, '')
- const f1=()=>{
-   console.log(userId)
- }
+
   return (
     <Nav>
       {/* <Logo>
@@ -31,13 +33,12 @@ const Header = ({onLogout,user}) => {
         </NavItem>
         <NavItem>
           <Link to={`/userInfo/${userId}`}>내정보</Link>
-          <Button onClick={f1}>Check</Button>
         </NavItem>
         {user ?
           (
             <div>
               <Button type="primary" shape="round" onClick={onLogout}>
-                 로그아웃
+                로그아웃
               </Button>
             </div>
           ) : (
