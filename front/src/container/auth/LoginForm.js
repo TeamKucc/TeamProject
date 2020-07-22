@@ -31,7 +31,6 @@ const LoginForm = (props) => {
         const { userID, password } = form;
         console.log(form)
         dispatch(login({ userID, password }))
-
     };
 
     useEffect(() => {
@@ -46,11 +45,14 @@ const LoginForm = (props) => {
             return
         }
         if (auth) {
-            if (auth.login) {
-                setTimeout(() => {
-                    props.history.push('/')
-                },500)
-            };
+            console.log(auth.userId)
+            props.history.push('/')
+            try {
+               const userId=localStorage.getItem('userId')
+                dispatch(tempSetUser(userId))
+            } catch (error) {
+                console.log('storage Error error')
+            }
 
         }
     }, [auth, authError]);

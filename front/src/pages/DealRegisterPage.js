@@ -1,8 +1,14 @@
 import React from 'react';
-import DealRegisterContainer from '../containers/deal/DealRegisterContainer';
+import Template from '../components/auth/Template';
+import DealRegisterForm from '../container/auth/DealRegisterForm';
 
 const DealRegisterPage = () => {
-  return <DealRegisterContainer />;
+  return (
+    <Template>
+      <DealRegisterForm />
+    </Template>
+  )
+    ;
 };
 
 export default DealRegisterPage;
