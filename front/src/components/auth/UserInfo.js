@@ -28,11 +28,12 @@ const useStyles = makeStyles((theme) => ({
             margin: theme.spacing(1),
             width: '25ch',
         },
-        textAlign:'center'
+        textAlign:'center',
+        
     },
 }));
 
-const UserInfo = ({ onSubmit, form, user, onChange }) => {
+const UserInfo = ({ onSubmit, form, user, onChange,error }) => {
     const classes = useStyles()
 
     return (
@@ -46,6 +47,7 @@ const UserInfo = ({ onSubmit, form, user, onChange }) => {
                     <TextField id="standard-basic" name="email" label="Email" value={form.email} onChange={onChange} />
                     <button type="submit">완료</button>
                 </form>
+                <div>{error}</div>
             </FormBox>
         </UserInfoBlock>
     )

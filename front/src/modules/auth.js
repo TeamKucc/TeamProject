@@ -15,6 +15,12 @@ const [
 ] = createRequestActionTypes('auth/REGISTER')
 
 const [
+ DREGISTER,
+ DREGISTER_SUCCESS,
+ DREGISTER_FAILURE
+] = createRequestActionTypes('auth/DREGISTER')
+
+const [
     LOGIN,
     LOGIN_SUCCESS,
     LOGIN_FAILURE
@@ -38,10 +44,12 @@ export const changeField = createAction(
 export const initializeForm = createAction(INITIALLIZE_FORM, form => form);
 export const login = createAction(LOGIN, ({ userID, password }) => ({ userID, password }));
 export const register = createAction(REGISTER, ({userID,name,password,email }) => ({ userID,name,password,email}));
+export const dregister = createAction(DREGISTER,({userID,name,password,email })=>({userID,name,password,email }))
 export const userInfo = createAction(USERINFO)
 
 export const loginSaga = createRequestsaga(LOGIN, authCtrl.login)
 export const registerSaga = createRequestsaga(REGISTER, authCtrl.register);
+export const dregisterSaga = createRequestsaga(DREGISTER,authCtrl.dregister)
 export const userInfoSaga=  createRequestsaga(USERINFO,userCtrl.userinfo);
 
 export function* authSaga() {
@@ -63,6 +71,13 @@ const initialState = {
         password: '',
     },
     userInfo:{
+        userID: '',
+        name:'',
+        password: '',
+        passwordConfirm: '',
+        email:'',
+    },
+    dregister:{
         userID: '',
         name:'',
         password: '',
@@ -112,6 +127,14 @@ const auth = handleActions(
         [USERINFO_FAILURE]:(state,{payload:error})=>({
             ...state,
             error:error
+        }),
+        [DREGISTER_SUCCESS]:(state,{payload:auth})=>({
+            ...state,
+            auth
+        }),
+        [DREGISTER_FAILURE]:(state,{payload:error})=>({
+            ...state,
+            authError:error
         })
     }
     ,initialState

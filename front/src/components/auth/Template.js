@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+
 
 const TemplateBlock = styled.div`
     position:absolute;
@@ -12,7 +12,7 @@ const TemplateBlock = styled.div`
     display: flex;
     flex-direction: colum;
     justify-content: center;
-     align-items: center;
+    align-items: center;
 `
 
 const WhiteBox = styled.div`

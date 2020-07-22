@@ -5,7 +5,8 @@ import { logout } from '../../modules/user'
 import {withRouter} from 'react-router-dom'
 import Cookies from 'react-cookies'
 import HEAD from '../../components/common/HEAD'
-const HeaderContainer = ({history}) => {
+
+const HeaderContainer = (props) => {
 
     const {user}=useSelector(({user})=>({user:user.user}))
     const dispatch = useDispatch()
@@ -13,8 +14,10 @@ const HeaderContainer = ({history}) => {
     const onLogout = () => {
         console.log('logout call')
         dispatch(logout())
-        history.push('/')
+        localStorage.removeItem('userId')
+        props.history.push('/')
     }
+
 
     return <HEAD onLogout={onLogout} user={user} />
 }

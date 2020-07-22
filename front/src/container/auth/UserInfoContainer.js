@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import UserInfo from '../../components/auth/UserInfo';
 import { changeField, userInfo, } from '../../modules/auth';
-import {userUpdate} from '../../modules/user'
+import { userUpdate } from '../../modules/user'
+import {withRouter} from 'react-router-dom'
 import produce from 'immer'
 
-const UserInfoContainer = ({match}) => {
-    
+const UserInfoContainer = ({ match,history }) => {
+
     const dispatch = useDispatch();
     const [error, setError] = useState(null)
     const { form, auth, authError, user } = useSelector(({ auth }) => ({
@@ -26,10 +27,15 @@ const UserInfoContainer = ({match}) => {
             })
         )
     }
-    useEffect(()=>{
-        const userId = localStorage.getItem('userId').replace(/['"]+/g, '')
-        dispatch(userInfo(userId))
-    },[])
+    useEffect(() => {
+        try {
+            const userId = localStorage.getItem('userId').replace(/['"]+/g, '')
+            dispatch(userInfo(userId))
+        } catch (error) {
+            alert("접근권한이 없습니다")
+            history.push('/')
+        }
+    }, [])
 
     const onSubmit = e => {
         e.preventDefault();
@@ -46,15 +52,15 @@ const UserInfoContainer = ({match}) => {
         console.log('call')
         dispatch(userUpdate({ userID, name, password, email }));
     }
-    
- 
+
+
 
     return (
         <>
-            <UserInfo onSubmit={onSubmit} onChange={onChange} form={form} user={user} error={error}  />
-            
+            <UserInfo onSubmit={onSubmit} onChange={onChange} form={form} user={user} error={error} />
+
         </>
     )
 }
 
-export default UserInfoContainer
+export default withRouter(UserInfoContainer)

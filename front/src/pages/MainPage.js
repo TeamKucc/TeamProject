@@ -13,4 +13,4 @@ const MainPage = () => {
   );
 };
 
-export default withRouter(MainPage);
+export default MainPage;
