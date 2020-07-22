@@ -1,6 +1,7 @@
-import User from '../../models/user'
+import User from '../../models/user';
 
 export const list = (req, res) => {
+<<<<<<< HEAD
     if (!req.decode.admin) {
         return res.status(403).json({
             message: 'you are not adimn'
@@ -39,3 +40,30 @@ export const userUpdate = (req,res)=>{
         })
     })
 }
+=======
+  if (!req.decode.admin) {
+    return res.status(403).json({
+      message: 'you are not adimn',
+    });
+  }
+  User.find({}).then((users) => {
+    res.json({ users });
+  });
+};
+
+export const assignAdmin = (req, res) => {
+  if (!req.decode.admin) {
+    return res.status(403).json({
+      message: 'you are not adimn',
+    });
+  }
+
+  User.findByUsername(req.params.username)
+    .then((user) => user.assignAdmin())
+    .then(
+      res.json({
+        success: true,
+      }),
+    );
+};
+>>>>>>> 173e0f07595014dd2b535d0d6b2189995cf14739
