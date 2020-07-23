@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-<<<<<<< HEAD
 const productSchema = mongoose.Schema({
   thumbnails: {
     type: Array,
@@ -43,46 +42,6 @@ const productSchema = mongoose.Schema({
 },{
   versionkey:false,
 });
-=======
-const productSchema = mongoose.Schema(
-  {
-    images: {
-      type: Array,
-      default: [],
-    },
-
-    thumbnails: {
-      type: Array,
-      default: [],
-    },
-
-    title: {
-      type: String,
-      maxlength: 20,
-    },
-
-    description: {
-      type: String,
-    },
-
-    price: {
-      type: Number,
-      default: 0,
-    },
-
-    discount: {
-      type: Number,
-      default: 0,
-    },
-
-    person: {
-      type: Number,
-      default: 0,
-    },
-  },
-  { timestamps: true },
-);
->>>>>>> 173e0f07595014dd2b535d0d6b2189995cf14739
 
 productSchema.index(
   {
@@ -98,9 +57,4 @@ productSchema.index(
 );
 
 const Product = mongoose.model('Product', productSchema);
-
-<<<<<<< HEAD
 export default Product;
-=======
-module.exports = { Product };
->>>>>>> 173e0f07595014dd2b535d0d6b2189995cf14739
