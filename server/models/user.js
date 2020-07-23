@@ -1,5 +1,4 @@
 import mongoose, { Schema } from 'mongoose';
-<<<<<<< HEAD
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import moment from 'moment'
