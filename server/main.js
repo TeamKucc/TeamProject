@@ -1,8 +1,8 @@
 require('dotenv').config();
 import express from 'express';
-
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser'
+import bodyparser from 'body-parser'
 import api from './api/index'
 
 const app = express();
@@ -26,5 +26,6 @@ app.use(cookieParser())
 
 app.use('/api', api);
 app.use('/uploads', express.static('uploads'));
+app.use('/thumbnails', express.static('thumbnails'));
 
 app.listen(PORT, () => console.log('Server ON:' + PORT));
