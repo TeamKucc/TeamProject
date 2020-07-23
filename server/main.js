@@ -17,6 +17,7 @@ mongoose.connect(
     } else {
       console.log('Error!:' + JSON.stringify(err, undefined, 2));
     }
+  }
 )
 
 app.use(bodyparser.urlencoded({ extended: true }))
