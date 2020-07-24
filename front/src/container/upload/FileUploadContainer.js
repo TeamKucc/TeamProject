@@ -48,23 +48,10 @@ const FileUploadContainer = ({ history }) => {
   // }
 
   const onDrop = (files) => {
-    
-    const formData = new FormData();
-    formData.append('file', files[0]);
-    try {
-      const options = {
-        headers: { 'content-type': 'multipart/form-data' },
-        body: formData,
-      }
-      console.log(options)
-      dispatch(
-        imageUpload({
-          options,
-        }),
-      );
-    } catch (e) {
-      alert('Error:' + e);
-    }
+    dispatch(
+      imageUpload({
+        files
+      }))
   };
 
   return <FileUpload onDrop={onDrop} images={images} />;

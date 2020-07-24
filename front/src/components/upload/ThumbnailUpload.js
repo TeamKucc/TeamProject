@@ -11,7 +11,9 @@ function ThumbnailUpload(props) {
       header: { "content-type": "multipart/form-data" },
     }
     formData.append("file", files[0])
-    console.log(files)
+    for (var value of formData.values()) {
+      console.log(value); 
+   }
     //save the Image we chose inside the Node Server
     Axios.post("/api/product/uploadThumbnail", formData, config).then((response) => {
       console.log(response.data)

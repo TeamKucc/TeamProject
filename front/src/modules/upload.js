@@ -1,7 +1,9 @@
 import { createAction, handleActions } from 'redux-actions'
 import createRequestSaga, { createRequestActionTypes } from '../lib/createRequestsaga'
 import * as productAPI from '../lib/api/product'
-import { takeLatest, call } from 'redux-saga/effects';
+import { takeLatest, call, put } from 'redux-saga/effects';
+import { startLoading, finishLoading } from './loading';
+import axios from 'axios';
 
 const INITIALIZE = 'product/INITIALIZE';
 const CHANGE_FIELD = 'product/CHANGE_FIELD';
@@ -25,8 +27,8 @@ export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
   value,
 }));
 
-export const imageUpload = createAction(IMAGE_UPLOAD, ({ images, option }) => ({
-  images, option
+export const imageUpload = createAction(IMAGE_UPLOAD, (files) => ({
+  files
 }));
 
 export const productUpload = createAction(PRODUCT_UPLOAD, ({ thumbnails, title, description, price, images, discount, person }) => ({
@@ -35,29 +37,37 @@ export const productUpload = createAction(PRODUCT_UPLOAD, ({ thumbnails, title, 
 
 export const setOriginalUpload = createAction(SET_ORIGINAL_UPLOAD, upload => upload);
 
-const imageUploadSaga = createRequestSaga(IMAGE_UPLOAD, productAPI.imageUpload);
+// const imageUploadSaga = createRequestSaga(IMAGE_UPLOAD, productAPI.imageUpload);
 const productUploadSaga = createRequestSaga(PRODUCT_UPLOAD, productAPI.productUpload);
+
+function* imageUploadSaga(action){
+  yield put(startLoading(IMAGE_UPLOAD))
+  const files = action.payload.files.files
+  console.log(files)
+  try {
+    let formData = new FormData()
+    const config = {
+      header: { "content-type": "multipart/form-data" },
+    }
+    formData.append("file", files[0])
+    const {image} = yield call([axios,'post'],'/api/product/uploadImage',formData,config)
+    yield put({
+      type:IMAGE_UPLOAD_SUCCESS,
+      payload:image.data
+    })
+  } catch (error) {
+    
+  }
+  yield put(finishLoading(IMAGE_UPLOAD))
+}
 
 export function* productSaga() {
   yield takeLatest(IMAGE_UPLOAD, imageUploadSaga);
   yield takeLatest(PRODUCT_UPLOAD, productUploadSaga);
 }
 
-// export function*  imageSaga(files){
-//   const formData = new FormData()
-//   formData.append('file', files)
-//   try{
-//     const options = {
-//       method: 'POST',
-//       header: { 'content-type': 'multipart/form-data' },
-//       body : formData
-//     }
-//     const response = yield call(PRODUCT_UPLOAD, imageUploadSaga, options)
-//     console.log(response)
-//   } catch (err) {
-//     console.log(err)
-//   }
-// }
+
+
 
 export const initialState = {
 	thumbnails:[],

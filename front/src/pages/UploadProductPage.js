@@ -9,7 +9,7 @@ const UploadProductPage = () => {
   return (
     <div>
       <FileUploadContainer/>
-      <UploadContainer/>
+      {/* <UploadContainer/> */}
     </div>
   )
 }
