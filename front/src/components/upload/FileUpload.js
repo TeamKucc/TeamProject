@@ -4,8 +4,9 @@ import {Typography} from 'antd'
 // import Axios from 'axios';
 // import { imageUpload } from '../../modules/upload';
 
-function FileUpload( { onDrop, images } ) {
-
+function FileUpload( { onDrop, onDelete, images } ) {
+  
+  console.log(images)
   const { Title } = Typography;
   // const [Images, setImages] = useState([]);
 
@@ -73,11 +74,11 @@ function FileUpload( { onDrop, images } ) {
         }}
       >
         {images.map((image, index) => (
-          // <div key={index} onClick={() => onDelete(image)}>
-          <div key={index}>
+          <div key={index} onClick={() => onDelete(image)}>
+          {/* <div key={index}> */}
             <img
               style={{ minWidth: '300px', width: '300px', height: '240px' }}
-              src={`http://localhost:4000/${image}`}
+              src={`http://localhost:3000/${image}`}
               alt={`productImg-${index}`}
             />
           </div>

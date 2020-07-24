@@ -50,7 +50,8 @@ function* imageUploadSaga(action){
       header: { "content-type": "multipart/form-data" },
     }
     formData.append("file", files[0])
-    const {image} = yield call([axios,'post'],'/api/product/uploadImage',formData,config)
+    const image = yield call([axios,'post'],'/api/product/uploadImage',formData,config)
+    console.log(image.data.image)
     yield put({
       type:IMAGE_UPLOAD_SUCCESS,
       payload:image.data
@@ -93,9 +94,9 @@ const upload = handleActions(
       product: null,
       postError: null,
     }),
-    [IMAGE_UPLOAD_SUCCESS]: (state, { payload: upload }) => ({
+    [IMAGE_UPLOAD_SUCCESS]: (state,{payload:{image}})=>({
       ...state,
-      upload,
+      images:image
     }),
     [IMAGE_UPLOAD_FAILURE]: (state, { payload: uploadError }) => ({
       ...state,

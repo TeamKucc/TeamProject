@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import FileUpload from '../../components/upload/FileUpload';
 import { useSelector, useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { imageUpload } from '../../modules/upload';
 
-const FileUploadContainer = ({ history }) => {
+const FileUploadContainer = () => {
   // function*  imageSaga(files){
   // 	const formData = new FormData()
   // 	formData.append('file', files)
@@ -25,6 +25,9 @@ const FileUploadContainer = ({ history }) => {
   const { images } = useSelector(({ upload }) => ({
     images: upload.images,
   }));
+
+  const [Images, setImages] = useState([]);
+
 
   // const onDrop = (files) => {
 
@@ -52,9 +55,20 @@ const FileUploadContainer = ({ history }) => {
       imageUpload({
         files
       }))
+      setImages([...Images, images])
   };
 
-  return <FileUpload onDrop={onDrop} images={images} />;
+  const onDelete = (image) => {
+    const currentIndex = Images.indexOf(image);
+
+    let newImages = [...Images]
+    newImages.splice(currentIndex, 1)
+
+    setImages(newImages)
+    // props.refreshFunction(newImages)
+}
+
+  return <FileUpload onDrop={onDrop} onDelete={onDelete} images={Images} />;
 };
 
 export default withRouter(FileUploadContainer);
