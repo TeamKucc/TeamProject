@@ -26,6 +26,26 @@ export const register = async (req, res) => {
             })
         }
     })
+}
+
+export const dregister = async (req, res) => {
+    const user = new User(req.body);
+    const {userID} = user
+
+    await User.findOne({ userID: userID }, (err, userID) => {
+        if (userID) {
+            res.status(409).json({
+                message: "ID already exist"
+            })
+        } else {
+            user.save((err, doc) => {
+                if (err) return res.json({ success: false, err });
+                return res.status(200).json({
+                    success: true
+                })
+            })
+        }
+    })
 
 }
 
@@ -60,4 +80,9 @@ export const logout = (req, res) => {
             logoutsuccess: true
         })
     })
+}
+
+
+export const admin=(req,res)=>{
+    User.find().exec()
 }
