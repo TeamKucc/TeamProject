@@ -5,9 +5,11 @@ import multer from 'multer';
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'uploads/');
+    console.log('call')
   },
   filename: (req, file, cb) => {
     cb(null, `${Date.now()}_${file.originalname}`);
+    console.log(file)
   },
   fileFilter: (req, file, cb) => {
     const ext = path.extname(file.originalname);

@@ -3,7 +3,7 @@ import {all} from 'redux-saga/effects'
 import loading from './loading'
 import auth,{authSaga} from './auth'
 import user,{userSaga} from './user'
-import upload, { productSaga, imageSaga } from './upload'
+import upload, { productSaga } from './upload'
 import landing, { landingSaga } from './landing'
 
 const rootReducer = combineReducers({
@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
 })
 
 export function* rootSaga(){
-    yield all([authSaga(),userSaga(),productSaga(), imageSaga(), landingSaga()]);
+    yield all([authSaga(),userSaga(),productSaga(),  landingSaga()]);
 }
 
 export default rootReducer;

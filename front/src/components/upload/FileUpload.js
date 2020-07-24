@@ -77,7 +77,7 @@ function FileUpload( { onDrop, images } ) {
           <div key={index}>
             <img
               style={{ minWidth: '300px', width: '300px', height: '240px' }}
-              src={`http://localhost:3000/${image}`}
+              src={`http://localhost:4000/${image}`}
               alt={`productImg-${index}`}
             />
           </div>

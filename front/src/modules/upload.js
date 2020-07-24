@@ -25,8 +25,8 @@ export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
   value,
 }));
 
-export const imageUpload = createAction(IMAGE_UPLOAD, ({ images }) => ({
-  images,
+export const imageUpload = createAction(IMAGE_UPLOAD, ({ images, option }) => ({
+  images, option
 }));
 
 export const productUpload = createAction(PRODUCT_UPLOAD, ({ thumbnails, title, description, price, images, discount, person }) => ({
@@ -39,25 +39,25 @@ const imageUploadSaga = createRequestSaga(IMAGE_UPLOAD, productAPI.imageUpload);
 const productUploadSaga = createRequestSaga(PRODUCT_UPLOAD, productAPI.productUpload);
 
 export function* productSaga() {
-  // yield takeLatest(IMAGE_UPLOAD, imageUploadSaga);
+  yield takeLatest(IMAGE_UPLOAD, imageUploadSaga);
   yield takeLatest(PRODUCT_UPLOAD, productUploadSaga);
 }
 
-export function*  imageSaga(files){
-  const formData = new FormData()
-  formData.append('file', files)
-  try{
-    const options = {
-      method: 'POST',
-      header: { 'content-type': 'multipart/form-data' },
-      body : formData
-    }
-    const response = yield call(PRODUCT_UPLOAD, imageUploadSaga, options)
-    console.log(response)
-  } catch (err) {
-    console.log(err)
-  }
-}
+// export function*  imageSaga(files){
+//   const formData = new FormData()
+//   formData.append('file', files)
+//   try{
+//     const options = {
+//       method: 'POST',
+//       header: { 'content-type': 'multipart/form-data' },
+//       body : formData
+//     }
+//     const response = yield call(PRODUCT_UPLOAD, imageUploadSaga, options)
+//     console.log(response)
+//   } catch (err) {
+//     console.log(err)
+//   }
+// }
 
 export const initialState = {
 	thumbnails:[],
@@ -83,13 +83,13 @@ const upload = handleActions(
       product: null,
       postError: null,
     }),
-    [IMAGE_UPLOAD_SUCCESS]: (state, { payload: product }) => ({
+    [IMAGE_UPLOAD_SUCCESS]: (state, { payload: upload }) => ({
       ...state,
-      product,
+      upload,
     }),
-    [IMAGE_UPLOAD_FAILURE]: (state, { payload: productError }) => ({
+    [IMAGE_UPLOAD_FAILURE]: (state, { payload: uploadError }) => ({
       ...state,
-      productError,
+      uploadError,
     }),
     [PRODUCT_UPLOAD]: (state) => ({
       ...state,
