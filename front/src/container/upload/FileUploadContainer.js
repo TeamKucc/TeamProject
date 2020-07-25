@@ -1,63 +1,38 @@
-import React, { useEffect} from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, {useState} from 'react';
+import FileUpload from '../../components/upload/FileUpload';
+import { useSelector, useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { uploadImage, changeField } from '../../modules/upload'
-import FileUpload from '../../components/upload/FileUpload'
+import { imageUpload } from '../../modules/upload';
 
-const FileUploadContainer = ({history}) => {
+const FileUploadContainer = () => {
 
-	const dispatch = useDispatch()
 
-	const { product, productError} = useSelector(({ upload }) => ({
-		product:upload.product,
-		productError:upload.productError
-	}));
+  const [Images, setImages] = useState([]);
+  const dispatch = useDispatch();
+  const { images } = useSelector(({ upload }) => ({
+    images: upload.images,
+  })
+  );
 
-	const onPublish = e => {
-		e.preventDefault();
-		const {
-			thumbnails,
-			title,
-			description,
-			price,
-			images,
-			discount,
-			person,} = product
-		dispatch(
-      uploadImage({
-        thumbnails,
-        title,
-        description,
-        price,
-        images,
-        discount,
-        person,
-      })
-    );
-	}
+// console.log(images)
+  const onDrop = (files) => {
+    dispatch(
+      imageUpload({
+        files
+      }))
+    setImages([...Images, files])
+  };
 
-	const onChange = e => {
-		console.log('call')
-		const {value, name} = e.target
-		dispatch(
-      changeField({
-        key: name,
-        value,
-      })
-    );
-	}
+  const onDelete = (image) => {
+    const currentIndex = Images.indexOf(image);
 
-	const onCancle = () => {
-		history.goBack()
-	}
+    let newImages = [...Images]
+    newImages.splice(currentIndex, 1)
 
-	useEffect(() => {
-	console.log(product)
-	}, [history, product, productError])
-
-	return(
-		<uploadImage onPublish={onPublish} onCancle={onCancle} onChange={onChange} product={product} />
-	)
+    setImages(newImages)
 }
+// console.log(Images)
+  return <FileUpload onDrop={onDrop} onDelete={onDelete} images={Images}/>;
+};
 
-export default withRouter(FileUploadContainer)
+export default withRouter(FileUploadContainer);

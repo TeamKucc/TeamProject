@@ -25,7 +25,7 @@ let upload = multer({ storage: storage }).single('file');
 
 let storageThumbnail = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'thumbnail/');
+    cb(null, 'thumbnails/');
   },
   filename: (req, file, cb) => {
     cb(null, `${Date.now()}_${file.originalname}`);
@@ -45,8 +45,9 @@ let storageThumbnail = multer.diskStorage({
 let upload2 = multer({ storage: storageThumbnail }).single('file');
 
 export const uploadImage = (req, res) => {
-  console.log(req.body);
   upload(req, res, (err) => {
+    console.log(req.file);
+
     if (err) {
       return res.json({ success: false, err });
     }
@@ -59,7 +60,9 @@ export const uploadImage = (req, res) => {
 };
 
 export const uploadThumbnail = (req, res) => {
+  console.log(req.body)
   upload2(req, res, (err) => {
+    console.log(req.file)
     if (err) {
       return res.json({ success: false, err });
     }

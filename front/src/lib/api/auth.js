@@ -9,4 +9,4 @@ export const register = ({userID,name,password,email})=>
 export const dregister = ({userID,name,password,email})=>
     client.post()
 
-export const logout =(userId)=>client.post('/api/auth/logout',{_id:userId})
+export const logout =()=>client.get('/api/auth/logout')
