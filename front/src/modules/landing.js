@@ -11,7 +11,7 @@ const [
 
 export const landingProduct = createAction(
   LANDING_PRODUCT,
-  ({ thumbnails, title, price, discount}) => ({ thumbnails, title, price, discount}),
+  ({ thumbnails, title, price, discount, landing, landingError }) => ({ thumbnails, title, price, discount}),
 );
 
 const landingProductSaga = createRequestSaga(LANDING_PRODUCT, productAPI.landingProduct);
@@ -27,7 +27,7 @@ const initialState = {
 
 const landing = handleActions(
   {
-    [LANDING_PRODUCT_SUCCESS]: (state, { payload: landing, meta: response }) => ({
+    [LANDING_PRODUCT_SUCCESS]: (state, { payload: landing }) => ({
       ...state,
       landing,
     }),

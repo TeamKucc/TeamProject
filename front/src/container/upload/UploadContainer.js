@@ -9,7 +9,7 @@ const UploadContainer = ({ history }) => {
   
   const { thumbnails, title, description, price, images, discount, person, upload, uploadError } = useSelector(
     ({ upload }) => ({
-    thumbnails: upload.thumbnails, 
+    thumbnails: upload.thumbnails,
     title: upload.title, 
     description: upload.description, 
     price: upload.price, 
@@ -21,7 +21,8 @@ const UploadContainer = ({ history }) => {
   })
   );
 
-  const onPublish = () => {
+  const onPublish = (e) => {
+    e.preventDefault()
     dispatch(
       productUpload({
         thumbnails,
@@ -34,6 +35,7 @@ const UploadContainer = ({ history }) => {
       }),
     );
   }
+
   const onChange = (e) => {
     console.log('call');
     const { value, name } = e.target;
@@ -44,10 +46,6 @@ const UploadContainer = ({ history }) => {
       }),
     );
   };
-
-  // const onCancle = () => {
-  // 	history.goBack()
-  // }
 
   useEffect(() => {
     if(uploadError){

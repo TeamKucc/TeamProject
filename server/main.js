@@ -10,7 +10,7 @@ const { PORT, MONGO_URI } = process.env;
 
 mongoose.connect(
   MONGO_URI,
-  { useNewUrlParser: true, useUnifiedTopology: true },
+  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
   (err) => {
     if (!err) {
       console.log('DB ON');

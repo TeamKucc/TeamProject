@@ -14,7 +14,7 @@ const FileUploadContainer = () => {
   })
   );
 
-// console.log(images)
+
   const onDrop = (files) => {
     dispatch(
       imageUpload({
@@ -31,7 +31,7 @@ const FileUploadContainer = () => {
 
     setImages(newImages)
 }
-// console.log(Images)
+
   return <FileUpload onDrop={onDrop} onDelete={onDelete} images={Images}/>;
 };
 

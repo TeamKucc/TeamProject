@@ -9,25 +9,25 @@ import Typography from "@material-ui/core/Typography";
 import ImageSlider from "./ImageSlider";
 
 
-function Landing() {
-  const [Products, setProducts] = useState([]);
+function Landing({Products}) {
+  // const [Products, setProducts] = useState([]);
 
-  useEffect(() => {
-    const variables = {};
+  // useEffect(() => {
+  //   const variables = {};
 
-    getProducts(variables);
-  }, []);
+  //   getProducts(variables);
+  // }, []);
 
-  const getProducts = () => {
-    Axios.get("/api/product/getProducts").then((response) => {
-      console.log(response.data);
-      if (response.data) {
-        setProducts(response.data);
-      } else {
-        alert("Failed to fectch product datas");
-      }
-    });
-  };
+  // const getProducts = () => {
+  //   Axios.get("/api/product/getProducts").then((response) => {
+  //     console.log(response.data);
+  //     if (response.data) {
+  //       setProducts(response.data);
+  //     } else {
+  //       alert("Failed to fectch product datas");
+  //     }
+  //   });
+  // };
 
   const useStyles = makeStyles({
     root: {

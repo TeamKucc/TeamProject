@@ -74,7 +74,7 @@ export const uploadThumbnail = (req, res) => {
   });
 };
 
-export const uploadProduct = (req, res) => {
+export const productUpload = (req, res) => {
   console.log(req.body)
   const product = new Product(req.body);
 

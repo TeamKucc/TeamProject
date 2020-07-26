@@ -1,32 +1,13 @@
 import React from 'react';
 import { Button, Form, Input } from 'antd';
-// import FileUpload from './FileUpload';
-// import ThumbnailUpload from './ThumbnailUpload';
-// import Axios from "axios"
 
-// const { Title } = Typography;
 const { TextArea } = Input;
 
 function UploadProduct({ onPublish, onChange, product }) {
-  // const f1 = () => {
-  //   console.log(product);
-  // };
 
   return (
     <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
-      {/* <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        <Title level={2}>제품등록</Title>
-      </div> */}
-      {/* <button onClick={f1}>체크</button> */}
       <Form onSubmit={onPublish}>
-        {/* <FileUpload onChange={onChange} name="images" product={product} />
-        <br />
-        <br /> */}
-
-        {/* <ThumbnailUpload onChange={onChange} name="thumbnails" />
-        <br />
-        <br /> */}
-
         <label>제품명</label>
         <Input onChange={onChange} name="title" />
         <br />

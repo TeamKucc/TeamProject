@@ -6,7 +6,6 @@ import * as productAPI from '../lib/api/product';
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { startLoading, finishLoading } from './loading';
 import axios from 'axios';
-import ThumbnailUpload from '../components/upload/ThumbnailUpload';
 
 const INITIALIZE = 'product/INITIALIZE';
 const CHANGE_FIELD = 'product/CHANGE_FIELD';
@@ -71,7 +70,6 @@ const productUploadSaga = createRequestSaga(
 function* imageUploadSaga(action) {
   yield put(startLoading(IMAGE_UPLOAD));
   const files = action.payload.files.files;
-  // console.log(files);
   try {
     let formData = new FormData();
     const config = {
@@ -95,7 +93,6 @@ function* imageUploadSaga(action) {
 function* thumbnailUploadSaga(action) {
   yield put(startLoading(THUMBNAIL_UPLOAD));
   const files = action.payload.files.files;
-  // console.log(files);
   try {
     let formData = new FormData();
     const config = {
@@ -108,9 +105,10 @@ function* thumbnailUploadSaga(action) {
       formData,
       config,
     );
+   
     yield put({
       type: THUMBNAIL_UPLOAD_SUCCESS,
-      payload: thumbnail.data.thumbnail,
+      payload: thumbnail.data.image,
     });
   } catch (error) {}
   yield put(finishLoading(THUMBNAIL_UPLOAD));
@@ -148,7 +146,7 @@ const upload = handleActions(
     }),
     [IMAGE_UPLOAD_SUCCESS]: (state, action) => ({
       ...state,
-      thumbnails: action.payload,
+      images: action.payload,
     }),
     [IMAGE_UPLOAD_FAILURE]: (state, { payload: uploadError }) => ({
       ...state,
@@ -161,7 +159,7 @@ const upload = handleActions(
     }),
     [THUMBNAIL_UPLOAD_SUCCESS]: (state, action) => ({
       ...state,
-      images: action.payload,
+      thumbnails: action.payload,
     }),
     [THUMBNAIL_UPLOAD_FAILURE]: (state, { payload: uploadError }) => ({
       ...state,
@@ -172,9 +170,9 @@ const upload = handleActions(
       upload: null,
       uploadError: null,
     }),
-    [PRODUCT_UPLOAD_SUCCESS]: (state, { payload: upload }) => ({
+    [PRODUCT_UPLOAD_SUCCESS]: (state, action) => ({
       ...state,
-      upload,
+      upload: action.payload,
     }),
     [PRODUCT_UPLOAD_FAILURE]: (state, { payload: uploadError }) => ({
       ...state,
