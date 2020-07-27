@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import FileUpload from '../../components/upload/FileUpload';
 import { useSelector, useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -9,30 +9,28 @@ const FileUploadContainer = () => {
 
   const [Images, setImages] = useState([]);
   const dispatch = useDispatch();
-  const { images } = useSelector(({ upload }) => ({
+  const { images, loading } = useSelector(({ upload, loading }) => ({
     images: upload.images,
+    loading: loading['product/IMAGE_UPLOAD']
   })
   );
 
-
-  const onDrop = (files) => {
+  const onDrop = useCallback((files) => {
     dispatch(
       imageUpload({
         files
       }))
-    setImages([...Images, files])
-  };
+  })
 
   const onDelete = (image) => {
     const currentIndex = Images.indexOf(image);
 
     let newImages = [...Images]
     newImages.splice(currentIndex, 1)
-
     setImages(newImages)
-}
+  }
 
-  return <FileUpload onDrop={onDrop} onDelete={onDelete} images={Images}/>;
+  return <FileUpload onDrop={onDrop} onDelete={onDelete} images={images} loading={loading} />;
 };
 
 export default withRouter(FileUploadContainer);
