@@ -68,9 +68,9 @@ const productUploadSaga = createRequestSaga(
 );
 
 function* imageUploadSaga(action) {
-  yield put(startLoading(IMAGE_UPLOAD));
-  const files = action.payload.files.files;
+  yield put(startLoading('product/IMAGE_UPLOAD'));
   try {
+    const files = action.payload.files.files;
     let formData = new FormData();
     const config = {
       header: { 'content-type': 'multipart/form-data' },
@@ -82,12 +82,18 @@ function* imageUploadSaga(action) {
       formData,
       config,
     );
+    console.log(typeof(image.data))
     yield put({
       type: IMAGE_UPLOAD_SUCCESS,
-      payload: image.data.image,
+      payload: image.data,
     });
-  } catch (error) {}
-  yield put(finishLoading(IMAGE_UPLOAD));
+  } catch (error) {
+    yield put({
+      type: IMAGE_UPLOAD_FAILURE,
+      payload:error,
+    });
+  }
+  yield put(finishLoading('product/IMAGE_UPLOAD'));
 }
 
 function* thumbnailUploadSaga(action) {
@@ -105,7 +111,6 @@ function* thumbnailUploadSaga(action) {
       formData,
       config,
     );
-   
     yield put({
       type: THUMBNAIL_UPLOAD_SUCCESS,
       payload: thumbnail.data.image,
@@ -125,7 +130,7 @@ export const initialState = {
   title: '',
   description: '',
   price: 0,
-  images: [],
+  images:[],
   discount: 0,
   person: 0,
   upload: null,
@@ -139,14 +144,9 @@ const upload = handleActions(
       ...state,
       [key]: value,
     }),
-    [IMAGE_UPLOAD]: (state) => ({
+    [IMAGE_UPLOAD_SUCCESS]: (state,{payload:images})=>({
       ...state,
-      product: null,
-      postError: null,
-    }),
-    [IMAGE_UPLOAD_SUCCESS]: (state, action) => ({
-      ...state,
-      images: action.payload,
+      images
     }),
     [IMAGE_UPLOAD_FAILURE]: (state, { payload: uploadError }) => ({
       ...state,
