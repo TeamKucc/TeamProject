@@ -1,11 +1,10 @@
 import User from '../models/user';
 
 let authCheck = (req, res, next) => {
-    console.log(req.cookies)
-    let token = req.cookies.w_auth;
+    console.log(req.headers.cookie)
+    let token = req.headers.cookie.w_auth;
 
     User.findByToken(token, (err, user) => {
-        console.log(token)
         if (err) throw err;
         if (!user)
             return res.json({
