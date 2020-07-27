@@ -11,12 +11,9 @@ const HeaderContainer = (props) => {
     const {user}=useSelector(({user})=>({user:user.user}))
     const dispatch = useDispatch()
 
-
     const onLogout = () => {
         console.log('logout call')
-        const userId = user.replace(/['"]+/g, '')
-        console.log(userId)
-        dispatch(logout(userId))
+        dispatch(logout())
         localStorage.removeItem('userId')
         props.history.push('/')
     }
