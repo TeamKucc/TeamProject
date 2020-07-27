@@ -107,7 +107,7 @@ dist
 .ico
 
 #image
-.png
+*.png
 
 #text
 .txt
