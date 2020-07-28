@@ -8,5 +8,6 @@ router.post('/uploadImage', productCtrl.uploadImage);
 router.post('/uploadThumbnail', productCtrl.uploadThumbnail);
 router.post('/productUpload', productCtrl.productUpload);
 router.get('/getProducts', productCtrl.getProducts);
+router.get('/getStock', productCtrl.getStock)
 
 export default router;

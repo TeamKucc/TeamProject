@@ -6,25 +6,39 @@ import UploadProduct from '../../components/upload/UploadProduct2';
 
 const UploadContainer = ({ history }) => {
   const dispatch = useDispatch();
-  
-  const { thumbnails, title, description, price, images, discount, person, upload, uploadError } = useSelector(
-    ({ upload }) => ({
+
+  const {
+    user,
+    stock,
+    thumbnails,
+    title,
+    description,
+    price,
+    images,
+    discount,
+    person,
+    upload,
+    uploadError,
+  } = useSelector(({ upload, user }) => ({
+    user: user.user,
+    stock: upload.stock,
     thumbnails: upload.thumbnails,
-    title: upload.title, 
-    description: upload.description, 
-    price: upload.price, 
-    images: upload.images, 
-    discount: upload.discount, 
+    title: upload.title,
+    description: upload.description,
+    price: upload.price,
+    images: upload.images,
+    discount: upload.discount,
     person: upload.person,
     upload: upload.upload,
-    uploadError: upload.uploadError
-  })
-  );
+    uploadError: upload.uploadError,
+  }));
 
   const onPublish = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     dispatch(
       productUpload({
+        user,
+        stock,
         thumbnails,
         title,
         description,
@@ -34,7 +48,7 @@ const UploadContainer = ({ history }) => {
         person,
       }),
     );
-  }
+  };
 
   const onChange = (e) => {
     console.log('call');
@@ -48,17 +62,12 @@ const UploadContainer = ({ history }) => {
   };
 
   useEffect(() => {
-    if(uploadError){
-      console.log(uploadError)
+    if (uploadError) {
+      console.log(uploadError);
     }
   }, [history, upload, uploadError]);
 
-  return (
-    <UploadProduct
-      onPublish={onPublish}
-      onChange={onChange}
-    />
-  );
+  return <UploadProduct onPublish={onPublish} onChange={onChange} />;
 };
 
 export default withRouter(UploadContainer);

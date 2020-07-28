@@ -45,7 +45,8 @@ export const thumbnailUpload = createAction(THUMBNAIL_UPLOAD, (files) => ({
 
 export const productUpload = createAction(
   PRODUCT_UPLOAD,
-  ({ thumbnails, title, description, price, images, discount, person }) => ({
+  ({ stock, thumbnails, title, description, price, images, discount, person }) => ({
+    stock,
     thumbnails,
     title,
     description,
