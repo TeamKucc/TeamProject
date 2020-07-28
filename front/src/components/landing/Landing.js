@@ -1,41 +1,26 @@
-import React, { useEffect, useState } from "react";
-import Axios from "axios";
-import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-import ImageSlider from "./ImageSlider";
+import React, { useEffect, useState } from 'react';
+import Axios from 'axios';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import ImageSlider from './ImageSlider';
 
+function Landing({Products, loading}) {
 
-function Landing({Products}) {
-  // const [Products, setProducts] = useState([]);
-
-  // useEffect(() => {
-  //   const variables = {};
-
-  //   getProducts(variables);
-  // }, []);
-
-  // const getProducts = () => {
-  //   Axios.get("/api/product/getProducts").then((response) => {
-  //     console.log(response.data);
-  //     if (response.data) {
-  //       setProducts(response.data);
-  //     } else {
-  //       alert("Failed to fectch product datas");
-  //     }
-  //   });
-  // };
+  let Prod = Object.keys(Products).map(function (key) {
+    return Products[key]
+  })
 
   const useStyles = makeStyles({
     root: {
       minWidth: 200,
       maxWidth: 340,
-      display: "inline-block",
+      display: 'inline-block',
       margin: 6,
-      textAlign: "center",
+      textAlign: 'center',
     },
     media: {
       height: 140,
@@ -43,7 +28,7 @@ function Landing({Products}) {
   });
 
   const classes = useStyles();
-  const renderCards = Products.map((product, index) => {
+  const renderCards = Prod.map((product, index) => {
     return (
       <Card className={classes.root} key={index}>
         <CardActionArea>
@@ -81,31 +66,31 @@ function Landing({Products}) {
   });
 
   return (
-   
-    <div style={{ width: "75%", margin: "3rem auto" }}>
-      <div style={{ textAlign: "center" }}>
+    <div style={{ width: '75%', margin: '3rem auto' }}>
+      <div style={{ textAlign: 'center' }}>
         <h2> 제품목록 </h2>
       </div>
-      
-        {Products.length === 0 ? (
-          <div
-            style={{
-              display: "flex",
-              height: "300px",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <h2>등록된 제품이 없습니다!</h2>
-          </div>
-        ) : (
-          <div>{renderCards}</div>
-        )}
-      
+
+      {Products.length === 0 ? (
+        <div
+          style={{
+            display: 'flex',
+            height: '300px',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <h2>등록된 제품이 없습니다!</h2>
+        </div>
+      ) : (
+        <div>
+        {!loading && Products && (<div>{renderCards}</div>)}
+        </div>
+      )}
+
       <br />
       <br />
     </div>
-    
   );
 }
 

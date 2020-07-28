@@ -1,42 +1,23 @@
-import React, { useEffect } from 'react';
-import { withRouter } from 'react-router-dom';
-import { useDisptch, useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
 import Landing from '../../components/landing/Landing';
+import { withRouter } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { landingProduct } from '../../modules/landing';
 
 const LandingContainer = () => {
-  const dispatch = useDisptch();
 
-  const {
-    thumbnails,
-    title,
-    price,
-    discount,
-    landing,
-    landingError,
-  } = useSelector(({ landing }) => ({
-    thumbnails: landing.thumbnails,
-    title: landing.title,
-    price: landing.price,
-    dicount: landing.discount,
+  const dispatch = useDispatch();
+  const { landing, loading } = useSelector(({ landing, loading }) => ({
     landing: landing.landing,
     landingError: landing.landingError,
+    loading: loading['landing/LANDING_PRODUCT'],
   }));
 
   useEffect(() => {
-    dispatch(
-      landingProduct({
-        thumbnails,
-        title,
-        price,
-        discount,
-        landing,
-        landingError,
-      }),
-    );
-  });
+    dispatch(landingProduct({}))
+  },[dispatch]);
 
-  return(
-      <Landing Products={Products} />
-  )
+  return <Landing Products={landing} loading={loading} />;
 };
+
+export default withRouter(LandingContainer);
