@@ -1,9 +1,10 @@
 import React from 'react';
+import ProductInfo from '../container/post/ProductInfo';
 
 const ProductPage = () => {
   return (
     <>
-      <div>제품 구매 페이지</div>
+      <ProductInfo/>
     </>
   );
 };
