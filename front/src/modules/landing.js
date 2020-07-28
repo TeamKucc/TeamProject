@@ -1,7 +1,9 @@
-import { createAction, handleActions } from 'redux-actions'
-import createRequestSaga, {createRequestActionTypes} from '../lib/createRequestsaga'
-import * as productAPI from '../lib/api/product'
-import { takeLatest } from 'redux-saga/effects'
+import { createAction, handleActions } from 'redux-actions';
+import createRequestSaga, {
+  createRequestActionTypes,
+} from '../lib/createRequestsaga';
+import * as productAPI from '../lib/api/product';
+import { takeLatest } from 'redux-saga/effects';
 
 const [
   LANDING_PRODUCT,
@@ -11,29 +13,37 @@ const [
 
 export const landingProduct = createAction(
   LANDING_PRODUCT,
-  ({ thumbnails, title, price, discount, landing, landingError }) => ({ thumbnails, title, price, discount}),
+  ({ thumbnails, title, price, discount }) => ({
+    thumbnails,
+    title,
+    price,
+    discount,
+  }),
 );
 
-const landingProductSaga = createRequestSaga(LANDING_PRODUCT, productAPI.landingProduct);
+const landingProductSaga = createRequestSaga(
+  LANDING_PRODUCT,
+  productAPI.landingProduct,
+);
 
 export function* landingSaga() {
   yield takeLatest(LANDING_PRODUCT, landingProductSaga);
 }
 
 const initialState = {
-  landing: { thumbnails:[], title:'', price:0, discount:0},
-  error: null,
+  landing: {},
+  landingError: null,
 };
 
 const landing = handleActions(
   {
-    [LANDING_PRODUCT_SUCCESS]: (state, { payload: landing }) => ({
+    [LANDING_PRODUCT_SUCCESS]: (state, action) => ({
       ...state,
-      landing,
+      landing: action.payload,
     }),
-    [LANDING_PRODUCT_FAILURE]: (state, { payload: error }) => ({
+    [LANDING_PRODUCT_FAILURE]: (state, { payload: landingError }) => ({
       ...state,
-      error,
+      landingError,
     }),
   },
   initialState,
