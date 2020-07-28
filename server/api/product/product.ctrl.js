@@ -1,8 +1,9 @@
 
 import Product from '../../models/product';
 import multer from 'multer';
+import BootpayRest from 'bootpay-rest-client'
 
-var storage = multer.diskStorage({
+let storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'uploads/');
   },
@@ -79,16 +80,43 @@ export const productUpload = (req, res) => {
   const product = new Product(req.body);
 
   product.save((err) => {
-    if (err) return res.status(400).json({ success: false, err });
+    if (err) return res.status(400).json({ success: false, Message: err });
     return res.status(200).json({ success: true });
   });
 };
 
-export const getProducts = (req, res)=>{
-  Product.find({},(err,result)=>{
-    if(err) return res.status(409).json({
-      success:false, err
+export const getProducts = (req, res) => {
+  Product.find({}, (err, result) => {
+    if (err) return res.status(409).json({
+      success: false, err
     })
     res.json(result)
+  })
+}
+
+export const readProduct = (req, res) => {
+  Product.findOne({ _id: req.body._id }, (err, result) => {
+    if (err) return res.status(400).json({ success: false, Message: err })
+    return res.json({ result })
+  })
+}
+
+export const config = (req, res) => {
+  const { headers } = req
+  console.log(headers._id)
+  const token = headers._id
+  BootpayRest.setConfig(
+    "5f1fb31b02f57e00333052f9",
+    "bVk2alHM4fcHf9b9MYX6SwjT2f3txa8EzFdgEW5Suas="
+  )
+  BootpayRest.getAccessToken().then(function (response) {
+    if (response.status === 200 && response.data.token !== undefined) {
+      BootpayRest.verify('5df6e67d4f74b4002a77e0eb').then(function (_response) {
+        res.json({
+         _response
+        })
+      })
+
+    }
   })
 }

@@ -6,6 +6,7 @@ import { userUpdate } from '../../modules/user'
 import {withRouter} from 'react-router-dom'
 import produce from 'immer'
 
+
 const UserInfoContainer = ({ match,history }) => {
 
     const dispatch = useDispatch();
