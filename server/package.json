@@ -21,7 +21,6 @@
     "moment": "^2.27.0",
     "mongoose": "^5.9.23",
     "multer": "^1.4.2"
-
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
@@ -30,6 +29,4 @@
     "lib": "lib"
   },
   "description": ""
-
-  }
-
+}
