@@ -1,16 +1,7 @@
-<<<<<<< HEAD
 import { createAction, handleActions } from 'redux-actions'
 import createRequestSaga, {createRequestActionTypes} from '../lib/createRequestsaga'
 import * as productAPI from '../lib/api/product'
 import { takeLatest, take } from 'redux-saga/effects'
-=======
-import { createAction, handleActions } from 'redux-actions';
-import createRequestSaga, {
-  createRequestActionTypes,
-} from '../lib/createRequestsaga';
-import * as productAPI from '../lib/api/product';
-import { takeLatest } from 'redux-saga/effects';
->>>>>>> origin/master
 
 const [
   LANDING_PRODUCT,
@@ -36,19 +27,12 @@ export const landingProduct = createAction(
   }),
 );
 
-<<<<<<< HEAD
 export const readProduct = createAction(READ_PRODUCT,({_id})=>({_id}));
 
 export const unloadProduct = createAction(UNLOAD_PRODUCT)
 
 const landingProductSaga = createRequestSaga(LANDING_PRODUCT, productAPI.landingProduct);
 const readProductSaga = createRequestSaga(READ_PRODUCT,productAPI.readProduct)
-=======
-const landingProductSaga = createRequestSaga(
-  LANDING_PRODUCT,
-  productAPI.landingProduct,
-);
->>>>>>> origin/master
 
 export function* landingSaga() {
   yield takeLatest(LANDING_PRODUCT, landingProductSaga);
@@ -56,14 +40,9 @@ export function* landingSaga() {
 }
 
 const initialState = {
-<<<<<<< HEAD
   landing: { thumbnails:[], title:'', price:0, discount:0},
   error: null,
   product:null,
-=======
-  landing: {},
-  landingError: null,
->>>>>>> origin/master
 };
 
 const landing = handleActions(
