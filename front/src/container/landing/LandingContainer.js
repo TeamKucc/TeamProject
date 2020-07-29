@@ -9,7 +9,7 @@ const LandingContainer = () => {
   const dispatch = useDispatch();
   const { landing, loading } = useSelector(({ landing, loading }) => ({
     landing: landing.landing,
-    landingError: landing.landingError,
+    landingError: landing.error,
     loading: loading['landing/LANDING_PRODUCT'],
   }));
 

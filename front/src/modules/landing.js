@@ -36,11 +36,11 @@ const readProductSaga = createRequestSaga(READ_PRODUCT,productAPI.readProduct)
 
 export function* landingSaga() {
   yield takeLatest(LANDING_PRODUCT, landingProductSaga);
-  yield take(READ_PRODUCT,readProductSaga)
+  yield takeLatest(READ_PRODUCT,readProductSaga)
 }
 
 const initialState = {
-  landing: { thumbnails:[], title:'', price:0, discount:0},
+  landing: {},
   error: null,
   product:null,
 };
@@ -51,9 +51,9 @@ const landing = handleActions(
       ...state,
       landing: action.payload,
     }),
-    [LANDING_PRODUCT_FAILURE]: (state, { payload: landingError }) => ({
+    [LANDING_PRODUCT_FAILURE]: (state, { payload: error }) => ({
       ...state,
-      landingError,
+      error,
     }),
     [READ_PRODUCT_SUCCESS]:(state,{payload:product})=>({
       ...state,
