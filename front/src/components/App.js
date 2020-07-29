@@ -11,6 +11,7 @@ import Loading from '../pages/Loading';
 import LandingPage from '../pages/LandingPage';
 import UploadProductPage from '../pages/UploadProductPage';
 import StockPage from '../pages/StockPage'
+import ProductPage from '../pages/ProductPage';
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
       <Route component={LandingPage} path="/product/landing" />
       <Route component={UploadProductPage} exact path="/product/upload" />
       <Route component={StockPage} exact path="/product/stock" />
+      <Route component={ProductPage} path="/product/:id" />
     </>
   );
 };

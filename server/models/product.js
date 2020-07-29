@@ -5,8 +5,8 @@ const Schema = mongoose.Schema;
 const productSchema = mongoose.Schema({
 
   user: {
-    type:mongoose.Schema.Types.ObjectId,
-    required: true,
+    type:String,
+    // required: true,
   },
 
   stock: {

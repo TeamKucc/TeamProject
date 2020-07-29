@@ -1,6 +1,7 @@
 import React from "react"
 
 function ImageSlider(props) {
+  console.log(props.images)
   return (
     <div>
         {props.images.map((image, index) => (

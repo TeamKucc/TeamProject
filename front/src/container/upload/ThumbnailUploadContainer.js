@@ -1,17 +1,17 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import ThumbnailUpload from '../../components/upload/ThumbnailUpload';
 import { useSelector, useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { thumbnailUpload } from '../../modules/upload';
-import { changeField } from '../../modules/upload';
+import { thumbnailUpload, changeField, thumbnailDelete } from '../../modules/upload';
+
 
 const ThumbnailUploadContainer = () => {
 
 
-  const [Thumbnails, setThumbnails] = useState([]);
   const dispatch = useDispatch();
-  const { thumbnails } = useSelector(({ upload }) => ({
+  const { thumbnails,loading } = useSelector(({ upload,loading }) => ({
     thumbnails: upload.thumbnails,
+    loading:loading['product/THUMBNAIL_UPLOAD'],
   })
   );
 
@@ -20,7 +20,6 @@ const ThumbnailUploadContainer = () => {
       thumbnailUpload({
         files
       }))
-      setThumbnails([...Thumbnails, files])
   };
 
   const onChange = (e) => {
@@ -35,15 +34,11 @@ const ThumbnailUploadContainer = () => {
   };
 
   const onDelete = (thumbnail) => {
-    const currentIndex = Thumbnails.indexOf(thumbnail);
+    const currentIndex = thumbnails.indexOf(thumbnail);
+    dispatch(thumbnailDelete(currentIndex))
+  }
 
-    let newThumbnails = [...Thumbnails]
-    newThumbnails.splice(currentIndex, 1)
-
-    setThumbnails(newThumbnails)
-}
-
-  return <ThumbnailUpload onDrop={onDrop} onDelete={onDelete} images={Thumbnails} onChange={onChange}/>;
+  return <ThumbnailUpload onDrop={onDrop} onDelete={onDelete} images={thumbnails} onChange={onChange} loading={loading} />;
 };
 
 export default withRouter(ThumbnailUploadContainer);

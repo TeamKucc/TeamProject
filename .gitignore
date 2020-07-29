@@ -112,3 +112,5 @@ dist
 
 #text
 .txt
+#etc
+*.exe

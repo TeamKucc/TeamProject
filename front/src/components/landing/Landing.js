@@ -7,8 +7,9 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import ImageSlider from './ImageSlider';
+import { Link } from 'react-router-dom';
 
-function Landing({Products, loading}) {
+function Landing({ Products, loading }) {
 
   let Prod = Object.keys(Products).map(function (key) {
     return Products[key]
@@ -32,7 +33,8 @@ function Landing({Products, loading}) {
     return (
       <Card className={classes.root} key={index}>
         <CardActionArea>
-          <a href={`/product/${product._id}`}>
+          <Link to={`/product/${product._id}`}>
+
             <ImageSlider images={product.thumbnails} />
             <CardContent>
               <Typography gutterBottom variant="h6" component="h2">
@@ -51,7 +53,7 @@ function Landing({Products, loading}) {
                 {product.price}
               </Typography>
             </CardActions>
-          </a>
+          </Link>
         </CardActionArea>
         <CardActions>
           <Typography variant="overline" color="primary" component="p">
@@ -83,10 +85,13 @@ function Landing({Products, loading}) {
           <h2>등록된 제품이 없습니다!</h2>
         </div>
       ) : (
-        <div>
-        {!loading && Products && (<div>{renderCards}</div>)}
-        </div>
-      )}
+          <div>
+            {!loading && Products && (<div>
+              {renderCards}
+            </div>)
+            }
+          </div>
+        )}
 
       <br />
       <br />

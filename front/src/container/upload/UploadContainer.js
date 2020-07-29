@@ -6,26 +6,28 @@ import UploadProduct from '../../components/upload/UploadProduct2';
 
 const UploadContainer = ({ history }) => {
   const dispatch = useDispatch();
-  
-  const { stock, thumbnails, title, description, price, images, discount, person, upload, uploadError } = useSelector(
-    ({ upload }) => ({
-    stock: upload.stock,
+
+  const { stock, thumbnails, title, description, price, images, discount, person, upload, uploadError, user } = useSelector(
+    ({ upload,user }) => ({
+      user: user.user,
+      stock: upload.stock,
       thumbnails: upload.thumbnails,
-    title: upload.title, 
-    description: upload.description, 
-    price: upload.price, 
-    images: upload.images, 
-    discount: upload.discount, 
-    person: upload.person,
-    upload: upload.upload,
-    uploadError: upload.uploadError
-  })
+      title: upload.title,
+      description: upload.description,
+      price: upload.price,
+      images: upload.images,
+      discount: upload.discount,
+      person: upload.person,
+      upload: upload.upload,
+      uploadError: upload.uploadError
+    })
   );
 
   const onPublish = (e) => {
     e.preventDefault()
     dispatch(
       productUpload({
+        user,
         stock,
         thumbnails,
         title,
@@ -50,7 +52,7 @@ const UploadContainer = ({ history }) => {
   };
 
   useEffect(() => {
-    if(uploadError){
+    if (uploadError) {
       console.log(uploadError)
     }
   }, [history, upload, uploadError]);
