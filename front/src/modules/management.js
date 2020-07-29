@@ -13,12 +13,13 @@ const [
 
 export const stockManagement = createAction(
   STOCK_MANAGEMENT,
-  ({ stock, thumbnails, title, price, discount }) => ({
+  ({ stock, thumbnails, title, price, discount, enable }) => ({
     stock,
     thumbnails,
     title,
     price,
     discount,
+    enable,
   }),
 );
 
@@ -32,7 +33,7 @@ export function* managementSaga() {
 }
 
 const initialState = {
-  management: { stock: 0, thumbnails: [], title: '', price: 0, discount: 0 },
+  management: {},
   error: null,
 };
 
