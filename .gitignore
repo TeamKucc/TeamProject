@@ -108,7 +108,6 @@ dist
 
 #image
 *.png
-*.jpg
 
 #text
 .txt
