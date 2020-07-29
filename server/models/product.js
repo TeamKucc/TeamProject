@@ -50,7 +50,7 @@ const productSchema = mongoose.Schema({
 
   enable: {
     type: Boolean,
-    default: true
+    default: null
   },
 
   created:{

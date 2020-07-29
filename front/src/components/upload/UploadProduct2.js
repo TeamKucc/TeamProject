@@ -33,7 +33,7 @@ function UploadProduct({ onPublish, onChange }) {
         <br />
         <br />
 
-        <label>재고</label>
+        <label>재고수량</label>
         <Input onChange={onChange} name="stock" />
         <br />
         <br />

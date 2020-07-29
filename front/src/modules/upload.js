@@ -30,7 +30,14 @@ const [
   PRODUCT_UPLOAD_SUCCESS,
   PRODUCT_UPLOAD_FAILURE,
 ] = createRequestActionTypes('product/PRODUCT_UPLOAD');
+
 const SET_ORIGINAL_UPLOAD = 'product/SET_ORIGINAL_UPLOAD';
+
+const [
+  UPDATE_UPLOAD,
+  UPDATE_UPLOAD_SUCCESS,
+  UPDATE_UPLOAD_FAILURE,
+] = createRequestActionTypes('product/UPDATE_UPLOAD');
 
 export const initialize = createAction(INITIALIZE);
 export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
@@ -39,6 +46,7 @@ export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
 }));
 
 export const imagedDelete = createAction(IMAGE_DELETE, (images) => (images))
+
 export const thumbnailDelete = createAction(THUMBNAIL_DELETE, (images) => (images))
 
 export const imageUpload = createAction(IMAGE_UPLOAD, (files) => ({
@@ -69,10 +77,39 @@ export const setOriginalUpload = createAction(
   (upload) => upload,
 );
 
-// const imageUploadSaga = createRequestSaga(IMAGE_UPLOAD, productAPI.imageUpload);
+export const updateUpload = createAction(
+  UPDATE_UPLOAD,
+  ({
+    stock,
+    thumbnails,
+    title,
+    description,
+    price,
+    images,
+    discount,
+    person,
+    enable,
+  }) => ({
+    stock,
+      thumbnails,
+      title,
+      description,
+      price,
+      images,
+      discount,
+      person,
+      enable,
+  }),
+);
+
 const productUploadSaga = createRequestSaga(
   PRODUCT_UPLOAD,
   productAPI.productUpload,
+);
+
+const updateUploadSaga = createRequestSaga(
+  UPDATE_UPLOAD,
+  productAPI.updateUpload,
 );
 
 function* imageUploadSaga(action) {
@@ -132,11 +169,12 @@ export function* productSaga() {
   yield takeLatest(IMAGE_UPLOAD, imageUploadSaga);
   yield takeLatest(THUMBNAIL_UPLOAD, thumbnailUploadSaga);
   yield takeLatest(PRODUCT_UPLOAD, productUploadSaga);
+  yield takeLatest(UPDATE_UPLOAD, updateUploadSaga)
 }
 
 export const initialState = {
   stock: 0,
-  thumbnails:[],
+  thumbnails: [],
   title: '',
   description: '',
   price: 0,
@@ -145,6 +183,7 @@ export const initialState = {
   person: 0,
   upload: null,
   uploadError: null,
+  enable: null,
 };
 
 const upload = handleActions(
@@ -200,6 +239,14 @@ const upload = handleActions(
       images: upload.images,
       discount: upload.discount,
       person: upload.person,
+    }),
+    [UPDATE_UPLOAD_SUCCESS]: (state, { payload: upload }) => ({
+      ...state,
+      upload,
+    }),
+    [UPDATE_UPLOAD_FAILURE]: (state, { payload: uploadError }) => ({
+      ...state,
+      uploadError,
     }),
   },
   initialState,
