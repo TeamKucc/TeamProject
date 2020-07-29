@@ -12,12 +12,26 @@ const StockContainer = () => {
     loading: loading['management/STOCK_MANAGEMENT'],
   }));
 
+  // const onChange = (e) => {
+  //   console.log('call');
+  //   const { value, name } = e.target;
+  //   dispatch(
+  //     changeField({
+  //       key: name,
+  //       value,
+  //     }),
+  //   );
+  // };
+
+  const onChange = () => {}
+  const onCheckedChange = () => {}
+  
   useEffect(() => {
     dispatch(stockManagement({}))
   },[dispatch]);
 
 	return (
-		<Stock Products={management}/>
+		<Stock Products={management} onChange={onChange} onCheckedChange={onCheckedChange} />
 	);
 };
 export default withRouter(StockContainer);

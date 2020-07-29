@@ -7,9 +7,10 @@ import UploadProduct from '../../components/upload/UploadProduct2';
 const UploadContainer = ({ history }) => {
   const dispatch = useDispatch();
   
-  const { thumbnails, title, description, price, images, discount, person, upload, uploadError } = useSelector(
+  const { stock, thumbnails, title, description, price, images, discount, person, upload, uploadError } = useSelector(
     ({ upload }) => ({
-    thumbnails: upload.thumbnails,
+    stock: upload.stock,
+      thumbnails: upload.thumbnails,
     title: upload.title, 
     description: upload.description, 
     price: upload.price, 
@@ -25,6 +26,7 @@ const UploadContainer = ({ history }) => {
     e.preventDefault()
     dispatch(
       productUpload({
+        stock,
         thumbnails,
         title,
         description,

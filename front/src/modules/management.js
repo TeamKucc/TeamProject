@@ -32,8 +32,8 @@ export function* managementSaga() {
 }
 
 const initialState = {
-  management: {},
-  managementError: null,
+  management: { stock: 0, thumbnails: [], title: '', price: 0, discount: 0 },
+  error: null,
 };
 
 const management = handleActions(
@@ -44,7 +44,7 @@ const management = handleActions(
     }),
     [STOCK_MANAGEMENT_FAILURE]: (state, action) => ({
       ...state,
-      managementError: action.payload,
+      error: action.payload,
     }),
   },
   initialState,

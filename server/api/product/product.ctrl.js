@@ -120,3 +120,14 @@ export const config = (req, res) => {
     }
   })
 }
+
+export const getStock = (req, res)=>{
+  Product.find({},(err,result)=>{
+    if(err) return res.status(409).json({
+      success:false, err
+    })
+    res.json(result)
+  })
+}
+
+// find({user:req.body._id}, () => {})
