@@ -12,8 +12,6 @@ const StockContainer = () => {
     loading: loading['management/STOCK_MANAGEMENT'],
   }));
 
-  
-
   useEffect(() => {
     dispatch(stockManagement({}))
   },[dispatch]);
