@@ -10,6 +10,6 @@ router.post('/productUpload', productCtrl.productUpload);
 router.get('/getProducts', productCtrl.getProducts);
 router.post('/readProduct',productCtrl.readProduct);
 router.get('/config',productCtrl.config)
-// router.get('/getStock', productCtrl.getStock)
+router.get('/getStock', productCtrl.getStock)
 
 export default router;
