@@ -14,7 +14,7 @@ import UploadProductPage from '../pages/UploadProductPage';
 const App = () => {
   return (
     <>
-      <Route component={MainPage} path={['/home', '/']} />
+      <Route component={LandingPage} path={['/home', '/']} />
       <Route component={LoginPage} path="/login" />
       <Route component={RegisterPage} path="/register" />
       <Route component={BuyerRegisterPage} path="/register/buyer" />

@@ -14,10 +14,12 @@ const LandingContainer = () => {
   }));
 
   useEffect(() => {
+    console.log(landing)
     dispatch(landingProduct({}))
   },[dispatch]);
 
-  return <Landing Products={landing} loading={loading} />;
+  return null
+  // return <Landing Products={landing} loading={loading} />;
 };
 
 export default withRouter(LandingContainer);
