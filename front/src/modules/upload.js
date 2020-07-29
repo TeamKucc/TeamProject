@@ -45,7 +45,8 @@ export const thumbnailUpload = createAction(THUMBNAIL_UPLOAD, (files) => ({
 
 export const productUpload = createAction(
   PRODUCT_UPLOAD,
-  ({ thumbnails, title, description, price, images, discount, person }) => ({
+  ({ stock, thumbnails, title, description, price, images, discount, person }) => ({
+    stock,
     thumbnails,
     title,
     description,
@@ -126,6 +127,7 @@ export function* productSaga() {
 }
 
 export const initialState = {
+  stock: 0,
   thumbnails: [],
   title: '',
   description: '',
@@ -180,6 +182,7 @@ const upload = handleActions(
     }),
     [SET_ORIGINAL_UPLOAD]: (state, { payload: upload }) => ({
       ...state,
+      stock: upload.stock,
       thumbnails: upload.thumbnails,
       title: upload.title,
       description: upload.description,

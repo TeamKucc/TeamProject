@@ -10,6 +10,7 @@ import HEAD from '../components/common/HEAD';
 import Loading from '../pages/Loading';
 import LandingPage from '../pages/LandingPage';
 import UploadProductPage from '../pages/UploadProductPage';
+import StockPage from '../pages/StockPage'
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
       <Route component={Loading} path="loading" />
       <Route component={LandingPage} path="/product/landing" />
       <Route component={UploadProductPage} exact path="/product/upload" />
+      <Route component={StockPage} exact path="/product/stock" />
     </>
   );
 };
