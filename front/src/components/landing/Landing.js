@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -7,7 +6,13 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import ImageSlider from './ImageSlider';
+import styled from 'styled-components';
+import Responsive from '../common/Responsive';
 import { Link } from 'react-router-dom';
+
+const LangingBlock = styled(Responsive)`
+  margin-top:3rem
+`
 
 function Landing({ Products, loading }) {
 
@@ -68,34 +73,36 @@ function Landing({ Products, loading }) {
   });
 
   return (
-    <div style={{ width: '75%', margin: '3rem auto' }}>
-      <div style={{ textAlign: 'center' }}>
-        <h2> 제품목록 </h2>
-      </div>
-
-      {Products.length === 0 ? (
-        <div
-          style={{
-            display: 'flex',
-            height: '300px',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <h2>등록된 제품이 없습니다!</h2>
+    <LangingBlock>
+      <div style={{ width: '75%', margin: '3rem auto' }}>
+        <div style={{ textAlign: 'center' }}>
+          <h2> 제품목록 </h2>
         </div>
-      ) : (
-          <div>
-            {!loading && Products && (<div>
-              {renderCards}
-            </div>)
-            }
-          </div>
-        )}
 
-      <br />
-      <br />
-    </div>
+        {Products.length === 0 ? (
+          <div
+            style={{
+              display: 'flex',
+              height: '300px',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <h2>등록된 제품이 없습니다!</h2>
+          </div>
+        ) : (
+            <div>
+              {!loading && Products && (<div>
+                {renderCards}
+              </div>)
+              }
+            </div>
+          )}
+
+        <br />
+        <br />
+      </div>
+    </LangingBlock>
   );
 }
 
