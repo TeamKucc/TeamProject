@@ -19,7 +19,12 @@ const UNLOAD_PRODUCT = 'unload/UNLOAD_PRODUCT'
 
 export const landingProduct = createAction(
   LANDING_PRODUCT,
-  ({ thumbnails, title, price, discount, landing, landingError }) => ({ thumbnails, title, price, discount}),
+  ({ thumbnails, title, price, discount }) => ({
+    thumbnails,
+    title,
+    price,
+    discount,
+  }),
 );
 
 export const readProduct = createAction(READ_PRODUCT,({_id})=>({_id}));
@@ -31,20 +36,20 @@ const readProductSaga = createRequestSaga(READ_PRODUCT,productAPI.readProduct)
 
 export function* landingSaga() {
   yield takeLatest(LANDING_PRODUCT, landingProductSaga);
-  yield take(READ_PRODUCT,readProductSaga)
+  yield takeLatest(READ_PRODUCT,readProductSaga)
 }
 
 const initialState = {
-  landing: { thumbnails:[], title:'', price:0, discount:0},
+  landing: {},
   error: null,
   product:null,
 };
 
 const landing = handleActions(
   {
-    [LANDING_PRODUCT_SUCCESS]: (state, { payload: landing }) => ({
+    [LANDING_PRODUCT_SUCCESS]: (state, action) => ({
       ...state,
-      landing,
+      landing: action.payload,
     }),
     [LANDING_PRODUCT_FAILURE]: (state, { payload: error }) => ({
       ...state,

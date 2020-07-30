@@ -1,7 +1,19 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+
 const productSchema = mongoose.Schema({
+
+  user: {
+    type:String,
+    // required: true,
+  },
+
+  stock: {
+    type: Number,
+    default:0,
+  },
+  
   thumbnails: {
     type: Array,
     default: [],
@@ -34,6 +46,11 @@ const productSchema = mongoose.Schema({
   person: {
     type: Number,
     default: 0,
+  },
+
+  enable: {
+    type: Boolean,
+    default: null
   },
 
   created:{

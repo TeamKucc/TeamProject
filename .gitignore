@@ -108,6 +108,9 @@ dist
 
 #image
 *.png
+*.jpg
 
 #text
 .txt
+#etc
+*.exe

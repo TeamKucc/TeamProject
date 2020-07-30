@@ -3,7 +3,7 @@ import { Button, Form, Input } from 'antd';
 
 const { TextArea } = Input;
 
-function UploadProduct({ onPublish, onChange, product }) {
+function UploadProduct({ onPublish, onChange }) {
 
   return (
     <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
@@ -30,6 +30,11 @@ function UploadProduct({ onPublish, onChange, product }) {
 
         <label>할인인원</label>
         <Input onChange={onChange} name="person" />
+        <br />
+        <br />
+
+        <label>재고수량</label>
+        <Input onChange={onChange} name="stock" />
         <br />
         <br />
 

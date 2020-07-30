@@ -3,19 +3,15 @@ import Dropzone from 'react-dropzone';
 import { Typography } from 'antd'
 import upload from '../../modules/upload';
 
-function FileUpload({ onDrop, onDelete, images, loading }) {
-    
+function FileUpload({ onDrop, onDelete, images}) {
+
     const { Title } = Typography;
-   
-    const image = []
-    image.push(images)
     const f1 = () => {
-        console.log(image)
-        console.log(typeof(images))
-    }
-    
+        console.log(images[0])
+      }
+
     return (
-        
+
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
             <button onClick={f1}>src Check</button>
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
@@ -48,7 +44,7 @@ function FileUpload({ onDrop, onDelete, images, loading }) {
                         overflowX: 'scroll',
                     }}
                 >
-                    {/* {images.map((image, index) => (
+                    {images.map((image, index) => (
                         <div key={index} onClick={() => onDelete(image)}>
                             <img
                                 style={{ minWidth: '300px', width: '300px', height: '240px' }}
@@ -56,7 +52,7 @@ function FileUpload({ onDrop, onDelete, images, loading }) {
                                 src={`http://localhost:4000/${images[index].image}`}
                             />
                         </div>
-                    ))} */}
+                    ))}
                 </div>
             </div>
         </div>

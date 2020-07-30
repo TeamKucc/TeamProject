@@ -1,10 +1,11 @@
 import React from "react"
-import Landing from "../components/landing/Landing"
-
+import LandingContainer from "../container/landing/LandingContainer"
+import HeaderContainer from "../container/common/HeaderContainer"
 const LandingPage = () => {
   return (
     <div>
-      <Landing />
+      <HeaderContainer/>
+      <LandingContainer/>
     </div>
   )
 }

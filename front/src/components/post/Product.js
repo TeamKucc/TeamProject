@@ -1,26 +1,32 @@
 import React from 'react';
+import styled from 'styled-components'
+import Responsive from '../common/Responsive';
 
-const Product = ({ info,buyProduct }) => {
+
+const ProductBlock = styled(Responsive)`
+    margin-top:3rem;
+`
+
+const Product = ({ info, buyProduct }) => {
     return (
-        <div>
-            <Descriptions title="Product Info">
-                <Descriptions.Item label="Price"> {info}</Descriptions.Item>
-                <Descriptions.Item label="Sold">{}</Descriptions.Item>
-                <Descriptions.Item label="View"> {}</Descriptions.Item>
-                <Descriptions.Item label="Description"> {}</Descriptions.Item>
-            </Descriptions>
-
-            <br />
-            <br />
-            <br />
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <Button size="large" shape="round" type="danger"
-                    onClick={buyProduct}
-                >
-                    결제하기
-                    </Button>
+        <ProductBlock>
+            <div>
+                <form onSubmit={buyProduct}>
+                    <div>
+                        {info}
+                    </div>
+                    <br />
+                    <br />
+                    <br />
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                        <button size="large" shape="round" type="submit"
+                        >
+                            결제하기
+                    </button>
+                    </div>
+                </form>
             </div>
-        </div>
+        </ProductBlock>
     )
 }
 export default Product;

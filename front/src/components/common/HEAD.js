@@ -43,11 +43,7 @@ export default function Pricing({ onLogout, user }) {
 
   if (user) {
     UserId = user.replace(/['"]+/g, '')
-    console.log(UserId)
   }
-  useEffect(()=>{
-      console.log('Header Render!!!!!!!')
-  },[UserId])
   return (
     <>
       <CssBaseline />
@@ -55,7 +51,7 @@ export default function Pricing({ onLogout, user }) {
         <Toolbar className={classes.toolbar}>
        
           <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
-            <Link href="/">
+            <Link href="/" style={{ textDecoration: 'none' }}>
             LOGO
             </Link>
           </Typography>
