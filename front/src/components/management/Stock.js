@@ -7,12 +7,13 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import Button from '@material-ui/core/Button';
 import { Checkbox } from '@material-ui/core';
-
+import { Link } from 'react-router-dom';
 import ImageSlider from './ImageSlider';
 import DeleteConfirm from './DeleteConfirm'
 
 // 상품코드, 상품명, 창고재고, 주문대기, 재고수정, 판매, 품절, 수정버튼
-const Stock = ({ Products, onCheckedChange, onEdit, onRemove }) => {
+const Stock = ({ Products, onCheckedChange, onRemove }) => {
+
   let Prod = Object.keys(Products).map(function (key) {
     return Products[key];
   });
@@ -89,7 +90,7 @@ const Stock = ({ Products, onCheckedChange, onEdit, onRemove }) => {
               </>
           }
                 <TableCell width="5%">
-                  <Button onClick={onEdit}>수정</Button>
+                  <Link to={`/product/upload/${product._id}`}>수정</Link>
                 </TableCell>
                 <TableCell width="5%">
                   <Button onClick={onDeleteClick}>삭제</Button>

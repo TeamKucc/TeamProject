@@ -13,7 +13,7 @@ const ProductInfo = ({ params, history }) => {
         product: landing.product,
         user: user.user
     }))
-    console.log(params)
+    // console.log(params)
     useEffect(() => {
         try {
             dispatch(readProduct(productId))
@@ -52,6 +52,7 @@ const ProductInfo = ({ params, history }) => {
             return
         }
     }
+    
     return (
         <div>
             <Product info={product} buyProduct={onPay} />
