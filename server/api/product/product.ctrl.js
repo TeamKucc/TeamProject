@@ -122,7 +122,6 @@ export const config = (req, res) => {
 }
 
 export const getStock = (req, res)=>{
-  // const {id} = req.body
   Product.find({},(err,result)=>{
     if(err) return res.status(409).json({
       success:false, err

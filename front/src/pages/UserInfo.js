@@ -3,7 +3,9 @@ import UserInfoContainer from '../container/auth/UserInfoContainer'
 
 const UserInfo =()=>{
     return(
+
             <UserInfoContainer/>
+  
     )
 }
 

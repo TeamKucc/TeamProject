@@ -34,6 +34,7 @@ function Landing({ Products, loading }) {
       <Card className={classes.root} key={index}>
         <CardActionArea>
           <Link to={`/product/${product._id}`}>
+
             <ImageSlider images={product.thumbnails} />
             <CardContent>
               <Typography gutterBottom variant="h6" component="h2">

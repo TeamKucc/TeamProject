@@ -91,14 +91,14 @@ export const updateUpload = createAction(
     enable,
   }) => ({
     stock,
-    thumbnails,
-    title,
-    description,
-    price,
-    images,
-    discount,
-    person,
-    enable,
+      thumbnails,
+      title,
+      description,
+      price,
+      images,
+      discount,
+      person,
+      enable,
   }),
 );
 
@@ -184,7 +184,6 @@ export const initialState = {
   upload: null,
   uploadError: null,
   enable: null,
-  originalProductId: null,
 };
 
 const upload = handleActions(
@@ -222,9 +221,9 @@ const upload = handleActions(
       ...state,
       uploadError,
     }),
-    [PRODUCT_UPLOAD_SUCCESS]: (state, { payload: upload }) => ({
+    [PRODUCT_UPLOAD_SUCCESS]: (state, action) => ({
       ...state,
-      upload,
+      upload: action.payload,
     }),
     [PRODUCT_UPLOAD_FAILURE]: (state, { payload: uploadError }) => ({
       ...state,
@@ -240,7 +239,6 @@ const upload = handleActions(
       images: upload.images,
       discount: upload.discount,
       person: upload.person,
-      originalProductId: upload._id,
     }),
     [UPDATE_UPLOAD_SUCCESS]: (state, { payload: upload }) => ({
       ...state,
