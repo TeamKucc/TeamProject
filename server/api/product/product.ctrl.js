@@ -1,7 +1,6 @@
-
 import Product from '../../models/product';
 import multer from 'multer';
-import BootpayRest from 'bootpay-rest-client'
+import BootpayRest from 'bootpay-rest-client';
 
 let storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -61,9 +60,9 @@ export const uploadImage = (req, res) => {
 };
 
 export const uploadThumbnail = (req, res) => {
-  console.log(req.body)
+  console.log(req.body);
   upload2(req, res, (err) => {
-    console.log(req.file)
+    console.log(req.file);
     if (err) {
       return res.json({ success: false, err });
     }
@@ -76,7 +75,7 @@ export const uploadThumbnail = (req, res) => {
 };
 
 export const productUpload = (req, res) => {
-  console.log(req.body)
+  console.log(req.body);
   const product = new Product(req.body);
 
   product.save((err) => {
@@ -87,59 +86,68 @@ export const productUpload = (req, res) => {
 
 export const getProducts = (req, res) => {
   Product.find({}, (err, result) => {
-    if (err) return res.status(409).json({
-      success: false, err
-    })
-    res.json(result)
-  })
-}
+    if (err)
+      return res.status(409).json({
+        success: false,
+        err,
+      });
+    res.json(result);
+  });
+};
 
 export const readProduct = (req, res) => {
-  const {id}=req.params
-  Product.findOne({ _id:id }, (err, result) => {
-    if (err) return res.status(400).json({ success: false, Message: err })
-    return res.json(result )
-  })
-}
+
+  const { id } = req.params;
+  Product.findOne({ _id: id }, (err, result) => {
+    if (err) return res.status(400).json({ success: false, Message: err });
+    return res.json(result);
+  });
+};
 
 export const config = (req, res) => {
-  const { headers } = req
-  console.log(headers._id)
-  const token = headers._id
+  const { headers } = req;
+  console.log(headers._id);
+  const token = headers._id;
   BootpayRest.setConfig(
-    "5f1fb31b02f57e00333052f9",
-    "bVk2alHM4fcHf9b9MYX6SwjT2f3txa8EzFdgEW5Suas="
-  )
+    '5f1fb31b02f57e00333052f9',
+    'bVk2alHM4fcHf9b9MYX6SwjT2f3txa8EzFdgEW5Suas=',
+  );
   BootpayRest.getAccessToken().then(function (response) {
     if (response.status === 200 && response.data.token !== undefined) {
       BootpayRest.verify('5df6e67d4f74b4002a77e0eb').then(function (_response) {
         res.json({
-         _response
-        })
-      })
-
+          _response,
+        });
+      });
     }
-  })
-}
-
-export const getStock = (req, res)=>{
-  // const {id} = req.body
-  Product.find({},(err,result)=>{
-    if(err) return res.status(409).json({
-      success:false, err
-    })
-    res.json(result)
-  })
-}
-
-export const updateUpload = (req, res) => {
-  console.log(req.body)
-  const product = new Product(req.body);
-
-  product.save((err) => {
-    if (err) return res.status(400).json({ success: false, err });
-    return res.status(200).json({ success: true });
   });
 };
 
-// find({user:req.body._id}, () => {})
+export const getStock = (req, res) => {
+  // const {id} = req.body
+  Product.find({}, (err, result) => {
+    if (err)
+      return res.status(409).json({
+        success: false,
+        err,
+      });
+    res.json(result);
+  });
+};
+
+
+export const updateUpload = (req, res)=>{
+  console.log(req.body)
+  // const { id } = req.params;
+  const { stock, thumbnails, title, description, price, images, discount, person, enable } = req.body
+  Product.findOneAndUpdate({ _id : req.body.id }, {$set:{ stock:stock, thumbnails:thumbnails, title:title, description:description, price:price, images:images, discount:discount, person:person, enable:enable}},(err,result)=>{
+      if(err) return res.status(404).json({
+          message:'Changed error',
+          Change:false
+      })
+      res.json({
+          message:'Success User Infomation Change',
+          Change:true
+      })
+  })
+}

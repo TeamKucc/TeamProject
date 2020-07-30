@@ -1,7 +1,9 @@
-import { createAction, handleActions } from 'redux-actions'
-import createRequestSaga, {createRequestActionTypes} from '../lib/createRequestsaga'
-import * as productAPI from '../lib/api/product'
-import { takeLatest, take } from 'redux-saga/effects'
+import { createAction, handleActions } from 'redux-actions';
+import createRequestSaga, {
+  createRequestActionTypes,
+} from '../lib/createRequestsaga';
+import * as productAPI from '../lib/api/product';
+import { takeLatest, take } from 'redux-saga/effects';
 
 const [
   LANDING_PRODUCT,
@@ -12,10 +14,10 @@ const [
 const [
   READ_PRODUCT,
   READ_PRODUCT_SUCCESS,
-  READ_PRODUCT_FAILURE
-]=createRequestActionTypes('read/READ_PRODUCT');
+  READ_PRODUCT_FAILURE,
+] = createRequestActionTypes('read/READ_PRODUCT');
 
-const UNLOAD_PRODUCT = 'unload/UNLOAD_PRODUCT'
+const UNLOAD_PRODUCT = 'unload/UNLOAD_PRODUCT';
 
 export const landingProduct = createAction(
   LANDING_PRODUCT,
@@ -27,23 +29,26 @@ export const landingProduct = createAction(
   }),
 );
 
-export const readProduct = createAction(READ_PRODUCT,_id=>_id);
+export const readProduct = createAction(READ_PRODUCT, (_id) => _id);
 
-export const unloadProduct = createAction(UNLOAD_PRODUCT)
+export const unloadProduct = createAction(UNLOAD_PRODUCT);
 
-const landingProductSaga = createRequestSaga(LANDING_PRODUCT, productAPI.landingProduct);
-const readProductSaga = createRequestSaga(READ_PRODUCT,productAPI.readProduct)
+const landingProductSaga = createRequestSaga(
+  LANDING_PRODUCT,
+  productAPI.landingProduct,
+);
+const readProductSaga = createRequestSaga(READ_PRODUCT, productAPI.readProduct);
 
 export function* landingSaga() {
   yield takeLatest(LANDING_PRODUCT, landingProductSaga);
-  yield takeLatest(READ_PRODUCT,readProductSaga)
+  yield takeLatest(READ_PRODUCT, readProductSaga);
 }
 
 const initialState = {
   landing: {},
   error: null,
-  product:null,
-  productDetail:null
+  product: null,
+  productDetail: null,
 };
 
 const landing = handleActions(
@@ -56,15 +61,15 @@ const landing = handleActions(
       ...state,
       error,
     }),
-    [READ_PRODUCT_SUCCESS]:(state,{payload:info})=>({
+    [READ_PRODUCT_SUCCESS]: (state, { payload: info }) => ({
       ...state,
-      productDetail:info
+      productDetail: info,
     }),
-    [READ_PRODUCT_FAILURE]:(state,{payload:error})=>({
+    [READ_PRODUCT_FAILURE]: (state, { payload: error }) => ({
       ...state,
-      error
+      error,
     }),
-    [UNLOAD_PRODUCT]:()=>initialState,
+    [UNLOAD_PRODUCT]: () => initialState,
   },
   initialState,
 );

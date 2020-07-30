@@ -25,10 +25,10 @@ const App = () => {
       <Route component={UserInfo} exact path="/userInfo/:user" />
       <Route component={HEAD} path="/head" />
       <Route component={Loading} path="loading" />
-      <Route component={UploadProductPage} exact path="/product/upload" exact />
+      <Route component={UploadProductPage} exact path="/product/upload" />
       <Route component={StockPage} exact path="/product/stock" />
-      <Route component={ProductPage} path="/product/:id" exact/>
-      <Route component={ProductEditPage} path="/product/upload/:id" exact/>
+      <Route component={ProductPage} path="/:id" exact/>
+      <Route component={ProductEditPage} exact path="/product/upload/:id" />
     </>
   );
 };

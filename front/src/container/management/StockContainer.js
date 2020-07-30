@@ -8,7 +8,6 @@ import {
   removeProduct,
   readProduct,
 } from '../../lib/api/product';
-import { setOriginalUpload } from '../../modules/upload';
 
 const StockContainer = ({ match, history }) => {
   // console.log(match)
@@ -29,12 +28,6 @@ const StockContainer = ({ match, history }) => {
     console.log(e.target.value);
   };
 
-  const onEdit = () => {
-    console.log(management)
-    dispatch(setOriginalUpload(management));
-    history.push('/product/upload');
-  };
-  
   const onRemove = async () => {
     // try{
     //   await removeProduct(management._id)
@@ -52,7 +45,6 @@ const StockContainer = ({ match, history }) => {
     <Stock
       Products={management}
       onCheckedChange={onCheckedChange}
-      // onEdit={onEdit}
       onRemove={onRemove}
     />
   );

@@ -3,52 +3,61 @@ import ProductEdit from '../../components/upload/ProductEdit';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { changeField, setOriginalUpload } from '../../modules/upload';
+import { readProduct, unloadProduct } from '../../modules/landing';
+import { updateUpload } from '../../lib/api/product';
 
 const ProductEditContainer = ({ match, history }) => {
   const dispatch = useDispatch();
 
-  const { productId } = match.params;
-
   const {
-    user,
-    stock,
-    thumbnails,
-    title,
-    description,
-    price,
-    images,
-    discount,
-    person,
-    upload,
-    uploadError,
-    enable,
-  } = useSelector(({ upload, user }) => ({
-    user: user.user,
-    stock: upload.stock,
-    thumbnails: upload.thumbnails,
-    title: upload.title,
-    description: upload.description,
-    price: upload.price,
-    images: upload.images,
-    discount: upload.discount,
-    person: upload.person,
-    upload: upload.upload,
-    uploadError: upload.uploadError,
-    enable: upload.enable,
+    // idx,
+    // stock,
+    // thumbnails,
+    // title,
+    // description,
+    // price,
+    // images,
+    // discount,
+    // person,
+    // enable,
+    product,
+  } = useSelector(({ upload, landing }) => ({
+    // stock: upload.stock,
+    // thumbnails: upload.thumbnails,
+    // title: upload.title,
+    // description: upload.description,
+    // price: upload.price,
+    // images: upload.images,
+    // discount: upload.discount,
+    // person: upload.person,
+    // enable: upload.enable,
+    product: landing.productDetail,
   }));
+  
+  const { id } = match.params;
+  useEffect(() => {
+    dispatch(readProduct(id));
+    return () => {
+      dispatch(unloadProduct());
+    };
+  }, [dispatch, id]);
 
-  // useEffect(() => {
-  //   dispatch(readPost(productId));
-  //   return () => {
-  //     dispatch(unloadPost());
-  //   };
-  // }, [dispatch, productId]);
-
+  console.log(product)
   const onPublish = (e) => {
     e.preventDefault();
+    const {
+      stock,
+      thumbnails,
+      title,
+      description,
+      price,
+      images,
+      discount,
+      person,
+      enable } = product
     dispatch(
-      setOriginalUpload({
-        user,
+      updateUpload({
+        id,
         stock,
         thumbnails,
         title,
@@ -57,12 +66,10 @@ const ProductEditContainer = ({ match, history }) => {
         images,
         discount,
         person,
-        upload,
-        uploadError,
         enable,
       }),
-    )
-    history.push('/product/stock')
+    );
+    history.push('/product/stock');
   };
 
   const onChange = (e) => {
@@ -78,7 +85,11 @@ const ProductEditContainer = ({ match, history }) => {
 
   return (
     <div>
-      <ProductEdit onPublish={onPublish} onChange={onChange} />
+      <ProductEdit
+        onPublish={onPublish}
+        onChange={onChange}
+        product={product}
+      />
     </div>
   );
 };

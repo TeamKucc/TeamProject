@@ -4,32 +4,33 @@ import { Checkbox } from '@material-ui/core';
 
 const { TextArea } = Input;
 
-const ProductEdit = ({ onPublish, onChange }) => {
+const ProductEdit = ({ onPublish, onChange, product }) => {
+  if (!product) return null;
 	return (
 		<div style={{ maxWidth: '700px', margin: '2rem auto' }}>
       <Form onSubmit={onPublish}>
         <label>제품명</label>
-        <Input onChange={onChange} name="title" />
+        <Input onChange={onChange} name="title" value={product.title}/>
         <br />
         <br />
 
         <label>제품설명</label>
-        <TextArea onChange={onChange} name="description" />
+        <TextArea onChange={onChange} name="description" value={product.description}/>
         <br />
         <br />
 
         <label>원가</label>
-        <Input onChange={onChange} name="price" />
+        <Input onChange={onChange} name="price" value={product.price}/>
         <br />
         <br />
 
         <label>할인가</label>
-        <Input onChange={onChange} name="discount" />
+        <Input onChange={onChange} name="discount" value={product.discount}/>
         <br />
         <br />
 
         <label>할인인원</label>
-        <Input onChange={onChange} name="person" />
+        <Input onChange={onChange} name="person" value={product.person}/>
         <br />
         <br />
 
@@ -40,8 +41,8 @@ const ProductEdit = ({ onPublish, onChange }) => {
 
         <label>판매상태</label>
         <br/>
-        <input type="radio" name="check" value="true" /> 판매 &nbsp;
-        <input type="radio" name="check" value="false" /> 품절
+        <input type="radio" name="enable" value="true" /> 판매 &nbsp;
+        <input type="radio" name="enable" value="false" /> 품절
         <br />
         <br />
 
