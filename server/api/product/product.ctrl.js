@@ -95,9 +95,10 @@ export const getProducts = (req, res) => {
 }
 
 export const readProduct = (req, res) => {
-  Product.findOne({ _id: req.body._id }, (err, result) => {
+  const {id}=req.params
+  Product.findOne({ _id:id }, (err, result) => {
     if (err) return res.status(400).json({ success: false, Message: err })
-    return res.json({ result })
+    return res.json(result )
   })
 }
 

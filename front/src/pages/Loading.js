@@ -4,7 +4,7 @@ import MainPage from './MainPage';
 
 const Loading =()=>{
     return(
-        <Redirect to={MainPage}/>
+        null
     )
 }
 

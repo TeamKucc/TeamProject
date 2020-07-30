@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Redirect, withRouter } from 'react-router-dom';
+import { Route, Redirect, withRouter, Switch } from 'react-router-dom';
 import LoginPage from '../pages/LoginPage';
 import BuyerRegisterPage from '../pages/BuyerRegisterPage';
 import DealRegisterPage from '../pages/DealRegisterPage';
@@ -25,8 +25,7 @@ const App = () => {
       <Route component={UserInfo} exact path="/userInfo/:user" />
       <Route component={HEAD} path="/head" />
       <Route component={Loading} path="loading" />
-      <Route component={LandingPage} path="/product/landing" />
-      <Route component={UploadProductPage} exact path="/product/upload" />
+      <Route component={UploadProductPage} exact path="/product/upload" exact />
       <Route component={StockPage} exact path="/product/stock" />
       <Route component={ProductPage} path="/product/:id" exact/>
       <Route component={ProductEditPage} path="/product/upload/:id" exact/>
@@ -34,4 +33,4 @@ const App = () => {
   );
 };
 
-export default withRouter(App);
+export default App;

@@ -3,62 +3,58 @@ import { useDispatch, useSelector } from 'react-redux'
 import { readProduct, unloadProduct } from '../../modules/landing';
 import Product from '../../components/post/Product'
 import ProductImage from '../../components/post/ProductImage'
+import { withRouter } from 'react-router-dom';
 
-
-const ProductInfo = ({ params, history }) => {
-    const { IMP } = window;
-    const { productId } = '';
+const ProductInfo = ({ match, history }) => {
     const dispatch = useDispatch()
+    const { IMP } = window;
     const { product, user } = useSelector(({ landing, user }) => ({
-        product: landing.product,
+        product: landing.productDetail,
         user: user.user
     }))
     // console.log(params)
     useEffect(() => {
-        try {
-            dispatch(readProduct(productId))
-            return () => {
-                dispatch(unloadProduct())
-            }
-        } catch (error) {
-
+        const { id } = match.params
+        dispatch(readProduct(id))
+        return () => {
+            dispatch(unloadProduct())
         }
     }, [dispatch])
 
-    const onPay = (e) => {
-        const userCode = 'imp97305641'
-        e.preventDefault();
-        const data = {
-            pg: 'kg_inisis',
-            pay_method: 'vstf',
-            merchant_uid: user._id + product._id,
-            name: product.title,
-            amount: product.amount,
-            buyer_name: user.name,
-            buyer_tel: user.phone,
-            buyer_email: user.email,
-            escrow: false,
-        }
-
-        IMP.init(userCode);
-        IMP.request_pay(data, callback);
+    const onClick = () => {
+        IMP.init('imp97305641');
+        IMP.request_pay({
+            pg: 'kakao', // version 1.1.0부터 지원.
+            pay_method: 'card',
+            merchant_uid: 'merchant_' + new Date().getTime(),
+            name: '주문명:결제테스트',
+            amount: 14000,
+            buyer_email: 'iamport@siot.do',
+            buyer_name: '구매자이름',
+            buyer_tel: '010-1234-5678',
+            buyer_addr: '서울특별시 강남구 삼성동',
+            buyer_postcode: '123-456',
+        }, function (rsp) {
+            if (rsp.success) {
+                var msg = '결제가 완료되었습니다.';
+                msg += '고유ID : ' + rsp.imp_uid;
+                msg += '상점 거래ID : ' + rsp.merchant_uid;
+                msg += '결제 금액 : ' + rsp.paid_amount;
+                msg += '카드 승인번호 : ' + rsp.apply_num;
+            } else {
+                var msg = '결제에 실패하였습니다.';
+                msg += '에러내용 : ' + rsp.error_msg;
+            }
+            alert(msg);
+        });
     }
-    const callback = (response) => {
-        console.log(response)
-        if (response.success) {
 
-        } else {
-            alert('결제오류!')
-            return
-        }
-    }
-    
     return (
-        <div>
-            <Product info={product} buyProduct={onPay} />
+        <>
             <ProductImage info={product} />
-        </div>
+            <Product info={product} buy={onClick} />
+        </>
     )
 }
 
-export default ProductInfo
+export default withRouter(ProductInfo)

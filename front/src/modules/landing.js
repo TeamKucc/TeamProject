@@ -27,7 +27,7 @@ export const landingProduct = createAction(
   }),
 );
 
-export const readProduct = createAction(READ_PRODUCT,({_id})=>({_id}));
+export const readProduct = createAction(READ_PRODUCT,_id=>_id);
 
 export const unloadProduct = createAction(UNLOAD_PRODUCT)
 
@@ -43,6 +43,7 @@ const initialState = {
   landing: {},
   error: null,
   product:null,
+  productDetail:null
 };
 
 const landing = handleActions(
@@ -55,9 +56,9 @@ const landing = handleActions(
       ...state,
       error,
     }),
-    [READ_PRODUCT_SUCCESS]:(state,{payload:product})=>({
+    [READ_PRODUCT_SUCCESS]:(state,{payload:info})=>({
       ...state,
-      product
+      productDetail:info
     }),
     [READ_PRODUCT_FAILURE]:(state,{payload:error})=>({
       ...state,
