@@ -28,6 +28,7 @@ const UserInfoContainer = ({ match,history }) => {
             })
         )
     }
+
     useEffect(() => {
         try {
             const userId = localStorage.getItem('userId').replace(/['"]+/g, '')

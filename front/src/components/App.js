@@ -12,11 +12,12 @@ import LandingPage from '../pages/LandingPage';
 import UploadProductPage from '../pages/UploadProductPage';
 import StockPage from '../pages/StockPage'
 import ProductPage from '../pages/ProductPage';
+import ProductEditPage from '../pages/ProductEditPage'
 
 const App = () => {
   return (
     <>
-      <Route component={LandingPage} path={['/home', '/']} />
+      <Route component={LandingPage} path={['/home', '/']} exact/>
       <Route component={LoginPage} path="/login" />
       <Route component={RegisterPage} path="/register" />
       <Route component={BuyerRegisterPage} path="/register/buyer" />
@@ -27,7 +28,8 @@ const App = () => {
       <Route component={LandingPage} path="/product/landing" />
       <Route component={UploadProductPage} exact path="/product/upload" />
       <Route component={StockPage} exact path="/product/stock" />
-      <Route component={ProductPage} path="/product/:id" />
+      <Route component={ProductPage} path="/product/:id" exact/>
+      <Route component={ProductEditPage} path="/product/upload/:id" exact/>
     </>
   );
 };
