@@ -10,7 +10,7 @@ router.post('/productUpload', productCtrl.productUpload);
 router.post('updateUpload', productCtrl.updateUpload)
 
 router.get('/getProducts', productCtrl.getProducts);
-router.post('/readProduct',productCtrl.readProduct);
+router.post('/readProduct/:id',productCtrl.readProduct);
 
 router.get('/config',productCtrl.config)
 router.get('/getStock', productCtrl.getStock)

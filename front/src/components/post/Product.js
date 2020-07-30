@@ -7,24 +7,26 @@ const ProductBlock = styled(Responsive)`
     margin-top:3rem;
 `
 
-const Product = ({ info, buyProduct }) => {
+const Product = ({ info, buy }) => {
+    if (!info) return null;
+    const { stock, price, discount, title } = info
     return (
         <ProductBlock>
             <div>
-                <form onSubmit={buyProduct}>
-                    <div>
-                        {info}
-                    </div>
-                    <br />
-                    <br />
-                    <br />
-                    <div style={{ display: 'flex', justifyContent: 'center' }}>
-                        <button size="large" shape="round" type="submit"
-                        >
-                            결제하기
+
+                <div>제목:{title}</div>
+                <div>가격:{price}</div>
+                <div>할인가:{discount}</div>
+                <div>재고:{stock}</div>
+                <br />
+                <br />
+                <br />
+                <div>
+                </div>
+
+                <button onClick={buy}>
+                    결제하기
                     </button>
-                    </div>
-                </form>
             </div>
         </ProductBlock>
     )

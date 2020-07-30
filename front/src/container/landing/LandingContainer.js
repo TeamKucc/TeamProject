@@ -19,7 +19,7 @@ const LandingContainer = () => {
   },[dispatch]);
 
   // return null
-  return <Landing Products={landing} loading={loading} />;
+  return( <Landing Products={landing} loading={loading} />);
 };
 
 export default withRouter(LandingContainer);
