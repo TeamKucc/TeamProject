@@ -1,7 +1,10 @@
 import Product from '../../models/product';
+import Pay from '../../models/payment';
 import multer from 'multer';
-import BootpayRest from 'bootpay-rest-client';
+import mongoose from 'mongoose'
 
+
+const ObjectId = mongoose.Types.ObjectId;
 let storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'uploads/');
@@ -84,6 +87,16 @@ export const productUpload = (req, res) => {
   });
 };
 
+export const productPaid = async (req, res) => {
+  console.log(req.body)
+  const pay = new Pay(req.body);
+  await pay.save((err) => {
+    if (err) return res.status(400).json({ success: false, Message: err });
+    return res.status(200).json({ success: true })
+  })
+  await Product.updateOne({ _id: req.body.product }, { $inc: { stock: -1 } })
+}
+
 export const getProducts = (req, res) => {
   Product.find({}, (err, result) => {
     if (err)
@@ -136,18 +149,18 @@ export const getStock = (req, res) => {
 };
 
 
-export const updateUpload = (req, res)=>{
+export const updateUpload = (req, res) => {
   console.log(req.body)
   // const { id } = req.params;
   const { stock, thumbnails, title, description, price, images, discount, person, enable } = req.body
-  Product.findOneAndUpdate({ _id : req.body.id }, {$set:{ stock:stock, thumbnails:thumbnails, title:title, description:description, price:price, images:images, discount:discount, person:person, enable:enable}},(err,result)=>{
-      if(err) return res.status(404).json({
-          message:'Changed error',
-          Change:false
-      })
-      res.json({
-          message:'Success User Infomation Change',
-          Change:true
-      })
+  Product.findOneAndUpdate({ _id: req.body.id }, { $set: { stock: stock, thumbnails: thumbnails, title: title, description: description, price: price, images: images, discount: discount, person: person, enable: enable } }, (err, result) => {
+    if (err) return res.status(404).json({
+      message: 'Changed error',
+      Change: false
+    })
+    res.json({
+      message: 'Success User Infomation Change',
+      Change: true
+    })
   })
 }

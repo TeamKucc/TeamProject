@@ -4,7 +4,7 @@ import { Checkbox } from '@material-ui/core';
 
 const { TextArea } = Input;
 
-const ProductEdit = ({ onPublish, onChange, product }) => {
+const ProductEdit = ({ onPublish, onChange, product,description }) => {
   if (!product) return null;
 	return (
 		<div style={{ maxWidth: '700px', margin: '2rem auto' }}>
@@ -15,7 +15,7 @@ const ProductEdit = ({ onPublish, onChange, product }) => {
         <br />
 
         <label>제품설명</label>
-        <TextArea onChange={onChange} name="description" value={product.description}/>
+        <TextArea onChange={onChange} name="description" value={description}/>
         <br />
         <br />
 

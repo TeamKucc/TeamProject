@@ -8,7 +8,6 @@ import { updateUpload } from '../../modules/upload';
 
 const ProductEditContainer = ({ match, history }) => {
   const dispatch = useDispatch();
-
   const {
     stock,
     thumbnails,
@@ -78,6 +77,7 @@ const ProductEditContainer = ({ match, history }) => {
         onPublish={onPublish}
         onChange={onChange}
         product={product}
+        description = {description}
       />
     </div>
   );

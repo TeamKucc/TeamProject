@@ -8,14 +8,14 @@ import produce from 'immer'
 
 
 const UserInfoContainer = ({ match,history }) => {
-
     const dispatch = useDispatch();
     const [error, setError] = useState(null)
-    const { form, auth, authError, user } = useSelector(({ auth }) => ({
+    const { form, auth, authError, user,_id } = useSelector(({ auth,user }) => ({
         form: auth.userInfo,
         auth: auth.auth,
         authError: auth.authError,
-        user: auth.user
+        user: auth.user,
+        _id:user.user
     }));
     //인풋 변경이벤트
     const onChange = e => {
@@ -42,7 +42,8 @@ const UserInfoContainer = ({ match,history }) => {
     const onSubmit = e => {
         e.preventDefault();
         const { userID, name, password, passwordConfirm, email } = form;
-
+        const userId = localStorage.getItem('userId').replace(/['"]+/g, '')
+        console.log(form)
         if ([userID, name, password, passwordConfirm, email].includes('')) {
             setError('빈칸을 모두 입력해주세요')
             return
@@ -52,7 +53,8 @@ const UserInfoContainer = ({ match,history }) => {
             return
         }
         console.log('call')
-        dispatch(userUpdate({ userID, name, password, email }));
+        dispatch(userUpdate({ userID, name, password, email,userId }));
+
     }
 
 

@@ -15,4 +15,8 @@ router.post('/readProduct/:id',productCtrl.readProduct);
 router.get('/config',productCtrl.config)
 router.get('/getStock', productCtrl.getStock)
 
+router.post('/paid',productCtrl.productPaid)
+router.get('/userPaid')
+router.get('/sellerPaid')
+
 export default router;

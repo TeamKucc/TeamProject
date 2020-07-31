@@ -19,7 +19,9 @@ function Landing({ Products, loading }) {
   let Prod = Object.keys(Products).map(function (key) {
     return Products[key]
   })
-
+  console.log('-------------------')
+  console.log(Prod.thumbnails)
+  console.log('-------------------')
   const useStyles = makeStyles({
     root: {
       minWidth: 200,
@@ -35,10 +37,12 @@ function Landing({ Products, loading }) {
 
   const classes = useStyles();
   const renderCards = Prod.map((product, index) => {
+    console.log('land')
+    console.log(product.thumbnails)
     return (
       <Card className={classes.root} key={index}>
         <CardActionArea>
-          <Link to={`/product/${product._id}`}>
+          <Link to={`/${product._id}`}>
             <ImageSlider images={product.thumbnails} />
             <CardContent>
               <Typography gutterBottom variant="h6" component="h2">
