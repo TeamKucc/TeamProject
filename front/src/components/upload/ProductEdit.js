@@ -20,17 +20,17 @@ const ProductEdit = ({ onPublish, onChange, product }) => {
         <br />
 
         <label>원가</label>
-        <Input onChange={onChange} name="price" value={product.price}/>
+        <Input onChange={onChange} name="price"/>
         <br />
         <br />
 
         <label>할인가</label>
-        <Input onChange={onChange} name="discount" value={product.discount}/>
+        <Input onChange={onChange} name="discount"/>
         <br />
         <br />
 
         <label>할인인원</label>
-        <Input onChange={onChange} name="person" value={product.person}/>
+        <Input onChange={onChange} name="person" />
         <br />
         <br />
 
@@ -41,8 +41,8 @@ const ProductEdit = ({ onPublish, onChange, product }) => {
 
         <label>판매상태</label>
         <br/>
-        <input type="radio" name="enable" value="true" /> 판매 &nbsp;
-        <input type="radio" name="enable" value="false" /> 품절
+        <input type="radio" onChange={onChange} name="enable" value="true" /> 판매 &nbsp;
+        <input type="radio" onChange={onChange} name="enable" value="false" /> 품절
         <br />
         <br />
 

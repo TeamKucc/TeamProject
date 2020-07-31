@@ -45,9 +45,12 @@ export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
   value,
 }));
 
-export const imagedDelete = createAction(IMAGE_DELETE, (images) => (images))
+export const imagedDelete = createAction(IMAGE_DELETE, (images) => images);
 
-export const thumbnailDelete = createAction(THUMBNAIL_DELETE, (images) => (images))
+export const thumbnailDelete = createAction(
+  THUMBNAIL_DELETE,
+  (images) => images,
+);
 
 export const imageUpload = createAction(IMAGE_UPLOAD, (files) => ({
   files,
@@ -59,8 +62,16 @@ export const thumbnailUpload = createAction(THUMBNAIL_UPLOAD, (files) => ({
 
 export const productUpload = createAction(
   PRODUCT_UPLOAD,
-  ({ id, stock, thumbnails, title, description, price, images, discount, person }) => ({
-    id,
+  ({
+    stock,
+    thumbnails,
+    title,
+    description,
+    price,
+    images,
+    discount,
+    person,
+  }) => ({
     stock,
     thumbnails,
     title,
@@ -109,14 +120,14 @@ const productUploadSaga = createRequestSaga(
 
 const updateUploadSaga = createRequestSaga(
   UPDATE_UPLOAD,
-  productAPI.updateUpload
+  productAPI.updateUpload,
 );
 
 function* imageUploadSaga(action) {
   yield put(startLoading('product/IMAGE_UPLOAD'));
   try {
     const files = action.payload.files.files;
-    console.log(files)
+    console.log(files);
     let formData = new FormData();
     const config = {
       header: { 'content-type': 'multipart/form-data' },
@@ -156,12 +167,12 @@ function* thumbnailUploadSaga(action) {
       formData,
       config,
     );
-    console.log(thumbnail)
+    console.log(thumbnail);
     yield put({
       type: THUMBNAIL_UPLOAD_SUCCESS,
       payload: thumbnail.data,
     });
-  } catch (error) { }
+  } catch (error) {}
   yield put(finishLoading(THUMBNAIL_UPLOAD));
 }
 
@@ -169,7 +180,7 @@ export function* productSaga() {
   yield takeLatest(IMAGE_UPLOAD, imageUploadSaga);
   yield takeLatest(THUMBNAIL_UPLOAD, thumbnailUploadSaga);
   yield takeLatest(PRODUCT_UPLOAD, productUploadSaga);
-  yield takeLatest(UPDATE_UPLOAD, updateUploadSaga)
+  yield takeLatest(UPDATE_UPLOAD, updateUploadSaga);
 }
 
 export const initialState = {
@@ -189,33 +200,37 @@ export const initialState = {
 const upload = handleActions(
   {
     [INITIALIZE]: (state) => initialState,
-    [CHANGE_FIELD]: (state, { payload: { key, value } }) => ({
-      ...state,
-      [key]: value,
+    // [CHANGE_FIELD]: (state, { payload: { key, value } }) => ({
+    //   ...state,
+    //   [key]: value,
+    // }),
+    [CHANGE_FIELD]: (state, { payload: { key, value } }) => produce(state,draft=>{
+      draft[key]=value
+      return draft
     }),
     [IMAGE_DELETE]: (state, { payload: image }) =>
-      produce(state, draft => {
-        draft.images.splice(image, 1)
-        return draft
+      produce(state, (draft) => {
+        draft.images.splice(image, 1);
+        return draft;
       }),
     [IMAGE_UPLOAD_SUCCESS]: (state, { payload: image }) =>
-      produce(state, draft => {
-        draft.images.push(image)
-        return draft
+      produce(state, (draft) => {
+        draft.images.push(image);
+        return draft;
       }),
     [IMAGE_UPLOAD_FAILURE]: (state, { payload: uploadError }) => ({
       ...state,
       uploadError,
     }),
     [THUMBNAIL_DELETE]: (state, { payload: image }) =>
-      produce(state, draft => {
-        draft.thumbnails.splice(image, 1)
-        return draft
+      produce(state, (draft) => {
+        draft.thumbnails.splice(image, 1);
+        return draft;
       }),
-    [THUMBNAIL_UPLOAD_SUCCESS]: (state, { payload: thumbnails}) =>
-      produce(state,draft=>{
-        draft.thumbnails.push(thumbnails)
-        return draft
+    [THUMBNAIL_UPLOAD_SUCCESS]: (state, { payload: thumbnails }) =>
+      produce(state, (draft) => {
+        draft.thumbnails.push(thumbnails);
+        return draft;
       }),
     [THUMBNAIL_UPLOAD_FAILURE]: (state, { payload: uploadError }) => ({
       ...state,

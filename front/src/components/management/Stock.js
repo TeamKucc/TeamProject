@@ -90,7 +90,7 @@ const Stock = ({ Products, onCheckedChange, onRemove }) => {
               </>
           }
                 <TableCell width="5%">
-                  <Link to={`/product/upload/${product._id}`} >수정</Link>
+                  <Link to={`/product/upload/${product._id}`}>수정</Link>
                 </TableCell>
                 <TableCell width="5%">
                   <Button onClick={onDeleteClick}>삭제</Button>
