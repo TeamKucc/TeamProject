@@ -2,9 +2,10 @@ import React, { useEffect } from 'react';
 import ProductEdit from '../../components/upload/ProductEdit';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { changeField, productUpload } from '../../modules/upload';
+import { changeField } from '../../modules/landing';
 import { readProduct, unloadProduct } from '../../modules/landing';
-import { updateUpload } from '../../modules/upload';
+import { updateUpload } from '../../modules/landing';
+import { initialize } from '../../modules/landing';
 
 const ProductEditContainer = ({ match, history }) => {
   const dispatch = useDispatch();
@@ -30,21 +31,27 @@ const ProductEditContainer = ({ match, history }) => {
     discount: upload.discount,
     person: upload.person,
     enable: upload.enable,
-    product: landing.productDetail,
+    product: landing.productInfo
   }));
 
   const { id } = match.params;
-  useEffect(() => {
+  console.log(product.price)
+  
+  useEffect( () => {
     dispatch(readProduct(id))
+    dispatch(changeField({
+      form:'productInfo',
+      key: price,
+    }))
     return () => {
-      dispatch(unloadProduct());
+      // dispatch(unloadProduct());
     };
   }, [dispatch]);
 
   console.log();
-  const onPublish = (e) => {
+  const onPublish = async (e) => {
     e.preventDefault();
-    dispatch(
+    await dispatch(
       updateUpload({
         id,
         stock,
@@ -58,6 +65,7 @@ const ProductEditContainer = ({ match, history }) => {
         enable,
       }),
     )
+    // await dispatch(initialize())
     history.push('/product/stock');
   };
 
@@ -66,6 +74,7 @@ const ProductEditContainer = ({ match, history }) => {
     const { value, name } = e.target;
     dispatch(
       changeField({
+        form:'productInfo',
         key: name,
         value,
       }),
