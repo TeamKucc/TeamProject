@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Form, Input } from 'antd';
-import { Checkbox } from '@material-ui/core';
 
 const { TextArea } = Input;
 
+<<<<<<< HEAD
 const ProductEdit = ({ onPublish, onChange, product,description }) => {
+=======
+const ProductEdit = ({ onPublish, onChange, product }) => {
+
+>>>>>>> 1b5788a9aa19d8f6b98a9692256c7062a2c585d3
   if (!product) return null;
-	return (
+
+  console.log(product)
+  return (
 		<div style={{ maxWidth: '700px', margin: '2rem auto' }}>
       <Form onSubmit={onPublish}>
         <label>제품명</label>
@@ -20,22 +26,22 @@ const ProductEdit = ({ onPublish, onChange, product,description }) => {
         <br />
 
         <label>원가</label>
-        <Input onChange={onChange} name="price"/>
+        <Input onChange={onChange} name="price" value={product.price}/>
         <br />
         <br />
 
         <label>할인가</label>
-        <Input onChange={onChange} name="discount"/>
+        <Input onChange={onChange} name="discount" value={product.discount}/>
         <br />
         <br />
 
         <label>할인인원</label>
-        <Input onChange={onChange} name="person" />
+        <Input onChange={onChange} name="person" value={product.person}/>
         <br />
         <br />
 
         <label>재고수량</label>
-        <Input onChange={onChange} name="stock" />
+        <Input onChange={onChange} name="stock" value={product.stock}/>
         <br />
         <br />
 
