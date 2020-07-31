@@ -15,9 +15,8 @@ export const list = (req, res) => {
 }
 
 export const userInfo = (req, res) => {
-    
     const {_id} = req.params
-    console.log(_id)
+    // console.log(_id)
     User.findOne({_id:_id},(err,result)=>{
         if(err) res.status(404).json({
             message:err
@@ -27,7 +26,8 @@ export const userInfo = (req, res) => {
 }
 
 export const userUpdate = (req,res)=>{
-    const {userID,name,password,eamil} = req.body
+    console.log(req.body)
+    const {userID,name,password,email} = req.body
     User.findOneAndUpdate({_id:req.body._id},{userID,name,password,email},(err,result)=>{
         if(err) return res.status(404).json({
             message:'Changed error',

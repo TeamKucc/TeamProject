@@ -3,31 +3,39 @@ import Stock from '../../components/management/Stock';
 import { withRouter } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { stockManagement } from '../../modules/management';
-import { updateUpload } from '../../lib/api/product';
-import { setOriginalUpload } from '../../modules/upload';
+import {
+  updateUpload,
+  removeProduct,
+  readProduct,
+} from '../../lib/api/product';
 
 const StockContainer = ({ match, history }) => {
   // console.log(match)
   // console.log(history)
-
   const dispatch = useDispatch();
-  const { management, loading } = useSelector(({ management, loading }) => ({
-    management: management.management,
-    managementError: management.managementError,
-    loading: loading['management/STOCK_MANAGEMENT'],
-  }));
+  const { management, loading, user } = useSelector(
+    ({ management, loading, user }) => ({
+      management: management.management,
+      managementError: management.managementError,
+      loading: loading['management/STOCK_MANAGEMENT'],
+      user: user.user,
+    }),
+  );
 
-  // console.log(management)
-
+  console.log(management);
   const onCheckedChange = (e) => {
     // enable ? true : false
     console.log(e.target.value);
   };
-  const onEdit = () => {
-    dispatch(setOriginalUpload(management));
-    history.push('/product/stock');
+
+  const onRemove = async () => {
+    // try{
+    //   await removeProduct(management._id)
+    //   history.push('/')
+    // } catch (e) {
+    //   console.log(e)
+    // }
   };
-  const onRemove = () => {};
 
   useEffect(() => {
     dispatch(stockManagement({}));
@@ -37,7 +45,6 @@ const StockContainer = ({ match, history }) => {
     <Stock
       Products={management}
       onCheckedChange={onCheckedChange}
-      onEdit={onEdit}
       onRemove={onRemove}
     />
   );

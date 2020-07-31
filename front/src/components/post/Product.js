@@ -13,7 +13,6 @@ const Product = ({ info, buy }) => {
     return (
         <ProductBlock>
             <div>
-
                 <div>제목:{title}</div>
                 <div>가격:{price}</div>
                 <div>할인가:{discount}</div>

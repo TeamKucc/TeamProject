@@ -31,7 +31,7 @@ const [
   PRODUCT_UPLOAD_FAILURE,
 ] = createRequestActionTypes('product/PRODUCT_UPLOAD');
 
-const SET_ORIGINAL_UPLOAD = 'product/SET_ORIGINAL_UPLOAD';
+// const SET_ORIGINAL_UPLOAD = 'product/SET_ORIGINAL_UPLOAD';
 
 const [
   UPDATE_UPLOAD,
@@ -59,8 +59,8 @@ export const thumbnailUpload = createAction(THUMBNAIL_UPLOAD, (files) => ({
 
 export const productUpload = createAction(
   PRODUCT_UPLOAD,
-  ({ user,stock, thumbnails, title, description, price, images, discount, person }) => ({
-    user,
+  ({ id, stock, thumbnails, title, description, price, images, discount, person }) => ({
+    id,
     stock,
     thumbnails,
     title,
@@ -72,10 +72,10 @@ export const productUpload = createAction(
   }),
 );
 
-export const setOriginalUpload = createAction(
-  SET_ORIGINAL_UPLOAD,
-  (upload) => upload,
-);
+// export const setOriginalUpload = createAction(
+//   SET_ORIGINAL_UPLOAD,
+//   (upload) => upload,
+// );
 
 export const updateUpload = createAction(
   UPDATE_UPLOAD,
@@ -91,14 +91,14 @@ export const updateUpload = createAction(
     enable,
   }) => ({
     stock,
-      thumbnails,
-      title,
-      description,
-      price,
-      images,
-      discount,
-      person,
-      enable,
+    thumbnails,
+    title,
+    description,
+    price,
+    images,
+    discount,
+    person,
+    enable,
   }),
 );
 
@@ -109,7 +109,7 @@ const productUploadSaga = createRequestSaga(
 
 const updateUploadSaga = createRequestSaga(
   UPDATE_UPLOAD,
-  productAPI.updateUpload,
+  productAPI.updateUpload
 );
 
 function* imageUploadSaga(action) {
@@ -221,25 +221,26 @@ const upload = handleActions(
       ...state,
       uploadError,
     }),
-    [PRODUCT_UPLOAD_SUCCESS]: (state, action) => ({
+    [PRODUCT_UPLOAD_SUCCESS]: (state, { payload: upload }) => ({
       ...state,
-      upload: action.payload,
+      upload,
     }),
     [PRODUCT_UPLOAD_FAILURE]: (state, { payload: uploadError }) => ({
       ...state,
       uploadError,
     }),
-    [SET_ORIGINAL_UPLOAD]: (state, { payload: upload }) => ({
-      ...state,
-      stock: upload.stock,
-      thumbnails: upload.thumbnails,
-      title: upload.title,
-      description: upload.description,
-      price: upload.price,
-      images: upload.images,
-      discount: upload.discount,
-      person: upload.person,
-    }),
+    // [SET_ORIGINAL_UPLOAD]: (state, { payload: upload }) => ({
+    //   ...state,
+    //   stock: upload.stock,
+    //   thumbnails: upload.thumbnails,
+    //   title: upload.title,
+    //   description: upload.description,
+    //   price: upload.price,
+    //   images: upload.images,
+    //   discount: upload.discount,
+    //   person: upload.person,
+    //   originalProductId: upload._id,
+    // }),
     [UPDATE_UPLOAD_SUCCESS]: (state, { payload: upload }) => ({
       ...state,
       upload,

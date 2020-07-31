@@ -51,6 +51,7 @@ const UploadContainer = ({ history }) => {
         enable,
       }),
     );
+    history.push('/')
   };
 
   const onChange = (e) => {

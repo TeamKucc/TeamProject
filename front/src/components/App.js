@@ -12,20 +12,23 @@ import LandingPage from '../pages/LandingPage';
 import UploadProductPage from '../pages/UploadProductPage';
 import StockPage from '../pages/StockPage'
 import ProductPage from '../pages/ProductPage';
+import ProductEditPage from '../pages/ProductEditPage'
 
 const App = () => {
   return (
     <>
-      <Route component={LandingPage} path={'/'} exact />
-      <Route component={ProductPage} path="/product/:id" exact />
-      <Route component={LoginPage} path="/login" exact />
-      <Route component={RegisterPage} path="/register" exact />
-      <Route component={BuyerRegisterPage} path="/register/buyer" exact />
-      <Route component={DealRegisterPage} path="/register/deal" exact />
-      <Route component={UserInfo} exact path="/userInfo/:user" exact />
+      <Route component={LandingPage} path={['/home', '/']} exact/>
+      <Route component={LoginPage} path="/login" />
+      <Route component={RegisterPage} path="/register" />
+      <Route component={BuyerRegisterPage} path="/register/buyer" />
+      <Route component={DealRegisterPage} path="/register/deal" />
+      <Route component={UserInfo} exact path="/userInfo/:user" />
+      <Route component={HEAD} path="/head" />
       <Route component={Loading} path="loading" />
-      <Route component={UploadProductPage} exact path="/product/upload" exact />
+      <Route component={UploadProductPage} exact path="/product/upload" />
       <Route component={StockPage} exact path="/product/stock" />
+      <Route component={ProductPage} path="/:id" exact/>
+      <Route component={ProductEditPage} exact path="/product/upload/:id" />
     </>
   );
 };
