@@ -31,7 +31,11 @@ const [
   PRODUCT_UPLOAD_FAILURE,
 ] = createRequestActionTypes('product/PRODUCT_UPLOAD');
 
-// const SET_ORIGINAL_UPLOAD = 'product/SET_ORIGINAL_UPLOAD';
+const [
+  PRODUCT_PAID,
+  PRODUCT_PAID_SUCCESS,
+  PRODUCT_PAID_FAILURE,
+] = createRequestActionTypes('product/PRODUCT_PAID');
 
 const [
   UPDATE_UPLOAD,
@@ -72,10 +76,12 @@ export const productUpload = createAction(
   }),
 );
 
-// export const setOriginalUpload = createAction(
-//   SET_ORIGINAL_UPLOAD,
-//   (upload) => upload,
-// );
+export const productPaid = createAction(
+  PRODUCT_PAID,
+  ({ user, product }) => ({
+    user, product
+  })
+)
 
 export const updateUpload = createAction(
   UPDATE_UPLOAD,
@@ -106,6 +112,8 @@ const productUploadSaga = createRequestSaga(
   PRODUCT_UPLOAD,
   productAPI.productUpload,
 );
+
+const productPaidSaga = createRequestSaga(PRODUCT_PAID, productAPI.productPaid)
 
 const updateUploadSaga = createRequestSaga(
   UPDATE_UPLOAD,
@@ -169,7 +177,8 @@ export function* productSaga() {
   yield takeLatest(IMAGE_UPLOAD, imageUploadSaga);
   yield takeLatest(THUMBNAIL_UPLOAD, thumbnailUploadSaga);
   yield takeLatest(PRODUCT_UPLOAD, productUploadSaga);
-  yield takeLatest(UPDATE_UPLOAD, updateUploadSaga)
+  yield takeLatest(UPDATE_UPLOAD, updateUploadSaga);
+  yield takeLatest(PRODUCT_PAID,productPaidSaga)
 }
 
 export const initialState = {
@@ -184,6 +193,7 @@ export const initialState = {
   upload: null,
   uploadError: null,
   enable: null,
+  paid:null
 };
 
 const upload = handleActions(
@@ -212,8 +222,8 @@ const upload = handleActions(
         draft.thumbnails.splice(image, 1)
         return draft
       }),
-    [THUMBNAIL_UPLOAD_SUCCESS]: (state, { payload: thumbnails}) =>
-      produce(state,draft=>{
+    [THUMBNAIL_UPLOAD_SUCCESS]: (state, { payload: thumbnails }) =>
+      produce(state, draft => {
         draft.thumbnails.push(thumbnails)
         return draft
       }),
@@ -229,18 +239,14 @@ const upload = handleActions(
       ...state,
       uploadError,
     }),
-    // [SET_ORIGINAL_UPLOAD]: (state, { payload: upload }) => ({
-    //   ...state,
-    //   stock: upload.stock,
-    //   thumbnails: upload.thumbnails,
-    //   title: upload.title,
-    //   description: upload.description,
-    //   price: upload.price,
-    //   images: upload.images,
-    //   discount: upload.discount,
-    //   person: upload.person,
-    //   originalProductId: upload._id,
-    // }),
+    [PRODUCT_PAID_SUCCESS]:(state,{payload:paid})=>({
+      ...state,
+      paid
+    }),
+    [PRODUCT_PAID_FAILURE]:(state,{payload:error})=>({
+      ...state,
+      error
+    }),
     [UPDATE_UPLOAD_SUCCESS]: (state, { payload: upload }) => ({
       ...state,
       upload,

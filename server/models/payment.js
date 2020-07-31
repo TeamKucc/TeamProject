@@ -2,16 +2,16 @@ import mongoose, { Schema } from 'mongoose';
 
 const paySchema = new Schema({
     user: {
-        type: Array,
-        default: []
-    },
-    data: {
-        type: Array,
-        default: []
+        type:String,
+        required: true,
     },
     product: {
-        type: Array,
-        default: []
+        type: String,
+        required: true,
+    },
+    postNumber: {
+        type: String,
+        default:'not yet'
     },
 }, {
     versionKey: false
@@ -19,4 +19,4 @@ const paySchema = new Schema({
 
 const Pay = mongoose.model('Pay', paySchema)
 
-export default { Pay }
+export default Pay 
