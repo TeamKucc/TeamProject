@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Redirect, withRouter, Switch } from 'react-router-dom';
 import LoginPage from '../pages/LoginPage';
 import BuyerRegisterPage from '../pages/BuyerRegisterPage';
@@ -13,11 +13,16 @@ import UploadProductPage from '../pages/UploadProductPage';
 import StockPage from '../pages/StockPage'
 import ProductPage from '../pages/ProductPage';
 import ProductEditPage from '../pages/ProductEditPage'
+import UserHistory from '../pages/UserHistory'
 
 const App = () => {
+  useEffect(() => {
+
+
+  }, [])
   return (
     <>
-      <Route component={LandingPage} path={['/home', '/']} exact/>
+      <Route component={LandingPage} path={['/home', '/']} exact />
       <Route component={LoginPage} path="/login" />
       <Route component={RegisterPage} path="/register" />
       <Route component={BuyerRegisterPage} path="/register/buyer" />
@@ -27,8 +32,9 @@ const App = () => {
       <Route component={Loading} path="loading" />
       <Route component={UploadProductPage} exact path="/product/upload" />
       <Route component={StockPage} exact path="/product/stock" />
-      <Route component={ProductPage} path="/:id" exact/>
+      <Route component={ProductPage} path="/:id" exact />
       <Route component={ProductEditPage} exact path="/product/upload/:id" />
+      <Route component={UserHistory} exact path="/user/userhistory" />
     </>
   );
 };

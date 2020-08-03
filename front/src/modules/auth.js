@@ -1,7 +1,8 @@
 import { createAction, handleActions } from 'redux-actions'
 import produce from 'immer'
-import { takeLatest, take } from 'redux-saga/effects'
+import { takeLatest,call, put } from 'redux-saga/effects'
 import createRequestsaga, { createRequestActionTypes } from '../lib/createRequestsaga'
+import { startLoading, finishLoading } from './loading';
 import * as authCtrl from '../lib/api/auth'
 import * as userCtrl from '../lib/api/user'
 
@@ -15,9 +16,9 @@ const [
 ] = createRequestActionTypes('auth/REGISTER')
 
 const [
- DREGISTER,
- DREGISTER_SUCCESS,
- DREGISTER_FAILURE
+    DREGISTER,
+    DREGISTER_SUCCESS,
+    DREGISTER_FAILURE
 ] = createRequestActionTypes('auth/DREGISTER')
 
 const [
@@ -30,7 +31,7 @@ const [
     USERINFO,
     USERINFO_SUCCESS,
     USERINFO_FAILURE
-]=createRequestActionTypes('user/USERINFO')
+] = createRequestActionTypes('user/USERINFO')
 
 export const changeField = createAction(
     CHANGE_FIELD,
@@ -43,51 +44,75 @@ export const changeField = createAction(
 
 export const initializeForm = createAction(INITIALLIZE_FORM, form => form);
 export const login = createAction(LOGIN, ({ userID, password }) => ({ userID, password }));
-export const register = createAction(REGISTER, ({userID,name,password,email }) => ({ userID,name,password,email}));
-export const dregister = createAction(DREGISTER,({userID,name,password,email })=>({userID,name,password,email }))
+export const register = createAction(REGISTER, ({ userID, name, password, email }) => ({ userID, name, password, email }));
+export const dregister = createAction(DREGISTER, ({ userID, name, password, email }) => ({ userID, name, password, email }))
 export const userInfo = createAction(USERINFO)
 
-export const loginSaga = createRequestsaga(LOGIN, authCtrl.login)
+// export const loginSaga = createRequestsaga(LOGIN, authCtrl.login)
 export const registerSaga = createRequestsaga(REGISTER, authCtrl.register);
-export const dregisterSaga = createRequestsaga(DREGISTER,authCtrl.dregister)
-export const userInfoSaga=  createRequestsaga(USERINFO,userCtrl.userinfo);
+export const dregisterSaga = createRequestsaga(DREGISTER, authCtrl.dregister)
+export const userInfoSaga = createRequestsaga(USERINFO, userCtrl.userinfo);
+
+
+function* loginSaga(action) {
+    yield put(startLoading('auth/LOGIN'));
+    try {
+        const input = action.payload
+        console.log(action.payload)
+        const userId = yield call(authCtrl.login,input);
+        console.log(userId.data.userId)
+        localStorage.setItem('userId',userId.data.userId)
+        yield put({
+            type: LOGIN_SUCCESS,
+            payload: userId.data,
+        });
+    } catch (error) {
+        yield put({
+            type: LOGIN_FAILURE,
+            payload: error,
+        });
+    }
+    yield put(finishLoading('auth/LOGIN'));
+}
+
+
 
 export function* authSaga() {
     yield takeLatest(REGISTER, registerSaga);
     yield takeLatest(LOGIN, loginSaga)
-    yield takeLatest(USERINFO,userInfoSaga)
+    yield takeLatest(USERINFO, userInfoSaga)
 }
 
 const initialState = {
     register: {
         userID: '',
-        name:'',
+        name: '',
         password: '',
         passwordConfirm: '',
-        email:'',
+        email: '',
     },
     login: {
         userID: '',
         password: '',
     },
-    userInfo:{
+    userInfo: {
         userID: '',
-        name:'',
+        name: '',
         password: '',
         passwordConfirm: '',
-        email:'',
+        email: '',
     },
-    dregister:{
+    dregister: {
         userID: '',
-        name:'',
+        name: '',
         password: '',
         passwordConfirm: '',
-        email:'',
+        email: '',
     },
     auth: null,
     authError: null,
-    user:null,
-    error:null
+    user: null,
+    error: null
 }
 
 const auth = handleActions(
@@ -104,7 +129,7 @@ const auth = handleActions(
             authError: null,
             auth,
         }),
-        
+
         [LOGIN_FAILURE]: (state, { payload: error }) => ({
             ...state,
             authError: error
@@ -118,26 +143,26 @@ const auth = handleActions(
             ...state,
             authError: error
         }),
-        [USERINFO_SUCCESS]:(state,{payload:user})=>({
+        [USERINFO_SUCCESS]: (state, { payload: user }) => ({
             ...state,
-            user:user,
-            userInfo:user,
-            error:null,
+            user: user,
+            userInfo: user,
+            error: null,
         }),
-        [USERINFO_FAILURE]:(state,{payload:error})=>({
+        [USERINFO_FAILURE]: (state, { payload: error }) => ({
             ...state,
-            error:error
+            error: error
         }),
-        [DREGISTER_SUCCESS]:(state,{payload:auth})=>({
+        [DREGISTER_SUCCESS]: (state, { payload: auth }) => ({
             ...state,
             auth
         }),
-        [DREGISTER_FAILURE]:(state,{payload:error})=>({
+        [DREGISTER_FAILURE]: (state, { payload: error }) => ({
             ...state,
-            authError:error
+            authError: error
         })
     }
-    ,initialState
+    , initialState
 )
 
 export default auth;

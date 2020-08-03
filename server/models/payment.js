@@ -2,11 +2,11 @@ import mongoose, { Schema } from 'mongoose';
 
 const paySchema = new Schema({
     user: {
-        type:String,
+        type:mongoose.Types.ObjectId,
         required: true,
     },
     product: {
-        type: String,
+        type:mongoose.Types.ObjectId,
         required: true,
     },
     postNumber: {

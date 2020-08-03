@@ -31,7 +31,7 @@ export const register = async (req, res) => {
 
 
 export const login = (req, res) => {
-
+    console.log(req.body)
     User.findOne({ userID: req.body.userID }, (err, user) => {
         if (!user) return res.json({
             loginSuccess: false,

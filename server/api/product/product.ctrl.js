@@ -84,15 +84,16 @@ export const productUpload = (req, res) => {
   });
 };
 
-export const productPaid = async(req, res) => {
+export const productPaid = async (req, res) => {
   console.log(req.body)
   const pay = new Pay(req.body);
   await pay.save((err) => {
     if (err) return res.status(400).json({ success: false, Message: err });
     return res.status(200).json({ success: true })
   })
-  await Product.aggregate
+  await Product.updateOne({ _id: req.body.product }, { $inc: { stock: -1 } })
 }
+
 
 export const getProducts = (req, res) => {
   Product.find({}, (err, result) => {
