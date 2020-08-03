@@ -14,7 +14,6 @@ const LandingContainer = () => {
   }));
 
   useEffect(() => {
-    console.log(landing)
     dispatch(landingProduct({}))
   },[dispatch]);
 

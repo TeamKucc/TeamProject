@@ -97,6 +97,7 @@ export const productPaid = async (req, res) => {
   await Product.updateOne({ _id: req.body.product }, { $inc: { stock: -1 } })
 }
 
+
 export const getProducts = (req, res) => {
   Product.find({}, (err, result) => {
     if (err)

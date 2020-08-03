@@ -19,9 +19,6 @@ function Landing({ Products, loading }) {
   let Prod = Object.keys(Products).map(function (key) {
     return Products[key]
   })
-  console.log('-------------------')
-  console.log(Prod.thumbnails)
-  console.log('-------------------')
   const useStyles = makeStyles({
     root: {
       minWidth: 200,
