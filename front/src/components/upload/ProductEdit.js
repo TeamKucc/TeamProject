@@ -3,12 +3,7 @@ import { Button, Form, Input } from 'antd';
 
 const { TextArea } = Input;
 
-<<<<<<< HEAD
 const ProductEdit = ({ onPublish, onChange, product,description }) => {
-=======
-const ProductEdit = ({ onPublish, onChange, product }) => {
-
->>>>>>> 1b5788a9aa19d8f6b98a9692256c7062a2c585d3
   if (!product) return null;
 
   console.log(product)

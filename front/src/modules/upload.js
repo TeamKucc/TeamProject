@@ -124,19 +124,10 @@ const productUploadSaga = createRequestSaga(
   productAPI.productUpload,
 );
 
-<<<<<<< HEAD
-const productPaidSaga = createRequestSaga(PRODUCT_PAID, productAPI.productPaid)
-
-const updateUploadSaga = createRequestSaga(
-  UPDATE_UPLOAD,
-  productAPI.updateUpload,
-);
-=======
 // const updateUploadSaga = createRequestSaga(
 //   UPDATE_UPLOAD,
 //   productAPI.updateUpload,
 // );
->>>>>>> 1b5788a9aa19d8f6b98a9692256c7062a2c585d3
 
 function* imageUploadSaga(action) {
   yield put(startLoading('product/IMAGE_UPLOAD'));
@@ -195,12 +186,7 @@ export function* productSaga() {
   yield takeLatest(IMAGE_UPLOAD, imageUploadSaga);
   yield takeLatest(THUMBNAIL_UPLOAD, thumbnailUploadSaga);
   yield takeLatest(PRODUCT_UPLOAD, productUploadSaga);
-<<<<<<< HEAD
-  yield takeLatest(UPDATE_UPLOAD, updateUploadSaga);
-  yield takeLatest(PRODUCT_PAID,productPaidSaga)
-=======
   // yield takeLatest(UPDATE_UPLOAD, updateUploadSaga);
->>>>>>> 1b5788a9aa19d8f6b98a9692256c7062a2c585d3
 }
 
 export const initialState = {
@@ -261,24 +247,6 @@ const upload = handleActions(
       ...state,
       uploadError,
     }),
-<<<<<<< HEAD
-    [PRODUCT_PAID_SUCCESS]:(state,{payload:paid})=>({
-      ...state,
-      paid
-    }),
-    [PRODUCT_PAID_FAILURE]:(state,{payload:error})=>({
-      ...state,
-      error
-    }),
-    [UPDATE_UPLOAD_SUCCESS]: (state, { payload: upload }) => ({
-      ...state,
-      upload,
-    }),
-    [UPDATE_UPLOAD_FAILURE]: (state, { payload: uploadError }) => ({
-      ...state,
-      uploadError,
-    }),
-=======
     // [SET_ORIGINAL_UPLOAD]: (state, { payload: upload }) => ({
     //   ...state,
     //   stock: upload.stock,
@@ -299,7 +267,6 @@ const upload = handleActions(
     //   ...state,
     //   uploadError,
     // }),
->>>>>>> 1b5788a9aa19d8f6b98a9692256c7062a2c585d3
   },
   initialState,
 );

@@ -1,13 +1,8 @@
 import { createAction, handleActions } from 'redux-actions';
 import { takeLatest, call } from 'redux-saga/effects';
 import * as authCtrl from '../lib/api/auth';
-<<<<<<< HEAD
-import * as userCtrl from '../lib/api/user';
-import createRequestSaga, {createRequestActionTypes} from '../lib/createRequestsaga'
-=======
 import * as userCtrl from '../lib/api/user'
 import createRequestSaga, { createRequestActionTypes } from '../lib/createRequestsaga'
->>>>>>> 김선규
 
 
 const TEMP_SET_USER = 'user/TEMP_SET_USER';
@@ -26,12 +21,8 @@ const [
 
 export const tempSetUser = createAction(TEMP_SET_USER, user => user)
 export const logout = createAction(LOGOUT);
-<<<<<<< HEAD
-export const userUpdate =createAction(USER_UPDATE,({userID,name,password,email,_id }) => ({ userID,name,password,email,_id}))
-=======
 export const userUpdate = createAction(USER_UPDATE,)
 export const getHistory = createAction(GET_HISTORY, user => user)
->>>>>>> 김선규
 
 const getHistorySaga = createRequestSaga(GET_HISTORY, userCtrl.gethistory)
 
@@ -46,20 +37,6 @@ function* logoutSaga() {
     }
 }
 
-<<<<<<< HEAD
-const userUpdateSaga=createRequestSaga(USER_UPDATE,userCtrl.userupdate)
-
-export function* userSaga() {
-    yield takeLatest(LOGOUT,logoutSaga);
-    yield takeLatest(USER_UPDATE,userUpdateSaga)
-}
-
-const initialState={
-    user:null,
-    checkError:null,
-    userInfo:null,
-    error:null
-=======
 export function* userSaga() {
     yield takeLatest(LOGOUT, logoutSaga);
     yield takeLatest(GET_HISTORY,getHistorySaga)
@@ -70,7 +47,6 @@ const initialState = {
     checkError: null,
     history: null,
     error: null,
->>>>>>> 김선규
 }
 
 export default handleActions(
@@ -90,18 +66,6 @@ export default handleActions(
         }),
         [GET_HISTORY_FAILURE]: (state, { payload: error }) => ({
             ...state,
-<<<<<<< HEAD
-            user:null
-        }),
-        [USER_UPDATE_SUCCESS]:(state,{payload:userinfo})=>({
-            ...state,
-            userinfo,
-            error:null,
-        }),
-        [USER_UPDATE_FAILURE]:(state,{payload:error})=>({
-            ...state,
-=======
->>>>>>> 김선규
             error
         })
     },

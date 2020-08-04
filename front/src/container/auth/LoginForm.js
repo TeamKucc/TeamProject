@@ -34,6 +34,9 @@ const LoginForm = (props) => {
     };
 
     useEffect(() => {
+        if(user){
+            props.history.push('/')
+        }
         dispatch(initializeForm('login'))
     }, [dispatch])
 
