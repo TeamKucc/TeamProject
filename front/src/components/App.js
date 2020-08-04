@@ -12,7 +12,6 @@ import LandingPage from '../pages/LandingPage';
 import UploadProductPage from '../pages/UploadProductPage';
 import StockPage from '../pages/StockPage'
 import ProductPage from '../pages/ProductPage';
-import ProductEditPage from '../pages/ProductEditPage'
 import UserHistory from '../pages/UserHistory'
 import StockDetailPage from '../pages/StockDetailPage'
 
