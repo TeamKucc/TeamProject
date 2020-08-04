@@ -12,7 +12,7 @@ import LandingPage from '../pages/LandingPage';
 import UploadProductPage from '../pages/UploadProductPage';
 import StockPage from '../pages/StockPage'
 import ProductPage from '../pages/ProductPage';
-import ProductEditPage from '../pages/ProductEditPage'
+import StockDetailPage from '../pages/StockDetailPage'
 
 const App = () => {
   return (
@@ -28,7 +28,7 @@ const App = () => {
       <Route component={UploadProductPage} exact path="/product/upload" />
       <Route component={StockPage} exact path="/product/stock" />
       <Route component={ProductPage} path="/:id" exact/>
-      <Route component={ProductEditPage} exact path="/product/upload/:id" />
+      <Route component={StockDetailPage} exact path="/product/upload/:id" />
     </>
   );
 };
