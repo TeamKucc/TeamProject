@@ -42,7 +42,11 @@ const Stock = ({ Products, onCheckedChange }) => {
               <TableRow key={index}>
                 <TableCell width="15%">{product._id}</TableCell>
                 <TableCell width="20px">
-                  <ImageSlider images={product.thumbnails} width="2" />
+                <img
+                        style={{ maxHeight: "100px" }}
+                        alt={`productImg-${index}`}
+                        src={`http://localhost:4000/${product.thumbnails[index].image}`}
+                    />
                 </TableCell>
                 <TableCell width="20%">{product.title}</TableCell>
                 <TableCell>{product.price}</TableCell>
