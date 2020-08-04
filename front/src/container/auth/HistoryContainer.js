@@ -3,31 +3,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getHistory } from '../../modules/user';
 import { readProduct } from '../../modules/landing';
 import auth from '../../modules/auth';
+import History from '../../components/auth/History'
 
 
 const HistoryContainer = () => {
     const dispatch = useDispatch()
-    const { history, product, user,historyProd } = useSelector(({ user, landing }) => ({
+    const { history, user } = useSelector(({ user }) => ({
         history: user.history,
-        product: landing.productDeatail,
         user: user.user,
     }))
     useEffect(() => {
         try {
             dispatch(getHistory(user))
-            dispatch(readProduct(historyProd))
         } catch (error) {
             console.log(error)
         }
     }, [])
 
-    useEffect(()=>{
-        console.log(history)
-        dispatch(readProduct(history))
-    },[historyProd])
+
     return (
         <div>
-
+            <History history={history} user={user} />
         </div>
     )
 }

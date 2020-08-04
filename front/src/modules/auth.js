@@ -1,6 +1,6 @@
 import { createAction, handleActions } from 'redux-actions'
 import produce from 'immer'
-import { takeLatest,call, put } from 'redux-saga/effects'
+import { takeLatest, call, put } from 'redux-saga/effects'
 import createRequestsaga, { createRequestActionTypes } from '../lib/createRequestsaga'
 import { startLoading, finishLoading } from './loading';
 import * as authCtrl from '../lib/api/auth'
@@ -58,10 +58,8 @@ function* loginSaga(action) {
     yield put(startLoading('auth/LOGIN'));
     try {
         const input = action.payload
-        console.log(action.payload)
-        const userId = yield call(authCtrl.login,input);
-        console.log(userId.data.userId)
-        localStorage.setItem('userId',userId.data.userId)
+        const userId = yield call(authCtrl.login, input);
+        localStorage.setItem('userId', userId.data.userId)
         yield put({
             type: LOGIN_SUCCESS,
             payload: userId.data,

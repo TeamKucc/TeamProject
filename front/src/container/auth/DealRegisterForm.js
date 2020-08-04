@@ -20,7 +20,7 @@ const BuyerRegisterForm = ({ history }) => {
         const { value, name } = e.target;
         dispatch(
             changeField({
-                form: 'register',
+                form: 'Dregister',
                 key: name,
                 value
             })
