@@ -1,15 +1,17 @@
 # TeamProject
 
 #### :pushpin: 개발사항
-1. 로그인 / 회원가입 - 인증번호 (API) :man: 김선규
+1. 로그인 / 회원가입 :man: 김선규
 2. 상품등록 / 상품랜딩 / 상품상세 :woman: 어성미 :man: 김선규
 3. 상품관리 / 상품관리상세 / 상품수정 :woman: 어성미
 4. 회원 구매내역
 5. 판매자 판매내역
-6. 결제 (API) :man: 김선규
-7. 배송추적 (API) :woman: 어성미
-8. 리뷰 / FAQ
-9. 챗봇 (API)
+6. 휴대폰번호인증 (API) :man: 김선규
+7. 사업자번호인증 (API) :woman: 어성미
+8. 결제 (API) :man: 김선규
+9. 배송추적 (API) :woman: 어성미
+10. 리뷰 / FAQ
+11. 챗봇 (API)
 
 #### :pushpin: 수정사항
 1. 상품업로드 썸네일 리덕스사가 고치기 :heavy_multiplication_x:

@@ -1,7 +1,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { productUpload, changeField } from '../../modules/upload';
+import {
+  productUpload,
+  changeField,
+  initialize,
+  updateUpload,
+} from '../../modules/upload';
 import UploadProduct from '../../components/upload/UploadProduct2';
 
 const UploadContainer = ({ history }) => {
@@ -20,6 +25,7 @@ const UploadContainer = ({ history }) => {
     upload,
     uploadError,
     enable,
+    productId,
   } = useSelector(({ upload, user }) => ({
     user: user.user,
     stock: upload.stock,
@@ -32,11 +38,40 @@ const UploadContainer = ({ history }) => {
     person: upload.person,
     upload: upload.upload,
     uploadError: upload.uploadError,
-    enable: upload.enable
+    enable: upload.enable,
+    productId: upload.productId,
   }));
 
-  const onPublish = (e) => {
-    e.preventDefault();
+  const product = {
+    stock,
+    thumbnails,
+    title,
+    description,
+    price,
+    images,
+    discount,
+    person,
+    enable,
+  };
+
+  console.log(productId)
+  const onPublish = () => {
+    if (productId) {
+      dispatch(
+        updateUpload({
+          id: productId,
+          stock,
+          thumbnails,
+          title,
+          description,
+          price,
+          images,
+          discount,
+          person,
+          enable,
+        }))
+        return
+    }
     dispatch(
       productUpload({
         user,
@@ -51,7 +86,7 @@ const UploadContainer = ({ history }) => {
         enable,
       }),
     );
-    history.push('/')
+    history.push('/');
   };
 
   const onChange = (e) => {
@@ -66,12 +101,20 @@ const UploadContainer = ({ history }) => {
   };
 
   useEffect(() => {
-    if (uploadError) {
-      console.log(uploadError);
-    }
-  }, [history, upload, uploadError]);
+    return () => {
+      dispatch(initialize());
+    };
+  }, [dispatch]);
 
-  return <UploadProduct onPublish={onPublish} onChange={onChange} />;
+  // console.log(product)
+
+  return (
+    <UploadProduct
+      onPublish={onPublish}
+      onChange={onChange}
+      product={product}
+    />
+  );
 };
 
 export default withRouter(UploadContainer);

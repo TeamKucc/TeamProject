@@ -14,6 +14,7 @@ import StockPage from '../pages/StockPage'
 import ProductPage from '../pages/ProductPage';
 import ProductEditPage from '../pages/ProductEditPage'
 import UserHistory from '../pages/UserHistory'
+import StockDetailPage from '../pages/StockDetailPage'
 
 const App = () => {
   useEffect(() => {
@@ -33,7 +34,7 @@ const App = () => {
       <Route component={UploadProductPage} exact path="/product/upload" />
       <Route component={StockPage} exact path="/product/stock" />
       <Route component={ProductPage} path="/:id" exact />
-      <Route component={ProductEditPage} exact path="/product/upload/:id" />
+      <Route component={StockDetailPage} exact path="/product/upload/:id" />
       <Route component={UserHistory} exact path="/user/userhistory" />
     </>
   );

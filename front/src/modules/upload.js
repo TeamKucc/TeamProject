@@ -36,12 +36,13 @@ const [
   PRODUCT_PAID_SUCCESS,
   PRODUCT_PAID_FAILURE,
 ] = createRequestActionTypes('product/PRODUCT_PAID');
+const SET_ORIGINAL_UPLOAD = 'product/SET_ORIGINAL_UPLOAD';
 
-// const [
-//   UPDATE_UPLOAD,
-//   UPDATE_UPLOAD_SUCCESS,
-//   UPDATE_UPLOAD_FAILURE,
-// ] = createRequestActionTypes('product/UPDATE_UPLOAD');
+const [
+  UPDATE_UPLOAD,
+  UPDATE_UPLOAD_SUCCESS,
+  UPDATE_UPLOAD_FAILURE,
+] = createRequestActionTypes('product/UPDATE_UPLOAD');
 
 export const initialize = createAction(INITIALIZE);
 export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
@@ -93,50 +94,54 @@ export const productPaid = createAction(
     user, product
   })
 )
+export const setOriginalUpload = createAction(
+  SET_ORIGINAL_UPLOAD,
+  (upload) => upload,
+);
 
-// export const updateUpload = createAction(
-//   UPDATE_UPLOAD,
-//   ({
-//     stock,
-//     thumbnails,
-//     title,
-//     description,
-//     price,
-//     images,
-//     discount,
-//     person,
-//     enable,
-//   }) => ({
-//     stock,
-//     thumbnails,
-//     title,
-//     description,
-//     price,
-//     images,
-//     discount,
-//     person,
-//     enable,
-//   }),
-// );
+export const updateUpload = createAction(
+  UPDATE_UPLOAD,
+  ({
+    id,
+    stock,
+    thumbnails,
+    title,
+    description,
+    price,
+    images,
+    discount,
+    person,
+    enable,
+  }) => ({
+    id,
+    stock,
+    thumbnails,
+    title,
+    description,
+    price,
+    images,
+    discount,
+    person,
+    enable,
+  }),
+);
 
 const productUploadSaga = createRequestSaga(
   PRODUCT_UPLOAD,
   productAPI.productUpload,
 );
 
-<<<<<<< HEAD
+
 const productPaidSaga = createRequestSaga(PRODUCT_PAID, productAPI.productPaid)
 
 const updateUploadSaga = createRequestSaga(
   UPDATE_UPLOAD,
   productAPI.updateUpload,
 );
-=======
 // const updateUploadSaga = createRequestSaga(
 //   UPDATE_UPLOAD,
 //   productAPI.updateUpload,
 // );
->>>>>>> 1b5788a9aa19d8f6b98a9692256c7062a2c585d3
 
 function* imageUploadSaga(action) {
   yield put(startLoading('product/IMAGE_UPLOAD'));
@@ -195,15 +200,13 @@ export function* productSaga() {
   yield takeLatest(IMAGE_UPLOAD, imageUploadSaga);
   yield takeLatest(THUMBNAIL_UPLOAD, thumbnailUploadSaga);
   yield takeLatest(PRODUCT_UPLOAD, productUploadSaga);
-<<<<<<< HEAD
   yield takeLatest(UPDATE_UPLOAD, updateUploadSaga);
   yield takeLatest(PRODUCT_PAID,productPaidSaga)
-=======
-  // yield takeLatest(UPDATE_UPLOAD, updateUploadSaga);
->>>>>>> 1b5788a9aa19d8f6b98a9692256c7062a2c585d3
+  yield takeLatest(UPDATE_UPLOAD, updateUploadSaga);
 }
 
 export const initialState = {
+  productId: null,
   stock: 0,
   thumbnails: [],
   title: '',
@@ -255,20 +258,31 @@ const upload = handleActions(
     }),
     [PRODUCT_UPLOAD_SUCCESS]: (state, { payload: upload }) => ({
       ...state,
-      upload,
+      upload: upload,
     }),
     [PRODUCT_UPLOAD_FAILURE]: (state, { payload: uploadError }) => ({
       ...state,
       uploadError,
     }),
-<<<<<<< HEAD
     [PRODUCT_PAID_SUCCESS]:(state,{payload:paid})=>({
       ...state,
       paid
     }),
     [PRODUCT_PAID_FAILURE]:(state,{payload:error})=>({
       ...state,
-      error
+      error,
+    }),
+    [SET_ORIGINAL_UPLOAD]: (state, { payload: upload }) => ({
+      ...state,
+      stock: upload.stock,
+      thumbnails: upload.thumbnails,
+      title: upload.title,
+      description: upload.description,
+      price: upload.price,
+      images: upload.images,
+      discount: upload.discount,
+      person: upload.person,
+      productId: upload._id,
     }),
     [UPDATE_UPLOAD_SUCCESS]: (state, { payload: upload }) => ({
       ...state,
@@ -278,28 +292,26 @@ const upload = handleActions(
       ...state,
       uploadError,
     }),
-=======
-    // [SET_ORIGINAL_UPLOAD]: (state, { payload: upload }) => ({
-    //   ...state,
-    //   stock: upload.stock,
-    //   thumbnails: upload.thumbnails,
-    //   title: upload.title,
-    //   description: upload.description,
-    //   price: upload.price,
-    //   images: upload.images,
-    //   discount: upload.discount,
-    //   person: upload.person,
-    //   originalProductId: upload._id,
-    // }),
-    // [UPDATE_UPLOAD_SUCCESS]: (state, { payload: upload }) => ({
-    //   ...state,
-    //   upload,
-    // }),
-    // [UPDATE_UPLOAD_FAILURE]: (state, { payload: uploadError }) => ({
-    //   ...state,
-    //   uploadError,
-    // }),
->>>>>>> 1b5788a9aa19d8f6b98a9692256c7062a2c585d3
+    [SET_ORIGINAL_UPLOAD]: (state, { payload: upload }) => ({
+      ...state,
+      stock: upload.stock,
+      thumbnails: upload.thumbnails,
+      title: upload.title,
+      description: upload.description,
+      price: upload.price,
+      images: upload.images,
+      discount: upload.discount,
+      person: upload.person,
+      productId: upload._id,
+    }),
+    [UPDATE_UPLOAD_SUCCESS]: (state, { payload: upload }) => ({
+      ...state,
+      upload,
+    }),
+    [UPDATE_UPLOAD_FAILURE]: (state, { payload: uploadError }) => ({
+      ...state,
+      uploadError,
+    }),
   },
   initialState,
 );

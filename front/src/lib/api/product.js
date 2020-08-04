@@ -6,4 +6,8 @@ export const stockManagement = ({ stock, thumbnails, title, price, discount, ena
 export const updateUpload = ({ id, stock, thumbnails, title, description, price, images, discount, person, enable }) => client.post("/api/product/updateUpload", { id, stock, thumbnails, title, description, price, images, discount, person, enable })
 export const readProduct =  id => client.post(`/api/product/readProduct/${id}`)
 export const removeProduct = ({ _id }) => client.delete(`/api/product/${_id}`)
+<<<<<<< HEAD
 export const productPaid = ({user,product})=>client.post('/api/product/paid',({user,product}));
+=======
+export const stockDetail = id => client.post(`/api/product/stockDetail/${id}`)
+>>>>>>> Seung

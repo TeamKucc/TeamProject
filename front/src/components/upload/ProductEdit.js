@@ -3,12 +3,8 @@ import { Button, Form, Input } from 'antd';
 
 const { TextArea } = Input;
 
-<<<<<<< HEAD
-const ProductEdit = ({ onPublish, onChange, product,description }) => {
-=======
 const ProductEdit = ({ onPublish, onChange, product }) => {
 
->>>>>>> 1b5788a9aa19d8f6b98a9692256c7062a2c585d3
   if (!product) return null;
 
   console.log(product)
@@ -21,7 +17,7 @@ const ProductEdit = ({ onPublish, onChange, product }) => {
         <br />
 
         <label>제품설명</label>
-        <TextArea onChange={onChange} name="description" value={description}/>
+        <TextArea onChange={onChange} name="description" value={product.description}/>
         <br />
         <br />
 

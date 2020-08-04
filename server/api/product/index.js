@@ -11,6 +11,7 @@ router.post('/updateUpload', productCtrl.updateUpload)
 
 router.get('/getProducts', productCtrl.getProducts);
 router.post('/readProduct/:id',productCtrl.readProduct);
+router.post('/stockDetail/:id', productCtrl.stockDetail)
 
 router.get('/config',productCtrl.config)
 router.get('/getStock', productCtrl.getStock)
