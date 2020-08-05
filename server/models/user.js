@@ -12,6 +12,7 @@ const UserSchema = new Schema(
     role: { type: Number, default: 0 },
     token: { type: String },
     tokenExp: { type: Number },
+    business: { type: Number, maxlength: 10 },
   },
   {
     versionKey: false,

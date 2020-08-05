@@ -160,3 +160,4 @@ export const stockDetail = (req, res) => {
     return res.json(result);
   });
 }
+
