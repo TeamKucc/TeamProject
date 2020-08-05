@@ -33,6 +33,12 @@ const [
     USERINFO_FAILURE
 ] = createRequestActionTypes('user/USERINFO')
 
+const [
+    BUSINESS,
+    BUSINESS_SUCCESS,
+    BUSINESS_FAILURE,
+] = createRequestActionTypes('user/BUSINESS')
+
 export const changeField = createAction(
     CHANGE_FIELD,
     ({ form, key, value }) => ({
@@ -44,15 +50,16 @@ export const changeField = createAction(
 
 export const initializeForm = createAction(INITIALLIZE_FORM, form => form);
 export const login = createAction(LOGIN, ({ userID, password }) => ({ userID, password }));
-export const register = createAction(REGISTER, ({ userID, name, password, email }) => ({ userID, name, password, email }));
-export const dregister = createAction(DREGISTER, ({ userID, name, password, email }) => ({ userID, name, password, email }))
+export const register = createAction(REGISTER, ({userID,name,password,email }) => ({ userID,name,password,email}));
+export const dregister = createAction(DREGISTER,({userID,name,password,email, business })=>({userID,name,password,email, business }))
 export const userInfo = createAction(USERINFO)
+export const businessNumber = createAction(BUSINESS, ({business}) => ({business}))
 
 // export const loginSaga = createRequestsaga(LOGIN, authCtrl.login)
 export const registerSaga = createRequestsaga(REGISTER, authCtrl.register);
 export const dregisterSaga = createRequestsaga(DREGISTER, authCtrl.dregister)
 export const userInfoSaga = createRequestsaga(USERINFO, userCtrl.userinfo);
-
+export const businessSaga = createRequestsaga(BUSINESS, authCtrl.business)
 
 function* loginSaga(action) {
     yield put(startLoading('auth/LOGIN'));
@@ -82,12 +89,11 @@ function* loginSaga(action) {
     yield put(finishLoading('auth/LOGIN'));
 }
 
-
-
 export function* authSaga() {
     yield takeLatest(REGISTER, registerSaga);
     yield takeLatest(LOGIN, loginSaga)
-    yield takeLatest(USERINFO, userInfoSaga)
+    yield takeLatest(USERINFO,userInfoSaga)
+    yield takeLatest(BUSINESS, businessSaga)
 }
 
 const initialState = {
@@ -114,12 +120,14 @@ const initialState = {
         name: '',
         password: '',
         passwordConfirm: '',
-        email: '',
+        email:'',
+        business: '',
     },
     auth: null,
     authError: null,
-    user: null,
-    error: null
+    businessState: null,
+    user:null,
+    error:null
 }
 
 const auth = handleActions(
@@ -166,7 +174,15 @@ const auth = handleActions(
         }),
         [DREGISTER_FAILURE]: (state, { payload: error }) => ({
             ...state,
-            authError: error
+            authError:error
+        }),
+        [BUSINESS_SUCCESS]:(state,{payload:businessState})=>({
+            ...state,
+            businessState: businessState
+        }),
+        [BUSINESS_FAILURE]:(state,{payload:error})=>({
+            ...state,
+            error:error
         })
     }
     , initialState

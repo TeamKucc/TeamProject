@@ -9,6 +9,6 @@ router.post('/register', authctrl.register)
 router.post('/login',authctrl.login)
 // router.use('/logout',authCheck)
 router.get('/logout',authCheck,authctrl.logout)
-
+router.post('/business', authctrl.business)
 
 export default router;

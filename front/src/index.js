@@ -4,7 +4,7 @@ import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 import 'antd/dist/antd.css';
 import {BrowserRouter} from 'react-router-dom'
-
+import cors from 'cors'
 
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -30,6 +30,7 @@ function loadUser(){
 
 sagaMiddleware.run(rootSaga);
 loadUser()
+cors()
 
 ReactDOM.render(
   <Provider store={store}>

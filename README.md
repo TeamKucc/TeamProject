@@ -1,25 +1,33 @@
 # TeamProject
 
 #### :pushpin: 개발사항
-1. 로그인 / 회원가입 :man: 김선규
-2. 상품등록 / 상품랜딩 / 상품상세 :woman: 어성미 :man: 김선규
+1. 로그인 / 회원가입 / 내정보 :man: 김선규
+2. 상품등록 / 상품랜딩 / 상품상세 / 결제상세 :woman: 어성미 :man: 김선규
 3. 상품관리 / 상품수정 :woman: 어성미
-4. 회원 구매내역 :man: 김선규
-5. 판매자 판매내역 :man: 김선규
-6. 휴대폰번호인증 (API) :man: 김선규
+4. 회원 구매내역 / 판매자 판매내역
+5. 리뷰
+6. 휴대폰번호인증 (API)
 7. 사업자번호인증 (API) :woman: 어성미
 8. 결제 (API) :man: 김선규
-9. 배송추적 (API) :woman: 어성미
-10. 리뷰 / FAQ
-11. 챗봇 (API)
+9. 배송추적 (API)
+10. 챗봇 (API)
 
 #### :pushpin: 수정사항
-1. 상품업로드 썸네일 리덕스사가 고치기 :heavy_multiplication_x:
-2. 랜딩페이지 예외처리 :heavy_multiplication_x:
-3. 회원 정보 수정 마무리
-4. 작성해야 할 리듀서 - User:buyhistory / Seller:sellhistory, postNumberUpdate 
-5. multer S3로 수정
-6. userID 상품등록시 저장
+1_1. 작성해 할 리듀서 - Seller:sellhistory, postNumberUpdate
+2_2. 상품랜딩 - 이미지업로드 multer S3 로 수정
+2_2. 상품랜딩 - 카테고리별 분류
+2_3. 상품상세 - 상품구매 재고 0일때, 구매버튼 비활성화 & 품절버튼 활성화
+2_3. 상품상세 - 공동구매 할인
+
+#### :memo: 공동구매
+1. 상품등록페이지 - 딜인원 입력
+2. 딜인원 - 딜생성
+3. 상품랜딩페이지 - 딜목록
+4. 상품상세페이지 - 참여버튼
+5. 참여버튼 클릭 - modal
+6. 참여 - DB 참여완료 데이터 저장
+7. 할인가 구매가능 권한부여
+8. Deal Schema - 참여아이디 검색 - isComplete(true/false)로 확인 - 확인시 결제가능
 
 #### :memo: 결제상세
 1. 결제완료 - payment 저장
