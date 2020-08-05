@@ -22,6 +22,10 @@ const ProductInfo = ({ match, history, location }) => {
         }
     }, [dispatch])
 
+    const makeDeal = ()=>{
+        
+    }
+
     const onClick = (form) => {
         if (!user) {
             alert('로그인을 해주세요!')

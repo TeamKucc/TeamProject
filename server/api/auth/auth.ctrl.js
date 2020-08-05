@@ -2,11 +2,7 @@ require('dotenv').config()
 import User from '../../models/user'
 import jwt, { decode } from 'jsonwebtoken'
 
-const { JWT_SECRET } = process.env
 
-export const auth = (req, res) => {
-
-}
 
 export const register = async (req, res) => {
     const user = new User(req.body);
@@ -54,8 +50,9 @@ export const login = (req, res) => {
 }
 
 export const logout = (req, res) => {
-    User.findOneAndUpdate({ _id: req.body._id }, { token: "", tokenExp: "" }, (err, doc) => {
-        if (err) return res.json({ success: false, err })
+    console.log(req.user._id)
+    User.findOneAndUpdate({ _id: req.user._id }, { token: "", tokenExp: "" }, (err, doc) => {
+        if (err) return res.status(400).json({logout:false,message:err})
         return res.status(200).send({
             logoutsuccess: true
         })

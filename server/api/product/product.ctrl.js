@@ -2,6 +2,7 @@ import Product from '../../models/product';
 import Pay from '../../models/payment';
 import multer from 'multer';
 import mongoose from 'mongoose'
+import Deal from '../../models/deal';
 
 
 const ObjectId = mongoose.Types.ObjectId;
@@ -173,4 +174,12 @@ export const stockDetail = (req, res) => {
     if (err) return res.status(400).json({ success: false, Message: err });
     return res.json(result);
   });
+}
+
+export const getDeal = (req, res) => {
+  console.log(req.body.product)
+  Deal.find({ product: req.body.product }, (err, result) => {
+    if (err) return res.status(400).json({ success: false, Message: err })
+    res.json(result)
+  })
 }
