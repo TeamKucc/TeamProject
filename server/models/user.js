@@ -8,6 +8,7 @@ const UserSchema = new Schema(
     userID: { type: String, required: true, maxlength: 30 },
     name: { type: String, maxlength: 15 },
     password: { type: String, required: true, minlength: 6 },
+    address: { type: String },
     email: { type: String, trim: true, unique: 1 },
     role: { type: Number, default: 0 },//2번이 admin
     token: { type: String },
@@ -42,6 +43,24 @@ UserSchema.pre('save', function (next) {
     next();
   }
 });
+UserSchema.pre('findOneAndUpdate', function (next) {
+  const update = this.getUpdate();
+  if (update.password) {
+    console.log('passs')
+    bcrypt.genSalt(5, (err, salt) => {
+      bcrypt.hash(update.password, salt, (err, hash) => {
+        if (err) return err;
+        this.getUpdate().password = hash;
+        console.log(this.getUpdate().password)
+        next();
+      })
+    })
+  } else {
+    next();
+  }
+})
+
+
 
 UserSchema.statics.findByUsername = function (username) {
   console.log(username);

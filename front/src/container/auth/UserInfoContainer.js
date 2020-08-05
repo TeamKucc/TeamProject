@@ -53,8 +53,8 @@ const UserInfoContainer = ({ match,history }) => {
             return
         }
         console.log('call')
-        dispatch(userUpdate({ userID, name, password, email,userId }));
-
+        dispatch(userUpdate({ userID, name, password, email,userId,_id }));
+        window.location.reload()
     }
 
 

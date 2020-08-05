@@ -14,7 +14,7 @@ const LoginForm = (props) => {
         authError: auth.authError,
         user: user.user
     }))
-
+    
     const onChange = (e) => {
         const { value, name } = e.target;
         dispatch(
@@ -48,7 +48,7 @@ const LoginForm = (props) => {
             return
         }
         if (auth) {
-            console.log(auth.userId)
+            console.log(auth)
             props.history.push('/')
             try {
                const userId=localStorage.getItem('userId')

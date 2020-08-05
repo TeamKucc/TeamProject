@@ -19,12 +19,20 @@ const [
     GET_HISTORY_FAILURE
 ] = createRequestActionTypes('user/GET_HISTORY')
 
+const [
+    MAKE_DEAL,
+    MAKE_DEAL_SUCCESS,
+    MAKE_DEAL_FAILURE
+]=createRequestActionTypes('user/MAKE_DEAL')
+
 export const tempSetUser = createAction(TEMP_SET_USER, user => user)
 export const logout = createAction(LOGOUT);
-export const userUpdate = createAction(USER_UPDATE,)
+export const userUpdate = createAction(USER_UPDATE,({ userID, name, password, email,_id })=>({ userID, name, password, email,_id }))
 export const getHistory = createAction(GET_HISTORY, user => user)
+export const makeDeal = createAction(MAKE_DEAL,user=>user)
 
 const getHistorySaga = createRequestSaga(GET_HISTORY, userCtrl.gethistory)
+const userUpdateSaga = createRequestSaga(USER_UPDATE,userCtrl.userupdate)
 
 function* logoutSaga() {
     console.log('logout saga')
@@ -40,6 +48,7 @@ function* logoutSaga() {
 export function* userSaga() {
     yield takeLatest(LOGOUT, logoutSaga);
     yield takeLatest(GET_HISTORY,getHistorySaga)
+    yield takeLatest(USER_UPDATE,userUpdateSaga)
 }
 
 const initialState = {
