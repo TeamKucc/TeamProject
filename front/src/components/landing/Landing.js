@@ -35,8 +35,6 @@ function Landing({ Products, loading }) {
   const classes = useStyles();
   const renderCards = Prod.map((product, index) => {
     if(!product) return null;
-    console.log('land')
-    console.log(product.thumbnails[0])
     const image = product.thumbnails[0]
     return (
       <Card className={classes.root} key={index}>

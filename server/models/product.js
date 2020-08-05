@@ -5,7 +5,7 @@ const productSchema = new Schema({
 
   user: {
     type:mongoose.Types.ObjectId,
-    // required: true,
+    required: true,
   },
 
   stock: {
