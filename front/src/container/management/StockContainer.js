@@ -8,19 +8,22 @@ import {
   removeProduct,
   readProduct,
 } from '../../lib/api/product';
+import { setOriginalUpload } from '../../modules/upload';
 
 const StockContainer = ({ match, history }) => {
   // console.log(match)
   // console.log(history)
   const dispatch = useDispatch();
-  const { management, loading, user } = useSelector(
-    ({ management, loading, user }) => ({
-      management: management.management,
-      managementError: management.managementError,
-      loading: loading['management/STOCK_MANAGEMENT'],
-      user: user.user,
-    }),
-  );
+  const {
+    management,
+    loading,
+    user,
+  } = useSelector(({ management, loading, user}) => ({
+    management: management.management,
+    managementError: management.managementError,
+    loading: loading['management/STOCK_MANAGEMENT'],
+    user: user.user,
+  }));
 
   console.log(management);
   const onCheckedChange = (e) => {
@@ -36,7 +39,6 @@ const StockContainer = ({ match, history }) => {
     //   console.log(e)
     // }
   };
-
   useEffect(() => {
     dispatch(stockManagement({}));
   }, [dispatch]);

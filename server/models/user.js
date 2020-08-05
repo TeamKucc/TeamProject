@@ -9,7 +9,7 @@ const UserSchema = new Schema(
     name: { type: String, maxlength: 15 },
     password: { type: String, required: true, minlength: 6 },
     email: { type: String, trim: true, unique: 1 },
-    role: { type: Number, default: 0 },
+    role: { type: Number, default: 0 },//2번이 admin
     token: { type: String },
     tokenExp: { type: Number },
   },
@@ -27,7 +27,6 @@ const UserSchema = new Schema(
 
 UserSchema.pre('save', function (next) {
   let user = this;
-
   if (user.isModified('password')) {
     console.log('passwor Changed');
     bcrypt.genSalt(5, function (err, salt) {

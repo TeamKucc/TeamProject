@@ -4,6 +4,7 @@ import createRequestSaga, {
 } from '../lib/createRequestsaga';
 import * as productAPI from '../lib/api/product';
 import { takeLatest, take } from 'redux-saga/effects';
+import produce from 'immer'
 
 const [
   LANDING_PRODUCT,
@@ -49,6 +50,7 @@ const initialState = {
   error: null,
   product: null,
   productDetail: null,
+  productInfo:{}
 };
 
 const landing = handleActions(
@@ -64,6 +66,7 @@ const landing = handleActions(
     [READ_PRODUCT_SUCCESS]: (state, { payload: info }) => ({
       ...state,
       productDetail: info,
+      productInfo: info,
     }),
     [READ_PRODUCT_FAILURE]: (state, { payload: error }) => ({
       ...state,

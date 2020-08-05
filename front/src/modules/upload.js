@@ -36,6 +36,7 @@ const [
   PRODUCT_PAID_SUCCESS,
   PRODUCT_PAID_FAILURE,
 ] = createRequestActionTypes('product/PRODUCT_PAID');
+const SET_ORIGINAL_UPLOAD = 'product/SET_ORIGINAL_UPLOAD';
 
 const [
   UPDATE_UPLOAD,
@@ -49,9 +50,12 @@ export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
   value,
 }));
 
-export const imagedDelete = createAction(IMAGE_DELETE, (images) => (images))
+export const imagedDelete = createAction(IMAGE_DELETE, (images) => images);
 
-export const thumbnailDelete = createAction(THUMBNAIL_DELETE, (images) => (images))
+export const thumbnailDelete = createAction(
+  THUMBNAIL_DELETE,
+  (images) => images,
+);
 
 export const imageUpload = createAction(IMAGE_UPLOAD, (files) => ({
   files,
@@ -63,8 +67,16 @@ export const thumbnailUpload = createAction(THUMBNAIL_UPLOAD, (files) => ({
 
 export const productUpload = createAction(
   PRODUCT_UPLOAD,
-  ({ id, stock, thumbnails, title, description, price, images, discount, person }) => ({
-    id,
+  ({
+    stock,
+    thumbnails,
+    title,
+    description,
+    price,
+    images,
+    discount,
+    person,
+  }) => ({
     stock,
     thumbnails,
     title,
@@ -82,10 +94,15 @@ export const productPaid = createAction(
     user, product
   })
 )
+export const setOriginalUpload = createAction(
+  SET_ORIGINAL_UPLOAD,
+  (upload) => upload,
+);
 
 export const updateUpload = createAction(
   UPDATE_UPLOAD,
   ({
+    id,
     stock,
     thumbnails,
     title,
@@ -96,6 +113,7 @@ export const updateUpload = createAction(
     person,
     enable,
   }) => ({
+    id,
     stock,
     thumbnails,
     title,
@@ -113,18 +131,23 @@ const productUploadSaga = createRequestSaga(
   productAPI.productUpload,
 );
 
+
 const productPaidSaga = createRequestSaga(PRODUCT_PAID, productAPI.productPaid)
 
 const updateUploadSaga = createRequestSaga(
   UPDATE_UPLOAD,
-  productAPI.updateUpload
+  productAPI.updateUpload,
 );
+// const updateUploadSaga = createRequestSaga(
+//   UPDATE_UPLOAD,
+//   productAPI.updateUpload,
+// );
 
 function* imageUploadSaga(action) {
   yield put(startLoading('product/IMAGE_UPLOAD'));
   try {
     const files = action.payload.files.files;
-    console.log(files)
+    console.log(files);
     let formData = new FormData();
     const config = {
       header: { 'content-type': 'multipart/form-data' },
@@ -164,12 +187,12 @@ function* thumbnailUploadSaga(action) {
       formData,
       config,
     );
-    console.log(thumbnail)
+    console.log(thumbnail);
     yield put({
       type: THUMBNAIL_UPLOAD_SUCCESS,
       payload: thumbnail.data,
     });
-  } catch (error) { }
+  } catch (error) {}
   yield put(finishLoading(THUMBNAIL_UPLOAD));
 }
 
@@ -179,9 +202,11 @@ export function* productSaga() {
   yield takeLatest(PRODUCT_UPLOAD, productUploadSaga);
   yield takeLatest(UPDATE_UPLOAD, updateUploadSaga);
   yield takeLatest(PRODUCT_PAID,productPaidSaga)
+  yield takeLatest(UPDATE_UPLOAD, updateUploadSaga);
 }
 
 export const initialState = {
+  productId: null,
   stock: 0,
   thumbnails: [],
   title: '',
@@ -204,23 +229,23 @@ const upload = handleActions(
       [key]: value,
     }),
     [IMAGE_DELETE]: (state, { payload: image }) =>
-      produce(state, draft => {
-        draft.images.splice(image, 1)
-        return draft
+      produce(state, (draft) => {
+        draft.images.splice(image, 1);
+        return draft;
       }),
     [IMAGE_UPLOAD_SUCCESS]: (state, { payload: image }) =>
-      produce(state, draft => {
-        draft.images.push(image)
-        return draft
+      produce(state, (draft) => {
+        draft.images.push(image);
+        return draft;
       }),
     [IMAGE_UPLOAD_FAILURE]: (state, { payload: uploadError }) => ({
       ...state,
       uploadError,
     }),
     [THUMBNAIL_DELETE]: (state, { payload: image }) =>
-      produce(state, draft => {
-        draft.thumbnails.splice(image, 1)
-        return draft
+      produce(state, (draft) => {
+        draft.thumbnails.splice(image, 1);
+        return draft;
       }),
     [THUMBNAIL_UPLOAD_SUCCESS]: (state, { payload: thumbnails }) =>
       produce(state, draft => {
@@ -233,7 +258,7 @@ const upload = handleActions(
     }),
     [PRODUCT_UPLOAD_SUCCESS]: (state, { payload: upload }) => ({
       ...state,
-      upload,
+      upload: upload,
     }),
     [PRODUCT_UPLOAD_FAILURE]: (state, { payload: uploadError }) => ({
       ...state,
@@ -245,7 +270,39 @@ const upload = handleActions(
     }),
     [PRODUCT_PAID_FAILURE]:(state,{payload:error})=>({
       ...state,
-      error
+      error,
+    }),
+    [SET_ORIGINAL_UPLOAD]: (state, { payload: upload }) => ({
+      ...state,
+      stock: upload.stock,
+      thumbnails: upload.thumbnails,
+      title: upload.title,
+      description: upload.description,
+      price: upload.price,
+      images: upload.images,
+      discount: upload.discount,
+      person: upload.person,
+      productId: upload._id,
+    }),
+    [UPDATE_UPLOAD_SUCCESS]: (state, { payload: upload }) => ({
+      ...state,
+      upload,
+    }),
+    [UPDATE_UPLOAD_FAILURE]: (state, { payload: uploadError }) => ({
+      ...state,
+      uploadError,
+    }),
+    [SET_ORIGINAL_UPLOAD]: (state, { payload: upload }) => ({
+      ...state,
+      stock: upload.stock,
+      thumbnails: upload.thumbnails,
+      title: upload.title,
+      description: upload.description,
+      price: upload.price,
+      images: upload.images,
+      discount: upload.discount,
+      person: upload.person,
+      productId: upload._id,
     }),
     [UPDATE_UPLOAD_SUCCESS]: (state, { payload: upload }) => ({
       ...state,

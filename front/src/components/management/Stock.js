@@ -9,29 +9,14 @@ import Button from '@material-ui/core/Button';
 import { Checkbox } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import ImageSlider from './ImageSlider';
-import DeleteConfirm from './DeleteConfirm'
+// import DeleteConfirm from './DeleteConfirm'
 
 // 상품코드, 상품명, 창고재고, 주문대기, 재고수정, 판매, 품절, 수정버튼
-const Stock = ({ Products, onCheckedChange, onRemove }) => {
+const Stock = ({ Products, onCheckedChange }) => {
 
   let Prod = Object.keys(Products).map(function (key) {
     return Products[key];
   });
-
-  const [del, setDel] = useState(false)
-
-  const onDeleteClick = () => {
-    setDel(true)
-  }
-
-  const onCancel = () => {
-    setDel(false)
-  }
-
-  const onDelete = () => {
-    setDel(false)
-    onRemove()
-  }
 
   return (
     <Paper>
@@ -48,7 +33,7 @@ const Stock = ({ Products, onCheckedChange, onRemove }) => {
             <TableCell>판매</TableCell>
             <TableCell>품절</TableCell>
             <TableCell></TableCell>
-            <TableCell></TableCell>
+            {/* <TableCell></TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -57,7 +42,11 @@ const Stock = ({ Products, onCheckedChange, onRemove }) => {
               <TableRow key={index}>
                 <TableCell width="15%">{product._id}</TableCell>
                 <TableCell width="20px">
-                  <ImageSlider images={product.thumbnails} width="2" />
+                <img
+                        style={{ maxHeight: "100px" }}
+                        alt={`productImg-${index}`}
+                        src={`http://localhost:4000/${product.thumbnails[index].image}`}
+                    />
                 </TableCell>
                 <TableCell width="20%">{product.title}</TableCell>
                 <TableCell>{product.price}</TableCell>
@@ -90,12 +79,12 @@ const Stock = ({ Products, onCheckedChange, onRemove }) => {
               </>
           }
                 <TableCell width="5%">
-                  <Link to={`/product/upload/${product._id}`} >수정</Link>
+                  <Link to={`/product/upload/${product._id}`}>상세</Link>
                 </TableCell>
-                <TableCell width="5%">
+                {/* <TableCell width="5%">
                   <Button onClick={onDeleteClick}>삭제</Button>
                   <DeleteConfirm visible={del} onDelete={onDelete} onCancel={onCancel}/>
-                </TableCell>
+                </TableCell> */}
               </TableRow>
             );
           })}

@@ -1,5 +1,6 @@
 import User from '../../models/user';
 import Pay from '../../models/payment'
+import Product from '../../models/product';
 
 export const list = (req, res) => {
     if (!req.decode.admin) {
@@ -48,8 +49,16 @@ export const gethistory = (req, res) => {
             message: err,
             success: false
         })
-        res.status(200).json(result)
-
+        console.log(result)
+        Product.findOne({ _id: result.product }, (err, res2) => {
+            if (err) return res.status(500).json({
+                message: 'product not found',
+                success: false
+            })
+            res.json(
+                { result, res2 },
+            );
+        })
     })
 }
 

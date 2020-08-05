@@ -2,60 +2,55 @@ import React, { useEffect } from 'react';
 import ProductEdit from '../../components/upload/ProductEdit';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { changeField, setOriginalUpload } from '../../modules/upload';
+import { changeField } from '../../modules/landing';
 import { readProduct, unloadProduct } from '../../modules/landing';
-import { updateUpload } from '../../lib/api/product';
+import { updateUpload } from '../../modules/landing';
+import { initialize } from '../../modules/landing';
 
 const ProductEditContainer = ({ match, history }) => {
   const dispatch = useDispatch();
-
   const {
-    // idx,
-    // stock,
-    // thumbnails,
-    // title,
-    // description,
-    // price,
-    // images,
-    // discount,
-    // person,
-    // enable,
+    stock,
+    thumbnails,
+    title,
+    description,
+    price,
+    images,
+    discount,
+    person,
+    enable,
     product,
   } = useSelector(({ upload, landing }) => ({
-    // stock: upload.stock,
-    // thumbnails: upload.thumbnails,
-    // title: upload.title,
-    // description: upload.description,
-    // price: upload.price,
-    // images: upload.images,
-    // discount: upload.discount,
-    // person: upload.person,
-    // enable: upload.enable,
-    product: landing.productDetail,
+    stock: upload.stock,
+    thumbnails: upload.thumbnails,
+    title: upload.title,
+    description: upload.description,
+    price: upload.price,
+    images: upload.images,
+    discount: upload.discount,
+    person: upload.person,
+    enable: upload.enable,
+    product: landing.productInfo
   }));
-  
-  const { id } = match.params;
-  useEffect(() => {
-    dispatch(readProduct(id));
-    return () => {
-      dispatch(unloadProduct());
-    };
-  }, [dispatch, id]);
 
-  console.log(product)
-  const onPublish = (e) => {
+  const { id } = match.params;
+  console.log(product.price)
+  
+  useEffect( () => {
+    dispatch(readProduct(id))
+    dispatch(changeField({
+      form:'productInfo',
+      key: price,
+    }))
+    return () => {
+      // dispatch(unloadProduct());
+    };
+  }, [dispatch]);
+
+  console.log();
+  const onPublish = async (e) => {
     e.preventDefault();
-    const {
-      stock,
-      thumbnails,
-      title,
-      description,
-      price,
-      images,
-      discount,
-      person,
-      enable } = product
-    dispatch(
+    await dispatch(
       updateUpload({
         id,
         stock,
@@ -68,7 +63,8 @@ const ProductEditContainer = ({ match, history }) => {
         person,
         enable,
       }),
-    );
+    )
+    // await dispatch(initialize())
     history.push('/product/stock');
   };
 
@@ -77,6 +73,7 @@ const ProductEditContainer = ({ match, history }) => {
     const { value, name } = e.target;
     dispatch(
       changeField({
+        form:'productInfo',
         key: name,
         value,
       }),
@@ -89,6 +86,7 @@ const ProductEditContainer = ({ match, history }) => {
         onPublish={onPublish}
         onChange={onChange}
         product={product}
+        description = {description}
       />
     </div>
   );

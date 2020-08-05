@@ -34,13 +34,22 @@ function Landing({ Products, loading }) {
 
   const classes = useStyles();
   const renderCards = Prod.map((product, index) => {
-    console.log('land')
-    console.log(product.thumbnails)
+    if(!product) return null;
+    const image = product.thumbnails[0]
     return (
       <Card className={classes.root} key={index}>
         <CardActionArea>
           <Link to={`/${product._id}`}>
-            <ImageSlider images={product.thumbnails} />
+            {/* <ImageSlider images={product.thumbnails} /> */}
+            {product.thumbnails.map((image, index) => (
+                <div key={index}>
+                    <img
+                        style={{ minWidth: '300px', width: '300px', height: '240px' }}
+                        alt={`productImg-${index}`}
+                        src={`http://localhost:4000/${product.thumbnails[index].image}`}
+                    />
+                </div>
+            ))}
             <CardContent>
               <Typography gutterBottom variant="h6" component="h2">
                 {product.title}

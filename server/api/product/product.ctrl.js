@@ -1,7 +1,10 @@
 import Product from '../../models/product';
 import Pay from '../../models/payment';
 import multer from 'multer';
+import mongoose from 'mongoose'
 
+
+const ObjectId = mongoose.Types.ObjectId;
 let storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'uploads/');
@@ -75,7 +78,7 @@ export const uploadThumbnail = (req, res) => {
 };
 
 export const productUpload = (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const product = new Product(req.body);
 
   product.save((err) => {
@@ -161,4 +164,13 @@ export const updateUpload = (req, res) => {
       Change: true
     })
   })
+}
+
+export const stockDetail = (req, res) => {
+  console.log(req.params)
+  const { id } = req.params;
+  Product.findOne({ _id: id }, (err, result) => {
+    if (err) return res.status(400).json({ success: false, Message: err });
+    return res.json(result);
+  });
 }
