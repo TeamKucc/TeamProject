@@ -3,6 +3,7 @@ import Pay from '../../models/payment';
 import multer from 'multer';
 import mongoose from 'mongoose'
 import Deal from '../../models/deal';
+import Delivery from '../../models/delivery'
 
 
 const ObjectId = mongoose.Types.ObjectId;
@@ -183,3 +184,12 @@ export const getDeal = (req, res) => {
     res.json(result)
   })
 }
+
+export const deliveryUpload = (req, res) => {
+  console.log(req.body);
+  const delivery = new Delivery(req.body);
+  delivery.save((err) => {
+    if (err) return res.status(400).json({ success: false, Message: err });
+    return res.status(200).json({ success: true });
+  });
+};

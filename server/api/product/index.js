@@ -21,4 +21,6 @@ router.post('/paid',productCtrl.productPaid)
 router.get('/userPaid')
 router.get('/sellerPaid')
 
+router.post('/deliveryUpload', productCtrl.deliveryUpload)
+
 export default router;

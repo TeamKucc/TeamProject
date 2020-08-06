@@ -76,6 +76,7 @@ export const productUpload = createAction(
     images,
     discount,
     person,
+    category
   }) => ({
     stock,
     thumbnails,
@@ -85,15 +86,14 @@ export const productUpload = createAction(
     images,
     discount,
     person,
+    category
   }),
 );
 
-export const productPaid = createAction(
-  PRODUCT_PAID,
-  ({ user, product }) => ({
-    user, product
-  })
-)
+export const productPaid = createAction(PRODUCT_PAID, ({ user, product }) => ({
+  user,
+  product,
+}));
 export const setOriginalUpload = createAction(
   SET_ORIGINAL_UPLOAD,
   (upload) => upload,
@@ -112,6 +112,7 @@ export const updateUpload = createAction(
     discount,
     person,
     enable,
+    category
   }) => ({
     id,
     stock,
@@ -123,6 +124,7 @@ export const updateUpload = createAction(
     discount,
     person,
     enable,
+    category
   }),
 );
 
@@ -131,8 +133,7 @@ const productUploadSaga = createRequestSaga(
   productAPI.productUpload,
 );
 
-
-const productPaidSaga = createRequestSaga(PRODUCT_PAID, productAPI.productPaid)
+const productPaidSaga = createRequestSaga(PRODUCT_PAID, productAPI.productPaid);
 
 const updateUploadSaga = createRequestSaga(
   UPDATE_UPLOAD,
@@ -201,7 +202,7 @@ export function* productSaga() {
   yield takeLatest(THUMBNAIL_UPLOAD, thumbnailUploadSaga);
   yield takeLatest(PRODUCT_UPLOAD, productUploadSaga);
   yield takeLatest(UPDATE_UPLOAD, updateUploadSaga);
-  yield takeLatest(PRODUCT_PAID,productPaidSaga)
+  yield takeLatest(PRODUCT_PAID, productPaidSaga);
   yield takeLatest(UPDATE_UPLOAD, updateUploadSaga);
 }
 
@@ -218,7 +219,8 @@ export const initialState = {
   upload: null,
   uploadError: null,
   enable: null,
-  paid:null
+  paid: null,
+  category: '',
 };
 
 const upload = handleActions(
@@ -248,9 +250,9 @@ const upload = handleActions(
         return draft;
       }),
     [THUMBNAIL_UPLOAD_SUCCESS]: (state, { payload: thumbnails }) =>
-      produce(state, draft => {
-        draft.thumbnails.push(thumbnails)
-        return draft
+      produce(state, (draft) => {
+        draft.thumbnails.push(thumbnails);
+        return draft;
       }),
     [THUMBNAIL_UPLOAD_FAILURE]: (state, { payload: uploadError }) => ({
       ...state,
@@ -264,11 +266,11 @@ const upload = handleActions(
       ...state,
       uploadError,
     }),
-    [PRODUCT_PAID_SUCCESS]:(state,{payload:paid})=>({
+    [PRODUCT_PAID_SUCCESS]: (state, { payload: paid }) => ({
       ...state,
-      paid
+      paid,
     }),
-    [PRODUCT_PAID_FAILURE]:(state,{payload:error})=>({
+    [PRODUCT_PAID_FAILURE]: (state, { payload: error }) => ({
       ...state,
       error,
     }),

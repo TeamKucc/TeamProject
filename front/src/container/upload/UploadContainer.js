@@ -26,6 +26,7 @@ const UploadContainer = ({ history }) => {
     uploadError,
     enable,
     productId,
+    category,
   } = useSelector(({ upload, user }) => ({
     user: user.user,
     stock: upload.stock,
@@ -40,6 +41,7 @@ const UploadContainer = ({ history }) => {
     uploadError: upload.uploadError,
     enable: upload.enable,
     productId: upload.productId,
+    category: upload.category,
   }));
 
   const product = {
@@ -52,9 +54,9 @@ const UploadContainer = ({ history }) => {
     discount,
     person,
     enable,
+    category,
   };
 
-  console.log(productId)
   const onPublish = () => {
     if (productId) {
       dispatch(
@@ -69,6 +71,7 @@ const UploadContainer = ({ history }) => {
           discount,
           person,
           enable,
+          category,
         }))
         return
     }
@@ -84,6 +87,7 @@ const UploadContainer = ({ history }) => {
         discount,
         person,
         enable,
+        category,
       }),
     );
     history.push('/');
@@ -106,7 +110,7 @@ const UploadContainer = ({ history }) => {
     };
   }, [dispatch]);
 
-  // console.log(product)
+  console.log(product)
 
   return (
     <UploadProduct

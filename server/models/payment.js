@@ -1,22 +1,23 @@
 import mongoose, { Schema } from 'mongoose';
 
-const paySchema = new Schema({
+const paySchema = new Schema(
+  {
     user: {
-        type:mongoose.Types.ObjectId,
-        required: true,
+      type: mongoose.Types.ObjectId,
+      required: true,
     },
     product: {
-        type:mongoose.Types.ObjectId,
-        required: true,
+      type: mongoose.Types.ObjectId,
+      required: true,
     },
-    postNumber: {
-        type: String,
-        default:'not yet'
-    },
-}, {
-    versionKey: false
-})
+    delivery: { type: String },
+    deliveryNumber: { type: Number },
+  },
+  {
+    versionKey: false,
+  },
+);
 
-const Pay = mongoose.model('Pay', paySchema)
+const Pay = mongoose.model('Pay', paySchema);
 
-export default Pay 
+export default Pay;

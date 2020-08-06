@@ -14,15 +14,14 @@ import StockPage from '../pages/StockPage'
 import ProductPage from '../pages/ProductPage';
 import UserHistory from '../pages/UserHistory'
 import StockDetailPage from '../pages/StockDetailPage'
+import DeliveryPage from '../pages/DeliveryPage'
 
 const App = () => {
   useEffect(() => {
-
-
   }, [])
   return (
     <>
-      <Route component={LandingPage} path={['/home', '/']} exact />
+      <Route component={LandingPage} exact path={['/home', '/']} />
       <Route component={LoginPage} path="/login" />
       <Route component={RegisterPage} path="/register" />
       <Route component={BuyerRegisterPage} path="/register/buyer" />
@@ -35,6 +34,9 @@ const App = () => {
       <Route component={ProductPage} path="/:id" exact />
       <Route component={StockDetailPage} exact path="/product/upload/:id" />
       <Route component={UserHistory} exact path="/user/userhistory" />
+      
+      {/* 임시택배조회페이지 */}
+      <Route component={DeliveryPage} exact path="/product/delivery" />
     </>
   );
 };

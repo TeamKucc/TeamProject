@@ -56,6 +56,11 @@ const productSchema = new Schema({
     type:Date,
     default:Date.now
   },
+
+  category:{
+    type:String,
+    default: null
+  }
 },{
   versionkey:false,
 });

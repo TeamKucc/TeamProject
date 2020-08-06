@@ -39,6 +39,7 @@ const StockContainer = ({ match, history }) => {
     //   console.log(e)
     // }
   };
+
   useEffect(() => {
     dispatch(stockManagement({}));
   }, [dispatch]);

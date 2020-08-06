@@ -17,6 +17,7 @@ const Stock = ({ Products, onCheckedChange }) => {
   let Prod = Object.keys(Products).map(function (key) {
     return Products[key];
   });
+  console.log(Prod)
 
   return (
     <Paper>
@@ -45,7 +46,7 @@ const Stock = ({ Products, onCheckedChange }) => {
                 <img
                         style={{ maxHeight: "100px" }}
                         alt={`productImg-${index}`}
-                        src={`http://localhost:4000/${product.thumbnails[index].image}`}
+                        src={`http://localhost:4000/${product.thumbnails[0].image}`}
                     />
                 </TableCell>
                 <TableCell width="20%">{product.title}</TableCell>
