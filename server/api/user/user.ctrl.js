@@ -4,14 +4,14 @@ import Product from '../../models/product';
 import Deal from '../../models/deal'
 
 export const list = (req, res) => {
-  if (!req.decode.admin) {
-    return res.status(403).json({
-      message: 'you are not adimn',
+    if (!req.decode.admin) {
+        return res.status(403).json({
+            message: 'you are not adimn',
+        });
+    }
+    User.find({}).then((users) => {
+        res.json({ users });
     });
-  }
-  User.find({}).then((users) => {
-    res.json({ users });
-  });
 };
 
 export const userInfo = (req, res) => {
@@ -72,14 +72,23 @@ export const makeDeal = (req, res) => {
     })
 }
 
-export const joinDeal =(req,res)=>{
-    console.log(req.body._id)
-    Deal.findOneAndUpdate({_id:req.body._id},{$push:{user:req.body.user}},(err,result)=>{
-        if(err) res.status(400).json({
-            success:false,
-            message:err
+export const joinDeal = (req, res) => {
+    Deal.findOneAndUpdate({ _id: req.body._id }, { $push: { user: req.body.user } }, (err, result) => {
+        console.log(result)
+        if (err) res.status(400).json({
+            success: false,
+            message: err
         })
-        res.status(200).json(result)
+         Product.findOne({ _id: result.product }, (err, resP) => {
+            if (resP.person === result.user.length+1) {
+                Deal.findOneAndUpdate({ product: resP._id }, { complete: true }, (err, resultD) => {
+                    console.log(resultD)
+                })
+            }
+        })
+        res.status(200).json({
+            message:'join success'
+        })
     })
 }
 

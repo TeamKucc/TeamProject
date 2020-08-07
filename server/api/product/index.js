@@ -19,7 +19,7 @@ router.post('/getDeal',productCtrl.getDeal)
 
 router.post('/paid',productCtrl.productPaid)
 router.get('/userPaid')
-router.get('/sellerPaid')
+router.get('/productPaidSeller',productCtrl.productPaidSeller)
 
 router.post('/deliveryUpload', productCtrl.deliveryUpload)
 

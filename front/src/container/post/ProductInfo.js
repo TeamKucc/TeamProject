@@ -45,6 +45,7 @@ const ProductInfo = ({ match, history, location }) => {
                     msg += '결제 금액 : ' + rsp.paid_amount;
                     msg += '카드 승인번호 : ' + rsp.apply_num;
                     dispatch(productPaid({ user, product: product._id,form }))
+                    
                     location.reload()
                 } else {
                     console.log(rsp)

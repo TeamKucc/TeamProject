@@ -44,6 +44,12 @@ const [
   UPDATE_UPLOAD_FAILURE,
 ] = createRequestActionTypes('product/UPDATE_UPLOAD');
 
+const [
+  SELLER_PAID,
+  SELLER_PAID_SUCCESS,
+  SELLER_PAID_FAILURE
+] = createRequestActionTypes('product/SELLER_PAID')
+
 export const initialize = createAction(INITIALIZE);
 export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
   key,
@@ -64,6 +70,8 @@ export const imageUpload = createAction(IMAGE_UPLOAD, (files) => ({
 export const thumbnailUpload = createAction(THUMBNAIL_UPLOAD, (files) => ({
   files,
 }));
+
+export const sellerPaid = createAction(SELLER_PAID, ({ product, user }) => ({ product, user }))
 
 export const productUpload = createAction(
   PRODUCT_UPLOAD,
@@ -193,7 +201,7 @@ function* thumbnailUploadSaga(action) {
       type: THUMBNAIL_UPLOAD_SUCCESS,
       payload: thumbnail.data,
     });
-  } catch (error) {}
+  } catch (error) { }
   yield put(finishLoading(THUMBNAIL_UPLOAD));
 }
 

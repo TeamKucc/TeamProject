@@ -89,3 +89,6 @@ export const stockDetail = (id) =>
   client.post(`/api/product/stockDetail/${id}`);
 export const deliveryUpload = ({ delivery, deliveryNumber }) =>
   client.post('/api/product/deliveryUpload', { delivery, deliveryNumber });
+
+export const sellerPaid = ({ product, user }) =>
+  client.post('/api/product/sellerPaid', { product, user })

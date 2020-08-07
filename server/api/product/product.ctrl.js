@@ -4,6 +4,7 @@ import multer from 'multer';
 import mongoose from 'mongoose'
 import Deal from '../../models/deal';
 import Delivery from '../../models/delivery'
+import Seller from '../../models/seller';
 
 
 const ObjectId = mongoose.Types.ObjectId;
@@ -99,6 +100,13 @@ export const productPaid = async (req, res) => {
   await Product.updateOne({ _id: req.body.product }, { $inc: { stock: -1 } })
 }
 
+export const productPaidSeller = (req, res) => {
+  const paid = new Seller(req.body)
+  paid.save((err) => {
+    if (err) return res.status(400).json({ success: false, Message: err });
+    return res.status(200).json({ success: true })
+  })
+}
 
 export const getProducts = (req, res) => {
   Product.find({}, (err, result) => {

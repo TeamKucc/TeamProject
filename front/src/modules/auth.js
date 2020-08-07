@@ -67,7 +67,6 @@ function* loginSaga(action) {
         const input = action.payload
         const userId = yield call(authCtrl.login, input);
         localStorage.setItem('userId', userId.data.userId)
-        console.log(userId)
         if (!userId.data.login) {
             yield put({
                 type: LOGIN_FAILURE,
