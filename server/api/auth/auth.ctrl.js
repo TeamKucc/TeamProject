@@ -27,23 +27,35 @@ export const register = async (req, res) => {
 };
 
 export const login = (req, res) => {
-    console.log(req.body)
-    User.findOne({ userID: req.body.userID }, (err, user) => {
-        if (!user) return res.json({
-            loginSuccess: false,
-            message: "Login Failed,ID not Found"
-        });
-      });
+  console.log(req.body)
+  User.findOne({ userID: req.body.userID }, (err, user) => {
+    if (!user) return res.json({
+      loginSuccess: false,
+      message: "Login Failed,ID not Found"
+    });
+    user.verify(req.body.password, (err, isMatch) => {
+      if (!isMatch) return res.json({ login: false, message: "wrong password" })
+      user.generateToken((err, user) => {
+        if (err) return res.status(400).send(err);
+        res.cookie("w_authEXP", user.tokenExp)
+        res.cookie("w_auth", user.token)
+          .status(200)
+          .json({
+            login: true, userId: user._id
+          })
+      })
+    })
+  });
 };
 
 export const logout = (req, res) => {
-    console.log(req.user._id)
-    User.findOneAndUpdate({ _id: req.user._id }, { token: "", tokenExp: "" }, (err, doc) => {
-        if (err) return res.status(400).json({logout:false,message:err})
-        return res.status(200).send({
-            logoutsuccess: true
-        })
+  console.log(req.user._id)
+  User.findOneAndUpdate({ _id: req.user._id }, { token: "", tokenExp: "" }, (err, doc) => {
+    if (err) return res.status(400).json({ logout: false, message: err })
+    return res.status(200).send({
+      logoutsuccess: true
     })
+  })
 }
 
 export const business = (req, res) => {
@@ -65,14 +77,14 @@ export const business = (req, res) => {
   postCRN(CRNumber)
     .catch((err) => console.log(err))
     .then((result) => {
-      if(result == '부가가치세 일반과세자 입니다.') {
+      if (result == '부가가치세 일반과세자 입니다.') {
         return res.status(200).json({
-          businessState:true
+          businessState: true
         });
       } else {
         console.log(false)
         return res.status(409).json({
-          businessState:false
+          businessState: false
         });
       }
     });

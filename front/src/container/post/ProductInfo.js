@@ -13,7 +13,6 @@ const ProductInfo = ({ match, history, location }) => {
         product: landing.productDetail,
         user: user.user
     }))
-    console.log(product)
     useEffect(() => {
         const { id } = match.params
         dispatch(readProduct(id))
