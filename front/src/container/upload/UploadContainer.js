@@ -22,8 +22,6 @@ const UploadContainer = ({ history }) => {
     images,
     discount,
     person,
-    upload,
-    uploadError,
     enable,
     productId,
     category,
@@ -37,8 +35,6 @@ const UploadContainer = ({ history }) => {
     images: upload.images,
     discount: upload.discount,
     person: upload.person,
-    upload: upload.upload,
-    uploadError: upload.uploadError,
     enable: upload.enable,
     productId: upload.productId,
     category: upload.category,
@@ -77,7 +73,7 @@ const UploadContainer = ({ history }) => {
     }
     dispatch(
       productUpload({
-        user,
+        // user,
         stock,
         thumbnails,
         title,
@@ -90,7 +86,7 @@ const UploadContainer = ({ history }) => {
         category,
       }),
     );
-    history.push('/');
+    // history.push('/');
   };
 
   const onChange = (e) => {
@@ -104,11 +100,11 @@ const UploadContainer = ({ history }) => {
     );
   };
 
-  useEffect(() => {
-    return () => {
-      dispatch(initialize());
-    };
-  }, [dispatch]);
+  // useEffect(() => {
+  //   return () => {
+  //     dispatch(initialize());
+  //   };
+  // }, [dispatch]);
 
   console.log(product)
 

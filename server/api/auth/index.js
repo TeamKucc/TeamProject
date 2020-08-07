@@ -6,6 +6,8 @@ import authCheck from '../../lib/auth'
 const router = express.Router()
 
 router.post('/register', authctrl.register)
+router.post('/dregister', authctrl.dregister)
+
 router.post('/login',authctrl.login)
 // router.use('/logout',authCheck)
 router.get('/logout',authCheck,authctrl.logout)

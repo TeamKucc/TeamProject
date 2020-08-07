@@ -268,7 +268,7 @@ const upload = handleActions(
     }),
     [PRODUCT_UPLOAD_SUCCESS]: (state, { payload: upload }) => ({
       ...state,
-      upload: upload,
+      upload,
     }),
     [PRODUCT_UPLOAD_FAILURE]: (state, { payload: uploadError }) => ({
       ...state,
