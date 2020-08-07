@@ -54,7 +54,7 @@ function Landing({ Products, loading }) {
                     <img
                         style={{ minWidth: '300px', width: '300px', height: '240px' }}
                         alt={`productImg-${index}`}
-                        src={`http://localhost:4000/${product.thumbnails[index].image}`}
+                        src={`${product.thumbnails[index].image.location}`}
                     />
                 </div>
             ))}
@@ -97,7 +97,7 @@ function Landing({ Products, loading }) {
                     <img
                         style={{ minWidth: '300px', width: '300px', height: '240px' }}
                         alt={`productImg-${index}`}
-                        src={`http://localhost:4000/${product.thumbnails[index].image}`}
+                        src={`${product.thumbnails[index].image.location}`}
                     />
                 </div>
             ))}

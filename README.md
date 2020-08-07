@@ -4,9 +4,9 @@
 1. 로그인 / 회원가입 / 내정보 :man: 김선규
 2. 상품등록 / 상품랜딩 / 상품상세 / 결제상세 :woman: 어성미 :man: 김선규
 3. 상품관리 / 상품수정 :woman: 어성미
-4. 회원 구매내역 / 판매자 판매내역
+4. 회원 구매내역 / 판매자 판매내역 :man: 김선규
 5. 리뷰
-6. 이메일인증 (API)
+6. 이메일인증 (API) :heavy_exclamation_mark: 보류
 7. 사업자번호인증 (API) :woman: 어성미
 8. 결제 (API) :man: 김선규
 9. 배송추적 (API) :woman: 어성미
@@ -14,8 +14,6 @@
 
 #### :pushpin: 수정사항
 1_1. 작성해 할 리듀서 - Seller:sellhistory, postNumberUpdate :man: 김선규 <br>
-2_2. 상품랜딩 - 이미지업로드 multer S3 로 수정 :man: 김선규 <br>
-2_3. 상품상세 - 공동구매 할인 :man: 김선규 <br>
 
 #### :memo: 공동구매
 1. 상품등록페이지 - 딜인원 입력

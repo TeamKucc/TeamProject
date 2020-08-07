@@ -26,6 +26,27 @@ export const register = async (req, res) => {
   });
 };
 
+export const dregister = async (req, res) => {
+  console.log(req.body)
+  const user = new User(req.body);
+  const { userID } = user;
+
+  await User.findOne({ userID: userID }, (err, userID) => {
+    if (userID) {
+      res.status(409).json({
+        message: 'ID already exist',
+      });
+    } else {
+      user.save((err, doc) => {
+        if (err) return res.json({ success: false, err });
+        return res.status(200).json({
+          success: true,
+        });
+      });
+    }
+  });
+};
+
 export const login = (req, res) => {
   console.log(req.body)
   User.findOne({ userID: req.body.userID }, (err, user) => {
@@ -67,8 +88,7 @@ export const business = (req, res) => {
   // API 에 raw 로 올라갈 xml 데이터
   const xmlRaw =
     '<map id="ATTABZAA001R08"><pubcUserNo/><mobYn>N</mobYn><inqrTrgtClCd>1</inqrTrgtClCd><txprDscmNo>{CRN}</txprDscmNo><dongCode>15</dongCode><psbSearch>Y</psbSearch><map id="userReqInfoVO"/></map>';
-  // postCRN("3051577349").catch(err => console.log(err)).then(result => console.log(result))
-  const CRNumber = req.body.business; // 매개변수 -> 사업자번호
+  const CRNumber = req.body.business;
   if (!CRNumber) {
     console.log('매개변수에 사업자등록번호를 입력하십시오');
     return;

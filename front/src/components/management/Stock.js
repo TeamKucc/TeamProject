@@ -46,7 +46,7 @@ const Stock = ({ Products, onCheckedChange }) => {
                 <img
                         style={{ maxHeight: "100px" }}
                         alt={`productImg-${index}`}
-                        src={`http://localhost:4000/${product.thumbnails[0].image}`}
+                        src={`${product.thumbnails[0].image.location}`}
                     />
                 </TableCell>
                 <TableCell width="20%">{product.title}</TableCell>

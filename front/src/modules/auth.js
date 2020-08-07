@@ -91,6 +91,7 @@ function* loginSaga(action) {
 
 export function* authSaga() {
     yield takeLatest(REGISTER, registerSaga);
+    yield takeLatest(DREGISTER, dregisterSaga);
     yield takeLatest(LOGIN, loginSaga)
     yield takeLatest(USERINFO,userInfoSaga)
     yield takeLatest(BUSINESS, businessSaga)
