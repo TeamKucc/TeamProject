@@ -1,19 +1,33 @@
 # TeamProject
 
+#### :yellow_heart: 월요일 :yellow_heart:
+1. 수정사항
+2. 구매내역 구현
+3. 디자인
+
 #### :pushpin: 개발사항
-1. 로그인 / 회원가입 / 내정보 :man: 김선규
-2. 상품등록 / 상품랜딩 / 상품상세 / 결제상세 :woman: 어성미 :man: 김선규
-3. 상품관리 / 상품수정 :woman: 어성미
+1. 로그인 / 회원가입 / 내정보 / ADMIN :man: 김선규
+2. 상품랜딩 / 상품상세 / 결제상세 :woman: 어성미 :man: 김선규
+3. 상품등록 / 상품관리 / 상품수정 :woman: 어성미
 4. 회원 구매내역 / 판매자 판매내역 :man: 김선규
 5. 리뷰
-6. 이메일인증 (API) :heavy_exclamation_mark: 보류
+6. 이메일인증 (API)
 7. 사업자번호인증 (API) :woman: 어성미
 8. 결제 (API) :man: 김선규
 9. 배송추적 (API) :woman: 어성미
 10. 챗봇 (API)
 
 #### :pushpin: 수정사항
-1_1. 작성해 할 리듀서 - Seller:sellhistory, postNumberUpdate :man: 김선규 <br>
+All. 헤더부분 모든 페이지에서 띄우기 <br>
+1_1. 작성해 할 리듀서 - Seller:sellhistory, postNumberUpdate <br>
+1_1. 내정보 - 수정 완료시 수정완료창 띄우고 메인페이지 <br>
+1_1. 로그인 - 오류시 오류창 띄우기 <br>
+1_2. 회원가입 - 완료 후 로그인창 띄우기 <br>
+2_3 상품상세 - 결제버튼 생성 / path 재설정 <br>
+2_4 결제상세 - 결제상세페이지 생성 <br>
+3_1 상품등록 - role:0 인 판매자만 등록가능 / 판매자ID DB에 넘기기 <br>
+3_2 상품관리 - 판매자가 등록한 판매상품만 띄우기 <br>
+9_1 배송추적 - 판매자 판매내역과 연동 <br>
 
 #### :memo: 공동구매
 1. 상품등록페이지 - 딜인원 입력
@@ -27,5 +41,5 @@
 
 #### :memo: 결제상세
 1. 결제완료 - payment 저장
-2. 판매자 - 판매완료내역 / 상품정보 / 데이터 (상품등록 USER_ID, PRODUCT_ID, 송장번호) :heavy_exclamation_mark: UPDATE
+2. 판매자 - 판매완료내역 / 상품정보 / 데이터 (상품등록 USER_ID, PRODUCT_ID, 송장번호)
 3. 구매자 - 내가 구매한 상품 내역 (USER_ID, PRODUCT_ID)

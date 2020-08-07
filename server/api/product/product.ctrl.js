@@ -5,12 +5,9 @@ import multerS3 from 'multer-s3'
 import mongoose from 'mongoose'
 import Deal from '../../models/deal';
 import Delivery from '../../models/delivery'
-<<<<<<< HEAD
 import Seller from '../../models/seller';
-=======
 import path from 'path'
 import AWS from 'aws-sdk'
->>>>>>> Seung
 
 AWS.config.loadFromPath("config/awsconfig.json")
 
