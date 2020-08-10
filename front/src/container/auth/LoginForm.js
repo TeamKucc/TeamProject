@@ -45,6 +45,7 @@ const LoginForm = (props) => {
             console.log('오류발생');
             console.log(authError);
             setError('로그인 실패')
+            alert('아이디나 비밀번호가 존재하지 않거나 맞지 않습니다')
             return
         }
         if (auth) {
@@ -56,7 +57,6 @@ const LoginForm = (props) => {
             } catch (error) {
                 console.log('storage Error error')
             }
-
         }
     }, [auth, authError]);
 

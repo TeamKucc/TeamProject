@@ -12,8 +12,6 @@ const Header = ({ onLogout, user }) => {
     userId = user.replace(/['"]+/g, '')
   }
 
-
-
   return (
     <Nav>
       {/* <Logo>
