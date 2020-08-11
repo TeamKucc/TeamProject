@@ -5,6 +5,7 @@ import upload from '../../modules/upload';
 
 function ThumbnailUpload({ onDrop, onDelete, images }) {
   
+  console.log(images)
   const { Title } = Typography;
   const f1 = () => {
     console.log(images[0])

@@ -38,6 +38,7 @@ const ThumbnailUploadContainer = () => {
     dispatch(thumbnailDelete(currentIndex))
   }
 
+  console.log(thumbnails)
   return <ThumbnailUpload onDrop={onDrop} onDelete={onDelete} images={thumbnails} onChange={onChange} loading={loading} />;
 };
 
