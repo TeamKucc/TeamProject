@@ -113,7 +113,14 @@ dist
 *.svg
 
 #text
-.txt
+*.txt
+*.scss
+*.css
+*.ttf
+*.eot
+*.woff
+*.woff2
+*.otf
 
 #etc
 *.exe
