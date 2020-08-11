@@ -1,211 +1,315 @@
-import React, { useState, Fragment } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { BreadcrumbsItem } from 'react-breadcrumbs-dynamic';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import ImageSlider from './ImageSlider';
-import styled from 'styled-components';
-import Responsive from '../common/Responsive';
+import React, { useState, useEffect, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import {
+  toggleShopTopFilter,
+  getIndividualCategories,
+  setActiveSort,
+} from '../../helpers/product';
 
-const LangingBlock = styled(Responsive)`
-  margin-top: 3rem;
-`;
-
-function Landing({ Products, loading }) {
-  const [cate, setCate] = useState('전체');
+function Landing({ Products, loading, location }) {
   const [layout, setLayout] = useState('grid three-column');
+  const [cate, setCate] = useState('전체');
 
-  const cateChange = (e) => {
-    setCate(e.target.value);
-  };
-
-  const getLayout = (layout) => {
-    setLayout(layout);
-  };
+  const productCount = Products.length;
 
   let Prod = Object.keys(Products).map(function (key) {
     return Products[key];
   });
-  const useStyles = makeStyles({
-    root: {
-      minWidth: 200,
-      maxWidth: 340,
-      display: 'inline-block',
-      margin: 6,
-      textAlign: 'center',
-    },
-    media: {
-      height: 140,
-    },
-  });
 
-  const classes = useStyles();
+  // 카테고리 정렬
+  const setActiveSort = (e) => {
+    setCate(e.target.value);
+  };
+
+  const uniqueCategories = getIndividualCategories(Prod);
+
+  // 별점
+  const ProductRating = ({ ratingValue }) => {
+    let rating = [];
+
+    for (let i = 0; i < 5; i++) {
+      rating.push(<i className="fa fa-star-o" key={i}></i>);
+    }
+
+    if (ratingValue && ratingValue > 0) {
+      for (let i = 0; i <= ratingValue - 1; i++) {
+        rating[i] = <i className="fa fa-star-o yellow" key={i}></i>;
+      }
+    }
+    return <Fragment>{rating}</Fragment>;
+  };
+
   const renderCards = Prod.map((product, index) => {
     if (!product) return null;
-    const image = product.thumbnails[0];
 
     if (product.category == cate) {
       return (
-        <Card className={classes.root} key={index}>
-          <CardActionArea>
-            <Link to={`/${product._id}`}>
-              {/* <ImageSlider images={product.thumbnails} /> */}
-              {product.thumbnails.map((image, index) => (
-                <div key={index}>
+        <div key={index} className={`col-xl-4 col-sm-6 `}>
+          <div className={`product-wrap mb-25"`}>
+            <br />
+            <div className="product-img">
+              <Link to={`/${product._id}`}>
+                {/* {product.thumbnails.map((image, index) => {
+                return (
+                  <div key={index}>
+                    <img
+                      className="default-img"
+                      src={`${product.thumbnails[index].image.location}`}
+                      alt={`productImg-${index}`}
+                    />
+                  </div>
+                );
+              })} */}
+                <img
+                  className="default-img"
+                  src={`${product.thumbnails[0].image.location}`}
+                  alt={`productImg-${index}`}
+                />
+
+                {product.thumbnails.length > 1 ? (
                   <img
-                    style={{
-                      minWidth: '300px',
-                      width: '300px',
-                      height: '240px',
-                    }}
-                    alt={`productImg-${index}`}
-                    src={`${product.thumbnails[index].image.location}`}
+                    className="hover-img"
+                    src={`${product.thumbnails[1].image.location}`}
+                    alt=""
                   />
+                ) : (
+                  <img
+                    className="hover-img"
+                    src={`${product.thumbnails[0].image.location}`}
+                    alt=""
+                  />
+                )}
+              </Link>
+              <div className="product-action">
+                <div className="pro-same-action pro-wishlist">
+                  <button
+                    className={product.stock !== undefined ? 'active' : ''}
+                    disabled={product.stock !== undefined}
+                    title={
+                      product.stock !== undefined
+                        ? 'Added to wishlist'
+                        : 'Add to wishlist'
+                    }
+                    // onClick={() =>
+                    //   addToWishlist(product, addToast)
+                    // }
+                  >
+                    <i className="pe-7s-like" />
+                  </button>
                 </div>
-              ))}
-              <CardContent>
-                <Typography gutterBottom variant="h6" component="h2">
-                  {product.title}
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Typography variant="subtitle1" component="p">
-                  {product.discount}
-                </Typography>
-                <Typography
-                  variant="overline"
-                  color="textSecondary"
-                  component="p"
-                >
-                  {product.price}
-                </Typography>
-              </CardActions>
-            </Link>
-          </CardActionArea>
-          <CardActions>
-            <Typography variant="overline" color="primary" component="p">
-              참여인원
-            </Typography>
-            <Typography variant="overline" color="textSecondary" component="p">
-              딜성공
-            </Typography>
-          </CardActions>
-        </Card>
+                <div className="pro-same-action pro-cart">
+                  <a
+                    href={product._id}
+                    rel="noopener noreferrer"
+                    // target="_blank"
+                  >
+                    {' '}
+                    Buy now{' '}
+                  </a>
+                </div>
+                <div className="pro-same-action pro-quickview">
+                  <button
+                    // onClick={() => setModalShow(true)}
+                    title="Quick View"
+                  >
+                    <i className="pe-7s-look" />
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="product-content text-center">
+              <h3>
+                <Link to={`/${product._id}`}>{product.title}</Link>
+              </h3>
+              {product.stock && product.stock > 0 ? (
+                <div className="product-rating">
+                  <ProductRating ratingValue={product.stock} />
+                </div>
+              ) : (
+                ''
+              )}
+              <div className="product-price">
+                {product.discount !== null ? (
+                  <Fragment>
+                    <span>{product.discount}</span>{' '}
+                    <span className="old">{product.price}</span>
+                  </Fragment>
+                ) : (
+                  <span>{product.discount} </span>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
       );
-    } else if (cate == '전체') {
+    }else if (cate == '전체') {
       return (
-        <Card className={classes.root} key={index}>
-          <CardActionArea>
-            <Link to={`/${product._id}`}>
-              {/* <ImageSlider images={product.thumbnails} /> */}
-              {product.thumbnails.map((image, index) => (
-                <div key={index}>
+        <div key={index} className={`col-xl-4 col-sm-6 `}>
+          <div className={`product-wrap mb-25"`}>
+            <br />
+            <div className="product-img">
+              <Link to={`/${product._id}`}>
+                {/* {product.thumbnails.map((image, index) => {
+                return (
+                  <div key={index}>
+                    <img
+                      className="default-img"
+                      src={`${product.thumbnails[index].image.location}`}
+                      alt={`productImg-${index}`}
+                    />
+                  </div>
+                );
+              })} */}
+                <img
+                  className="default-img"
+                  src={`${product.thumbnails[0].image.location}`}
+                  alt={`productImg-${index}`}
+                />
+
+                {product.thumbnails.length > 1 ? (
                   <img
-                    style={{
-                      minWidth: '300px',
-                      width: '300px',
-                      height: '240px',
-                    }}
-                    alt={`productImg-${index}`}
-                    src={`${product.thumbnails[index].image.location}`}
+                    className="hover-img"
+                    src={`${product.thumbnails[1].image.location}`}
+                    alt=""
                   />
+                ) : (
+                  <img
+                    className="hover-img"
+                    src={`${product.thumbnails[0].image.location}`}
+                    alt=""
+                  />
+                )}
+              </Link>
+              <div className="product-action">
+                <div className="pro-same-action pro-wishlist">
+                  <button
+                    className={product.stock !== undefined ? 'active' : ''}
+                    disabled={product.stock !== undefined}
+                    title={
+                      product.stock !== undefined
+                        ? 'Added to wishlist'
+                        : 'Add to wishlist'
+                    }
+                    // onClick={() =>
+                    //   addToWishlist(product, addToast)
+                    // }
+                  >
+                    <i className="pe-7s-like" />
+                  </button>
                 </div>
-              ))}
-              <CardContent>
-                <Typography gutterBottom variant="h6" component="h2">
-                  {product.title}
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Typography variant="subtitle1" component="p">
-                  {product.discount}
-                </Typography>
-                <Typography
-                  variant="overline"
-                  color="textSecondary"
-                  component="p"
-                >
-                  {product.price}
-                </Typography>
-              </CardActions>
-            </Link>
-          </CardActionArea>
-          <CardActions>
-            <Typography variant="overline" color="primary" component="p">
-              참여인원
-            </Typography>
-            <Typography variant="overline" color="textSecondary" component="p">
-              딜성공
-            </Typography>
-          </CardActions>
-        </Card>
+                <div className="pro-same-action pro-cart">
+                  <a
+                    href={product._id}
+                    rel="noopener noreferrer"
+                    // target="_blank"
+                  >
+                    {' '}
+                    Buy now{' '}
+                  </a>
+                </div>
+                <div className="pro-same-action pro-quickview">
+                  <button
+                    // onClick={() => setModalShow(true)}
+                    title="Quick View"
+                  >
+                    <i className="pe-7s-look" />
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="product-content text-center">
+              <h3>
+                <Link to={`/${product._id}`}>{product.title}</Link>
+              </h3>
+              {product.stock && product.stock > 0 ? (
+                <div className="product-rating">
+                  <ProductRating ratingValue={product.stock} />
+                </div>
+              ) : (
+                ''
+              )}
+              <div className="product-price">
+                {product.discount !== null ? (
+                  <Fragment>
+                    <span>{product.discount}</span>{' '}
+                    <span className="old">{product.price}</span>
+                  </Fragment>
+                ) : (
+                  <span>{product.discount} </span>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
       );
     }
   });
+
   return (
     <Fragment>
-      <LangingBlock>
-        <div style={{ width: '75%', margin: '3rem auto' }}>
-          <div style={{ textAlign: 'center' }}>
-            <h2> 제품목록 </h2>
+      <div className="shop-area pt-95 pb-100">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-12">
+              {/* 필터 */}
+              <Fragment>
+                <div className="shop-top-bar mb-35">
+                  <div className="select-shoing-wrap">
+                    <p>Showing {productCount} result</p>
+                  </div>
+
+                  <div className="filter-active">
+                    <button onClick={(e) => toggleShopTopFilter(e)}>
+                      <i className="fa fa-plus"></i> filter
+                    </button>
+                  </div>
+                </div>
+                <div
+                  className="product-filter-wrapper"
+                  id="product-filter-wrapper"
+                >
+                  <div className="product-filter-wrapper__inner">
+                    <div className="row">
+                      {/* Product Filter */}
+                      <div className="col-md-3 col-sm-6 col-xs-12 mb-30">
+                        <div className="product-filter">
+                          <h5>Categories</h5>
+                          {uniqueCategories ? (
+                            <ul>
+                              {uniqueCategories.map((category, key) => {
+                                return (
+                                  <li key={key}>
+                                    <button
+                                      onClick={(e) => {
+                                        setActiveSort(e);
+                                      }}
+                                      value={category}
+                                    >
+                                      {category}
+                                    </button>
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          ) : (
+                            'No categories found'
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Fragment>
+
+              {/* 카드 업로드 */}
+
+              <div className="shop-bottom-area mt-35">
+                <div className={`row grid three-column`}>{renderCards}</div>
+              </div>
+            </div>
           </div>
-
-          {Products.length === 0 ? (
-            <div
-              style={{
-                display: 'flex',
-                height: '300px',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <h2>등록된 제품이 없습니다!</h2>
-            </div>
-          ) : (
-            <div>
-              <button onClick={cateChange} value="전체">
-                전체
-              </button>
-              <button onClick={cateChange} value="패션의류">
-                패션의류
-              </button>
-              <button onClick={cateChange} value="패션잡화">
-                패션잡화
-              </button>
-              <button onClick={cateChange} value="뷰티">
-                뷰티
-              </button>
-              <button onClick={cateChange} value="식품">
-                식품
-              </button>
-              <button onClick={cateChange} value="출산/유아동">
-                출산/유아동
-              </button>
-              <button onClick={cateChange} value="디지털/가전">
-                디지털/가전
-              </button>
-              <button onClick={cateChange} value="인테리어">
-                인테리어
-              </button>
-              <button onClick={cateChange} value="스포츠/레저">
-                스포츠/레저
-              </button>
-              <button onClick={cateChange} value="생활">
-                생활
-              </button>
-
-              {!loading && Products && <div>{renderCards}</div>}
-            </div>
-          )}
-
-          <br />
-          <br />
         </div>
-      </LangingBlock>
+      </div>
     </Fragment>
   );
 }

@@ -27,6 +27,7 @@
     "react-dom": "^16.13.1",
     "react-dropzone": "^11.0.2",
     "react-fullpage": "^0.1.19",
+    "react-hooks-paginator": "^0.4.4",
     "react-id-swiper": "^4.0.0",
     "react-image-gallery": "^1.0.8",
     "react-lightgallery": "^0.8.2",
