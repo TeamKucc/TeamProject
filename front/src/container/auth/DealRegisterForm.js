@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   changeField,
   initializeForm,
-  register,
+  dregister,
   businessNumber
 } from '../../modules/auth';
 import DealRegisterForm from '../../components/auth/DealRegisterForm';
@@ -26,6 +26,7 @@ const BuyerRegisterForm = ({ history }) => {
 
   //인풋 변경이벤트
   const onChange = (e) => {
+    // console.log("call")
     const { value, name } = e.target;
     dispatch(
       changeField({
@@ -40,7 +41,7 @@ const BuyerRegisterForm = ({ history }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const { userID, name, password, passwordConfirm, email, business } = form;
+    const { userID, name, password, passwordConfirm, email } = form;
 
     if (
       [userID, name, password, passwordConfirm, email, business].includes('')
@@ -52,14 +53,16 @@ const BuyerRegisterForm = ({ history }) => {
       setError('비밀번호가 다릅니다');
       return;
     }
-    
-    console.log('call');
-    dispatch(register({ userID, name, password, email, business }));
+    if(success != '사업자 번호인증 성공') {
+      setError('사업자번호 인증이 필요합니다')
+    }
+    dispatch(dregister({ userID, name, password, business, email }));
+    alert('회원가입 되었습니다')
+    history.push('/login')
   };
-
   
   const onClick = () => {
-    dispatch(
+    dispatch( 
       businessNumber({
         business
       }),
@@ -68,7 +71,7 @@ const BuyerRegisterForm = ({ history }) => {
 
   //컴포넌트가 처음 렌더링 될때 폼 초기화
   useEffect(() => {
-    dispatch(initializeForm('register'));
+    dispatch(initializeForm('dregister'));
   }, [dispatch]);
 
 
@@ -83,6 +86,7 @@ const BuyerRegisterForm = ({ history }) => {
   useEffect(()=>{
     if(businessState){
       setSuccess('사업자 번호인증 성공')
+      setError('')
       setFail('')
       return
     }
@@ -118,7 +122,7 @@ const BuyerRegisterForm = ({ history }) => {
   return (
     <div>
       <DealRegisterForm
-        type="register"
+        type="dregister"
         form={form}
         onChange={onChange}
         onSubmit={onSubmit}

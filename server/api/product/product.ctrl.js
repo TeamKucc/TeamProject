@@ -1,13 +1,32 @@
 import Product from '../../models/product';
 import Pay from '../../models/payment';
 import multer from 'multer';
+import multerS3 from 'multer-s3'
 import mongoose from 'mongoose'
 import Deal from '../../models/deal';
 import Delivery from '../../models/delivery'
 import Seller from '../../models/seller';
+import path from 'path'
+import AWS from 'aws-sdk'
 
+AWS.config.loadFromPath("config/awsconfig.json")
+
+let s3 = new AWS.S3();
 
 const ObjectId = mongoose.Types.ObjectId;
+
+let upload2 = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: "teamkucc",
+    key: function (req, file, cb) {
+      let extension = path.extname(file.originalname);
+      cb(null, Date.now().toString() + extension)
+    },
+    acl: 'public-read-write',
+  })
+}).single('file')
+
 let storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'uploads/');
@@ -29,26 +48,36 @@ let storage = multer.diskStorage({
 
 let upload = multer({ storage: storage }).single('file');
 
-let storageThumbnail = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'thumbnails/');
-  },
-  filename: (req, file, cb) => {
-    cb(null, `${Date.now()}_${file.originalname}`);
-  },
-  fileFilter: (req, file, cb) => {
-    const ext = path.extname(file.originalname);
-    if (ext !== '.jpg' || ext !== '.png') {
-      return cb(
-        res.status(400).end('jpg, png 파일만 업로드 가능합니다!'),
-        false,
-      );
-    }
-    cb(null, true);
-  },
-});
+// let storageThumbnail = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, 'thumbnails/');
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, `${Date.now()}_${file.originalname}`);
+//   },
+//   fileFilter: (req, file, cb) => {
+//     const ext = path.extname(file.originalname);
+//     if (ext !== '.jpg' || ext !== '.png') {
+//       return cb(
+//         res.status(400).end('jpg, png 파일만 업로드 가능합니다!'),
+//         false,
+//       );
+//     }
+//     cb(null, true);
+//   },
+// });
 
-let upload2 = multer({ storage: storageThumbnail }).single('file');
+// let upload2 = multer({ storage: storageThumbnail }).single('file');
+
+// export const uploadImage = (req, res) => {
+//   upload(req, res, (err) => {
+//     console.log(req.file);
+//     if (err) {
+//       return res.json({ success: false, err });
+//     }
+//     return res.json(req.file)  
+//   })
+// }
 
 export const uploadImage = (req, res) => {
   upload(req, res, (err) => {
@@ -74,14 +103,13 @@ export const uploadThumbnail = (req, res) => {
     }
     return res.json({
       success: true,
-      image: res.req.file.path,
-      fileName: res.req.file.filename,
+      image: req.file,
     });
   });
 };
 
 export const productUpload = (req, res) => {
-  // console.log(req.body);
+  console.log(req.body);
   const product = new Product(req.body);
 
   product.save((err) => {

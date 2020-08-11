@@ -1,14 +1,17 @@
 import React from 'react';
 import Template from '../components/auth/Template';
 import DealRegisterForm from '../container/auth/DealRegisterForm';
+import HeaderContainer from '../container/common/HeaderContainer';
 
 const DealRegisterPage = () => {
   return (
-    <Template>
+    <div>
+      <HeaderContainer />
+      <Template>
       <DealRegisterForm />
-    </Template>
-  )
-    ;
+      </Template>
+    </div>
+  );
 };
 
 export default DealRegisterPage;

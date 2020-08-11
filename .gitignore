@@ -114,5 +114,9 @@ dist
 
 #text
 .txt
+
 #etc
 *.exe
+
+#aws
+*.awsconfig

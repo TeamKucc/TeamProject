@@ -54,6 +54,7 @@ const UserInfoContainer = ({ match,history }) => {
         }
         console.log('call')
         dispatch(userUpdate({ userID, name, password, email,userId,_id }));
+        alert("내정보 수정이 완료되었습니다")
         window.location.reload()
     }
 

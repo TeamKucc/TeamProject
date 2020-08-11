@@ -7,7 +7,6 @@ const LoginPage = () => {
     <Template>
       <LoginForm/>
     </Template>
-
   );
 };
 
