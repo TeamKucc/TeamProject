@@ -110,6 +110,7 @@ dist
 *.png
 *.jpg
 *.webp
+*.svg
 
 #text
 .txt

@@ -1,85 +1,82 @@
-import React, { useEffect } from 'react';
-import styled from 'styled-components';
-import { Button } from 'antd';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import PropTypes from "prop-types";
+import NavMenu from "./header/NavMenu";
+import IconGroup from "./header/IconGroup";
+import MobileMenu from "./header/MobileMenu";
 
 
-
-const Header = ({ onLogout, user }) => {
+const Header = ({
+  layout,
+  top,
+  borderStyle,
+  headerPaddingClass,
+  headerPositionClass,
+  headerBgClass
+}) => {
   const userId = null;
 
-  if (user) {
-    userId = user.replace(/['"]+/g, '')
-  }
+  const [scroll, setScroll] = useState(0);
+  const [headerTop, setHeaderTop] = useState(0);
 
+  useEffect(() => {
+    const header = document.querySelector(".sticky-bar");
+    setHeaderTop(header.offsetTop);
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const handleScroll = () => {
+    setScroll(window.scrollY);
+  };
 
 
   return (
-    <Nav>
-      {/* <Logo>
-          <img
-            width="50%"
-            height="100%"
-            src="https://pbs.twimg.com/profile_images/646868921916592128/YaNX1Jnk_400x400.jpg"
-            alt="logo"
-          />
-        </Logo> */}
-      <NavList>
-        <NavItem>
-          <h2>소개</h2>
-        </NavItem>
-        <NavItem>
-          <h2>게시판</h2>
-        </NavItem>
-        <NavItem>
-          <Link to={`/userInfo/${userId}`}>내정보</Link>
-        </NavItem>
-        {user ?
-          (
-            <div>
-              <Button type="primary" shape="round" onClick={onLogout}>
-                로그아웃
-              </Button>
+    <header
+      className={`header-area clearfix ${headerBgClass ? headerBgClass : ""} ${
+        headerPositionClass ? headerPositionClass : ""
+        }`}
+    >
+      <div
+        className={` ${
+          headerPaddingClass ? headerPaddingClass : ""
+        } sticky-bar header-res-padding clearfix ${
+          scroll > headerTop ? "stick" : ""
+        }`}
+      >
+        <div className={layout === "container-fluid" ? layout : "container"}>
+          <div className="row">
+            <div className="col-xl-2 col-lg-2 col-md-6 col-4">
+              {/* header logo */}
+              {/* <Logo imageUrl="/assets/img/logo/logo.png" logoClass="logo" /> */}
+              Logo
             </div>
-          ) : (
-            <div>{user}
-              <Button type="primary" shape="round">
-                <Link to="/login" >로그인</Link>
-              </Button>
+            <div className="col-xl-8 col-lg-8 d-none d-lg-block">
+              {/* Nav menu */}
+              <NavMenu />
             </div>
-          )}
-
-      </NavList>
-    </Nav>
+            <div className="col-xl-2 col-lg-2 col-md-6 col-8">
+              {/* Icon group */}
+              <IconGroup />
+            </div>
+          </div>
+        </div>
+        {/* mobile menu */}
+        <MobileMenu />
+      </div>
+    </header>
   );
 
 }
+Header.propTypes = {
+  borderStyle: PropTypes.string,
+  headerPaddingClass: PropTypes.string,
+  headerPositionClass: PropTypes.string,
+  layout: PropTypes.string,
+  top: PropTypes.string
+};
+
 
 export default Header;
-// const Logo = styled.div`
-//   position: fixed;
-//   width: 200px;
-//   height: 80px;
-// `;
 
-const Nav = styled.div`
-  display:flex;
-  width: 100%;
-  height: 100px;
-  margin: 10px;
-  padding: 20px 20px;
-  border-bottom: 1px solid #d1d8e4;
-`;
-
-const NavList = styled.ul`
-  width: 1080px;
-  height: 100px;
-  display: flex;
-  margin: 0 auto;
-`;
-
-const NavItem = styled.li`
-  width: 100px;
-  margin: 0 auto;
-  display: flex;
-`;

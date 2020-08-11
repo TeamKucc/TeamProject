@@ -15,6 +15,9 @@ import ProductPage from '../pages/ProductPage';
 import UserHistory from '../pages/UserHistory'
 import StockDetailPage from '../pages/StockDetailPage'
 import DeliveryPage from '../pages/DeliveryPage'
+import HeaderOne from '../pages/Test'
+import Test2 from '../pages/Test2';
+import LoginRegister from '../pages/RG';
 
 const App = () => {
   useEffect(() => {
@@ -23,9 +26,9 @@ const App = () => {
     <>
       <Route component={LandingPage} exact path={['/home', '/']} />
       <Route component={LoginPage} path="/login" />
-      <Route component={RegisterPage} path="/register" />
-      <Route component={BuyerRegisterPage} path="/register/buyer" />
-      <Route component={DealRegisterPage} path="/register/deal" />
+      <Route component={RegisterPage} exact path="/register" />
+      <Route component={BuyerRegisterPage} exact path="/register/buyer" />
+      <Route component={DealRegisterPage} exact path="/register/deal" />
       <Route component={UserInfo} exact path="/userInfo/:user" />
       <Route component={HEAD} path="/head" />
       <Route component={Loading} path="loading" />
@@ -34,7 +37,8 @@ const App = () => {
       <Route component={ProductPage} path="/:id" exact />
       <Route component={StockDetailPage} exact path="/product/upload/:id" />
       <Route component={UserHistory} exact path="/user/userhistory" />
-      
+      <Route component={Test2} path="/test/test" exact />
+      <Route component={LoginRegister} path="/test/Rg" exact />
       {/* 임시택배조회페이지 */}
       <Route component={DeliveryPage} exact path="/product/delivery" />
     </>
