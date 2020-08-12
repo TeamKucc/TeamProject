@@ -15,18 +15,10 @@ const LandingContainer = () => {
 
   useEffect(() => {
     dispatch(landingProduct({}))
-  },[dispatch]);
+  }, [dispatch]);
 
-  const delivery = "kr.cjlogistics"
-  const number = 632383557514
-  const href  = "https://tracker.delivery/#/" + delivery + "/" + number
-
-  // return null
   return (
   <Landing Products={landing} loading={loading} />
-  // <div>택배사 : {delivery} 송장번호 : {number}
-  // <a href={href} target="_blank">배송조회</a>
-  // </div>
   )
 }
 

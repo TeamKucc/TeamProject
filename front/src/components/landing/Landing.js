@@ -81,21 +81,14 @@ function Landing({ Products, loading, location }) {
                 )}
               </Link>
               <div className="product-action">
-                <div className="pro-same-action pro-wishlist">
-                  <button
-                    className={product.stock !== undefined ? 'active' : ''}
-                    disabled={product.stock !== undefined}
-                    title={
-                      product.stock !== undefined
-                        ? 'Added to wishlist'
-                        : 'Add to wishlist'
-                    }
-                    // onClick={() =>
-                    //   addToWishlist(product, addToast)
-                    // }
+              <div className="pro-same-action pro-wishlist">
+                  <a
+                  href={'/product/order/' + product._id}
+                  rel="noopener noreferrer"
+                  title="결제하기"
                   >
-                    <i className="pe-7s-like" />
-                  </button>
+                    <i className="pe-7s-piggy" />
+                  </a>
                 </div>
                 <div className="pro-same-action pro-cart">
                   <a
@@ -104,13 +97,13 @@ function Landing({ Products, loading, location }) {
                     // target="_blank"
                   >
                     {' '}
-                    Buy now{' '}
+                    제품상세{' '}
                   </a>
                 </div>
                 <div className="pro-same-action pro-quickview">
                   <button
                     // onClick={() => setModalShow(true)}
-                    title="Quick View"
+                    title="미리보기"
                   >
                     <i className="pe-7s-look" />
                   </button>
@@ -142,7 +135,7 @@ function Landing({ Products, loading, location }) {
           </div>
         </div>
       );
-    }else if (cate == '전체') {
+    } else if (cate == '전체') {
       return (
         <div key={index} className={`col-xl-4 col-sm-6 `}>
           <div className={`product-wrap mb-25"`}>
@@ -182,20 +175,13 @@ function Landing({ Products, loading, location }) {
               </Link>
               <div className="product-action">
                 <div className="pro-same-action pro-wishlist">
-                  <button
-                    className={product.stock !== undefined ? 'active' : ''}
-                    disabled={product.stock !== undefined}
-                    title={
-                      product.stock !== undefined
-                        ? 'Added to wishlist'
-                        : 'Add to wishlist'
-                    }
-                    // onClick={() =>
-                    //   addToWishlist(product, addToast)
-                    // }
+                  <a
+                  href={'/product/order/' + product._id}
+                  rel="noopener noreferrer"
+                  title="결제하기"
                   >
-                    <i className="pe-7s-like" />
-                  </button>
+                    <i className="pe-7s-piggy" />
+                  </a>
                 </div>
                 <div className="pro-same-action pro-cart">
                   <a
@@ -204,13 +190,13 @@ function Landing({ Products, loading, location }) {
                     // target="_blank"
                   >
                     {' '}
-                    Buy now{' '}
+                    제품상세{' '}
                   </a>
                 </div>
                 <div className="pro-same-action pro-quickview">
                   <button
                     // onClick={() => setModalShow(true)}
-                    title="Quick View"
+                    title="미리보기"
                   >
                     <i className="pe-7s-look" />
                   </button>
