@@ -1,9 +1,0 @@
-diff a/front/src/components/App.js b/front/src/components/App.js	(rejected hunks)
-@@ -19,7 +19,6 @@
- import Test2 from '../pages/Test2';
- import LoginRegister from '../pages/RG';
- import OrderPage from '../pages/OrderPage'
--import RegisterCompletePage from '../pages/RegisterCompletePage'
- 
- const App = () => {
-   useEffect(() => {
