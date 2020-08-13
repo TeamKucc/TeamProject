@@ -8,7 +8,11 @@ const RegisterComplete = () => {
       <div className="container">
         <div className="slider-content-3 slider-animated-1 text-center">
           <div className="support-content-2 pb-20">
+<<<<<<< HEAD
 						로고이미지 띄울거임
+=======
+                        로고이미지 띄울거임
+>>>>>>> d77bda53db3ea71ac267af672b17152351fa0752
             {/* <img
               className="animated"
               src="http://localhost:4000/uploads/icon/support-1.png"
@@ -33,4 +37,8 @@ const RegisterComplete = () => {
   );
 };
 
+<<<<<<< HEAD
 export default RegisterComplete;
+=======
+export default RegisterComplete;
+>>>>>>> d77bda53db3ea71ac267af672b17152351fa0752

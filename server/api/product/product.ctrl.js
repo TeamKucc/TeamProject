@@ -1,15 +1,15 @@
 import Product from '../../models/product';
 import Pay from '../../models/payment';
 import multer from 'multer';
-import multerS3 from 'multer-s3'
-import mongoose from 'mongoose'
+import multerS3 from 'multer-s3';
+import mongoose from 'mongoose';
 import Deal from '../../models/deal';
-import Delivery from '../../models/delivery'
+import Delivery from '../../models/delivery';
 import Seller from '../../models/seller';
-import path from 'path'
-import AWS from 'aws-sdk'
+import path from 'path';
+import AWS from 'aws-sdk';
 
-AWS.config.loadFromPath("config/awsconfig.json")
+AWS.config.loadFromPath('config/awsconfig.json');
 
 let s3 = new AWS.S3();
 
@@ -18,18 +18,24 @@ const ObjectId = mongoose.Types.ObjectId;
 let upload2 = multer({
   storage: multerS3({
     s3: s3,
-    bucket: "teamkucc",
+    bucket: 'teamkucc',
     key: function (req, file, cb) {
       let extension = path.extname(file.originalname);
-      cb(null, Date.now().toString() + extension)
+      cb(null, Date.now().toString() + extension);
     },
     acl: 'public-read-write',
+<<<<<<< HEAD
   })
 }).single('file')
+=======
+  }),
+}).single('file');
+>>>>>>> d77bda53db3ea71ac267af672b17152351fa0752
 
 let upload = multer({
   storage: multerS3({
     s3: s3,
+<<<<<<< HEAD
     bucket: "teamkucc2",
     key: function (req, file, cb) {
       let extension = path.extname(file.originalname);
@@ -38,6 +44,16 @@ let upload = multer({
     acl: 'public-read-write',
   })
 }).single('file')
+=======
+    bucket: 'teamkucc2',
+    key: function (req, file, cb) {
+      let extension = path.extname(file.originalname);
+      cb(null, Date.now().toString() + extension);
+    },
+    acl: 'public-read-write',
+  }),
+}).single('file');
+>>>>>>> d77bda53db3ea71ac267af672b17152351fa0752
 
 export const uploadImage = (req, res) => {
   console.log(req.body);
@@ -78,22 +94,22 @@ export const productUpload = (req, res) => {
 };
 
 export const productPaid = async (req, res) => {
-  console.log(req.body)
+  console.log(req.body);
   const pay = new Pay(req.body);
   await pay.save((err) => {
     if (err) return res.status(400).json({ success: false, Message: err });
-    return res.status(200).json({ success: true })
-  })
-  await Product.updateOne({ _id: req.body.product }, { $inc: { stock: -1 } })
-}
+    return res.status(200).json({ success: true });
+  });
+  await Product.updateOne({ _id: req.body.product }, { $inc: { stock: -1 } });
+};
 
 export const productPaidSeller = (req, res) => {
-  const paid = new Seller(req.body)
+  const paid = new Seller(req.body);
   paid.save((err) => {
     if (err) return res.status(400).json({ success: false, Message: err });
-    return res.status(200).json({ success: true })
-  })
-}
+    return res.status(200).json({ success: true });
+  });
+};
 
 export const getProducts = (req, res) => {
   Product.find({}, (err, result) => {
@@ -107,7 +123,6 @@ export const getProducts = (req, res) => {
 };
 
 export const readProduct = (req, res) => {
-
   const { id } = req.params;
   Product.findOne({ _id: id }, (err, result) => {
     if (err) return res.status(400).json({ success: false, Message: err });
@@ -135,8 +150,8 @@ export const config = (req, res) => {
 };
 
 export const getStock = (req, res) => {
-  // const {id} = req.body
-  Product.find({}, (err, result) => {
+  console.log(req.params);
+  Product.find({ seller: req.body.seller }, (err, result) => {
     if (err)
       return res.status(409).json({
         success: false,
@@ -146,39 +161,65 @@ export const getStock = (req, res) => {
   });
 };
 
-
 export const updateUpload = (req, res) => {
-  console.log(req.body)
+  console.log(req.body);
   // const { id } = req.params;
-  const { stock, thumbnails, title, description, price, images, discount, person, enable } = req.body
-  Product.findOneAndUpdate({ _id: req.body.id }, { $set: { stock: stock, thumbnails: thumbnails, title: title, description: description, price: price, images: images, discount: discount, person: person, enable: enable } }, (err, result) => {
-    if (err) return res.status(404).json({
-      message: 'Changed error',
-      Change: false
-    })
-    res.json({
-      message: 'Success User Infomation Change',
-      Change: true
-    })
-  })
-}
+  const {
+    stock,
+    thumbnails,
+    title,
+    description,
+    price,
+    images,
+    discount,
+    person,
+    enable,
+  } = req.body;
+  Product.findOneAndUpdate(
+    { _id: req.body.id },
+    {
+      $set: {
+        stock: stock,
+        thumbnails: thumbnails,
+        title: title,
+        description: description,
+        price: price,
+        images: images,
+        discount: discount,
+        person: person,
+        enable: enable,
+      },
+    },
+    (err, result) => {
+      if (err)
+        return res.status(404).json({
+          message: 'Changed error',
+          Change: false,
+        });
+      res.json({
+        message: 'Success User Infomation Change',
+        Change: true,
+      });
+    },
+  );
+};
 
 export const stockDetail = (req, res) => {
-  console.log(req.params)
+  console.log(req.params);
   const { id } = req.params;
   Product.findOne({ _id: id }, (err, result) => {
     if (err) return res.status(400).json({ success: false, Message: err });
     return res.json(result);
   });
-}
+};
 
 export const getDeal = (req, res) => {
-  console.log(req.body.product)
+  console.log(req.body.product);
   Deal.find({ product: req.body.product }, (err, result) => {
-    if (err) return res.status(400).json({ success: false, Message: err })
-    res.json(result)
-  })
-}
+    if (err) return res.status(400).json({ success: false, Message: err });
+    res.json(result);
+  });
+};
 
 export const deliveryUpload = (req, res) => {
   console.log(req.body);

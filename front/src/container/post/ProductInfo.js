@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { readProduct, unloadProduct } from '../../modules/landing';
-import Product from '../../components/post/Product'
-import ProductImage from '../../components/post/ProductImage'
+import Product from '../../components/product/Product'
+import ProductImage from '../../components/product/ProductImage'
 import { withRouter } from 'react-router-dom';
 import { productPaid } from '../../modules/upload';
 
@@ -25,7 +25,7 @@ const ProductInfo = ({ match, history, location }) => {
         
     }
 
-    const onClick = (form) => {
+    const onClick = () => {
         if (!user) {
             alert('로그인을 해주세요!')
             history.push('/login')
@@ -44,8 +44,7 @@ const ProductInfo = ({ match, history, location }) => {
                     msg += '상점 거래ID : ' + rsp.merchant_uid;
                     msg += '결제 금액 : ' + rsp.paid_amount;
                     msg += '카드 승인번호 : ' + rsp.apply_num;
-                    dispatch(productPaid({ user, product: product._id,form }))
-                    
+                    dispatch(productPaid({ user, product: product._id,seller:product.seller}))
                     location.reload()
                 } else {
                     console.log(rsp)

@@ -14,6 +14,7 @@ export const productUpload = ({
   category,
 }) =>
   client.post('/api/product/productUpload', {
+    seller,
     stock,
     thumbnails,
     title,
@@ -39,22 +40,10 @@ export const landingProduct = ({
     discount,
     category,
   });
-export const stockManagement = ({
-  stock,
-  thumbnails,
-  title,
-  price,
-  discount,
-  enable,
-}) =>
-  client.get('/api/product/getStock', {
-    stock,
-    thumbnails,
-    title,
-    price,
-    discount,
-    enable,
-  });
+export const stockManagement = (
+  seller,
+) =>
+  client.post('/api/product/getStock', seller);
 export const updateUpload = ({
   id,
   stock,
@@ -93,3 +82,6 @@ export const deliveryUpload = ({ delivery, deliveryNumber }) =>
 
 export const sellerPaid = ({ product, user }) =>
   client.post('/api/product/sellerPaid', { product, user })
+
+export const findDeal = _id =>
+  client.post('/api/user/findDeal', { _id })

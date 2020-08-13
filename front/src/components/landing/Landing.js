@@ -48,7 +48,7 @@ function Landing({ Products, loading, location }) {
           <div className={`product-wrap mb-25"`}>
             <br />
             <div className="product-img">
-              <Link to={`/${product._id}`}>
+              <Link to={`/item/${product._id}`}>
                 {/* {product.thumbnails.map((image, index) => {
                 return (
                   <div key={index}>
@@ -112,7 +112,7 @@ function Landing({ Products, loading, location }) {
             </div>
             <div className="product-content text-center">
               <h3>
-                <Link to={`/${product._id}`}>{product.title}</Link>
+                <Link to={`/item/${product._id}`}>{product.title}</Link>
               </h3>
               {product.stock && product.stock > 0 ? (
                 <div className="product-rating">
@@ -141,7 +141,7 @@ function Landing({ Products, loading, location }) {
           <div className={`product-wrap mb-25"`}>
             <br />
             <div className="product-img">
-              <Link to={`/${product._id}`}>
+              <Link to={`/item/${product._id}`}>
                 {/* {product.thumbnails.map((image, index) => {
                 return (
                   <div key={index}>
@@ -205,7 +205,7 @@ function Landing({ Products, loading, location }) {
             </div>
             <div className="product-content text-center">
               <h3>
-                <Link to={`/${product._id}`}>{product.title}</Link>
+                <Link to={`/item/${product._id}`}>{product.title}</Link>
               </h3>
               {product.stock && product.stock > 0 ? (
                 <div className="product-rating">

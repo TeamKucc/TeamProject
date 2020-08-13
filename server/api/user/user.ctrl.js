@@ -2,6 +2,7 @@ import User from '../../models/user';
 import Pay from '../../models/payment'
 import Product from '../../models/product';
 import Deal from '../../models/deal'
+import user from '../../../front/src/modules/user';
 
 export const list = (req, res) => {
     if (!req.decode.admin) {
@@ -61,9 +62,20 @@ export const gethistory = (req, res) => {
     })
 }
 
-export const makeDeal = (req, res) => {
-    const deal = new Deal(req.body)
-    deal.save((err, result) => {
+export const sellHistory=(req,res)=>{
+    console.log(req.body)
+    Pay.find({seller:req.body.user},(err,result)=>{
+        if(err) return res.status(500).json({
+            success:false,
+            message:err
+        })
+        res.status(200).json(result)
+    })
+}
+
+export const findDeal = (req, res) => {
+    console.log(req.body)
+    Deal.find({ product: req.body._id }, (err, result) => {
         if (err) res.status(400).json({
             success: false,
             message: err
@@ -72,23 +84,66 @@ export const makeDeal = (req, res) => {
     })
 }
 
-export const joinDeal = (req, res) => {
-    Deal.findOneAndUpdate({ _id: req.body._id }, { $push: { user: req.body.user } }, (err, result) => {
-        console.log(result)
-        if (err) res.status(400).json({
-            success: false,
-            message: err
-        })
-         Product.findOne({ _id: result.product }, (err, resP) => {
-            if (resP.person === result.user.length+1) {
-                Deal.findOneAndUpdate({ product: resP._id }, { complete: true }, (err, resultD) => {
-                    console.log(resultD)
+export const makeDeal = (req, res) => {
+    console.log('call')
+    const deal = new Deal(req.body)
+    console.log(req.body.user)
+
+    Deal.findOne({ user: req.body.user }, (err, result) => {
+        if (result) {
+            res.status(409).json({
+                success: false,
+                message: '이미 딜을 생성하셨습니다'
+            })
+        } else {
+            deal.save((err, result) => {
+                if (err) res.status(400).json({
+                    success: false,
+                    message: err
                 })
-            }
-        })
-        res.status(200).json({
-            message:'join success'
-        })
+                res.json(result)
+            })
+        }
+    }
+    )
+
+
+}
+
+
+
+export const joinDeal = (req, res) => {
+    console.log('call')
+    console.log(req.body)
+    
+    Deal.find({ user: req.body.user }, (err, result) => {
+        console.log(result)
+        if (result) {
+            res.status(409).json({
+                success: false,
+                message: '이미 참여하셨습니다'
+            })
+        } else {
+            Deal.findOneAndUpdate({ _id: req.body._id }, { $push: { user: req.body.user } }, (err, result) => {
+                console.log(result)
+                if (err) res.status(400).json({
+                    success: false,
+                    message: err
+                })
+                Product.findOne({ _id: result.product }, (err, resP) => {
+                    if (resP.person === result.user.length + 1) {
+                        Deal.findOneAndUpdate({ product: resP._id }, { complete: true }, (err, resultD) => {
+                            console.log(resultD)
+                        })
+                    }
+                });
+
+                res.status(200).json({
+                    message: 'join success'
+                });
+            })
+        }
     })
+
 }
 

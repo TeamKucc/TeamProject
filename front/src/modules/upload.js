@@ -50,6 +50,12 @@ const [
   SELLER_PAID_FAILURE
 ] = createRequestActionTypes('product/SELLER_PAID')
 
+const [
+  FIND_DEAL,
+  FIND_DEAL_SUCCESS,
+  FIND_DEAL_FAILURE,
+]=createRequestActionTypes('product/FIND_DEAL')
+
 export const initialize = createAction(INITIALIZE);
 export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
   key,
@@ -138,6 +144,9 @@ export const updateUpload = createAction(
   }),
 );
 
+export const findDeal = createAction(FIND_DEAL,_id=>_id)
+
+
 const productUploadSaga = createRequestSaga(
   PRODUCT_UPLOAD,
   productAPI.productUpload,
@@ -153,6 +162,8 @@ const updateUploadSaga = createRequestSaga(
 //   UPDATE_UPLOAD,
 //   productAPI.updateUpload,
 // );
+
+const findDealSaga =createRequestSaga(FIND_DEAL,productAPI.findDeal)
 
 function* imageUploadSaga(action) {
   yield put(startLoading('product/IMAGE_UPLOAD'));
@@ -214,6 +225,7 @@ export function* productSaga() {
   yield takeLatest(UPDATE_UPLOAD, updateUploadSaga);
   yield takeLatest(PRODUCT_PAID, productPaidSaga);
   yield takeLatest(UPDATE_UPLOAD, updateUploadSaga);
+  yield takeLatest(FIND_DEAL,findDealSaga)
 }
 
 export const initialState = {
@@ -231,6 +243,8 @@ export const initialState = {
   enable: null,
   paid: null,
   category: '',
+  deal:null,
+  error:null,
 };
 
 const upload = handleActions(
@@ -324,6 +338,14 @@ const upload = handleActions(
       ...state,
       uploadError,
     }),
+    [FIND_DEAL_SUCCESS]:(state,{payload:deal})=>({
+      ...state,
+      deal
+    }),
+    [FIND_DEAL_FAILURE]:(state,{payload:error})=>({
+      ...state,
+      error
+    })
   },
   initialState,
 );

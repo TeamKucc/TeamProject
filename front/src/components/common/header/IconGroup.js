@@ -3,8 +3,15 @@ import { Link } from "react-router-dom";
 
 
 const IconGroup = ({
-  iconWhiteClass
+  iconWhiteClass,
+  user,
+  onLogout
 }) => {
+
+  let UserId = null;
+  if (user) {
+    UserId = user.replace(/['"]+/g, '')
+  }
   const handleClick = e => {
     e.currentTarget.nextSibling.classList.toggle("active");
   };
@@ -42,19 +49,32 @@ const IconGroup = ({
         </button>
         <div className="account-dropdown">
           <ul>
-            <li>
-              <Link to={process.env.PUBLIC_URL + "/login-register"}>Login</Link>
-            </li>
-            <li>
-              <Link to={process.env.PUBLIC_URL + "/login-register"}>
-                Register
-              </Link>
-            </li>
-            <li>
-              <Link to={process.env.PUBLIC_URL + "/my-account"}>
-                my account
-              </Link>
-            </li>
+
+            {user ? (
+              <>
+                <li>
+                  <Link href={`/userInfo/${UserId}`}>
+                    my account
+                </Link>
+                </li>
+                <li>
+                  <Link onClick={onLogout}>
+                    로그아웃
+                  </Link>
+                </li>
+              </>
+            ) : (
+                <>
+                  <li>
+                    <Link to={process.env.PUBLIC_URL + "/login"}>Login</Link>
+                  </li>
+                  <li>
+                    <Link to={process.env.PUBLIC_URL + "/login-register"}>
+                      Register
+                    </Link>
+                  </li>
+                </>
+              )}
           </ul>
         </div>
       </div>

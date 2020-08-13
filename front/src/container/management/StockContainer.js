@@ -39,7 +39,7 @@ const StockContainer = ({ match, history }) => {
   };
 
   useEffect(() => {
-    dispatch(stockManagement({}));
+    dispatch(stockManagement({seller}));
   }, [dispatch]);
 
   return (
