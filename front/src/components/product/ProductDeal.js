@@ -15,7 +15,7 @@ const ProductDeal = ({ user, product, deal }) => {
     }
 
     const join = (_id) => {
-        dispatch(joinDeal({ user, _id }))
+        dispatch(joinDeal({ user, _id,product: product._id }))
     }
 
     if (!deal) return null;

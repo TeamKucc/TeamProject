@@ -43,7 +43,7 @@ export const userUpdate = createAction(USER_UPDATE, ({ userID, name, password, e
 export const getHistory = createAction(GET_HISTORY, user => user)
 export const sellerHistory = createAction(SELLER_HISTORY,user=>user)
 export const makeDeal = createAction(MAKE_DEAL, ({ user, product }) => ({ user, product }))
-export const joinDeal = createAction(JOIN_DEAL, user => user)
+export const joinDeal = createAction(JOIN_DEAL, ({user,product}) => ({user,product}))
 
 const getHistorySaga = createRequestSaga(GET_HISTORY, userCtrl.gethistory)
 const sellerHistorySaga = createRequestSaga(SELLER_HISTORY,userCtrl.sellerHistory)
