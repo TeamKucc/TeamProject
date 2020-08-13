@@ -15,14 +15,10 @@ const LandingContainer = () => {
 
   useEffect(() => {
     dispatch(landingProduct({}))
-  },[dispatch]);
+  }, [dispatch]);
 
- 
-
-  // return null
   return (
   <Landing Products={landing} loading={loading} />
-
   )
 }
 

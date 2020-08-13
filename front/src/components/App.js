@@ -21,6 +21,7 @@ import LoginRegister from '../pages/RG';
 import ProductTT from './product/ProductTT'
 import ProductTes from '../container/post/ProductTes';
 import SellerPage from '../pages/SellerPage';
+import OrderPage from '../pages/OrderPage'
 
 const App = () => {
   useEffect(() => {
@@ -29,6 +30,9 @@ const App = () => {
     <>
       <Route component={LandingPage} exact path={['/home', '/']} />
       <Route component={LoginPage} exact path="/login" />
+      <Route component={MainPage} exact path={['/home', '/']} />
+      <Route component={LandingPage} path="/product/landing" exact />
+      <Route component={LoginPage} path="/login" />
       <Route component={RegisterPage} exact path="/register" />
       <Route component={BuyerRegisterPage} exact path="/register/buyer" />
       <Route component={DealRegisterPage} exact path="/register/deal" />
@@ -44,6 +48,8 @@ const App = () => {
       <Route component={Test2} path="/test/test" exact />
       <Route component={LoginRegister} path="/test/Rg" exact />
       <Route component={ProductTes}  path="/:id" exact />
+      <Route component={OrderPage} path="/product/order/:id" exact />
+
       {/* 임시택배조회페이지 */}
       <Route component={DeliveryPage} exact path="/product/delivery" />
     </>
