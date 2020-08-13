@@ -22,13 +22,14 @@ import ProductTT from './product/ProductTT'
 import ProductTes from '../container/post/ProductTes';
 import SellerPage from '../pages/SellerPage';
 import OrderPage from '../pages/OrderPage'
+import RegisterCompletePage from '../pages/RegisterCompletePage'
 
 const App = () => {
   useEffect(() => {
   }, [])
   return (
     <>
-      <Route component={LandingPage} exact path={['/home', '/']} />
+      {/* <Route component={LandingPage} exact path={['/home', '/']} /> */}
       <Route component={LoginPage} exact path="/login" />
       <Route component={MainPage} exact path={['/home', '/']} />
       <Route component={LandingPage} path="/product/landing" exact />
@@ -49,6 +50,7 @@ const App = () => {
       <Route component={LoginRegister} path="/test/Rg" exact />
       {/* <Route component={ProductTes}  path="/:id" exact /> */}
       <Route component={OrderPage} path="/product/order/:id" exact />
+      <Route component={RegisterCompletePage} path="/register/complete" exact />
 
       {/* 임시택배조회페이지 */}
       <Route component={DeliveryPage} exact path="/product/delivery" />

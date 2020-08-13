@@ -3,10 +3,10 @@ import mongoose, { Schema } from 'mongoose';
 
 const productSchema = new Schema({
 
-  // user: {
-  //   type:mongoose.Types.ObjectId,
-  //   required: true,
-  // },
+  seller: {
+    type:mongoose.Types.ObjectId,
+    required: true,
+  },
 
   stock: {
     type: Number,

@@ -1,13 +1,14 @@
 import React from 'react';
-import StockContainer from '../container/management/StockContainer'
+import StockContainer from '../container/management/StockContainer';
+import HeaderContainer from '../container/common/HeaderContainer';
 
 const StockPage = () => {
-	return (
-		<div>
-			<StockContainer/>
-		</div>
-
-	);
+  return (
+    <div>
+      <HeaderContainer />
+      <StockContainer />
+    </div>
+  );
 };
 
 export default StockPage;

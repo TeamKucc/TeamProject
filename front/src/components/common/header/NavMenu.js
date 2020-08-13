@@ -1,20 +1,21 @@
-import PropTypes from "prop-types";
-import React from "react";
-import { Link } from "react-router-dom";
-
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const NavMenu = ({ menuWhiteClass, sidebarMenu, user }) => {
+  const role = 1;
+
   return (
     <div
       className={` ${
         sidebarMenu
-          ? "sidebar-menu"
-          : `main-menu ${menuWhiteClass ? menuWhiteClass : ""}`
-        } `}
+          ? 'sidebar-menu'
+          : `main-menu ${menuWhiteClass ? menuWhiteClass : ''}`
+      } `}
     >
       <nav>
         <ul>
-          <li>
+          {/* <li>
             <Link to={process.env.PUBLIC_URL + "/"}>
               home
               {sidebarMenu ? (
@@ -116,12 +117,33 @@ const NavMenu = ({ menuWhiteClass, sidebarMenu, user }) => {
                 </Link>
               </li>
             </ul>
+          </li> */}
+          <li>
+            <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to={process.env.PUBLIC_URL + "/contact"}>
-              contact_us
-            </Link>
+            <Link to="/">About</Link>
           </li>
+          <li>
+            <Link to="/product/landing">Product</Link>
+          </li>
+          <li>
+            <Link to="/">CS Center</Link>
+          </li>
+          {role == 1 ? (
+            <>
+            <li>
+              <Link to="/product/upload">Register</Link>
+            </li>
+            <li>
+            <Link to="/product/stock">Management</Link>
+            </li>
+            </>
+          ) : (
+            <li>
+            <Link to="/">My Deal</Link>
+            </li>
+          )}
         </ul>
       </nav>
     </div>
@@ -131,7 +153,7 @@ const NavMenu = ({ menuWhiteClass, sidebarMenu, user }) => {
 NavMenu.propTypes = {
   menuWhiteClass: PropTypes.string,
   sidebarMenu: PropTypes.bool,
-  strings: PropTypes.object
+  strings: PropTypes.object,
 };
 
 export default NavMenu;

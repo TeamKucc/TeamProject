@@ -17,12 +17,12 @@ const StockContainer = ({ match, history }) => {
   const {
     management,
     loading,
-    user,
+    seller,
   } = useSelector(({ management, loading, user}) => ({
     management: management.management,
     managementError: management.managementError,
     loading: loading['management/STOCK_MANAGEMENT'],
-    user: user.user,
+    seller: user.user,
   }));
 
   console.log(management);
@@ -41,7 +41,7 @@ const StockContainer = ({ match, history }) => {
   };
 
   useEffect(() => {
-    dispatch(stockManagement({}));
+    dispatch(stockManagement({seller}));
   }, [dispatch]);
 
   return (
