@@ -41,6 +41,7 @@ const BuyerRegisterForm = ({ history }) => {
         }
         console.log('call')
         dispatch(register({ userID,name,password,email }));
+        history.push('/register/complete')
     }
 
     //컴포넌트가 처음 렌더링 될때 폼 초기화

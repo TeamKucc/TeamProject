@@ -1,19 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Dropzone from 'react-dropzone';
 import { Typography } from 'antd'
-import upload from '../../modules/upload';
 
 function FileUpload({ onDrop, onDelete, images}) {
 
     const { Title } = Typography;
-    const f1 = () => {
-        console.log(images[0])
-      }
 
     return (
 
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
-            <button onClick={f1}>src Check</button>
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
                 <Title level={2}>제품등록</Title>
             </div>
@@ -49,7 +44,7 @@ function FileUpload({ onDrop, onDelete, images}) {
                             <img
                                 style={{ minWidth: '300px', width: '300px', height: '240px' }}
                                 alt={`productImg-${index}`}
-                                src={`http://localhost:4000/${images[index].image}`}
+                                src={`${images[index].image.location}`}
                             />
                         </div>
                     ))}

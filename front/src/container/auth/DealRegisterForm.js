@@ -57,8 +57,7 @@ const BuyerRegisterForm = ({ history }) => {
       setError('사업자번호 인증이 필요합니다')
     }
     dispatch(dregister({ userID, name, password, business, email }));
-    alert('회원가입 되었습니다')
-    history.push('/login')
+    history.push('/register/complete')
   };
   
   const onClick = () => {

@@ -13,7 +13,7 @@ const UploadContainer = ({ history }) => {
   const dispatch = useDispatch();
 
   const {
-    user,
+    seller,
     stock,
     thumbnails,
     title,
@@ -26,7 +26,7 @@ const UploadContainer = ({ history }) => {
     productId,
     category,
   } = useSelector(({ upload, user }) => ({
-    user: user.user,
+    seller: user.user,
     stock: upload.stock,
     thumbnails: upload.thumbnails,
     title: upload.title,
@@ -73,7 +73,7 @@ const UploadContainer = ({ history }) => {
     }
     dispatch(
       productUpload({
-        // user,
+        seller,
         stock,
         thumbnails,
         title,
@@ -85,6 +85,8 @@ const UploadContainer = ({ history }) => {
         enable,
         category,
       }),
+      alert("제품이 등록되었습니다!"),
+      history.push('/product/stock')
     );
     // history.push('/');
   };

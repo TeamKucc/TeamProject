@@ -76,6 +76,7 @@ export const sellerPaid = createAction(SELLER_PAID, ({ product, user }) => ({ pr
 export const productUpload = createAction(
   PRODUCT_UPLOAD,
   ({
+    seller,
     stock,
     thumbnails,
     title,
@@ -86,6 +87,7 @@ export const productUpload = createAction(
     person,
     category
   }) => ({
+    seller,
     stock,
     thumbnails,
     title,

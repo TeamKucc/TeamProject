@@ -1,6 +1,7 @@
 import client from './client';
 
 export const productUpload = ({
+  seller,
   stock,
   thumbnails,
   title,
@@ -13,6 +14,7 @@ export const productUpload = ({
   category,
 }) =>
   client.post('/api/product/productUpload', {
+    seller,
     stock,
     thumbnails,
     title,
@@ -39,21 +41,12 @@ export const landingProduct = ({
     category,
   });
 export const stockManagement = ({
-  stock,
-  thumbnails,
-  title,
-  price,
-  discount,
-  enable,
+  seller,
 }) =>
-  client.get('/api/product/getStock', {
-    stock,
-    thumbnails,
-    title,
-    price,
-    discount,
-    enable,
+  client.post('/api/product/getStock', {
+    seller,
   });
+
 export const updateUpload = ({
   id,
   stock,

@@ -27,69 +27,28 @@ let upload2 = multer({
   })
 }).single('file')
 
-let storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads/');
-  },
-  filename: (req, file, cb) => {
-    cb(null, `${Date.now()}_${file.originalname}`);
-  },
-  fileFilter: (req, file, cb) => {
-    const ext = path.extname(file.originalname);
-    if (ext !== '.jpg' || ext !== '.png') {
-      return cb(
-        res.status(400).end('jpg, png 파일만 업로드 가능합니다!'),
-        false,
-      );
-    }
-    cb(null, true);
-  },
-});
-
-let upload = multer({ storage: storage }).single('file');
-
-// let storageThumbnail = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, 'thumbnails/');
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, `${Date.now()}_${file.originalname}`);
-//   },
-//   fileFilter: (req, file, cb) => {
-//     const ext = path.extname(file.originalname);
-//     if (ext !== '.jpg' || ext !== '.png') {
-//       return cb(
-//         res.status(400).end('jpg, png 파일만 업로드 가능합니다!'),
-//         false,
-//       );
-//     }
-//     cb(null, true);
-//   },
-// });
-
-// let upload2 = multer({ storage: storageThumbnail }).single('file');
-
-// export const uploadImage = (req, res) => {
-//   upload(req, res, (err) => {
-//     console.log(req.file);
-//     if (err) {
-//       return res.json({ success: false, err });
-//     }
-//     return res.json(req.file)  
-//   })
-// }
+let upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: "teamkucc2",
+    key: function (req, file, cb) {
+      let extension = path.extname(file.originalname);
+      cb(null, Date.now().toString() + extension)
+    },
+    acl: 'public-read-write',
+  })
+}).single('file')
 
 export const uploadImage = (req, res) => {
+  console.log(req.body);
   upload(req, res, (err) => {
     console.log(req.file);
-
     if (err) {
       return res.json({ success: false, err });
     }
     return res.json({
       success: true,
-      image: res.req.file.path,
-      fileName: res.req.file.filename,
+      image: req.file,
     });
   });
 };
@@ -176,8 +135,8 @@ export const config = (req, res) => {
 };
 
 export const getStock = (req, res) => {
-  // const {id} = req.body
-  Product.find({}, (err, result) => {
+  console.log(req.params)
+  Product.find({seller: req.body.seller}, (err, result) => {
     if (err)
       return res.status(409).json({
         success: false,
