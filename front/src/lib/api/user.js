@@ -11,7 +11,7 @@ export const sellerHistory = user=>client.post('/api/user/sellerHistory',{user})
 
 export const makeDeal = ({ user, product }) => client.post('/api/user/makeDeal', { user, product })
 
-export const joinDeal = user => client.post('/api/user/joinDeal', { user })
+export const joinDeal = ({user,product}) => client.post('/api/user/joinDeal', { user,product })
 
 
 

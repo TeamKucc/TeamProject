@@ -27,7 +27,7 @@ const MobileNavMenu = ({ user, onLogout }) => {
         ) : (
             <>
               <li>
-                <Link to={process.env.PUBLIC_URL + "/login"}>Login</Link>
+                <Link to={"/login"}>Login</Link>
               </li>
               <li>
                 <Link to={process.env.PUBLIC_URL + "/login-register"}>
