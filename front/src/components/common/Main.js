@@ -114,9 +114,9 @@ const Main = ({ products }) => {
         <div className="container">
           <div className="row feature-icon-two-wrap">
             {featureIconData &&
-              featureIconData.map((single, index) => {
+              featureIconData.map((single, key) => {
                 return (
-                  <div key={index} className="col-md-4">
+                  <div className="col-md-4">
                     <div
                       className={`support-wrap-2 support-shape mb-30 text-center`}
                     >

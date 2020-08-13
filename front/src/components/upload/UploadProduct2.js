@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 const { TextArea } = Input;
 
 function UploadProduct({ onPublish, onChange, product }) {
-  
+
   console.log(product)
 
   const classes = useStyles();

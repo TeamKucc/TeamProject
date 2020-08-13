@@ -14,7 +14,7 @@ router.post('/readProduct/:id',productCtrl.readProduct);
 router.post('/stockDetail/:id', productCtrl.stockDetail)
 
 router.get('/config',productCtrl.config)
-router.post('/getStock', productCtrl.getStock)
+router.get('/getStock', productCtrl.getStock)
 router.post('/getDeal',productCtrl.getDeal)
 
 router.post('/paid',productCtrl.productPaid)

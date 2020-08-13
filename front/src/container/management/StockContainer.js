@@ -17,13 +17,15 @@ const StockContainer = ({ match, history }) => {
   const {
     management,
     loading,
-    seller,
+    user,
   } = useSelector(({ management, loading, user}) => ({
     management: management.management,
+    managementError: management.managementError,
     loading: loading['management/STOCK_MANAGEMENT'],
-    seller: user.user,
+    user: user.user,
   }));
 
+  console.log(management);
   const onCheckedChange = (e) => {
     // enable ? true : false
     console.log(e.target.value);
@@ -38,9 +40,8 @@ const StockContainer = ({ match, history }) => {
     // }
   };
 
-  console.log(seller)
   useEffect(() => {
-    dispatch(stockManagement({seller}));
+    dispatch(stockManagement({}));
   }, [dispatch]);
 
   return (

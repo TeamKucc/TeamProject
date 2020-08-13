@@ -19,8 +19,15 @@ const [
 
 export const stockManagement = createAction(
   STOCK_MANAGEMENT,
-  seller => seller,
-)
+  ({ stock, thumbnails, title, price, discount, enable }) => ({
+    stock,
+    thumbnails,
+    title,
+    price,
+    discount,
+    enable,
+  }),
+);
 
 export const stockDetail = createAction(
   STOCK_DETAIL,

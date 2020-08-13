@@ -7,9 +7,12 @@ function ThumbnailUpload({ onDrop, onDelete, images }) {
   
   console.log(images)
   const { Title } = Typography;
-
+  const f1 = () => {
+    console.log(images[0])
+  }
   return (
     <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
+      <button onClick={f1}>src Check</button>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <Dropzone onDrop={onDrop} multiple={false} maxSize={800000000}>
           {({ getRootProps, getInputProps }) => (
