@@ -1,6 +1,7 @@
 import client from './client';
 
 export const productUpload = ({
+  seller,
   stock,
   thumbnails,
   title,

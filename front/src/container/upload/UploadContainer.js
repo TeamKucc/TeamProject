@@ -13,7 +13,7 @@ const UploadContainer = ({ history }) => {
   const dispatch = useDispatch();
 
   const {
-    user,
+    seller,
     stock,
     thumbnails,
     title,

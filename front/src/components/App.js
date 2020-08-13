@@ -19,6 +19,7 @@ import HeaderOne from '../pages/Test'
 import Test2 from '../pages/Test2';
 import LoginRegister from '../pages/RG';
 import OrderPage from '../pages/OrderPage'
+import RegisterCompletePage from '../pages/RegisterCompletePage'
 
 const App = () => {
   useEffect(() => {
@@ -42,7 +43,8 @@ const App = () => {
       <Route component={Test2} path="/test/test" exact />
       <Route component={LoginRegister} path="/test/Rg" exact />
       <Route component={OrderPage} path="/product/order/:id" exact />
-
+      <Route component={RegisterCompletePage} path="/register/complete" exact />
+      
       {/* 임시택배조회페이지 */}
       <Route component={DeliveryPage} exact path="/product/delivery" />
     </>
