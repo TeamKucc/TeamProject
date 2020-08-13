@@ -10,6 +10,11 @@ const paySchema = new Schema(
       type: mongoose.Types.ObjectId,
       required: true,
     },
+    seller:{
+      type:mongoose.Types.ObjectId,
+      required:true
+    }
+    ,
     delivery: { type: String },
     deliveryNumber: { type: Number },
   },

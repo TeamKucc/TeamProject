@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 
-const NavMenu = ({  menuWhiteClass, sidebarMenu }) => {
+const NavMenu = ({ menuWhiteClass, sidebarMenu, user }) => {
   return (
     <div
       className={` ${
@@ -50,12 +50,12 @@ const NavMenu = ({  menuWhiteClass, sidebarMenu }) => {
                   </li>
                   <li>
                     <Link to={process.env.PUBLIC_URL + "/home-fashion-four"}>
-                     hf4
+                      hf4
                     </Link>
                   </li>
                   <li>
                     <Link to={process.env.PUBLIC_URL + "/home-fashion-five"}>
-                     hf5
+                      hf5
                     </Link>
                   </li>
                 </ul>
@@ -74,7 +74,7 @@ const NavMenu = ({  menuWhiteClass, sidebarMenu }) => {
                   </li>
                   <li>
                     <Link to={process.env.PUBLIC_URL + "/home-furniture-six"}>
-                     hf6
+                      hf6
                     </Link>
                   </li>
                 </ul>
@@ -107,12 +107,12 @@ const NavMenu = ({  menuWhiteClass, sidebarMenu }) => {
               </li>
               <li>
                 <Link to={process.env.PUBLIC_URL + "/blog-right-sidebar"}>
-                 brs
+                  brs
                 </Link>
               </li>
               <li>
                 <Link to={process.env.PUBLIC_URL + "/blog-details-standard"}>
-                 blog-standard
+                  blog-standard
                 </Link>
               </li>
             </ul>

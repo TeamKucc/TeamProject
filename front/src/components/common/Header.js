@@ -11,10 +11,14 @@ const Header = ({
   borderStyle,
   headerPaddingClass,
   headerPositionClass,
-  headerBgClass
+  headerBgClass,
+  onLogout,
+  user
 }) => {
-  const userId = null;
-
+  let UserId = null;
+  if (user) {
+    UserId = user.replace(/['"]+/g, '')
+  }
   const [scroll, setScroll] = useState(0);
   const [headerTop, setHeaderTop] = useState(0);
 
@@ -41,9 +45,9 @@ const Header = ({
       <div
         className={` ${
           headerPaddingClass ? headerPaddingClass : ""
-        } sticky-bar header-res-padding clearfix ${
+          } sticky-bar header-res-padding clearfix ${
           scroll > headerTop ? "stick" : ""
-        }`}
+          }`}
       >
         <div className={layout === "container-fluid" ? layout : "container"}>
           <div className="row">
@@ -54,11 +58,11 @@ const Header = ({
             </div>
             <div className="col-xl-8 col-lg-8 d-none d-lg-block">
               {/* Nav menu */}
-              <NavMenu />
+              <NavMenu user={user}/>
             </div>
             <div className="col-xl-2 col-lg-2 col-md-6 col-8">
               {/* Icon group */}
-              <IconGroup />
+              <IconGroup user={user} onLogout={onLogout} />
             </div>
           </div>
         </div>

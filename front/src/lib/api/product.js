@@ -92,3 +92,6 @@ export const deliveryUpload = ({ delivery, deliveryNumber }) =>
 
 export const sellerPaid = ({ product, user }) =>
   client.post('/api/product/sellerPaid', { product, user })
+
+export const findDeal = _id =>
+  client.post('/api/user/findDeal', { _id })
