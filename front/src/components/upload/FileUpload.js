@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Dropzone from 'react-dropzone';
 import { Typography } from 'antd'
-import upload from '../../modules/upload';
 
 function FileUpload({ onDrop, onDelete, images}) {
 

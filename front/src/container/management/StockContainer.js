@@ -20,12 +20,10 @@ const StockContainer = ({ match, history }) => {
     seller,
   } = useSelector(({ management, loading, user}) => ({
     management: management.management,
-    managementError: management.managementError,
     loading: loading['management/STOCK_MANAGEMENT'],
     seller: user.user,
   }));
 
-  console.log(management);
   const onCheckedChange = (e) => {
     // enable ? true : false
     console.log(e.target.value);

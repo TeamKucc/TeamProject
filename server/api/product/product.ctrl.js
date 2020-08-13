@@ -24,12 +24,27 @@ let upload2 = multer({
       cb(null, Date.now().toString() + extension);
     },
     acl: 'public-read-write',
+<<<<<<< HEAD
+  })
+}).single('file')
+=======
   }),
 }).single('file');
+>>>>>>> d77bda53db3ea71ac267af672b17152351fa0752
 
 let upload = multer({
   storage: multerS3({
     s3: s3,
+<<<<<<< HEAD
+    bucket: "teamkucc2",
+    key: function (req, file, cb) {
+      let extension = path.extname(file.originalname);
+      cb(null, Date.now().toString() + extension)
+    },
+    acl: 'public-read-write',
+  })
+}).single('file')
+=======
     bucket: 'teamkucc2',
     key: function (req, file, cb) {
       let extension = path.extname(file.originalname);
@@ -38,6 +53,7 @@ let upload = multer({
     acl: 'public-read-write',
   }),
 }).single('file');
+>>>>>>> d77bda53db3ea71ac267af672b17152351fa0752
 
 export const uploadImage = (req, res) => {
   console.log(req.body);
