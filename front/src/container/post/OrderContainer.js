@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
-import Order from '../../components/post/Order'
+import Order from '../../components/product/Order'
 import { readProduct, unloadProduct } from '../../modules/landing';
 
 
