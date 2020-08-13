@@ -6,6 +6,7 @@ import { readProduct, unloadProduct } from '../../modules/landing';
 import { makeDeal } from '../../modules/user'
 import ProductDeal from '../../components/product/ProductDeal';
 import { findDeal } from '../../modules/upload';
+import { withRouter } from 'react-router-dom';
 
 const ProductTes = ({ match, history, location }) => {
     const dispatch = useDispatch();
@@ -39,9 +40,9 @@ const ProductTes = ({ match, history, location }) => {
                             product={product}
                             makeDeal={makeDeal}
                         />
-                    </div>
-                    <div>
-                        <ProductDeal user={user} product={product} deal={deal}/>
+                        <div>
+                            <ProductDeal user={user} product={product} deal={deal} />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -50,4 +51,4 @@ const ProductTes = ({ match, history, location }) => {
     )
 }
 
-export default ProductTes
+export default withRouter(ProductTes)

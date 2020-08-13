@@ -32,7 +32,7 @@ const App = () => {
       <Route component={LoginPage} exact path="/login" />
       <Route component={MainPage} exact path={['/home', '/']} />
       <Route component={LandingPage} path="/product/landing" exact />
-      <Route component={LoginPage} path="/login" />
+      <Route component={LoginPage} exact path="/login" />
       <Route component={RegisterPage} exact path="/register" />
       <Route component={BuyerRegisterPage} exact path="/register/buyer" />
       <Route component={DealRegisterPage} exact path="/register/deal" />
@@ -42,12 +42,12 @@ const App = () => {
       <Route component={UploadProductPage} exact path="/product/upload" />
       <Route component={StockPage} exact path="/product/stock" />
       <Route component={SellerPage} exact path="/seller/paid/:id"/>
-      {/* <Route component={ProductPage} path="/:id" exact /> */}
+      <Route component={ProductPage} path="/:id" exact />
       <Route component={StockDetailPage} exact path="/product/upload/:id" />
       <Route component={UserHistory} exact path="/user/userhistory" />
       <Route component={Test2} path="/test/test" exact />
       <Route component={LoginRegister} path="/test/Rg" exact />
-      <Route component={ProductTes}  path="/:id" exact />
+      {/* <Route component={ProductTes}  path="/:id" exact /> */}
       <Route component={OrderPage} path="/product/order/:id" exact />
 
       {/* 임시택배조회페이지 */}

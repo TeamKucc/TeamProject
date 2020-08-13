@@ -3,9 +3,40 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 
-const MobileNavMenu = () => {
+const MobileNavMenu = ({ user, onLogout }) => {
+  let UserId = null;
+  if (user) {
+    UserId = user.replace(/['"]+/g, '')
+  }
   return (
     <nav className="offcanvas-navigation" id="offcanvas-navigation">
+      <ul>
+        {user ? (
+          <>
+            <li>
+              <Link href={`/userInfo/${UserId}`}>
+                my account
+              </Link>
+            </li>
+            <li>
+              <Link onClick={onLogout}>
+                로그아웃
+              </Link>
+            </li>
+          </>
+        ) : (
+            <>
+              <li>
+                <Link to={process.env.PUBLIC_URL + "/login"}>Login</Link>
+              </li>
+              <li>
+                <Link to={process.env.PUBLIC_URL + "/login-register"}>
+                  Register
+        </Link>
+              </li>
+            </>
+          )}
+      </ul>
       <ul>
         <li className="menu-item-has-children">
           <Link to={process.env.PUBLIC_URL + "/"}>home</Link>
@@ -17,7 +48,7 @@ const MobileNavMenu = () => {
               <ul className="sub-menu">
                 <li>
                   <Link to={process.env.PUBLIC_URL + "/home-fashion"}>
-                  2
+                    2
                   </Link>
                 </li>
                 <li>
@@ -25,32 +56,23 @@ const MobileNavMenu = () => {
                     3
                   </Link>
                 </li>
+              </ul>
+            </li>
+            <li className="menu-item-has-children">
+              <Link to={process.env.PUBLIC_URL + "/"}>
+                2
+              </Link>
+              <ul className="sub-menu">
                 <li>
-                  <Link to={process.env.PUBLIC_URL + "/home-fashion-three"}>
-                   4
+                  <Link to={process.env.PUBLIC_URL + "/home-fashion"}>
+                    1
                   </Link>
                 </li>
                 <li>
-                  <Link to={process.env.PUBLIC_URL + "/home-fashion-four"}>
-                   5
+                  <Link to={process.env.PUBLIC_URL + "/home-fashion-two"}>
+                    2
                   </Link>
                 </li>
-                <li>
-                  <Link to={process.env.PUBLIC_URL + "/home-fashion-five"}>
-                  6
-                  </Link>
-                </li>
-                <li>
-                  <Link to={process.env.PUBLIC_URL + "/home-fashion-six"}>
-                   7
-                  </Link>
-                </li>
-                <li>
-                  <Link to={process.env.PUBLIC_URL + "/home-fashion-seven"}>
-                   8
-                  </Link>
-                </li>
-              
               </ul>
             </li>
           </ul>

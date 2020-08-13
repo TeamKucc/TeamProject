@@ -19,7 +19,7 @@ const ProductDescriptionInfo = ({
 
     return (
         <div className="product-details-content ml-70">
-            <h2>상품 이름 적는칸</h2>
+            <h2>{product.title}</h2>
             <div className="product-details-price">
                 {discountedPrice !== null ? (
                     <Fragment>
@@ -34,7 +34,7 @@ const ProductDescriptionInfo = ({
             </div>
 
             <div className="pro-details-list">
-                <p>상품 짧은 설명 적는곳</p>
+                <p>{product.description}</p>
             </div>
             <div className="pro-details-quality">
                 <div className="pro-details-cart btn-hover">
