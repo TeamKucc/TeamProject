@@ -141,7 +141,7 @@ function Landing({ Products, loading, location }) {
           <div className={`product-wrap mb-25"`}>
             <br />
             <div className="product-img">
-              <Link to={`/item/${product._id}`}>
+              <Link to={`/item/${product._id}`} >
                 {/* {product.thumbnails.map((image, index) => {
                 return (
                   <div key={index}>

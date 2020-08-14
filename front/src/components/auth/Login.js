@@ -5,8 +5,8 @@ import Tab from "react-bootstrap/Tab";
 import Nav from "react-bootstrap/Nav";
 
 
-const LoginRegister = ({ location }) => {
-    const { pathname } = location;
+const LoginRegister = ({ form, onChange, onSubmit }) => {
+
 
     return (
         <Fragment>
@@ -33,19 +33,24 @@ const LoginRegister = ({ location }) => {
                                         <Tab.Pane eventKey="login">
                                             <div className="login-form-container">
                                                 <div className="login-register-form">
-                                                    <form>
+                                                    <form onSubmit={onSubmit}>
                                                         <input
                                                             type="text"
-                                                            name="user-name"
+                                                            name="userID"
                                                             placeholder="Username"
+                                                            value={form.username}
+                                                            onChange={onChange}
                                                         />
                                                         <input
                                                             type="password"
-                                                            name="user-password"
+                                                            name="password"
                                                             placeholder="Password"
+                                                            value={form.password}
+                                                            onChange={onChange}
                                                         />
                                                         <div className="button-box">
                                                             <div className="login-toggle-btn">
+
                                                                 <Link to={process.env.PUBLIC_URL + "/"}>
                                                                     Forgot Password?
                                                                 </Link>
@@ -60,45 +65,17 @@ const LoginRegister = ({ location }) => {
                                         </Tab.Pane>
                                         <Tab.Pane eventKey="register">
                                             <div className="login-form-container">
-                                                <div className="login-register-form">
-                                                    <form>
-                                                        <input
-                                                            type="text"
-                                                            name="user-name"
-                                                            placeholder="Username"
-                                                        />
-                                                        <input
-                                                            type="password"
-                                                            name="user-password"
-                                                            placeholder="Password"
-                                                        />
-                                                        <input
-                                                            name="user-email"
-                                                            placeholder="Email"
-                                                            type="email"
-                                                        />
-                                                        <input
-                                                            name="user-email"
-                                                            placeholder="Email"
-                                                            type="email"
-                                                        />
-                                                        <input
-                                                            name="user-email"
-                                                            placeholder="Email"
-                                                            type="email"
-                                                        />
-                                                        <input
-                                                            name="user-email"
-                                                            placeholder="Email"
-                                                            type="email"
-                                                        />
-                                                        
-                                                        <div className="button-box">
-                                                            <button type="submit">
-                                                                <span>Register</span>
-                                                            </button>
-                                                        </div>
-                                                    </form>
+                                                <div className="register">
+                                                    <button>
+                                                        <Link to="">
+                                                            일반회원
+                                                        </Link>
+                                                    </button>
+                                                    <button>
+                                                        <Link to="">
+                                                            판매회원
+                                                        </Link>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </Tab.Pane>

@@ -73,7 +73,7 @@ const Main = ({ products }) => {
             {sliderData &&
               sliderData.map((single, index) => {
                 return (
-                  <div key={index}>
+                  <div key={index._id}>
                     <div
                       className={`single-slider-2 slider-height-2 d-flex align-items-center bg-img swiper-slide`}
                       style={{
@@ -116,7 +116,7 @@ const Main = ({ products }) => {
             {featureIconData &&
               featureIconData.map((single, index) => {
                 return (
-                  <div key={index} className="col-md-4">
+                  <div key={index._id} className="col-md-4">
                     <div
                       className={`support-wrap-2 support-shape mb-30 text-center`}
                     >
@@ -150,7 +150,7 @@ const Main = ({ products }) => {
           <Fragment>
             {prod.map((product, index) => {
               return (
-                  <div key={index} className={`col-xl-3 col-md-6 col-lg-4 col-sm-6`}>
+                  <div key={index._id} className={`col-xl-3 col-md-6 col-lg-4 col-sm-6`}>
                     <div className={`product-wrap-2 mb-25`}>
                       <div className="product-img">
                         <Link to={`/${product._id}`}>

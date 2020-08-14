@@ -33,7 +33,6 @@ const App = () => {
       <Route component={LoginPage} exact path="/login" />
       <Route component={MainPage} exact path={['/home', '/']} />
       <Route component={LandingPage} path="/product/landing" exact />
-      <Route component={LoginPage} exact path="/login" />
       <Route component={RegisterPage} exact path="/register" />
       <Route component={BuyerRegisterPage} exact path="/register/buyer" />
       <Route component={DealRegisterPage} exact path="/register/deal" />

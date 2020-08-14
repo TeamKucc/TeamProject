@@ -3,17 +3,19 @@ import ProductDescriptionInfo from '../../components/product/ProductTT'
 import ProductImageGallery from '../../components/product/ProductImageGallery'
 import { useDispatch, useSelector } from 'react-redux'
 import { readProduct, unloadProduct } from '../../modules/landing';
-import { makeDeal } from '../../modules/user'
+import { makeDeal,checkDeal } from '../../modules/user'
 import ProductDeal from '../../components/product/ProductDeal';
 import { findDeal } from '../../modules/upload';
 import { withRouter } from 'react-router-dom';
 
 const ProductTes = ({ match, history, location }) => {
     const dispatch = useDispatch();
-    const { product, user, deal } = useSelector(({ landing, user, upload }) => ({
+    const { product, user, deal, complete,error } = useSelector(({ landing, user, upload }) => ({
         product: landing.productDetail,
         user: user.user,
-        deal: upload.deal
+        deal: upload.deal,
+        complete:user.complete,
+        error:user.error
     }))
     useEffect(() => {
         console.log(match.params.id)
@@ -25,6 +27,17 @@ const ProductTes = ({ match, history, location }) => {
         }
     }, [dispatch])
 
+    const onCheck =()=>{
+        dispatch(checkDeal(user))
+        console.log(complete)
+    }
+    
+    useEffect(()=>{
+        console.log(complete)
+        if(complete){
+            history.push(`/product/order/${product._id}`)
+        }
+    },[dispatch,complete])
 
     return (
         <div className="shop-area pt-100  ">
@@ -37,8 +50,10 @@ const ProductTes = ({ match, history, location }) => {
                         <ProductDescriptionInfo
                             spaceTopClass="pt-100"
                             spaceBottomClass="pb-100"
+                            complete={complete}
                             product={product}
                             makeDeal={makeDeal}
+                            onCheck={onCheck}
                         />
                         <div>
                             <ProductDeal user={user} product={product} deal={deal} />

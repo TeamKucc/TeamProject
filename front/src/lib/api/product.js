@@ -73,9 +73,11 @@ export const updateUpload = ({
 export const readProduct = (id) =>
   client.post(`/api/product/readProduct/${id}`);
 export const removeProduct = ({ _id }) => client.delete(`/api/product/${_id}`);
-export const productPaid = ({ user, product }) =>
-  client.post('/api/product/paid', { user, product });
+
+export const productPaid = ({ user, product,detail,seller }) =>
+  client.post('/api/product/paid', { user, product,detail,seller });
 export const stockDetail = (id) =>
+
   client.post(`/api/product/stockDetail/${id}`);
 export const deliveryUpload = ({ delivery, deliveryNumber }) =>
   client.post('/api/product/deliveryUpload', { delivery, deliveryNumber });
