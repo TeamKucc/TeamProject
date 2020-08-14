@@ -6,9 +6,8 @@ import {
   setActiveSort,
 } from '../../helpers/product';
 
-function Landing({ Products, loading, location }) {
+function Landing({ Products, onClick, cate }) {
   const [layout, setLayout] = useState('grid three-column');
-  const [cate, setCate] = useState('전체');
 
   const productCount = Products.length;
 
@@ -16,12 +15,39 @@ function Landing({ Products, loading, location }) {
     return Products[key];
   });
 
-  // 카테고리 정렬
-  const setActiveSort = (e) => {
-    setCate(e.target.value);
-  };
-
   const uniqueCategories = getIndividualCategories(Prod);
+
+  const changeCategory = (cate) => {
+    switch (cate) {
+      case 'fashion':
+        return "패션의류";
+        break;
+      case 'accessory':
+        return "패션잡화";
+        break;
+      case 'beauty':
+        return "뷰티";
+        break;
+      case 'food':
+        return "식품";
+        break;
+      case 'baby':
+        return "출산/유아동";
+        break;
+      case 'digital':
+        return "디지털/가전";
+        break;
+      case 'interior':
+        return "인테리어";
+        break;
+      case 'sports':
+        return "스포츠/레저";
+        break;
+      case 'lifestyle':
+        return "생활";
+        break;
+    }
+  };
 
   // 별점
   const ProductRating = ({ ratingValue }) => {
@@ -42,7 +68,8 @@ function Landing({ Products, loading, location }) {
   const renderCards = Prod.map((product, index) => {
     if (!product) return null;
 
-    if (product.category == cate) {
+    const category = changeCategory(cate)
+    if (product.category == category) {
       return (
         <div key={index} className={`col-xl-4 col-sm-6 `}>
           <div className={`product-wrap mb-25"`}>
@@ -81,11 +108,11 @@ function Landing({ Products, loading, location }) {
                 )}
               </Link>
               <div className="product-action">
-              <div className="pro-same-action pro-wishlist">
+                <div className="pro-same-action pro-wishlist">
                   <a
-                  href={'/product/order/' + product._id}
-                  rel="noopener noreferrer"
-                  title="결제하기"
+                    href={'/product/order/' + product._id}
+                    rel="noopener noreferrer"
+                    title="결제하기"
                   >
                     <i className="pe-7s-piggy" />
                   </a>
@@ -135,7 +162,7 @@ function Landing({ Products, loading, location }) {
           </div>
         </div>
       );
-    } else if (cate == '전체') {
+    } else if (cate == 'all') {
       return (
         <div key={index} className={`col-xl-4 col-sm-6 `}>
           <div className={`product-wrap mb-25"`}>
@@ -176,9 +203,9 @@ function Landing({ Products, loading, location }) {
               <div className="product-action">
                 <div className="pro-same-action pro-wishlist">
                   <a
-                  href={'/product/order/' + product._id}
-                  rel="noopener noreferrer"
-                  title="결제하기"
+                    href={'/product/order/' + product._id}
+                    rel="noopener noreferrer"
+                    title="결제하기"
                   >
                     <i className="pe-7s-piggy" />
                   </a>
@@ -265,12 +292,7 @@ function Landing({ Products, loading, location }) {
                               {uniqueCategories.map((category, key) => {
                                 return (
                                   <li key={key}>
-                                    <button
-                                      onClick={(e) => {
-                                        setActiveSort(e);
-                                      }}
-                                      value={category}
-                                    >
+                                    <button onClick={onClick} value={category}>
                                       {category}
                                     </button>
                                   </li>
@@ -288,7 +310,6 @@ function Landing({ Products, loading, location }) {
               </Fragment>
 
               {/* 카드 업로드 */}
-
               <div className="shop-bottom-area mt-35">
                 <div className={`row grid three-column`}>{renderCards}</div>
               </div>

@@ -20,6 +20,14 @@ const [
 
 const UNLOAD_PRODUCT = 'unload/UNLOAD_PRODUCT';
 
+const [
+  SEARCH_PRODUCT,
+  SEARCH_PRODUCT_SUCCESS,
+  SEARCH_PRODUCT_FAILURE,
+] = createRequestActionTypes('search/SEARCH_PRODUCT')
+
+const CHANGE_FIELD = 'search/CHANGE_FIELD'
+
 export const landingProduct = createAction(
   LANDING_PRODUCT,
   ({ thumbnails, title, price, discount }) => ({
@@ -31,8 +39,12 @@ export const landingProduct = createAction(
 );
 
 export const readProduct = createAction(READ_PRODUCT, (_id) => _id);
-
 export const unloadProduct = createAction(UNLOAD_PRODUCT);
+export const searchProduct = createAction(SEARCH_PRODUCT, (id) => id)
+export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
+  key,
+  value
+}))
 
 const landingProductSaga = createRequestSaga(
   LANDING_PRODUCT,
@@ -40,9 +52,12 @@ const landingProductSaga = createRequestSaga(
 );
 const readProductSaga = createRequestSaga(READ_PRODUCT, productAPI.readProduct);
 
+const searchProductSaga = createRequestSaga(SEARCH_PRODUCT, productAPI.searchProduct)
+
 export function* landingSaga() {
   yield takeLatest(LANDING_PRODUCT, landingProductSaga);
   yield takeLatest(READ_PRODUCT, readProductSaga);
+  yield takeLatest(SEARCH_PRODUCT, searchProductSaga)
 }
 
 const initialState = {
@@ -50,7 +65,9 @@ const initialState = {
   error: null,
   product: null,
   productDetail: null,
-  productInfo:{}
+  productInfo:{},
+  word: '',
+  search: {},
 };
 
 const landing = handleActions(
@@ -73,6 +90,18 @@ const landing = handleActions(
       error,
     }),
     [UNLOAD_PRODUCT]: () => initialState,
+    [SEARCH_PRODUCT_SUCCESS]: (state, { payload : search }) => ({
+      ...state,
+      search
+    }),
+    [SEARCH_PRODUCT_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      error
+    }),
+    [CHANGE_FIELD]: (state, { payload: { key, value } }) => ({
+      ...state,
+      [key]: value,
+    }),
   },
   initialState,
 );

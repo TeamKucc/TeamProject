@@ -54,7 +54,7 @@ export const uploadImage = (req, res) => {
 };
 
 export const uploadThumbnail = (req, res) => {
-  console.log(req.body);
+  console.log(req.file);
   upload2(req, res, (err) => {
     console.log(req.file);
     if (err) {
@@ -134,7 +134,7 @@ export const config = (req, res) => {
 };
 
 export const getStock = (req, res) => {
-  console.log(req.params);
+  console.log(req.body);
   Product.find({ seller: req.body.seller }, (err, result) => {
     if (err)
       return res.status(409).json({
@@ -213,3 +213,12 @@ export const deliveryUpload = (req, res) => {
     return res.status(200).json({ success: true });
   });
 };
+
+export const searchProduct = (req, res) => {
+  console.log(req.params);
+  const { id } = req.params;
+  Product.find({ title: {$regex: id} }, (err, result) => {
+    if (err) return res.status(400).json({ success: false, Message: err });
+    res.json(result);
+  });
+}
