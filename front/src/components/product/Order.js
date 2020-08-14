@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 
-const Order = ({ product }) => {
+const Order = ({ product,info,onChange,onPay }) => {
 
 	if( !product ) return null;
 
@@ -13,30 +13,31 @@ const Order = ({ product }) => {
               <div className="col-lg-7">
                 <div className="billing-info-wrap">
                   <h3>주문하기</h3>
+                  <form>
                   <div className="row">
 									<div className="col-lg-12">
                       <div className="billing-info mb-20">
                         <label>수령인</label>
-                        <input type="text" />
+                        <input type="text"  name="person" onChange={onChange} />
                       </div>
                     </div>
                     <div className="col-lg-12">
                       <div className="billing-info mb-20">
                         <label>배송지</label>
-                        <input type="text" />
+                        <input type="text" name="address" onChange={onChange} />
                       </div>
                     </div>
 										<div className="col-lg-12">
                       <div className="billing-info mb-20">
                         <label>연락처</label>
-                        <input type="text" />
+                        <input type="text" name="phone" onChange={onChange} />
                       </div>
                     </div>
                     <div className="col-lg-12">
                       <div className="billing-select mb-20">
                         <label>배송시 요청사항</label>
                         {/* <select value={message}> */}
-												<select>
+												<select name="request" onChange={onChange}>
                           <option>배송시 요청사항을 선택해 주세요</option>
                           <option>배송 전 연락바랍니다</option>
                           <option>부재시 경비실에 맡겨주세요</option>
@@ -58,8 +59,10 @@ const Order = ({ product }) => {
                       />
                     </div>
                   </div>
+                  </form>
                 </div>
               </div>
+              
 
               <div className="col-lg-5">
                 <div className="your-order-area">
@@ -102,7 +105,7 @@ const Order = ({ product }) => {
                     <div className="payment-method"></div>
                   </div>
                   <div className="place-order mt-25">
-                    <button className="btn-hover">결제하기</button>
+                    <button className="btn-hover" onClick={onPay} >결제하기</button>
                   </div>
                 </div>
               </div>

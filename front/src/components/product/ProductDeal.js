@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 
 const ProductDeal = ({ user, product, deal }) => {
     const dispatch = useDispatch()
-
+    console.log(deal)
     const make = () => {
         if (user) {
             dispatch(makeDeal({ user, product: product._id }))
@@ -15,7 +15,11 @@ const ProductDeal = ({ user, product, deal }) => {
     }
 
     const join = (_id) => {
-        dispatch(joinDeal({ user, _id,product: product._id }))
+        if (user) {
+            dispatch(joinDeal({ user, _id, product: product._id }))
+        } else {
+            alert('로그인 필요!')
+        }
     }
 
     if (!deal) return null;
@@ -23,11 +27,17 @@ const ProductDeal = ({ user, product, deal }) => {
         <div>
             <button onClick={make}>딜생성</button>
             <div>
-                {deal.map((index, deals) =>
-
-                    <div key={index}>
-                        {index._id} <button onClick={() => { join(index._id) }}>Join</button>
-                    </div>
+                {deal.map((index) => {
+                    return index.complete ? (
+                        <div key={index._id} className="done">
+                            {index._id} <button onClick={() => { join(index._id) }}>Join</button>
+                        </div>
+                    ) : (
+                            <div key={index._id}>
+                                {index._id} <button onClick={() => { join(index._id) }}>Join</button>
+                            </div>
+                        )
+                }
                 )}
             </div>
         </div>

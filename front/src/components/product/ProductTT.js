@@ -8,12 +8,11 @@ import { Link } from "react-router-dom";
 const ProductDescriptionInfo = ({
     product,
     discountedPrice,
-    makeDeal
+    makeDeal,
+    onCheck
 }) => {
     const [productStock, setProductStock] = useState(0);
-    const alertClicked=()=>{
-        alert('test!')
-    }
+   
     console.log(product)
     if (!product) return null;
 
@@ -39,7 +38,7 @@ const ProductDescriptionInfo = ({
             <div className="pro-details-quality">
                 <div className="pro-details-cart btn-hover">
                     {product.stock > 0 ? (
-                        <button className="btn-full">
+                        <button className="btn-full" onClick={onCheck}>
                             결제하기
                         </button>
                     ) : (

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { withRouter, Route } from 'react-router-dom';
 import { changeField, initializeForm, login } from '../../modules/auth'
 import AuthForm from '../../components/auth/LoginForm'
+import Login from '../../components/auth/Login'
 import { check, tempSetUser } from '../../modules/user'
 
 const LoginForm = (props) => {
@@ -14,7 +15,7 @@ const LoginForm = (props) => {
         authError: auth.authError,
         user: user.user
     }))
-    
+
     const onChange = (e) => {
         const { value, name } = e.target;
         dispatch(
@@ -34,7 +35,7 @@ const LoginForm = (props) => {
     };
 
     useEffect(() => {
-        if(user){
+        if (user) {
             props.history.push('/')
         }
         dispatch(initializeForm('login'))
@@ -52,7 +53,7 @@ const LoginForm = (props) => {
             console.log(auth)
             props.history.push('/')
             try {
-               const userId=localStorage.getItem('userId')
+                const userId = localStorage.getItem('userId')
                 dispatch(tempSetUser(userId))
             } catch (error) {
                 console.log('storage Error error')
@@ -64,7 +65,14 @@ const LoginForm = (props) => {
 
     return (
         <>
-            <AuthForm
+            {/* <AuthForm
+                type="login"
+                form="form"
+                onChange={onChange}
+                onSubmit={onSubmit}
+                error={error}
+            /> */}
+            <Login
                 type="login"
                 form="form"
                 onChange={onChange}

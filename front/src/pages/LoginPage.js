@@ -4,9 +4,7 @@ import Template from '../components/auth/Template';
 
 const LoginPage = () => {
   return (
-    <Template>
       <LoginForm/>
-    </Template>
   );
 };
 

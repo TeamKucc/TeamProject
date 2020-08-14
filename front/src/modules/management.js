@@ -20,7 +20,7 @@ const [
 export const stockManagement = createAction(
   STOCK_MANAGEMENT,
   seller => seller,
-)
+);
 
 export const stockDetail = createAction(
   STOCK_DETAIL,

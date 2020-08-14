@@ -106,9 +106,11 @@ export const productUpload = createAction(
   }),
 );
 
-export const productPaid = createAction(PRODUCT_PAID, ({ user, product }) => ({
+export const productPaid = createAction(PRODUCT_PAID, ({ user, product,detail,seller }) => ({
   user,
   product,
+  detail,
+  seller
 }));
 export const setOriginalUpload = createAction(
   SET_ORIGINAL_UPLOAD,
@@ -245,6 +247,12 @@ export const initialState = {
   category: '',
   deal:null,
   error:null,
+  detail:{
+    person:'',
+    address:'',
+    phone:'',
+    request:''
+  }
 };
 
 const upload = handleActions(

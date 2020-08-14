@@ -73,7 +73,7 @@ const ProductImageGallery = ({ product }) => {
                     <Swiper {...gallerySwiperParams}>
                         {product.thumbnails.map((key) => {
                                 return (
-                                    <div key={key}>
+                                    <div key={key._id}>
                                         <LightgalleryItem
                                             group="any"
                                             src={`${key.image.location}`}
@@ -99,7 +99,7 @@ const ProductImageGallery = ({ product }) => {
                 <Swiper {...thumbnailSwiperParams}>
                     {product.thumbnails.map((index,images) => {
                             return (
-                                <div key={index}>
+                                <div key={index._id}>
                                     <div className="single-image">
                                         <img
                                             src={`${index.image.location}`}

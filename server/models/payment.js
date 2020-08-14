@@ -13,10 +13,13 @@ const paySchema = new Schema(
     seller:{
       type:mongoose.Types.ObjectId,
       required:true
-    }
-    ,
+    },
     delivery: { type: String },
     deliveryNumber: { type: Number },
+    info:{
+      type:Object,
+      required:true
+    }
   },
   {
     versionKey: false,
