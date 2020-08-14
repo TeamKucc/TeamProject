@@ -44,6 +44,7 @@ export const stockManagement = (
   seller,
 ) =>
   client.post('/api/product/getStock', seller);
+
 export const updateUpload = ({
   id,
   stock,
@@ -85,3 +86,5 @@ export const sellerPaid = ({ product, user }) =>
 
 export const findDeal = _id =>
   client.post('/api/user/findDeal', { _id })
+
+export const searchProduct = (id) => client.post(`/api/product/searchProduct/${id}`)

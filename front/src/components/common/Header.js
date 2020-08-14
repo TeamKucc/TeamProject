@@ -13,7 +13,9 @@ const Header = ({
   headerPositionClass,
   headerBgClass,
   onLogout,
-  user
+  user,
+  onClick,
+  onChange,
 }) => {
   let UserId = null;
   if (user) {
@@ -62,7 +64,7 @@ const Header = ({
             </div>
             <div className="col-xl-2 col-lg-2 col-md-6 col-8">
               {/* Icon group */}
-              <IconGroup user={user} onLogout={onLogout} />
+              <IconGroup user={user} onLogout={onLogout} onClick={onClick} onChange={onChange} />
             </div>
           </div>
         </div>

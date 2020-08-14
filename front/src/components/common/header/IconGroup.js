@@ -5,7 +5,9 @@ import { Link } from "react-router-dom";
 const IconGroup = ({
   iconWhiteClass,
   user,
-  onLogout
+  onLogout,
+  onClick,
+  onChange,
 }) => {
 
   let UserId = null;
@@ -33,8 +35,8 @@ const IconGroup = ({
         </button>
         <div className="search-content">
           <form action="#">
-            <input type="text" placeholder="Search" />
-            <button className="button-search">
+            <input type="text" placeholder="Search" name="word" onChange={onChange}/>
+            <button className="button-search" onClick={onClick}>
               <i className="pe-7s-search" />
             </button>
           </form>

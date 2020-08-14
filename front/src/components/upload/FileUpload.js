@@ -43,7 +43,8 @@ function FileUpload({ onDrop, onDelete, images}) {
                             <img
                                 style={{ minWidth: '300px', width: '300px', height: '240px' }}
                                 alt={`productImg-${index}`}
-                                src={`${images[index].image.location}`}                            />
+                                src={`${images[index].image.location}`}                            
+                                />
                         </div>
                     ))}
                 </div>

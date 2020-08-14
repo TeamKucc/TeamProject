@@ -1,22 +1,23 @@
 # TeamProject
 
 #### :yellow_heart: 목요일 :yellow_heart:
-1. 메인기능 / 로그인 / 타이머 / ADMIN :man: 김선규
+1. 메인기능 / 타이머 :man: 김선규
 2. 디자인 / 리뷰 / 카테고리경로설정 :woman: 어성미
 
 #### :pushpin: 개발사항
-1. 로그인 / 회원가입 / 내정보 / ADMIN :man: 김선규
+1. 로그인 / 회원가입 / 내정보 :man: 김선규
 2. 상품랜딩 / 상품상세 / 결제상세 :woman: 어성미 :man: 김선규
 3. 상품등록 / 상품관리 / 상품수정 :woman: 어성미
 4. 회원 구매내역 / 판매자 판매내역 :man: 김선규
-5. 리뷰 / FAQ :woman: 어성미
-6. 사업자번호인증 (API) :woman: 어성미
-7. 결제 (API) :man: 김선규
-8. 배송추적 (API) :woman: 어성미
+5. 사업자번호인증 (API) :woman: 어성미
+6. 결제 (API) :man: 김선규
+7. 배송추적 (API) :woman: 어성미
 
 #### :pushpin: 추가개발사항
 1. 이메일인증 (API)
 2. 챗봇 (API)
+3. ADMIN
+4. 리뷰/게시판
 
 #### :pushpin: 수정사항
 

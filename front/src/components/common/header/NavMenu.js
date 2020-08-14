@@ -125,7 +125,7 @@ const NavMenu = ({ menuWhiteClass, sidebarMenu, user }) => {
             <Link to="/">About</Link>
           </li>
           <li>
-            <Link to="/product/landing">Product</Link>
+            <Link to="/product/landing/all">Product</Link>
           </li>
           <li>
             <Link to="/">CS Center</Link>
