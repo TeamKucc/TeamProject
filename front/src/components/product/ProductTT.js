@@ -9,7 +9,9 @@ const ProductDescriptionInfo = ({
     product,
     discountedPrice,
     makeDeal,
-    onCheck
+    onCheck,
+    onChange,
+    onClick,
 }) => {
     const [productStock, setProductStock] = useState(0);
    
@@ -70,6 +72,11 @@ const ProductDescriptionInfo = ({
             ) : (
                     ""
                 )}
+
+            <div>
+                <input name="write" onChange={onChange} placeholder="상품에 대한 리뷰를 작성해주세요!"/>
+                <button onClick={onClick}>등록하기</button>
+            </div>
         </div>
     );
 };

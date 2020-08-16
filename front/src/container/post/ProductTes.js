@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import ProductDescriptionInfo from '../../components/product/ProductTT'
 import ProductImageGallery from '../../components/product/ProductImageGallery'
 import { useDispatch, useSelector } from 'react-redux'
-import { readProduct, unloadProduct } from '../../modules/landing';
+import { readProduct, unloadProduct, changeField, reviewProduct } from '../../modules/landing';
 import { makeDeal,checkDeal } from '../../modules/user'
 import ProductDeal from '../../components/product/ProductDeal';
 import { findDeal } from '../../modules/upload';
@@ -17,6 +17,9 @@ const ProductTes = ({ match, history, location }) => {
         complete:user.complete,
         error:user.error
     }))
+
+    const { id } = match.params
+    
     useEffect(() => {
         console.log(match.params.id)
         const { id } = match.params
@@ -32,6 +35,27 @@ const ProductTes = ({ match, history, location }) => {
         console.log(complete)
     }
     
+    const onClick = () => {
+        dispatch(
+            reviewProduct({
+                user,
+                id,
+                write,
+            })
+        )
+    }
+
+    const onChange = (e) => {
+        console.log('call')
+        const { value, name } = e.target
+        dispatch(
+            changeField({
+                key: name,
+                value,
+            })
+        )
+    }
+
     useEffect(()=>{
         console.log(complete)
         if(complete){
@@ -54,6 +78,8 @@ const ProductTes = ({ match, history, location }) => {
                             product={product}
                             makeDeal={makeDeal}
                             onCheck={onCheck}
+                            onChange={onChange}
+                            onClick={onClick}
                         />
                         <div>
                             <ProductDeal user={user} product={product} deal={deal} />

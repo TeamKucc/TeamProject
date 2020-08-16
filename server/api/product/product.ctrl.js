@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import Deal from '../../models/deal';
 import Delivery from '../../models/delivery';
 import Seller from '../../models/seller';
+import Review from '../../models/review'
 import path from 'path';
 import AWS from 'aws-sdk';
 
@@ -222,3 +223,21 @@ export const searchProduct = (req, res) => {
     res.json(result);
   });
 }
+
+export const reviewProduct = (req, res) => {
+  console.log(req.body);
+  const product = new Product(req.body);
+
+  product.save((err) => {
+    if (err) return res.status(400).json({ success: false, Message: err });
+    return res.status(200).json({ success: true });
+  });
+};
+
+export const readReview = (req, res) => {
+  const { id } = req.params;
+  Review.findOne({ _id: id }, (err, result) => {
+    if (err) return res.status(400).json({ success: false, Message: err });
+    return res.json(result);
+  });
+};

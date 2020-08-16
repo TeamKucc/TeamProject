@@ -28,6 +28,12 @@ const [
 
 const CHANGE_FIELD = 'search/CHANGE_FIELD'
 
+const [
+  REVIEW_PRODUCT,
+  REVIEW_PRODUCT_SUCCESS,
+  REVIEW_PRODUCT_FAILURE,
+] = createRequestActionTypes('review/REVIEW_PRODUCT')
+
 export const landingProduct = createAction(
   LANDING_PRODUCT,
   ({ thumbnails, title, price, discount }) => ({
@@ -46,6 +52,10 @@ export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
   value
 }))
 
+export const reviewProduct = createAction(
+  REVIEW_PRODUCT,
+  ({ user, productId, write }) => ({ user, productId, write })
+)
 const landingProductSaga = createRequestSaga(
   LANDING_PRODUCT,
   productAPI.landingProduct,
@@ -53,11 +63,13 @@ const landingProductSaga = createRequestSaga(
 const readProductSaga = createRequestSaga(READ_PRODUCT, productAPI.readProduct);
 
 const searchProductSaga = createRequestSaga(SEARCH_PRODUCT, productAPI.searchProduct)
+const reviewProductSaga = createRequestSaga(REVIEW_PRODUCT, productAPI.reviewProduct)
 
 export function* landingSaga() {
   yield takeLatest(LANDING_PRODUCT, landingProductSaga);
   yield takeLatest(READ_PRODUCT, readProductSaga);
   yield takeLatest(SEARCH_PRODUCT, searchProductSaga)
+  yield takeLatest(REVIEW_PRODUCT, reviewProductSaga)
 }
 
 const initialState = {
@@ -68,6 +80,8 @@ const initialState = {
   productInfo:{},
   word: '',
   search: {},
+  write: '',
+  review: {},
 };
 
 const landing = handleActions(
@@ -102,6 +116,14 @@ const landing = handleActions(
       ...state,
       [key]: value,
     }),
+    [REVIEW_PRODUCT_SUCCESS]: (state, { payload: review }) => ({
+      ...state,
+      review
+    }),
+    [REVIEW_PRODUCT_FAILURE]: (state, { payload : error }) => ({
+      ...state,
+      error
+    })
   },
   initialState,
 );
