@@ -28,11 +28,17 @@ const [
 
 const CHANGE_FIELD = 'search/CHANGE_FIELD'
 
-const [
-  REVIEW_PRODUCT,
-  REVIEW_PRODUCT_SUCCESS,
-  REVIEW_PRODUCT_FAILURE,
-] = createRequestActionTypes('review/REVIEW_PRODUCT')
+// const [
+//   REVIEW_PRODUCT,
+//   REVIEW_PRODUCT_SUCCESS,
+//   REVIEW_PRODUCT_FAILURE,
+// ] = createRequestActionTypes('review/REVIEW_PRODUCT')
+
+// const [
+//   READ_REVIEW,
+//   READ_REVIEW_SUCCESS,
+//   READ_REVIEW_FAILURE,
+// ] = createRequestActionTypes('read/READ_PRODUCT');
 
 export const landingProduct = createAction(
   LANDING_PRODUCT,
@@ -52,10 +58,13 @@ export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
   value
 }))
 
-export const reviewProduct = createAction(
-  REVIEW_PRODUCT,
-  ({ user, productId, write }) => ({ user, productId, write })
-)
+// export const reviewProduct = createAction(
+//   REVIEW_PRODUCT,
+//   ({ user, id, write }) => ({ user, id, write })
+// )
+
+// export const readReview = createAction(READ_REVIEW, (id) => id);
+
 const landingProductSaga = createRequestSaga(
   LANDING_PRODUCT,
   productAPI.landingProduct,
@@ -63,13 +72,15 @@ const landingProductSaga = createRequestSaga(
 const readProductSaga = createRequestSaga(READ_PRODUCT, productAPI.readProduct);
 
 const searchProductSaga = createRequestSaga(SEARCH_PRODUCT, productAPI.searchProduct)
-const reviewProductSaga = createRequestSaga(REVIEW_PRODUCT, productAPI.reviewProduct)
+// const reviewProductSaga = createRequestSaga(REVIEW_PRODUCT, productAPI.reviewProduct)
+// const readReviewSaga = createRequestSaga(READ_REVIEW, productAPI.readReview)
 
 export function* landingSaga() {
   yield takeLatest(LANDING_PRODUCT, landingProductSaga);
   yield takeLatest(READ_PRODUCT, readProductSaga);
   yield takeLatest(SEARCH_PRODUCT, searchProductSaga)
-  yield takeLatest(REVIEW_PRODUCT, reviewProductSaga)
+  // yield takeLatest(REVIEW_PRODUCT, reviewProductSaga)
+  // yield takeLatest(READ_REVIEW, readReviewSaga)
 }
 
 const initialState = {
@@ -116,14 +127,22 @@ const landing = handleActions(
       ...state,
       [key]: value,
     }),
-    [REVIEW_PRODUCT_SUCCESS]: (state, { payload: review }) => ({
-      ...state,
-      review
-    }),
-    [REVIEW_PRODUCT_FAILURE]: (state, { payload : error }) => ({
-      ...state,
-      error
-    })
+    // [REVIEW_PRODUCT_SUCCESS]: (state, { payload: review }) => ({
+    //   ...state,
+    //   review
+    // }),
+    // [REVIEW_PRODUCT_FAILURE]: (state, { payload : error }) => ({
+    //   ...state,
+    //   error
+    // }),
+    // [READ_REVIEW_SUCCESS]: (state, { payload: review }) => ({
+    //   ...state,
+    //   review,
+    // }),
+    // [READ_REVIEW_FAILURE]: (state, { payload: error }) => ({
+    //   ...state,
+    //   error,
+    // }),
   },
   initialState,
 );

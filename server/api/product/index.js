@@ -24,7 +24,7 @@ router.get('/productPaidSeller',productCtrl.productPaidSeller)
 
 router.post('/deliveryUpload', productCtrl.deliveryUpload)
 
-router.post('/review', productCtrl.reviewProduct)
-router.get('/reviewProduct', productCtrl.reviewProduct)
+router.post('/reviewUpload', productCtrl.reviewUpload)
+router.post('/readReview', productCtrl.readReview)
 
 export default router;
