@@ -3,6 +3,7 @@ import { sellerHistory } from '../../modules/user';
 import Seller from '../../components/management/Seller'
 import {useDispatch,useSelector} from 'react-redux'
 import { withRouter } from 'react-router-dom';
+import Sell from '../../components/management/Sell';
 
 
 const SellerContainer = ({match}) => {  
@@ -20,7 +21,7 @@ const SellerContainer = ({match}) => {
     },[])
     return (
         <>
-        <Seller sellhistory={history}/>
+        <Sell sellhistory={history}/>
         </>
     )
 }
