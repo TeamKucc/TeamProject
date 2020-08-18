@@ -4,6 +4,7 @@ import Seller from '../../components/management/Seller';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { deliveryUpload, changeField } from '../../modules/delivery';
+import Sell from '../../components/management/Sell';
 
 const SellerContainer = ({ match }) => {
   const dispatch = useDispatch();
@@ -44,7 +45,7 @@ const onPublish = (id) => {
     
   return (
     <>
-      <Seller
+      <Sell
         sellhistory={history}
         onChange={onChange}
         onPublish={onPublish}
