@@ -8,6 +8,17 @@ const MobileNavMenu = ({ user, onLogout }) => {
   if (user) {
     UserId = user.replace(/['"]+/g, '')
   }
+  // <li>
+  //             <Link href={`/userInfo/${UserId}`}>
+  //               my account
+  //             </Link>
+  //           </li>
+  //           <li>
+  //             <Link onClick={onLogout}>
+  //               로그아웃
+  //             </Link>
+  //           </li>
+  //         </>
   return (
     <nav className="offcanvas-navigation" id="offcanvas-navigation">
       <ul>
@@ -27,12 +38,14 @@ const MobileNavMenu = ({ user, onLogout }) => {
         ) : (
             <>
               <li>
-                <Link to={"/login"}>Login</Link>
+                <Link to={`/userInfo/${UserId}`}>
+                  my account
+              </Link>
               </li>
               <li>
-                <Link to={process.env.PUBLIC_URL + "/login-register"}>
-                  Register
-        </Link>
+                <Link onClick={onLogout}>
+                  로그아웃
+              </Link>
               </li>
             </>
           )}

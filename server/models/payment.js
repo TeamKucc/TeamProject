@@ -10,15 +10,15 @@ const paySchema = new Schema(
       type: mongoose.Types.ObjectId,
       required: true,
     },
-    seller:{
-      type:mongoose.Types.ObjectId,
-      required:true
+    seller: {
+      type: mongoose.Types.ObjectId,
+      required: true
     },
-    delivery: { type: String },
-    deliveryNumber: { type: Number },
-    info:{
-      type:Object,
-      required:true
+    delivery: { type: String ,default: "not yet"},
+    deliveryNumber: { type: String, default: "not yet" },
+    productInfo: {
+      type: Object,
+      required: true
     }
   },
   {

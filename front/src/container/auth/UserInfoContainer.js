@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import UserInfo from '../../components/auth/UserInfo';
+import Info from '../../components/auth/info'
 import { changeField, userInfo, } from '../../modules/auth';
-import { userUpdate } from '../../modules/user'
+import { userUpdate, getHistory } from '../../modules/user'
 import {withRouter} from 'react-router-dom'
 import produce from 'immer'
 
@@ -10,12 +11,13 @@ import produce from 'immer'
 const UserInfoContainer = ({ match,history }) => {
     const dispatch = useDispatch();
     const [error, setError] = useState(null)
-    const { form, auth, authError, user,_id } = useSelector(({ auth,user }) => ({
+    const { form, auth, authError, user,_id,Phistory } = useSelector(({ auth,user }) => ({
         form: auth.userInfo,
         auth: auth.auth,
         authError: auth.authError,
         user: auth.user,
-        _id:user.user
+        _id:user.user,
+        Phistory:user.history
     }));
     //인풋 변경이벤트
     const onChange = e => {
@@ -33,6 +35,7 @@ const UserInfoContainer = ({ match,history }) => {
         try {
             const userId = localStorage.getItem('userId').replace(/['"]+/g, '')
             dispatch(userInfo(userId))
+            dispatch(getHistory(userId))
         } catch (error) {
             alert("접근권한이 없습니다")
             history.push('/')
@@ -44,7 +47,7 @@ const UserInfoContainer = ({ match,history }) => {
         const { userID, name, password, passwordConfirm, email } = form;
         const userId = localStorage.getItem('userId').replace(/['"]+/g, '')
         console.log(form)
-        if ([userID, name, password, passwordConfirm, email].includes('')) {
+        if ([userID, name, password, passwordConfirm, email].includes("")) {
             setError('빈칸을 모두 입력해주세요')
             return
         }
@@ -62,7 +65,8 @@ const UserInfoContainer = ({ match,history }) => {
 
     return (
         <>
-            <UserInfo onSubmit={onSubmit} onChange={onChange} form={form} user={user} error={error} />
+            {/* <UserInfo onSubmit={onSubmit} onChange={onChange} form={form} user={user} error={error} /> */}
+            <Info onSubmit={onSubmit} onChange={onChange} form={form} user={user} error={error} Phistory={Phistory}/>
 
         </>
     )

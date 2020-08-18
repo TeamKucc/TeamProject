@@ -48,7 +48,7 @@ const OrderContainer = ({ match, history, location }) => {
 					msg += '상점 거래ID : ' + rsp.merchant_uid;
 					msg += '결제 금액 : ' + rsp.paid_amount;
 					msg += '카드 승인번호 : ' + rsp.apply_num;
-					dispatch(productPaid({ user, product: product._id, seller: product.seller, detail }))
+					dispatch(productPaid({ user, product: product._id, seller: product.seller, productInfo:product }))
 					history.push('/')
 				} else {
 					console.log(rsp)

@@ -66,16 +66,16 @@ const LoginRegister = ({ form, onChange, onSubmit }) => {
                                         <Tab.Pane eventKey="register">
                                             <div className="login-form-container">
                                                 <div className="register">
-                                                    <button>
-                                                        <Link to="">
+                                                    <Link to="/register/buyer">
+                                                        <button>
                                                             일반회원
-                                                        </Link>
                                                     </button>
-                                                    <button>
-                                                        <Link to="">
+                                                    </Link>
+                                                    <Link to="/register/deal">
+                                                        <button>
                                                             판매회원
-                                                        </Link>
                                                     </button>
+                                                    </Link>
                                                 </div>
                                             </div>
                                         </Tab.Pane>

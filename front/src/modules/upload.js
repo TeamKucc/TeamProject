@@ -106,11 +106,12 @@ export const productUpload = createAction(
   }),
 );
 
-export const productPaid = createAction(PRODUCT_PAID, ({ user, product,detail,seller }) => ({
+export const productPaid = createAction(PRODUCT_PAID, ({ user, product,detail,seller,productInfo }) => ({
   user,
   product,
   detail,
-  seller
+  seller,
+  productInfo
 }));
 export const setOriginalUpload = createAction(
   SET_ORIGINAL_UPLOAD,

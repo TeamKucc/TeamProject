@@ -44,21 +44,14 @@ export const userUpdate = async (req, res) => {
 }
 
 export const gethistory = (req, res) => {
-    Pay.findOne({ user: req.body.user }, (err, result) => {
+    console.log(req.body)
+    Pay.find({ user: req.body.user }, (err, result) => {
         if (err) return res.status(500).json({
             message: err,
             success: false
         })
-        console.log(result)
-        Product.findOne({ _id: result.product }, (err, res2) => {
-            if (err) return res.status(500).json({
-                message: 'product not found',
-                success: false
-            })
-            res.json(
-                { result, res2 },
-            );
-        })
+        res.json(result);
+
     })
 }
 
@@ -74,8 +67,9 @@ export const sellHistory = (req, res) => {
 }
 
 export const findDeal = (req, res) => {
-    console.log(req.body)
+    console.log("product:" + req.body._id)
     Deal.find({ product: req.body._id }, (err, result) => {
+        console.log(result)
         if (err) res.status(400).json({
             success: false,
             message: err
@@ -85,17 +79,21 @@ export const findDeal = (req, res) => {
 }
 
 export const makeDeal = (req, res) => {
-    console.log('call')
+    console.log('make call')
     const deal = new Deal(req.body)
-    console.log(req.body.user)
+    console.log(req.body)
+    const user = req.body.user
 
-    Deal.findOne({ user: req.body.user }, (err, result) => {
+    Deal.findOne({ $and: [{ product: req.body.product }, { user: req.body.user }] }, (err, result) => {
+        console.log("deal:" + result)
         if (result) {
+            console.log('deal exist')
             res.status(409).json({
                 success: false,
                 message: '이미 딜을 생성하셨습니다'
             })
         } else {
+            console.log('deal save')
             deal.save((err, result) => {
                 if (err) res.status(400).json({
                     success: false,
@@ -106,8 +104,6 @@ export const makeDeal = (req, res) => {
         }
     }
     )
-
-
 }
 
 
@@ -115,7 +111,6 @@ export const makeDeal = (req, res) => {
 export const joinDeal = (req, res) => {
     console.log('call')
     console.log(req.body)
-
 
     Deal.findOneAndUpdate({ _id: req.body._id }, { $push: { user: req.body.user } }, (err, result) => {
         console.log(result)
@@ -130,7 +125,6 @@ export const joinDeal = (req, res) => {
                 })
             }
         });
-
         res.status(200).json({
             message: 'join success'
         });

@@ -153,7 +153,7 @@ const Main = ({ products }) => {
                   <div key={index._id} className={`col-xl-3 col-md-6 col-lg-4 col-sm-6`}>
                     <div className={`product-wrap-2 mb-25`}>
                       <div className="product-img">
-                        <Link to={`/${product._id}`}>
+                        <Link to={`/item/${product._id}`}>
                           <img
                             className="default-img"
                             src={`${product.thumbnails[0].image.location}`}
@@ -188,7 +188,7 @@ const Main = ({ products }) => {
                           className={`title-price-wrap-2`}
                         >
                           <h3>
-                          <Link to={`/${product._id}`}>
+                          <Link to={`/item/${product._id}`}>
                               {product.title}
                             </Link>
                           </h3>

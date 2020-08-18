@@ -3,23 +3,23 @@ import ProductDescriptionInfo from '../../components/product/ProductTT'
 import ProductImageGallery from '../../components/product/ProductImageGallery'
 import { useDispatch, useSelector } from 'react-redux'
 import { readProduct, unloadProduct, changeField, reviewProduct } from '../../modules/landing';
-import { makeDeal,checkDeal } from '../../modules/user'
+import { makeDeal, checkDeal } from '../../modules/user'
 import ProductDeal from '../../components/product/ProductDeal';
 import { findDeal } from '../../modules/upload';
 import { withRouter } from 'react-router-dom';
 
 const ProductTes = ({ match, history, location }) => {
     const dispatch = useDispatch();
-    const { product, user, deal, complete,error } = useSelector(({ landing, user, upload }) => ({
+    const { product, user, deal, complete, error } = useSelector(({ landing, user, upload }) => ({
         product: landing.productDetail,
         user: user.user,
         deal: upload.deal,
-        complete:user.complete,
-        error:user.error
+        complete: user.complete,
+        error: user.error
     }))
 
     const { id } = match.params
-    
+
     useEffect(() => {
         console.log(match.params.id)
         const { id } = match.params
@@ -30,12 +30,12 @@ const ProductTes = ({ match, history, location }) => {
         }
     }, [dispatch])
 
-    const onCheck =()=>{
+    const onCheck = () => {
         dispatch(checkDeal(user))
         console.log(complete)
     }
-    
-    const onClick = () => {
+
+    const onClick = (write) => {
         dispatch(
             reviewProduct({
                 user,
@@ -56,12 +56,14 @@ const ProductTes = ({ match, history, location }) => {
         )
     }
 
-    useEffect(()=>{
-        console.log(complete)
-        if(complete){
-            history.push(`/product/order/${product._id}`)
+    useEffect(() => {
+        if (product) {
+            if (complete) {
+                history.push(`/product/order/${product._id}`)
+            }
         }
-    },[dispatch,complete])
+
+    }, [dispatch, complete])
 
     return (
         <div className="shop-area pt-100  ">

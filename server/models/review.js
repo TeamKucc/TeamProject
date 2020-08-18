@@ -10,7 +10,7 @@ const reviewSchema = new Schema({
     
     productId: {
         type: String,
-        maxlength= 50,
+        maxlength: 50,
     },
     
     write: {

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import NavMenu from "./header/NavMenu";
 import IconGroup from "./header/IconGroup";
 import MobileMenu from "./header/MobileMenu";
+import { Link } from 'react-router-dom';
 
 
 const Header = ({
@@ -56,11 +57,13 @@ const Header = ({
             <div className="col-xl-2 col-lg-2 col-md-6 col-4">
               {/* header logo */}
               {/* <Logo imageUrl="/assets/img/logo/logo.png" logoClass="logo" /> */}
-              Logo
+              <Link to="/">
+                Logo
+              </Link>
             </div>
             <div className="col-xl-8 col-lg-8 d-none d-lg-block">
               {/* Nav menu */}
-              <NavMenu/>
+              <NavMenu />
             </div>
             <div className="col-xl-2 col-lg-2 col-md-6 col-8">
               {/* Icon group */}
