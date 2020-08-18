@@ -25,9 +25,11 @@ const DeliveryContainer = () => {
     );
 	};
   
-  const onPublish = () => {
+  const onPublish = (id) => {
+    console.log(id)
 		dispatch(
 			deliveryUpload({
+        id,
 				delivery,
         deliveryNumber,
 			})

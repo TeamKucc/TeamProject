@@ -19,7 +19,7 @@ export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
 
 export const deliveryUpload = createAction(
   DELIVERY_UPLOAD,
-  ({ delivery, deliveryNumber }) => ({ delivery, deliveryNumber }),
+  ({ id, delivery, deliveryNumber }) => ({ id, delivery, deliveryNumber }),
 );
 
 const deliveryUploadSaga = createRequestSaga(

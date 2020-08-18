@@ -19,6 +19,9 @@ const UserInfoContainer = ({ match,history }) => {
         _id:user.user,
         Phistory:user.history
     }));
+
+    console.log(Phistory)
+    
     //인풋 변경이벤트
     const onChange = e => {
         const { value, name } = e.target;
@@ -67,7 +70,6 @@ const UserInfoContainer = ({ match,history }) => {
         <>
             {/* <UserInfo onSubmit={onSubmit} onChange={onChange} form={form} user={user} error={error} /> */}
             <Info onSubmit={onSubmit} onChange={onChange} form={form} user={user} error={error} Phistory={Phistory}/>
-
         </>
     )
 }

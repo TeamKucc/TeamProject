@@ -1,6 +1,6 @@
 # TeamProject
 
-#### :yellow_heart: 화요일 :yellow_heart:
+#### :yellow_heart: 수요일 :yellow_heart:
 
 #### :pushpin: 개발사항
 1. 로그인 / 회원가입 / 내정보 :man: 김선규
@@ -18,10 +18,7 @@
 3. ADMIN
 
 #### :pushpin: 수정사항
-1. 구매자 구매내역 - 컴포넌트
-2. 판매자 판매내역 - 컴포넌트 / 컨테이너
-3. 딜생성 - 구매자 이름으로 딜뜨게
-4. 
+
 #### :memo: 디자인
 1. 메인
 2. 랜딩

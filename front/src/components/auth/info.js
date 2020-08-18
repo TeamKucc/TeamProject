@@ -7,6 +7,7 @@ import Accordion from "react-bootstrap/Accordion";
 
 const Info = ({ onSubmit, form, user, onChange, error, Phistory }) => {
 
+    console.log(Phistory)
     if (!Phistory) return null
     return (
         <>
@@ -97,7 +98,7 @@ const Info = ({ onSubmit, form, user, onChange, error, Phistory }) => {
                                                                         상품:{index.productInfo.title}
                                                                     </div>
                                                                     <div className="billing-info">
-                                                                        배송현황:{index.delivery}
+                                                                        배송현황: <a href={"https://tracker.delivery/#/" + index.delivery + "/" + index.deliveryNumber } target="_blank">배송조회</a>
                                                                     </div>
                                                                 </div>
                                                             })

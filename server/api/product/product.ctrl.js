@@ -6,9 +6,11 @@ import mongoose from 'mongoose';
 import Deal from '../../models/deal';
 import Delivery from '../../models/delivery';
 import Seller from '../../models/seller';
-import Review from '../../models/review'
+import Review from '../../models/review';
 import path from 'path';
 import AWS from 'aws-sdk';
+import Payment from '../../models/payment';
+import delivery from '../../../front/src/modules/delivery';
 
 AWS.config.loadFromPath('config/awsconfig.json');
 
@@ -25,20 +27,20 @@ let upload2 = multer({
       cb(null, Date.now().toString() + extension);
     },
     acl: 'public-read-write',
-  })
-}).single('file')
+  }),
+}).single('file');
 
 let upload = multer({
   storage: multerS3({
     s3: s3,
-    bucket: "teamkucc2",
+    bucket: 'teamkucc2',
     key: function (req, file, cb) {
       let extension = path.extname(file.originalname);
-      cb(null, Date.now().toString() + extension)
+      cb(null, Date.now().toString() + extension);
     },
     acl: 'public-read-write',
-  })
-}).single('file')
+  }),
+}).single('file');
 
 export const uploadImage = (req, res) => {
   console.log(req.body);
@@ -206,45 +208,53 @@ export const getDeal = (req, res) => {
   });
 };
 
-export const deliveryUpload = (req, res) => {
-  console.log(req.body);
-  const delivery = new Delivery(req.body);
-  delivery.save((err) => {
-    if (err) return res.status(400).json({ success: false, Message: err });
-    return res.status(200).json({ success: true });
-  });
-};
-
 export const searchProduct = (req, res) => {
   console.log(req.params);
   const { id } = req.params;
-  Product.find({ title: {$regex: id} }, (err, result) => {
+  Product.find({ title: { $regex: id } }, (err, result) => {
     if (err) return res.status(400).json({ success: false, Message: err });
     res.json(result);
   });
-}
+};
 
 export const reviewUpload = (req, res) => {
   const review = new Review(req.body);
-  Deal.find({$and:[{product:req.body.product},{user:req.body.user}]},(err,result)=>{
-    if(result){
-      review.save((err) => {
-        if (err) return res.status(400).json({ success: false, Message: err });
-        return res.status(200).json({ success: true });
-      });
-    }else{
-      res.status(409).json({
-        message:'Please Buy product',
-        success:false
-      })
-    }
-  })
+  Deal.find(
+    { $and: [{ product: req.body.product }, { user: req.body.user }] },
+    (err, result) => {
+      if (result) {
+        review.save((err) => {
+          if (err)
+            return res.status(400).json({ success: false, Message: err });
+          return res.status(200).json({ success: true });
+        });
+      } else {
+        res.status(409).json({
+          message: 'Please Buy product',
+          success: false,
+        });
+      }
+    },
+  );
 };
 
 export const readReview = (req, res) => {
-  console.log("readReview: " + req.body.id)
+  console.log('readReview: ' + req.body.id);
   Review.find({ id: req.body.id }, (err, result) => {
     if (err) return res.status(400).json({ success: false, Message: err });
     return res.json(result);
   });
+};
+
+export const deliveryUpload = (req, res) => {
+  console.log(req.body);
+  const { id, delivery, deliveryNumber } = req.body;
+  Payment.findOneAndUpdate(
+    { _id: id },
+    { $set: { delivery: delivery, deliveryNumber: deliveryNumber } },
+    (err) => {
+      if (err) return res.status(400).json({ success: false, Message: err });
+      return res.status(200).json({ success: true });
+    },
+  );
 };
