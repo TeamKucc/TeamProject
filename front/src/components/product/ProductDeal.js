@@ -4,7 +4,7 @@ import { makeDeal, joinDeal } from '../../modules/user'
 import { useDispatch } from 'react-redux'
 import { propTypes } from 'react-bootstrap/esm/Image';
 
-const ProductDeal = ({ user, product, deal }) => {
+const ProductDeal = ({ user, product, deal, review }) => {
     const dispatch = useDispatch()
     console.log(deal)
     const make = () => {

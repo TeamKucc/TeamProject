@@ -119,7 +119,7 @@ function Landing({ Products, onClick, cate }) {
                 </div>
                 <div className="pro-same-action pro-cart">
                   <a
-                    href={product._id}
+                    href={'/item/' + product._id}
                     rel="noopener noreferrer"
                     // target="_blank"
                   >
@@ -212,7 +212,7 @@ function Landing({ Products, onClick, cate }) {
                 </div>
                 <div className="pro-same-action pro-cart">
                   <a
-                    href={product._id}
+                    href={'/item/' + product._id}
                     rel="noopener noreferrer"
                     // target="_blank"
                   >

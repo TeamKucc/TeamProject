@@ -91,4 +91,5 @@ export const findDeal = _id =>
 
 export const searchProduct = (id) => client.post(`/api/product/searchProduct/${id}`)
 
-export const reviewProduct = ({ user, id, write }) => client.post('/api/product/review', { user, id, write })
+export const reviewUpload = ({ user, id, write }) => client.post('/api/product/reviewUpload', { user, id, write })
+export const readReview = (id) => client.post('/api/product/readReview', {id})

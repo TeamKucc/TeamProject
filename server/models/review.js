@@ -1,18 +1,14 @@
 import mongoose, { Schema } from 'mongoose';
 
-
 const reviewSchema = new Schema({
-
     user: {
         type: mongoose.Types.ObjectId,
         required: true
     },
-    
-    productId: {
+    id: {
         type: String,
         maxlength: 50,
     },
-    
     write: {
         type: String,
         maxlength: 50,

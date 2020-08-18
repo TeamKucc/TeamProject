@@ -224,19 +224,26 @@ export const searchProduct = (req, res) => {
   });
 }
 
-export const reviewProduct = (req, res) => {
-  console.log(req.body);
-  const product = new Product(req.body);
-
-  product.save((err) => {
-    if (err) return res.status(400).json({ success: false, Message: err });
-    return res.status(200).json({ success: true });
-  });
+export const reviewUpload = (req, res) => {
+  const review = new Review(req.body);
+  Deal.find({$and:[{product:req.body.product},{user:req.body.user}]},(err,result)=>{
+    if(result){
+      review.save((err) => {
+        if (err) return res.status(400).json({ success: false, Message: err });
+        return res.status(200).json({ success: true });
+      });
+    }else{
+      res.status(409).json({
+        message:'Please Buy product',
+        success:false
+      })
+    }
+  })
 };
 
 export const readReview = (req, res) => {
-  const { id } = req.params;
-  Review.findOne({ _id: id }, (err, result) => {
+  console.log("readReview: " + req.body.id)
+  Review.find({ id: req.body.id }, (err, result) => {
     if (err) return res.status(400).json({ success: false, Message: err });
     return res.json(result);
   });
