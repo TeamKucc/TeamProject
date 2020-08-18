@@ -8,15 +8,15 @@ import { withRouter } from 'react-router-dom';
 const SellerContainer = ({match}) => {  
     
     const dispatch = useDispatch()
-    const {history}  = useSelector(({user})=>({
-        history:user.seller
+    const {history,user}  = useSelector(({user})=>({
+        history:user.seller,
+        user:user.user
     }))
 
 
     useEffect(()=>{
-        const {id} = match.params
-        console.log(id)
-        dispatch(sellerHistory(id))
+        console.log(user)
+        dispatch(sellerHistory(user))
     },[])
     return (
         <>
