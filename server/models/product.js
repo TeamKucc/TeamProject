@@ -1,6 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 
 
+
 const productSchema = new Schema({
 
   seller: {
@@ -49,14 +50,13 @@ const productSchema = new Schema({
 
   enable: {
     type: Boolean,
-    default: null
+    default: true
   },
-
   created:{
     type:Date,
     default:Date.now
-  },
-
+  }
+,
   category:{
     type:String,
     default: null
@@ -65,18 +65,8 @@ const productSchema = new Schema({
   versionkey:false,
 });
 
-productSchema.index(
-  {
-    title: 'text',
-    description: 'text',
-  },
-  {
-    weights: {
-      name: 5,
-      description: 1,
-    },
-  },
-);
+
+
 
 const Product = mongoose.model('Product', productSchema);
 export default Product;

@@ -24,6 +24,7 @@ import SellerPage from '../pages/SellerPage';
 import OrderPage from '../pages/OrderPage'
 import RegisterCompletePage from '../pages/RegisterCompletePage'
 import SearchPage from '../pages/SearchPage'
+import TimeTest from './common/Timer'
 
 const App = () => {
   useEffect(() => {
@@ -42,7 +43,7 @@ const App = () => {
       <Route component={Loading} path="loading" />
       <Route component={UploadProductPage} exact path="/product/upload" />
       <Route component={StockPage} exact path="/product/stock" />
-      <Route component={SellerPage} exact path="/seller/paid/:id"/>
+      <Route component={SellerPage} exact path="/seller/paid" />
       <Route component={ProductPage} path="/item/:id" exact />
       <Route component={StockDetailPage} exact path="/product/upload/:id" />
       <Route component={UserHistory} exact path="/user/userhistory" />
@@ -52,6 +53,7 @@ const App = () => {
       <Route component={OrderPage} path="/product/order/:id" exact />
       <Route component={RegisterCompletePage} path="/register/complete" exact />
       <Route component={SearchPage} path="/product/search/:id" exact />
+      <Route component={TimeTest} path="/time/test/" exact />
 
       {/* 임시택배조회페이지 */}
       <Route component={DeliveryPage} exact path="/product/delivery" />

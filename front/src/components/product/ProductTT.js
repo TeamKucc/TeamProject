@@ -39,7 +39,7 @@ const ProductDescriptionInfo = ({
             </div>
             <div className="pro-details-quality">
                 <div className="pro-details-cart btn-hover">
-                    {product.stock > 0 ? (
+                    {product.stock > 0 && product.enable ? (
                         <button className="btn-full" onClick={onCheck}>
                             결제하기
                         </button>

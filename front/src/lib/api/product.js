@@ -75,12 +75,12 @@ export const readProduct = (id) =>
   client.post(`/api/product/readProduct/${id}`);
 export const removeProduct = ({ _id }) => client.delete(`/api/product/${_id}`);
 
-export const productPaid = ({ user, product,detail,seller,productInfo }) =>
-  client.post('/api/product/paid', { user, product,detail,seller,productInfo });
+export const productPaid = ({ user, product, detail, seller, productInfo }) =>
+  client.post('/api/product/paid', { user, product, detail, seller, productInfo });
 export const stockDetail = (id) =>
 
   client.post(`/api/product/stockDetail/${id}`);
-  
+
 export const deliveryUpload = ({ id, delivery, deliveryNumber }) =>
   client.post('/api/product/deliveryUpload', { id, delivery, deliveryNumber });
 
@@ -93,4 +93,6 @@ export const findDeal = _id =>
 export const searchProduct = (id) => client.post(`/api/product/searchProduct/${id}`)
 
 export const reviewUpload = ({ user, id, write }) => client.post('/api/product/reviewUpload', { user, id, write })
-export const readReview = (id) => client.post('/api/product/readReview', {id})
+export const readReview = (id) => client.post('/api/product/readReview', { id })
+
+export const endTime = id => client.post('/api/product/endTime', id)

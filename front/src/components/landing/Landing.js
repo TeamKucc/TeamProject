@@ -8,13 +8,12 @@ import {
 
 function Landing({ Products, onClick, cate }) {
   const [layout, setLayout] = useState('grid three-column');
-
+  
   const productCount = Products.length;
 
   let Prod = Object.keys(Products).map(function (key) {
     return Products[key];
   });
-
   const uniqueCategories = getIndividualCategories(Prod);
 
   const changeCategory = (cate) => {
@@ -100,12 +99,12 @@ function Landing({ Products, onClick, cate }) {
                     alt=""
                   />
                 ) : (
-                  <img
-                    className="hover-img"
-                    src={`${product.thumbnails[0].image.location}`}
-                    alt=""
-                  />
-                )}
+                    <img
+                      className="hover-img"
+                      src={`${product.thumbnails[0].image.location}`}
+                      alt=""
+                    />
+                  )}
               </Link>
               <div className="product-action">
                 <div className="pro-same-action pro-wishlist">
@@ -121,7 +120,7 @@ function Landing({ Products, onClick, cate }) {
                   <a
                     href={'/item/' + product._id}
                     rel="noopener noreferrer"
-                    // target="_blank"
+                  // target="_blank"
                   >
                     {' '}
                     제품상세{' '}
@@ -146,8 +145,8 @@ function Landing({ Products, onClick, cate }) {
                   <ProductRating ratingValue={product.stock} />
                 </div>
               ) : (
-                ''
-              )}
+                  ''
+                )}
               <div className="product-price">
                 {product.discount !== null ? (
                   <Fragment>
@@ -155,8 +154,8 @@ function Landing({ Products, onClick, cate }) {
                     <span className="old">{product.price}</span>
                   </Fragment>
                 ) : (
-                  <span>{product.discount} </span>
-                )}
+                    <span>{product.discount} </span>
+                  )}
               </div>
             </div>
           </div>
@@ -193,12 +192,12 @@ function Landing({ Products, onClick, cate }) {
                     alt=""
                   />
                 ) : (
-                  <img
-                    className="hover-img"
-                    src={`${product.thumbnails[0].image.location}`}
-                    alt=""
-                  />
-                )}
+                    <img
+                      className="hover-img"
+                      src={`${product.thumbnails[0].image.location}`}
+                      alt=""
+                    />
+                  )}
               </Link>
               <div className="product-action">
                 <div className="pro-same-action pro-wishlist">
@@ -214,7 +213,7 @@ function Landing({ Products, onClick, cate }) {
                   <a
                     href={'/item/' + product._id}
                     rel="noopener noreferrer"
-                    // target="_blank"
+                  // target="_blank"
                   >
                     {' '}
                     제품상세{' '}
@@ -239,8 +238,8 @@ function Landing({ Products, onClick, cate }) {
                   <ProductRating ratingValue={product.stock} />
                 </div>
               ) : (
-                ''
-              )}
+                  ''
+                )}
               <div className="product-price">
                 {product.discount !== null ? (
                   <Fragment>
@@ -248,8 +247,8 @@ function Landing({ Products, onClick, cate }) {
                     <span className="old">{product.price}</span>
                   </Fragment>
                 ) : (
-                  <span>{product.discount} </span>
-                )}
+                    <span>{product.discount} </span>
+                  )}
               </div>
             </div>
           </div>
@@ -300,8 +299,8 @@ function Landing({ Products, onClick, cate }) {
                               })}
                             </ul>
                           ) : (
-                            'No categories found'
-                          )}
+                              'No categories found'
+                            )}
                         </div>
                       </div>
                     </div>

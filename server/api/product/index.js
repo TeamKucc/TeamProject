@@ -27,4 +27,6 @@ router.post('/deliveryUpload', productCtrl.deliveryUpload)
 router.post('/reviewUpload', productCtrl.reviewUpload)
 router.post('/readReview', productCtrl.readReview)
 
+router.post('/endTime',productCtrl.endTime)
+
 export default router;

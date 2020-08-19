@@ -1,8 +1,37 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Swiper from 'react-id-swiper';
-
+import Timer from './Timer'
 const Main = ({ products }) => {
+  const [start, setStart] = useState(0);
+  const [end, setEnd] = useState(0)
+  const [tresult, setResult] = useState(null)
+
+  useEffect(() => {
+    setTimeout(() => {
+      // count()
+    }, 1000)
+  })
+
+
+  function count() {
+    setStart(new Date().getTime())
+    setEnd(new Date().getTime())
+    let distance = end - start
+    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    if (days === 0) {
+      let result = hours + "h "
+        + minutes + "m " + seconds + "s "
+      setResult(result)
+    } else {
+      let result = days + "day " + hours + "h "
+        + minutes + "m " + seconds + "s "
+      setResult(result)
+    }
+  }
   let prod = Object.keys(products).map(function (key) {
     return products[key];
   });
@@ -79,7 +108,7 @@ const Main = ({ products }) => {
                       style={{
                         backgroundImage: `url(${
                           'http://localhost:4000/uploads/main/' + single.image
-                        })`,
+                          })`,
                       }}
                     >
                       <div className="container">
@@ -147,12 +176,14 @@ const Main = ({ products }) => {
             <p>새로운 딜목록</p>
           </div>
           <div className="row five-column">
-          <Fragment>
-            {prod.map((product, index) => {
-              return (
+            <Fragment>
+              {prod.map((product, index) => {
+
+                return (
                   <div key={index._id} className={`col-xl-3 col-md-6 col-lg-4 col-sm-6`}>
                     <div className={`product-wrap-2 mb-25`}>
                       <div className="product-img">
+                        <Timer product={product} />
                         <Link to={`/item/${product._id}`}>
                           <img
                             className="default-img"
@@ -167,12 +198,12 @@ const Main = ({ products }) => {
                               alt=""
                             />
                           ) : (
-                            <img
-                              className="hover-img"
-                              src={`${product.thumbnails[0].image.location}`}
-                              alt=""
-                            />
-                          )}
+                              <img
+                                className="hover-img"
+                                src={`${product.thumbnails[0].image.location}`}
+                                alt=""
+                              />
+                            )}
                         </Link>
                         <div className="product-action-2">
                           <button
@@ -188,27 +219,27 @@ const Main = ({ products }) => {
                           className={`title-price-wrap-2`}
                         >
                           <h3>
-                          <Link to={`/item/${product._id}`}>
+                            <Link to={`/item/${product._id}`}>
                               {product.title}
                             </Link>
                           </h3>
                           <div className="price-2">
-                              <Fragment>
-                                <span>
-                                  {product.discount}
-                                </span>{' '}
-                                <span className="old">
-                                  {product.price}
-                                </span>
-                              </Fragment>
+                            <Fragment>
+                              <span>
+                                {product.discount}
+                              </span>{' '}
+                              <span className="old">
+                                {product.price}
+                              </span>
+                            </Fragment>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-              );
-            })}
-          </Fragment>
+                );
+              })}
+            </Fragment>
           </div>
         </div>
       </div>

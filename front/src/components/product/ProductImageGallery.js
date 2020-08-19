@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React, { Fragment, useEffect, useState } from "react";
 import { LightgalleryProvider, LightgalleryItem } from "react-lightgallery";
 import Swiper from "react-id-swiper";
+import Timer from '../common/Timer'
 
 const ProductImageGallery = ({ product }) => {
     const [gallerySwiper, getGallerySwiper] = useState(null);
@@ -37,35 +38,19 @@ const ProductImageGallery = ({ product }) => {
         loopedSlides: 4,
         touchRatio: 0.2,
         freeMode: true,
-        loop: true,
+        loop: false,
         slideToClickedSlide: true,
         navigation: {
             nextEl: ".swiper-button-next",
             prevEl: ".swiper-button-prev",
         },
-        renderPrevButton: () => (
-            <button className="swiper-button-prev ht-swiper-button-nav">
-                <i className="pe-7s-angle-left" />
-            </button>
-        ),
-        renderNextButton: () => (
-            <button className="swiper-button-next ht-swiper-button-nav">
-                <i className="pe-7s-angle-right" />
-            </button>
-        )
+        
     };
     return (
         <Fragment>
             <div className="product-large-image-wrapper">
-                {product.discount || product.new ? (
-                    <div className="product-img-badges">
-                        {product.discount ? (
-                            <span className="pink">-{product.discount}%</span>
-                        ) : (
-                                ""
-                            )}
-                        {product.new ? <span className="purple">New</span> : ""}
-                    </div>
+                {product.enable ? (
+                        <Timer product={product}/>
                 ) : (
                         ""
                     )}

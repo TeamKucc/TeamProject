@@ -57,12 +57,13 @@ export const login = (req, res) => {
     user.verify(req.body.password, (err, isMatch) => {
       if (!isMatch) return res.json({ login: false, message: "wrong password" })
       user.generateToken((err, user) => {
+        console.log(user)
         if (err) return res.status(400).send(err);
         res.cookie("w_authEXP", user.tokenExp)
         res.cookie("w_auth", user.token)
           .status(200)
           .json({
-            login: true, userId: user._id
+            login: true, userId: user._id,role:user.role
           })
       })
     })

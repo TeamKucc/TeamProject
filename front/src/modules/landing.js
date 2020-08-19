@@ -28,17 +28,11 @@ const [
 
 const CHANGE_FIELD = 'search/CHANGE_FIELD'
 
-// const [
-//   REVIEW_PRODUCT,
-//   REVIEW_PRODUCT_SUCCESS,
-//   REVIEW_PRODUCT_FAILURE,
-// ] = createRequestActionTypes('review/REVIEW_PRODUCT')
-
-// const [
-//   READ_REVIEW,
-//   READ_REVIEW_SUCCESS,
-//   READ_REVIEW_FAILURE,
-// ] = createRequestActionTypes('read/READ_PRODUCT');
+const [
+  END_TIME,
+  END_TIME_SUCCESS,
+  END_TIME_FAILURE
+] = createRequestActionTypes('product/END_TIME');
 
 export const landingProduct = createAction(
   LANDING_PRODUCT,
@@ -57,6 +51,7 @@ export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
   key,
   value
 }))
+export const endTime = createAction(END_TIME,id=>id)
 
 // export const reviewProduct = createAction(
 //   REVIEW_PRODUCT,
@@ -75,12 +70,13 @@ const searchProductSaga = createRequestSaga(SEARCH_PRODUCT, productAPI.searchPro
 // const reviewProductSaga = createRequestSaga(REVIEW_PRODUCT, productAPI.reviewProduct)
 // const readReviewSaga = createRequestSaga(READ_REVIEW, productAPI.readReview)
 
+const endTimeSaga = createRequestSaga(END_TIME,productAPI.endTime)
+
 export function* landingSaga() {
   yield takeLatest(LANDING_PRODUCT, landingProductSaga);
   yield takeLatest(READ_PRODUCT, readProductSaga);
   yield takeLatest(SEARCH_PRODUCT, searchProductSaga)
-  // yield takeLatest(REVIEW_PRODUCT, reviewProductSaga)
-  // yield takeLatest(READ_REVIEW, readReviewSaga)
+  yield takeLatest(END_TIME,endTimeSaga)
 }
 
 const initialState = {
@@ -88,11 +84,12 @@ const initialState = {
   error: null,
   product: null,
   productDetail: null,
-  productInfo:{},
+  productInfo: {},
   word: '',
   search: {},
   write: '',
   review: {},
+  time:null,
 };
 
 const landing = handleActions(
@@ -115,7 +112,7 @@ const landing = handleActions(
       error,
     }),
     [UNLOAD_PRODUCT]: () => initialState,
-    [SEARCH_PRODUCT_SUCCESS]: (state, { payload : search }) => ({
+    [SEARCH_PRODUCT_SUCCESS]: (state, { payload: search }) => ({
       ...state,
       search
     }),
@@ -127,22 +124,14 @@ const landing = handleActions(
       ...state,
       [key]: value,
     }),
-    // [REVIEW_PRODUCT_SUCCESS]: (state, { payload: review }) => ({
-    //   ...state,
-    //   review
-    // }),
-    // [REVIEW_PRODUCT_FAILURE]: (state, { payload : error }) => ({
-    //   ...state,
-    //   error
-    // }),
-    // [READ_REVIEW_SUCCESS]: (state, { payload: review }) => ({
-    //   ...state,
-    //   review,
-    // }),
-    // [READ_REVIEW_FAILURE]: (state, { payload: error }) => ({
-    //   ...state,
-    //   error,
-    // }),
+    [END_TIME_SUCCESS]:(state,{payload:time})=>({
+      ...state,
+      time
+    }),
+    [END_TIME_FAILURE]:(state,{payload:error})=>({
+      ...state,
+      error
+    })
   },
   initialState,
 );

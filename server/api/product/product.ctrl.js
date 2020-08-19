@@ -258,3 +258,16 @@ export const deliveryUpload = (req, res) => {
     },
   );
 };
+
+export const endTime = (req,res)=>{
+  console.log('endTime call')
+  console.log(req.body)
+  Product.findOneAndUpdate({_id:req.body.product},{enable:false},(err,result)=>{
+    if(err) return res.status(409).json({
+      message:err,
+      success:false
+    })
+
+    res.status(200).json(result)
+  })
+}

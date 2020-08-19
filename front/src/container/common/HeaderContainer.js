@@ -20,6 +20,7 @@ const HeaderContainer = (props) => {
         console.log('logout call')
         dispatch(logout())
         localStorage.removeItem('userId')
+        localStorage.removeItem('role')
         props.history.push('/')
     }
     // <HEAD onLogout={onLogout} user={user} />
