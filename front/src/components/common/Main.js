@@ -205,14 +205,14 @@ const Main = ({ products }) => {
                               />
                             )}
                         </Link>
-                        <div className="product-action-2">
+                        {/* <div className="product-action-2">
                           <button
                             // onClick={() => setModalShow()}
                             title="미리보기"
                           >
                             <i className="fa fa-eye"></i>
                           </button>
-                        </div>
+                        </div> */}
                       </div>
                       <div className="product-content-2">
                         <div

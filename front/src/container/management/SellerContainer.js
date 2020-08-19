@@ -45,7 +45,7 @@ const onPublish = (id) => {
     
   return (
     <>
-      <Sell
+      <Seller
         sellhistory={history}
         onChange={onChange}
         onPublish={onPublish}
