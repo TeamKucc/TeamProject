@@ -1,7 +1,5 @@
 # TeamProject
 
-#### :yellow_heart: 수요일 :yellow_heart:
-
 #### :pushpin: 개발사항
 1. 로그인 / 회원가입 / 내정보 :man: 김선규
 2. 상품랜딩 / 상품상세 / 결제상세 :woman: 어성미 :man: 김선규
@@ -18,6 +16,8 @@
 3. ADMIN
 
 #### :pushpin: 수정사항
+1. 디자인 - 제품등록 / 상품상세
+2. 구현 - 리뷰 별점 / ADMIN
 
 #### :memo: 디자인
 1. 메인

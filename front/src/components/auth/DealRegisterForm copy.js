@@ -1,27 +1,43 @@
-import PropTypes from 'prop-types';
-import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
-import Tab from 'react-bootstrap/Tab';
-import Nav from 'react-bootstrap/Nav';
+import React from 'react';
+import styled from 'styled-components';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+      width: '25ch',
+    },
+  },
+}));
+
+const ErrorMsg = styled.div`
+  color: red;
+  text-align: center;
+  font-size: 0.875rem;
+  margin-top: 1rem;
+`;
+
+const SuccessMsg = styled.div`
+  color: blue;
+  text-align: center;
+  font-size: 0.875rem;
+  margin-top: 1rem;
+`;
 
 const RegisterForm = ({
   form,
   onChange,
   onSubmit,
   success,
+  fail,
   error,
   onClick,
 }) => {
-  console.log(success)
+  const classes = useStyles();
 
-  const [disabled, setDisabled] = useState(false)
-
-  const message = (success) => {
-    if(success == '') return ''
-    else if(success == true) {
-      return '사업자번호 인증에 성공하였습니다'
-    }
-  }
   return (
     <Fragment>
       {/* breadcrumb */}
@@ -34,7 +50,7 @@ const RegisterForm = ({
                   <Nav variant="pills" className="login-register-tab-list">
                     <Nav.Item>
                       <Nav.Link>
-                        <h4>SELLER</h4>
+                        <h4>BUYER</h4>
                       </Nav.Link>
                     </Nav.Item>
                   </Nav>
@@ -78,29 +94,11 @@ const RegisterForm = ({
                               value={form.email}
                               onChange={onChange}
                             />
-                            <input
-                              type="text"
-                              name="business"
-                              placeholder="Business Number"
-                              value={form.business}
-                              onChange={onChange}
-                              disabled={success == true ? true : false}
-                            />
-                            <div >
-                              {/* {success == '' ? '' : (success == true ? '사업자 성공' : '사업자 실패')} */}
-                            {message(success)}
-                            </div>
-                            <br />
                             <div className="button-box">
-                              <button type="button" className="mr-20" onClick={onClick}>
-                                <span>Business Confirm</span>
-                              </button>
                               <button type="submit">
                                 <span>Register</span>
                               </button>
                             </div>
-                            <br />
-                            {error}
                           </form>
                         </div>
                       </div>
@@ -113,11 +111,65 @@ const RegisterForm = ({
         </div>
       </div>
     </Fragment>
+    // <div>
+    //   <form
+    //     className={classes.root}
+    //     noValidate
+    //     autoComplete="off"
+    //     onSubmit={onSubmit}
+    //   >
+    //     <TextField
+    //       id="standard-basic"
+    //       name="userID"
+    //       label="ID"
+    //       value={form.userID}
+    //       onChange={onChange}
+    //     />
+    //     <TextField
+    //       id="standard-basic"
+    //       name="name"
+    //       label="Name"
+    //       value={form.name}
+    //       onChange={onChange}
+    //     />
+    //     <TextField
+    //       id="standard-basic"
+    //       name="password"
+    //       label="password"
+    //       type="password"
+    //       value={form.password}
+    //       onChange={onChange}
+    //     />
+    //     <TextField
+    //       id="standard-basic"
+    //       name="passwordConfirm"
+    //       label="password-confirm"
+    //       type="password"
+    //       value={form.passwordConfirm}
+    //       onChange={onChange}
+    //     />
+    //     <TextField
+    //       id="standard-basic"
+    //       name="email"
+    //       label="Email"
+    //       value={form.email}
+    //       onChange={onChange}
+    //     />
+    //     <TextField
+    //       id="standard-basic"
+    //       name="business"
+    //       label="Business"
+    //       value={form.business}
+    //       onChange={onChange}
+    //     />
+    //     <SuccessMsg>{success}</SuccessMsg>
+    //     <ErrorMsg>{fail}</ErrorMsg>
+    //     <Button onClick={onClick}>사업자번호조회</Button>
+    //     <ErrorMsg>{error}</ErrorMsg>
+    //     <button type="submit">완료</button>
+    //   </form>
+    // </div>
   );
-};
-
-RegisterForm.propTypes = {
-  location: PropTypes.object,
 };
 
 export default RegisterForm;
