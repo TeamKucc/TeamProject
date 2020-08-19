@@ -71,7 +71,7 @@ const IconGroup = ({
                     <Link to={"/login"}>Login</Link>
                   </li>
                   <li>
-                    <Link to={process.env.PUBLIC_URL + "/register"}>
+                  <Link to={"/register"}>
                       Register
                     </Link>
                   </li>

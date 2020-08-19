@@ -44,7 +44,7 @@ const ProductTes = ({ match, history, location }) => {
         dispatch(checkDeal(user))
     }
 
-    const onClick = (write) => {
+    const onClick = () => {
         dispatch(
             reviewUpload({
                 user,
@@ -55,6 +55,7 @@ const ProductTes = ({ match, history, location }) => {
     }
 
     const onChange = (e) => {
+        console.log('call')
         const { value, name } = e.target
         dispatch(
             changeField({
@@ -69,11 +70,13 @@ const ProductTes = ({ match, history, location }) => {
             history.push(`/product/order/${product._id}`)
         }
     },[dispatch,complete])
+
     useEffect(()=>{
         if(error){
             alert('상품을 구매해주세요!')
         }
     },[dispatch,error])
+
     return (
         <div className="shop-area pt-100  ">
             <div className="container">

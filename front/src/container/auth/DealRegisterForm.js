@@ -11,8 +11,7 @@ import { withRouter } from 'react-router-dom';
 
 const BuyerRegisterForm = ({ history }) => {
   const dispatch = useDispatch();
-  const [success, setSuccess] = useState(null);
-  const [fail, setFail] = useState(null);
+  const [success, setSuccess] = useState('');
   const [error, setError] = useState(null);
   const { form, auth, authError, user, businessState, businessError } = useSelector(({ auth, user }) => ({
     form: auth.dregister,
@@ -40,6 +39,7 @@ const BuyerRegisterForm = ({ history }) => {
   const { business } = form
 
   const onSubmit = (e) => {
+    console.log("call")
     e.preventDefault();
     const { userID, name, password, passwordConfirm, email } = form;
 
@@ -53,8 +53,9 @@ const BuyerRegisterForm = ({ history }) => {
       setError('비밀번호가 다릅니다');
       return;
     }
-    if(success != '사업자 번호인증 성공') {
+    if(success != true) {
       setError('사업자번호 인증이 필요합니다')
+      return;
     }
     dispatch(dregister({ userID, name, password, business, email }));
     history.push('/register/complete')
@@ -73,21 +74,10 @@ const BuyerRegisterForm = ({ history }) => {
     dispatch(initializeForm('dregister'));
   }, [dispatch]);
 
-
-  useEffect(()=>{
-    if(businessError){
-      setFail('사업자 번호인증 실패')
-      setSuccess('')
-      return
-    }
-  },[businessError])
-
   useEffect(()=>{
     if(businessState){
-      setSuccess('사업자 번호인증 성공')
+      setSuccess(true)
       setError('')
-      setFail('')
-      return
     }
   }, [businessState])
 
@@ -122,12 +112,11 @@ const BuyerRegisterForm = ({ history }) => {
     <div>
       <DealRegisterForm
         type="dregister"
-        form={form}
+        form="form"
         onChange={onChange}
         onSubmit={onSubmit}
         onClick={onClick}
         success={success}
-        fail={fail}
         error={error}
       />
     </div>
