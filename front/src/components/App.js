@@ -26,12 +26,14 @@ import RegisterCompletePage from '../pages/RegisterCompletePage'
 import SearchPage from '../pages/SearchPage'
 import TimeTest from './common/Timer'
 
+
 const App = () => {
   useEffect(() => {
   }, [])
   return (
     <>
       {/* <Route component={LandingPage} exact path={['/home', '/']} /> */}
+      
       <Route component={LoginPage} exact path="/login" />
       <Route component={MainPage} exact path={['/home', '/']} />
       <Route component={LandingPage} path="/product/landing/:id" exact />
@@ -43,7 +45,7 @@ const App = () => {
       <Route component={Loading} path="loading" />
       <Route component={UploadProductPage} exact path="/product/upload" />
       <Route component={StockPage} exact path="/product/stock" />
-      <Route component={SellerPage} exact path="/seller/paid"/>
+      <Route component={SellerPage} exact path="/seller/paid" />
       <Route component={ProductPage} path="/item/:id" exact />
       <Route component={StockDetailPage} exact path="/product/upload/:id" />
       <Route component={UserHistory} exact path="/user/userhistory" />

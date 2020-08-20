@@ -16,6 +16,7 @@ import createSagaMiddleware from 'redux-saga';
 import rootReducer, { rootSaga } from './modules'
 
 import {tempSetUser,check} from './modules/user'
+import jsonServerProvider from 'ra-data-json-server';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));

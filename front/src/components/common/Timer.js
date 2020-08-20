@@ -15,7 +15,9 @@ const TimeTest = ({ match, product }) => {
                 count()
             }, 1000)
         }
-
+       return()=>{
+           clearTimeout()
+       }
     })
     if (!product) return null
     const count = () => {

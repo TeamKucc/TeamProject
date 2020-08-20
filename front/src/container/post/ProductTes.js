@@ -8,6 +8,7 @@ import { makeDeal,checkDeal } from '../../modules/user'
 import ProductDeal from '../../components/product/ProductDeal';
 import { findDeal } from '../../modules/upload';
 import { withRouter } from 'react-router-dom';
+import ProductDescriptionTab from '../../components/product/ReviewTap'
 
 const ProductTes = ({ match, history, location }) => {
     const dispatch = useDispatch();
@@ -96,6 +97,7 @@ const ProductTes = ({ match, history, location }) => {
                             <ProductDeal user={user} product={product} deal={deal} />
                         </div>
                     </div>
+                    <ProductDescriptionTab/>
                 </div>
             </div>
         </div>
