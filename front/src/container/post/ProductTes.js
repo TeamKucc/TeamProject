@@ -11,16 +11,18 @@ import { withRouter } from 'react-router-dom';
 
 const ProductTes = ({ match, history, location }) => {
     const dispatch = useDispatch();
-    const { product, user, deal, complete,error, write, review } = useSelector(({ landing, user, upload, review }) => ({
+    const { product, user, deal, complete,error, write, review, rating } = useSelector(({ landing, user, upload, review }) => ({
         product: landing.productDetail,
         user: user.user,
         deal: upload.deal,
         complete:user.complete,
         error:review.error,
         write: review.write,
+        rating: review.rating,
         review: review.review,
     }))
     
+    console.log(review)
     const { id } = match.params
 
     useEffect(() => {
@@ -50,17 +52,28 @@ const ProductTes = ({ match, history, location }) => {
                 user,
                 id,
                 write,
+                rating,
             })
         )
     }
 
     const onChange = (e) => {
-        console.log('call')
+        console.log(e)
         const { value, name } = e.target
         dispatch(
             changeField({
                 key: name,
                 value,
+            })
+        )
+    }
+
+    const changeRating = (value) => {
+        console.log(value)
+        dispatch(
+            changeField({
+                key: "rating",
+                value
             })
         )
     }
@@ -94,6 +107,8 @@ const ProductTes = ({ match, history, location }) => {
                             onCheck={onCheck}
                             onChange={onChange}
                             onClick={onClick}
+                            changeRating={changeRating}
+                            review={review}
                         />
                         <div>
                             <ProductDeal user={user} product={product} deal={deal} />

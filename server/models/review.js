@@ -12,6 +12,9 @@ const reviewSchema = new Schema({
     write: {
         type: String,
         maxlength: 50,
+    },
+    rating: {
+        type: Number,
     }
 });
 
