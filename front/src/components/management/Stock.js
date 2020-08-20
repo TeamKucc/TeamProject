@@ -13,7 +13,7 @@ import ImageSlider from './ImageSlider';
 
 // 상품코드, 상품명, 창고재고, 주문대기, 재고수정, 판매, 품절, 수정버튼
 const Stock = ({ Products, onCheckedChange }) => {
-
+  
   let Prod = Object.keys(Products).map(function (key) {
     return Products[key];
   });

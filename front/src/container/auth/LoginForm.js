@@ -26,7 +26,6 @@ const LoginForm = (props) => {
             })
         )
     }
-
     const onSubmit = e => {
         e.preventDefault()
         const { userID, password } = form;

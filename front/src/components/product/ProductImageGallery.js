@@ -56,12 +56,12 @@ const ProductImageGallery = ({ product }) => {
                     )}
                 <LightgalleryProvider>
                     <Swiper {...gallerySwiperParams}>
-                        {product.thumbnails.map((key) => {
+                        {product.thumbnails.map((img) => {
                                 return (
-                                    <div key={key._id}>
+                                    <div key={img._id}>
                                         <LightgalleryItem
                                             group="any"
-                                            src={`${key.image.location}`}
+                                            src={`${img.image.location}`}
                                         >
                                             <button>
                                                 <i className="pe-7s-expand1"></i>
@@ -69,7 +69,7 @@ const ProductImageGallery = ({ product }) => {
                                         </LightgalleryItem>
                                         <div className="single-image">
                                             <img
-                                                src={`${key.image.location}`}
+                                                src={`${img.image.location}`}
                                                 className="img-fluid"
                                                 alt=""
                                             />

@@ -9,6 +9,7 @@ const TimeTest = ({ match, product }) => {
     const [end, setEnd] = useState(0)
     const [tresult, setResult] = useState(null)
     const [stop, setStop] = useState(false)
+   
     useEffect(() => {
         if (!stop) {
             setTimeout(() => {
