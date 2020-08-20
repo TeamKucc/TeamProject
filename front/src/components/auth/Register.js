@@ -1,10 +1,11 @@
 import PropTypes from "prop-types";
-import React, { Fragment } from 'react';
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import Tab from "react-bootstrap/Tab";
 import Nav from "react-bootstrap/Nav";
 
-const RegisterForm = ( { form, onChange, onSubmit }) => {
+
+const Register = ({ form, onChange, onSubmit }) => {
 
     return (
       <Fragment>
@@ -14,11 +15,16 @@ const RegisterForm = ( { form, onChange, onSubmit }) => {
             <div className="row">
               <div className="col-lg-7 col-md-12 ml-auto mr-auto">
                 <div className="login-register-wrapper">
-                  <Tab.Container defaultActiveKey="login">
+                  <Tab.Container defaultActiveKey="register">
                     <Nav variant="pills" className="login-register-tab-list">
                       <Nav.Item>
-                        <Nav.Link>
-                          <h4>BUYER</h4>
+                        <Nav.Link eventKey="login">
+                          <h4>Login</h4>
+                        </Nav.Link>
+                      </Nav.Item>
+                      <Nav.Item>
+                        <Nav.Link eventKey="register">
+                          <h4>Register</h4>
                         </Nav.Link>
                       </Nav.Item>
                     </Nav>
@@ -30,15 +36,8 @@ const RegisterForm = ( { form, onChange, onSubmit }) => {
                               <input
                                 type="text"
                                 name="userID"
-                                placeholder="ID"
-                                value={form.userID}
-                                onChange={onChange}
-                              />
-                              <input
-                                type="text"
-                                name="name"
-                                placeholder="Name"
-                                value={form.name}
+                                placeholder="Username"
+                                value={form.username}
                                 onChange={onChange}
                               />
                               <input
@@ -48,24 +47,35 @@ const RegisterForm = ( { form, onChange, onSubmit }) => {
                                 value={form.password}
                                 onChange={onChange}
                               />
-                              <input
-                                type="password"
-                                name="passwordConfirm"
-                                placeholder="Password Confirm"
-                                value={form.passwordConfirm}
-                                onChange={onChange}
-                              />
-                              <input
-                                type="email"
-                                name="email"
-                                placeholder="E-mail"
-                                value={form.email}
-                                onChange={onChange}
-                              />
                               <div className="button-box">
+                                <div className="login-toggle-btn">
+                                  <Link to={process.env.PUBLIC_URL + '/'}>
+                                    Forgot Password?
+                                  </Link>
+                                </div>
                                 <button type="submit">
-                                  <span>Register</span>
+                                  <span>Login</span>
                                 </button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </Tab.Pane>
+                      <Tab.Pane eventKey="register">
+                        <div className="login-form-container">
+                          <div className="login-register-form">
+                            <form onSubmit={onSubmit} className="text-center">
+                              <div className="button-box">
+                                <Link to="/register/buyer">
+                                  <button className="mr-50" type="submit">
+                                    <span>BUYER</span>
+                                  </button>
+                                </Link>
+                                <Link to="/register/deal">
+                                  <button type="submit">
+                                    <span>SELLER</span>
+                                  </button>
+                                </Link>
                               </div>
                             </form>
                           </div>
@@ -80,10 +90,10 @@ const RegisterForm = ( { form, onChange, onSubmit }) => {
         </div>
       </Fragment>
     );
-}
+};
 
-RegisterForm.propTypes = {
+Register.propTypes = {
     location: PropTypes.object
 };
 
-export default RegisterForm;
+export default Register;

@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter, Route } from 'react-router-dom';
 import { changeField, initializeForm, login } from '../../modules/auth'
-import AuthForm from '../../components/auth/LoginForm'
-import Login from '../../components/auth/Login'
-import { check, tempSetUser } from '../../modules/user'
+import Register from '../../components/auth/Register'
+import { tempSetUser } from '../../modules/user'
 
-const LoginForm = (props) => {
+const RegisterForm = (props) => {
     const [error, setError] = useState(null)
     const dispatch = useDispatch();
     const { form, auth, authError, user } = useSelector(({ auth, user }) => ({
@@ -72,8 +71,8 @@ const LoginForm = (props) => {
                 onSubmit={onSubmit}
                 error={error}
             /> */}
-            <Login
-                type="login"
+            <Register
+                type="register"
                 form="form"
                 onChange={onChange}
                 onSubmit={onSubmit}
@@ -82,4 +81,4 @@ const LoginForm = (props) => {
         </div>
     )
 }
-export default withRouter(LoginForm)
+export default withRouter(RegisterForm)

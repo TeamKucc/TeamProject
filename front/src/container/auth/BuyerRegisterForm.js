@@ -83,7 +83,7 @@ const BuyerRegisterForm = ({ history }) => {
         <div>
             <RegisterForm
                 type="register"
-                form={form}
+                form="form"
                 onChange={onChange}
                 onSubmit={onSubmit}
                 error={error}

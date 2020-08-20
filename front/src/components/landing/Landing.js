@@ -1,49 +1,55 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { setActiveSort, setActiveLayout } from '../../helpers/product';
 import {
   toggleShopTopFilter,
   getIndividualCategories,
-  setActiveSort,
+  // setActiveSort,
 } from '../../helpers/product';
 
 function Landing({ Products, onClick, cate }) {
-  const [layout, setLayout] = useState('grid three-column');
-  
+  // const [layout, setLayout] = useState('grid three-column');
+  const [layout, setLayout] = useState("list");
+
   const productCount = Products.length;
 
   let Prod = Object.keys(Products).map(function (key) {
     return Products[key];
   });
   const uniqueCategories = getIndividualCategories(Prod);
+  
+  const getLayout = layout => {
+    setLayout(layout);
+  };
 
   const changeCategory = (cate) => {
     switch (cate) {
       case 'fashion':
-        return "패션의류";
+        return '패션의류';
         break;
       case 'accessory':
-        return "패션잡화";
+        return '패션잡화';
         break;
       case 'beauty':
-        return "뷰티";
+        return '뷰티';
         break;
       case 'food':
-        return "식품";
+        return '식품';
         break;
       case 'baby':
-        return "출산/유아동";
+        return '출산/유아동';
         break;
       case 'digital':
-        return "디지털/가전";
+        return '디지털/가전';
         break;
       case 'interior':
-        return "인테리어";
+        return '인테리어';
         break;
       case 'sports':
-        return "스포츠/레저";
+        return '스포츠/레저';
         break;
       case 'lifestyle':
-        return "생활";
+        return '생활';
         break;
     }
   };
@@ -51,7 +57,6 @@ function Landing({ Products, onClick, cate }) {
   // 별점
   const ProductRating = ({ ratingValue }) => {
     let rating = [];
-
     for (let i = 0; i < 5; i++) {
       rating.push(<i className="fa fa-star-o" key={i}></i>);
     }
@@ -64,253 +69,253 @@ function Landing({ Products, onClick, cate }) {
     return <Fragment>{rating}</Fragment>;
   };
 
-  const renderCards = Prod.map((product, index) => {
+  const productLanding = Prod.map((product, index) => {
     if (!product) return null;
-
+    
     const category = changeCategory(cate)
     if (product.category == category) {
-      return (
-        <div key={index} className={`col-xl-4 col-sm-6 `}>
-          <div className={`product-wrap mb-25"`}>
-            <br />
-            <div className="product-img">
-              <Link to={`/item/${product._id}`}>
-                {/* {product.thumbnails.map((image, index) => {
-                return (
-                  <div key={index}>
-                    <img
-                      className="default-img"
-                      src={`${product.thumbnails[index].image.location}`}
-                      alt={`productImg-${index}`}
-                    />
+    return (
+      <Fragment>
+        <div>
+          <div className="shop-list-wrap mb-30">
+            <div className="row">
+              <div className="col-xl-4 col-md-5 col-sm-6">
+                <div className="product-list-image-wrap">
+                  <div className="product-img">
+                    <Link to={`/item/${product._id}`}>
+                      <img
+                        className="default-img img-fluid"
+                        src={`${product.thumbnails[0].image.location}`}
+                        alt={`productImg-${index}`}
+                      />
+                      {product.thumbnails.length > 1 ? (
+                        <img
+                          className="hover-img img-fluid"
+                          src={`${product.thumbnails[1].image.location}`}
+                          alt=""
+                        />
+                      ) : (
+                        <img
+                          className="hover-img"
+                          src={`${product.thumbnails[0].image.location}`}
+                          alt=""
+                        />
+                      )}
+                    </Link>
+                      <div className="product-img-badges">
+                          <span className="pink">
+                            -{product.discount}%
+                          </span>
+                      </div>
                   </div>
-                );
-              })} */}
-                <img
-                  className="default-img"
-                  src={`${product.thumbnails[0].image.location}`}
-                  alt={`productImg-${index}`}
-                />
-
-                {product.thumbnails.length > 1 ? (
-                  <img
-                    className="hover-img"
-                    src={`${product.thumbnails[1].image.location}`}
-                    alt=""
-                  />
-                ) : (
-                    <img
-                      className="hover-img"
-                      src={`${product.thumbnails[0].image.location}`}
-                      alt=""
-                    />
-                  )}
-              </Link>
-              <div className="product-action">
-                <div className="pro-same-action pro-wishlist">
-                  <a
-                    href={'/product/order/' + product._id}
-                    rel="noopener noreferrer"
-                    title="결제하기"
-                  >
-                    <i className="pe-7s-piggy" />
-                  </a>
-                </div>
-                <div className="pro-same-action pro-cart">
-                  <a
-                    href={'/item/' + product._id}
-                    rel="noopener noreferrer"
-                  // target="_blank"
-                  >
-                    {' '}
-                    제품상세{' '}
-                  </a>
-                </div>
-                <div className="pro-same-action pro-quickview">
-                  <button
-                    // onClick={() => setModalShow(true)}
-                    title="미리보기"
-                  >
-                    <i className="pe-7s-look" />
-                  </button>
                 </div>
               </div>
-            </div>
-            <div className="product-content text-center">
-              <h3>
-                <Link to={`/item/${product._id}`}>{product.title}</Link>
-              </h3>
-              {product.stock && product.stock > 0 ? (
-                <div className="product-rating">
-                  <ProductRating ratingValue={product.stock} />
-                </div>
-              ) : (
-                  ''
-                )}
-              <div className="product-price">
-                {product.discount !== null ? (
-                  <Fragment>
-                    <span>{product.discount}</span>{' '}
-                    <span className="old">{product.price}</span>
-                  </Fragment>
-                ) : (
-                    <span>{product.discount} </span>
+              <div className="col-xl-8 col-md-7 col-sm-6">
+                <div className="shop-list-content">
+                  <h3>
+                    <Link to={`/item/${product._id}`}>
+                      {product.title}
+                    </Link>
+                  </h3>
+                  <div className="product-list-price">
+                    <Fragment>
+                      <span>{product.discount}</span>{' '}
+                      <span className="old">
+                        {product.price}
+                      </span>
+                    </Fragment>
+                  </div>
+                  {product.stock && product.stock > 0 ? (
+                    <div className="rating-review">
+                      <div className="product-list-rating">
+                        <ProductRating ratingValue={product.stock} />
+                      </div>
+                    </div>
+                  ) : (
+                    ''
                   )}
+                  <p>{product.description}</p>
+
+                  <div className="shop-list-actions d-flex align-items-center">
+                    <div className="shop-list-btn btn-hover">
+                        <a
+                        href={'/item/' + product._id}
+                          rel="noopener noreferrer"
+                          target="_blank"
+                        >
+                          {' '}
+                          PRODUCT DETAIL{' '}
+                        </a>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      );
-    } else if (cate == 'all') {
+      </Fragment>
+    )} else if (cate == 'all') {
       return (
-        <div key={index} className={`col-xl-4 col-sm-6 `}>
-          <div className={`product-wrap mb-25"`}>
-            <br />
-            <div className="product-img">
-              <Link to={`/item/${product._id}`} >
-                {/* {product.thumbnails.map((image, index) => {
-                return (
-                  <div key={index}>
-                    <img
-                      className="default-img"
-                      src={`${product.thumbnails[index].image.location}`}
-                      alt={`productImg-${index}`}
-                    />
+        <Fragment>
+          <div>
+            <div className="shop-list-wrap mb-30">
+              <div className="row">
+                <div className="col-xl-4 col-md-5 col-sm-6">
+                  <div className="product-list-image-wrap">
+                    <div className="product-img">
+                      <Link to={`/item/${product._id}`}>
+                        <img
+                          className="default-img img-fluid"
+                          src={`${product.thumbnails[0].image.location}`}
+                          alt={`productImg-${index}`}
+                        />
+                        {product.thumbnails.length > 1 ? (
+                          <img
+                            className="hover-img img-fluid"
+                            src={`${product.thumbnails[1].image.location}`}
+                            alt=""
+                          />
+                        ) : (
+                          <img
+                            className="hover-img"
+                            src={`${product.thumbnails[0].image.location}`}
+                            alt=""
+                          />
+                        )}
+                      </Link>
+                        <div className="product-img-badges">
+                            <span className="pink">
+                              -{product.discount}%
+                            </span>
+                        </div>
+                    </div>
                   </div>
-                );
-              })} */}
-                <img
-                  className="default-img"
-                  src={`${product.thumbnails[0].image.location}`}
-                  alt={`productImg-${index}`}
-                />
-
-                {product.thumbnails.length > 1 ? (
-                  <img
-                    className="hover-img"
-                    src={`${product.thumbnails[1].image.location}`}
-                    alt=""
-                  />
-                ) : (
-                    <img
-                      className="hover-img"
-                      src={`${product.thumbnails[0].image.location}`}
-                      alt=""
-                    />
-                  )}
-              </Link>
-              <div className="product-action">
-                <div className="pro-same-action pro-wishlist">
-                  <a
-                    href={'/product/order/' + product._id}
-                    rel="noopener noreferrer"
-                    title="결제하기"
-                  >
-                    <i className="pe-7s-piggy" />
-                  </a>
                 </div>
-                <div className="pro-same-action pro-cart">
-                  <a
-                    href={'/item/' + product._id}
-                    rel="noopener noreferrer"
-                  // target="_blank"
-                  >
-                    {' '}
-                    제품상세{' '}
-                  </a>
+                <div className="col-xl-8 col-md-7 col-sm-6">
+                  <div className="shop-list-content">
+                    <h3>
+                      <Link to={`/item/${product._id}`}>
+                        {product.title}
+                      </Link>
+                    </h3>
+                    <div className="product-list-price">
+                      <Fragment>
+                        <span>{product.discount}</span>{' '}
+                        <span className="old">
+                          {product.price}
+                        </span>
+                      </Fragment>
+                    </div>
+                    {product.stock && product.stock > 0 ? (
+                      <div className="rating-review">
+                        <div className="product-list-rating">
+                          <ProductRating ratingValue={product.stock} />
+                        </div>
+                      </div>
+                    ) : (
+                      ''
+                    )}
+                    <p>{product.description}</p>
+  
+                    <div className="shop-list-actions d-flex align-items-center">
+                      <div className="shop-list-btn btn-hover">
+                          <a
+                          href={'/item/' + product._id}
+                            rel="noopener noreferrer"
+                            target="_blank"
+                          >
+                            {' '}
+                            PRODUCT DETAIL{' '}
+                          </a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div className="pro-same-action pro-quickview">
-                  <button
-                    // onClick={() => setModalShow(true)}
-                    title="미리보기"
-                  >
-                    <i className="pe-7s-look" />
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div className="product-content text-center">
-              <h3>
-                <Link to={`/item/${product._id}`}>{product.title}</Link>
-              </h3>
-              {product.stock && product.stock > 0 ? (
-                <div className="product-rating">
-                  <ProductRating ratingValue={product.stock} />
-                </div>
-              ) : (
-                  ''
-                )}
-              <div className="product-price">
-                {product.discount !== null ? (
-                  <Fragment>
-                    <span>{product.discount}</span>{' '}
-                    <span className="old">{product.price}</span>
-                  </Fragment>
-                ) : (
-                    <span>{product.discount} </span>
-                  )}
               </div>
             </div>
           </div>
-        </div>
-      );
+        </Fragment>
+      )
     }
-  });
+  })
+  
 
   return (
     <Fragment>
       <div className="shop-area pt-95 pb-100">
         <div className="container">
           <div className="row">
-            <div className="col-lg-12">
-              {/* 필터 */}
-              <Fragment>
-                <div className="shop-top-bar mb-35">
-                  <div className="select-shoing-wrap">
-                    <p>Showing {productCount} result</p>
-                  </div>
+            <div className="col-lg-3 order-2 order-lg-1">
+              <div className={`sidebar-style mr-30`}>
 
-                  <div className="filter-active">
-                    <button onClick={(e) => toggleShopTopFilter(e)}>
-                      <i className="fa fa-plus"></i> filter
-                    </button>
+                {/* shop search */}
+                <div className="sidebar-widget">
+                  <h4 className="pro-sidebar-title">Search </h4>
+                  <div className="pro-sidebar-search mb-50 mt-25">
+                    <form className="pro-sidebar-search-form" action="#">
+                      <input type="text" placeholder="Search here..." />
+                      <button>
+                        <i className="pe-7s-search" />
+                      </button>
+                    </form>
                   </div>
                 </div>
-                <div
-                  className="product-filter-wrapper"
-                  id="product-filter-wrapper"
-                >
-                  <div className="product-filter-wrapper__inner">
-                    <div className="row">
-                      {/* Product Filter */}
-                      <div className="col-md-3 col-sm-6 col-xs-12 mb-30">
-                        <div className="product-filter">
-                          <h5>Categories</h5>
-                          {uniqueCategories ? (
-                            <ul>
-                              {uniqueCategories.map((category, key) => {
-                                return (
-                                  <li key={key}>
-                                    <button onClick={onClick} value={category}>
-                                      {category}
-                                    </button>
-                                  </li>
-                                );
-                              })}
-                            </ul>
-                          ) : (
-                              'No categories found'
-                            )}
-                        </div>
-                      </div>
-                    </div>
+
+                {/* filter by categories */}
+                <div className="sidebar-widget">
+                  <h4 className="pro-sidebar-title">Categories</h4>
+                  <div className="sidebar-widget-list mt-30">
+                    {uniqueCategories ? (
+                      <ul>
+                        {uniqueCategories.map((category, key) => {
+                          return (
+                            <li key={key}>
+                              <div className="sidebar-widget-list-left">
+                                <button onClick={onClick} value={category}>
+                                  {' '}
+                                  <span className="checkmark" />
+                                  {category}{' '}
+                                </button>
+                              </div>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    ) : (
+                      'No categories found'
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-9 order-1 order-lg-2">
+              <Fragment>
+                {/* shop top action */}
+                <div className="shop-top-bar mb-35">
+                  <div className="select-shoing-wrap">
+                    <p>Showing {productCount} of result</p>
+                  </div>
+
+                  <div className="shop-tab">
+                    <button
+                      onClick={(e) => {
+                        getLayout('list');
+                        setActiveLayout(e);
+                      }}
+                    >
+                      <i className="fa fa-list-ul" />
+                    </button>
                   </div>
                 </div>
               </Fragment>
 
-              {/* 카드 업로드 */}
+              {/* shop page content default */}
               <div className="shop-bottom-area mt-35">
-                <div className={`row grid three-column`}>{renderCards}</div>
+                <div className={`row`}>
+                  <Fragment>
+                    {productLanding}
+                  </Fragment>
+                </div>
               </div>
             </div>
           </div>

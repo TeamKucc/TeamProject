@@ -218,9 +218,10 @@ export const searchProduct = (req, res) => {
 };
 
 export const reviewUpload = (req, res) => {
+  console.log(req.body.write)
   const review = new Review(req.body);
   Deal.find(
-    { $and: [{ product: req.body.product }, { user: req.body.user }] },
+    { $and: [{ id: req.body.id }, { user: req.body.user }] },
     (err, result) => {
       if (result) {
         review.save((err) => {

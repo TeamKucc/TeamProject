@@ -12,16 +12,18 @@ import ProductDescriptionTab from '../../components/product/ReviewTap'
 
 const ProductTes = ({ match, history, location }) => {
     const dispatch = useDispatch();
-    const { product, user, deal, complete,error, write, review } = useSelector(({ landing, user, upload, review }) => ({
+    const { product, user, deal, complete,error, write, review, rating } = useSelector(({ landing, user, upload, review }) => ({
         product: landing.productDetail,
         user: user.user,
         deal: upload.deal,
         complete:user.complete,
         error:review.error,
         write: review.write,
+        rating: review.rating,
         review: review.review,
     }))
     
+    console.log(review)
     const { id } = match.params
 
     useEffect(() => {
@@ -45,17 +47,19 @@ const ProductTes = ({ match, history, location }) => {
         dispatch(checkDeal(user))
     }
 
-    const onClick = (write) => {
+    const onClick = () => {
         dispatch(
             reviewUpload({
                 user,
                 id,
                 write,
+                rating,
             })
         )
     }
 
     const onChange = (e) => {
+        console.log(e)
         const { value, name } = e.target
         dispatch(
             changeField({
@@ -65,16 +69,28 @@ const ProductTes = ({ match, history, location }) => {
         )
     }
 
+    const changeRating = (value) => {
+        console.log(value)
+        dispatch(
+            changeField({
+                key: "rating",
+                value
+            })
+        )
+    }
+
     useEffect(()=>{
         if(complete){
             history.push(`/product/order/${product._id}`)
         }
     },[dispatch,complete])
+
     useEffect(()=>{
         if(error){
             alert('상품을 구매해주세요!')
         }
     },[dispatch,error])
+
     return (
         <div className="shop-area pt-100  ">
             <div className="container">
@@ -92,6 +108,8 @@ const ProductTes = ({ match, history, location }) => {
                             onCheck={onCheck}
                             onChange={onChange}
                             onClick={onClick}
+                            changeRating={changeRating}
+                            review={review}
                         />
                         <div>
                             <ProductDeal user={user} product={product} deal={deal} />

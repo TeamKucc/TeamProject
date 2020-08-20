@@ -26,7 +26,7 @@ export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
 
 export const reviewUpload = createAction(
   REVIEW_UPLOAD,
-  ({ user, id, write }) => ({ user, id, write })
+  ({ user, id, write, rating }) => ({ user, id, write, rating })
 )
 
 export const readReview = createAction(READ_REVIEW, (id) => id);
@@ -41,6 +41,7 @@ export function* reviewSaga() {
 
 const initialState = {
   write: '',
+  rating: 0,
   review: {},
   error: null,
 };
