@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from "prop-types";
 import { makeDeal, joinDeal } from '../../modules/user'
 import { useDispatch } from 'react-redux'
-import { propTypes } from 'react-bootstrap/esm/Image';
+import { Button } from 'react-bootstrap';
 
 const ProductDeal = ({ user, product, deal, review }) => {
     const dispatch = useDispatch()
@@ -28,12 +28,16 @@ const ProductDeal = ({ user, product, deal, review }) => {
     if (!deal) return null;
     console.log(deal)
     return (
-        <div>
-            <button onClick={make}>딜생성</button>
-            <div>
+        <div className="product-details-content ml-70">
+            <Button onClick={make} variant="outline-dark">딜생성</Button>
+            <div className="pro-details-list" >
                 {deal.map((index) => {
-                    return <div key={index._id}>
-                        {index._id} <button onClick={() => { join(index._id) }}>Join</button>
+                    return <div className="pro-details-cart btn-hover" key={index._id}>
+                        <div className="pro-details-quality">
+                        <span  key={index.user}>
+                            {index.user + " "}
+                        </span> <button className="btn-full" onClick={() => { join(index._id) }}>Join</button>
+                        </div>
                     </div>
                 }
                 )}
@@ -42,7 +46,7 @@ const ProductDeal = ({ user, product, deal, review }) => {
     )
 }
 ProductDeal.propTypes = {
-    deal:PropTypes.array
-  };
+    deal: PropTypes.array
+};
 
 export default ProductDeal

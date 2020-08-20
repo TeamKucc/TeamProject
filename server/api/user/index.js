@@ -17,4 +17,6 @@ router.post('/joinDeal',userCtrl.joinDeal)
 router.post('/checkDeal',userCtrl.checkDeal)
 
 
+
+
 export default router;

@@ -4,24 +4,25 @@ import ProductImageGallery from '../../components/product/ProductImageGallery'
 import { useDispatch, useSelector } from 'react-redux'
 import { readProduct, unloadProduct } from '../../modules/landing';
 import { changeField, reviewUpload, readReview } from '../../modules/review'
-import { makeDeal,checkDeal } from '../../modules/user'
+import { makeDeal, checkDeal } from '../../modules/user'
 import ProductDeal from '../../components/product/ProductDeal';
 import { findDeal } from '../../modules/upload';
 import { withRouter } from 'react-router-dom';
+import ProductDescriptionTab from '../../components/product/ReviewTap'
 
 const ProductTes = ({ match, history, location }) => {
     const dispatch = useDispatch();
-    const { product, user, deal, complete,error, write, review, rating } = useSelector(({ landing, user, upload, review }) => ({
+    const { product, user, deal, complete, error, write, review, rating } = useSelector(({ landing, user, upload, review }) => ({
         product: landing.productDetail,
         user: user.user,
         deal: upload.deal,
-        complete:user.complete,
-        error:review.error,
+        complete: user.complete,
+        error: review.error,
         write: review.write,
         rating: review.rating,
         review: review.review,
     }))
-    
+
     console.log(review)
     const { id } = match.params
 
@@ -42,7 +43,7 @@ const ProductTes = ({ match, history, location }) => {
         console.log(id)
     }, [dispatch])
 
-    const onCheck =()=>{
+    const onCheck = () => {
         dispatch(checkDeal(user))
     }
 
@@ -55,6 +56,7 @@ const ProductTes = ({ match, history, location }) => {
                 rating,
             })
         )
+        window.location.reload()
     }
 
     const onChange = (e) => {
@@ -78,17 +80,17 @@ const ProductTes = ({ match, history, location }) => {
         )
     }
 
-    useEffect(()=>{
-        if(complete){
+    useEffect(() => {
+        if (complete) {
             history.push(`/product/order/${product._id}`)
         }
-    },[dispatch,complete])
+    }, [dispatch, complete])
 
-    useEffect(()=>{
-        if(error){
+    useEffect(() => {
+        if (error) {
             alert('상품을 구매해주세요!')
         }
-    },[dispatch,error])
+    }, [dispatch, error])
 
     return (
         <div className="shop-area pt-100  ">
@@ -115,6 +117,14 @@ const ProductTes = ({ match, history, location }) => {
                         </div>
                     </div>
                 </div>
+                    <ProductDescriptionTab
+                        makeDeal={makeDeal}
+                        onCheck={onCheck}
+                        onChange={onChange}
+                        onClick={onClick}
+                        changeRating={changeRating}
+                        review={review}
+                    />
             </div>
         </div>
 

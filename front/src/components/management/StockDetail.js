@@ -11,6 +11,9 @@ import { Checkbox } from '@material-ui/core';
 
 const StockDetail = ({ product, onEdit, onDelete }) => {
 
+  window.onbeforeunload = function(e) {
+    return alert('정보 작성중')
+  };
   const [modal, setModal] = useState(false);
 
   const onDeleteClick = () => {
