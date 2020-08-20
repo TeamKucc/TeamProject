@@ -61,17 +61,8 @@ const LoginForm = (props) => {
         }
     }, [auth, authError]);
 
-
-
     return (
         <div>
-            {/* <AuthForm
-                type="login"
-                form="form"
-                onChange={onChange}
-                onSubmit={onSubmit}
-                error={error}
-            /> */}
             <Login
                 type="login"
                 form="form"

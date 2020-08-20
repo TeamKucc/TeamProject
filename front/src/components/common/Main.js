@@ -32,6 +32,7 @@ const Main = ({ products }) => {
       setResult(result)
     }
   }
+
   let prod = Object.keys(products).map(function (key) {
     return products[key];
   });
@@ -68,18 +69,19 @@ const Main = ({ products }) => {
   });
 
   const params = {
-    effect: 'fade',
+    effect: "fade",
     loop: true,
     speed: 1000,
     autoplay: {
       delay: 0,
-      disableOnInteraction: false,
+      disableOnInteraction: false
     },
     watchSlidesVisibility: true,
     navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev"
     },
+    
     renderPrevButton: () => (
       <button className="swiper-button-prev ht-swiper-button-nav">
         <i className="pe-7s-angle-left" />
@@ -102,7 +104,7 @@ const Main = ({ products }) => {
             {sliderData &&
               sliderData.map((single, index) => {
                 return (
-                  <div key={index._id}>
+                  <div key={index}>
                     <div
                       className={`single-slider-2 slider-height-2 d-flex align-items-center bg-img swiper-slide`}
                       style={{
@@ -121,7 +123,7 @@ const Main = ({ products }) => {
                               <div className="slider-btn btn-hover">
                                 <Link
                                   className="animated"
-                                  to="/product/landing"
+                                  to="/product/landing/all"
                                 >
                                   DEAL NOW
                                 </Link>
@@ -131,7 +133,7 @@ const Main = ({ products }) => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                    </div>
                 );
               })}
           </Swiper>

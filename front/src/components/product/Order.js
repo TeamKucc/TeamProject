@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 
-const Order = ({ product,info,onChange,onPay }) => {
+const Order = ({ product,info,onChange,onPay, payInfo, onPayChange }) => {
 
 	if( !product ) return null;
 
@@ -18,26 +18,26 @@ const Order = ({ product,info,onChange,onPay }) => {
 									<div className="col-lg-12">
                       <div className="billing-info mb-20">
                         <label>수령인</label>
-                        <input type="text"  name="person" onChange={onChange} />
+                        <input type="text"  name="person" onChange={onPayChange} />
                       </div>
                     </div>
                     <div className="col-lg-12">
                       <div className="billing-info mb-20">
                         <label>배송지</label>
-                        <input type="text" name="address" onChange={onChange} />
+                        <input type="text" name="address" onChange={onPayChange} />
                       </div>
                     </div>
 										<div className="col-lg-12">
                       <div className="billing-info mb-20">
                         <label>연락처</label>
-                        <input type="text" name="phone" onChange={onChange} />
+                        <input type="text" name="phone" onChange={onPayChange} />
                       </div>
                     </div>
                     <div className="col-lg-12">
                       <div className="billing-select mb-20">
                         <label>배송시 요청사항</label>
                         {/* <select value={message}> */}
-												<select name="request" onChange={onChange}>
+												<select name="request" onChange={onPayChange}>
                           <option>배송시 요청사항을 선택해 주세요</option>
                           <option>배송 전 연락바랍니다</option>
                           <option>부재시 경비실에 맡겨주세요</option>
@@ -54,8 +54,8 @@ const Order = ({ product,info,onChange,onPay }) => {
                       <textarea
                         placeholder="직접입력"
 												name="message"
-												// value={message}
                         defaultValue={''}
+                        onChange={onPayChange}
                       />
                     </div>
                   </div>

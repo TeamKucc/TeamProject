@@ -19,6 +19,10 @@ const paySchema = new Schema(
     productInfo: {
       type: Object,
       required: true
+    },
+    payInfo: {
+      type:Object,
+      required: true
     }
   },
   {

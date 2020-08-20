@@ -10,6 +10,7 @@ import produce from 'immer';
 
 const INITIALIZE = 'product/INITIALIZE';
 const CHANGE_FIELD = 'product/CHANGE_FIELD';
+const PAYMENT_CHANGE_FIELD = 'product/PAYMENT_CHANGE_FIELD';
 const IMAGE_DELETE = 'product/IMAGE_DELETE';
 const THUMBNAIL_DELETE = 'product/THUMBNAIL_DELETE';
 
@@ -47,20 +48,29 @@ const [
 const [
   SELLER_PAID,
   SELLER_PAID_SUCCESS,
-  SELLER_PAID_FAILURE
-] = createRequestActionTypes('product/SELLER_PAID')
+  SELLER_PAID_FAILURE,
+] = createRequestActionTypes('product/SELLER_PAID');
 
 const [
   FIND_DEAL,
   FIND_DEAL_SUCCESS,
   FIND_DEAL_FAILURE,
-]=createRequestActionTypes('product/FIND_DEAL')
+] = createRequestActionTypes('product/FIND_DEAL');
 
 export const initialize = createAction(INITIALIZE);
 export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
   key,
   value,
 }));
+
+export const paymentChangeField = createAction(
+  PAYMENT_CHANGE_FIELD,
+  ({ form, key, value }) => ({
+    form,
+    key,
+    value,
+  }),
+);
 
 export const imagedDelete = createAction(IMAGE_DELETE, (images) => images);
 
@@ -77,7 +87,10 @@ export const thumbnailUpload = createAction(THUMBNAIL_UPLOAD, (files) => ({
   files,
 }));
 
-export const sellerPaid = createAction(SELLER_PAID, ({ product, user }) => ({ product, user }))
+export const sellerPaid = createAction(SELLER_PAID, ({ product, user }) => ({
+  product,
+  user,
+}));
 
 export const productUpload = createAction(
   PRODUCT_UPLOAD,
@@ -91,7 +104,7 @@ export const productUpload = createAction(
     images,
     discount,
     person,
-    category
+    category,
   }) => ({
     seller,
     stock,
@@ -102,17 +115,21 @@ export const productUpload = createAction(
     images,
     discount,
     person,
-    category
+    category,
   }),
 );
 
-export const productPaid = createAction(PRODUCT_PAID, ({ user, product,detail,seller,productInfo }) => ({
-  user,
-  product,
-  detail,
-  seller,
-  productInfo
-}));
+export const productPaid = createAction(
+  PRODUCT_PAID,
+  ({ user, product, detail, seller, productInfo, payInfo }) => ({
+    user,
+    product,
+    detail,
+    seller,
+    productInfo,
+    payInfo,
+  }),
+);
 export const setOriginalUpload = createAction(
   SET_ORIGINAL_UPLOAD,
   (upload) => upload,
@@ -131,7 +148,7 @@ export const updateUpload = createAction(
     discount,
     person,
     enable,
-    category
+    category,
   }) => ({
     id,
     stock,
@@ -143,12 +160,11 @@ export const updateUpload = createAction(
     discount,
     person,
     enable,
-    category
+    category,
   }),
 );
 
-export const findDeal = createAction(FIND_DEAL,_id=>_id)
-
+export const findDeal = createAction(FIND_DEAL, (_id) => _id);
 
 const productUploadSaga = createRequestSaga(
   PRODUCT_UPLOAD,
@@ -166,7 +182,7 @@ const updateUploadSaga = createRequestSaga(
 //   productAPI.updateUpload,
 // );
 
-const findDealSaga =createRequestSaga(FIND_DEAL,productAPI.findDeal)
+const findDealSaga = createRequestSaga(FIND_DEAL, productAPI.findDeal);
 
 function* imageUploadSaga(action) {
   yield put(startLoading('product/IMAGE_UPLOAD'));
@@ -217,7 +233,7 @@ function* thumbnailUploadSaga(action) {
       type: THUMBNAIL_UPLOAD_SUCCESS,
       payload: thumbnail.data,
     });
-  } catch (error) { }
+  } catch (error) {}
   yield put(finishLoading(THUMBNAIL_UPLOAD));
 }
 
@@ -228,7 +244,7 @@ export function* productSaga() {
   yield takeLatest(UPDATE_UPLOAD, updateUploadSaga);
   yield takeLatest(PRODUCT_PAID, productPaidSaga);
   yield takeLatest(UPDATE_UPLOAD, updateUploadSaga);
-  yield takeLatest(FIND_DEAL,findDealSaga)
+  yield takeLatest(FIND_DEAL, findDealSaga);
 }
 
 export const initialState = {
@@ -246,14 +262,21 @@ export const initialState = {
   enable: null,
   paid: null,
   category: '',
-  deal:null,
-  error:null,
-  detail:{
-    person:'',
-    address:'',
-    phone:'',
-    request:''
-  }
+  deal: null,
+  error: null,
+  detail: {
+    person: '',
+    address: '',
+    phone: '',
+    request: '',
+  },
+  payInfo: {
+    person: '',
+    address: '',
+    phone: '',
+    request: '',
+    message: '',
+  },
 };
 
 const upload = handleActions(
@@ -263,6 +286,8 @@ const upload = handleActions(
       ...state,
       [key]: value,
     }),
+    [PAYMENT_CHANGE_FIELD]: (state, { payload: { form, key, value } }) =>
+            produce(state, draft => { draft[form][key] = value }),
     [IMAGE_DELETE]: (state, { payload: image }) =>
       produce(state, (draft) => {
         draft.images.splice(image, 1);
@@ -347,14 +372,14 @@ const upload = handleActions(
       ...state,
       uploadError,
     }),
-    [FIND_DEAL_SUCCESS]:(state,{payload:deal})=>({
+    [FIND_DEAL_SUCCESS]: (state, { payload: deal }) => ({
       ...state,
-      deal
+      deal,
     }),
-    [FIND_DEAL_FAILURE]:(state,{payload:error})=>({
+    [FIND_DEAL_FAILURE]: (state, { payload: error }) => ({
       ...state,
-      error
-    })
+      error,
+    }),
   },
   initialState,
 );

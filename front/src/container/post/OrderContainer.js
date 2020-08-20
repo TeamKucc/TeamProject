@@ -3,16 +3,17 @@ import { withRouter } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import Order from '../../components/product/Order'
 import { readProduct, unloadProduct } from '../../modules/landing';
-import { productPaid, changeField } from '../../modules/upload';
+import { productPaid, changeField, paymentChangeField } from '../../modules/upload';
 
 
 const OrderContainer = ({ match, history, location }) => {
 	const { IMP } = window;
 	const dispatch = useDispatch();
-	const { product, user,detail } = useSelector(({ landing, user,upload }) => ({
+	const { product, user, detai, payInfo } = useSelector(({ landing, user,upload }) => ({
 		product: landing.productDetail,
 		user: user.user,
-		detail:upload.info
+		detail:upload.info,
+		payInfo: upload.payInfo
 	}))
 
 	useEffect(() => {
@@ -22,6 +23,7 @@ const OrderContainer = ({ match, history, location }) => {
 			dispatch(unloadProduct())
 		}
 	}, [dispatch])
+	
 	const onChange = (e) => {
 		const { value, name } = e.target
 		dispatch(changeField({
@@ -29,6 +31,19 @@ const OrderContainer = ({ match, history, location }) => {
 			value
 		}))
 	}
+
+	const onPayChange = (e) => {
+		const { value, name } = e.target
+		dispatch(
+			paymentChangeField({
+				form: "payInfo",
+				key: name,
+				value
+			})
+		)
+	}
+
+	console.log(payInfo)
 	const onPay = () => {
 		if (!user) {
 			alert('로그인을 해주세요!')
@@ -48,7 +63,7 @@ const OrderContainer = ({ match, history, location }) => {
 					msg += '상점 거래ID : ' + rsp.merchant_uid;
 					msg += '결제 금액 : ' + rsp.paid_amount;
 					msg += '카드 승인번호 : ' + rsp.apply_num;
-					dispatch(productPaid({ user, product: product._id, seller: product.seller, productInfo:product }))
+					dispatch(productPaid({ user, product: product._id, seller: product.seller, productInfo:product, payInfo: payInfo }))
 					history.push('/')
 				} else {
 					console.log(rsp)
@@ -61,7 +76,7 @@ const OrderContainer = ({ match, history, location }) => {
 	}
 	return (
 		<div>
-			<Order product={product} onPay={onPay} onChange={onChange} />
+			<Order product={product} onPay={onPay} onChange={onChange} onPayChange={onPayChange} payInfo={payInfo}/>
 		</div>
 	);
 };

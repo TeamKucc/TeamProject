@@ -75,10 +75,9 @@ export const readProduct = (id) =>
   client.post(`/api/product/readProduct/${id}`);
 export const removeProduct = ({ _id }) => client.delete(`/api/product/${_id}`);
 
-export const productPaid = ({ user, product, detail, seller, productInfo }) =>
-  client.post('/api/product/paid', { user, product, detail, seller, productInfo });
+export const productPaid = ({ user, product, detail, seller, productInfo, payInfo }) =>
+  client.post('/api/product/paid', { user, product, detail, seller, productInfo, payInfo });
 export const stockDetail = (id) =>
-
   client.post(`/api/product/stockDetail/${id}`);
 
 export const deliveryUpload = ({ id, delivery, deliveryNumber }) =>
