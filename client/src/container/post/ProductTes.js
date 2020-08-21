@@ -79,7 +79,7 @@ const ProductTes = ({ match, history, location }) => {
             })
         )
     }
-
+ 
     useEffect(() => {
         if (complete) {
             history.push(`/product/order/${product._id}`)
@@ -125,6 +125,7 @@ const ProductTes = ({ match, history, location }) => {
                         changeRating={changeRating}
                         review={review}
                     />
+                    
             </div>
         </div>
 

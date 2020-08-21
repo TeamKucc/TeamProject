@@ -25,8 +25,8 @@ const MobileNavMenu = ({ user, onLogout }) => {
         {user ? (
           <>
             <li>
-              <Link href={`/userInfo/${UserId}`}>
-                my account
+              <Link to={`/userInfo/${UserId}`}>
+                내정보
               </Link>
             </li>
             <li>
@@ -38,14 +38,12 @@ const MobileNavMenu = ({ user, onLogout }) => {
         ) : (
             <>
               <li>
-                <Link to={`/userInfo/${UserId}`}>
-                  my account
-              </Link>
+                <Link to={"/login"}>로그인</Link>
               </li>
               <li>
-                <Link onClick={onLogout}>
-                  로그아웃
-              </Link>
+                <Link to={"/register"}>
+                  회원가입
+            </Link>
               </li>
             </>
           )}

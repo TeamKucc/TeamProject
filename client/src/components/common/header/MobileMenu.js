@@ -58,7 +58,7 @@ const MobileMenu = ({user,onLogout}) => {
           <MobileMenuSearch />
 
           {/* mobile nav menu */}
-          <MobileNavMenu />
+          <MobileNavMenu user={user} onLogout={onLogout} />
 
           {/* mobile language and currency */}
         </div>

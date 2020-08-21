@@ -5,33 +5,7 @@ import Timer from './Timer'
 const Main = ({ products }) => {
   const [start, setStart] = useState(0);
   const [end, setEnd] = useState(0)
-  const [tresult, setResult] = useState(null)
 
-  useEffect(() => {
-    setTimeout(() => {
-      // count()
-    }, 1000)
-  })
-
-
-  function count() {
-    setStart(new Date().getTime())
-    setEnd(new Date().getTime())
-    let distance = end - start
-    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    if (days === 0) {
-      let result = hours + "h "
-        + minutes + "m " + seconds + "s "
-      setResult(result)
-    } else {
-      let result = days + "day " + hours + "h "
-        + minutes + "m " + seconds + "s "
-      setResult(result)
-    }
-  }
 
   let prod = Object.keys(products).map(function (key) {
     return products[key];
@@ -81,7 +55,7 @@ const Main = ({ products }) => {
       nextEl: ".swiper-button-next",
       prevEl: ".swiper-button-prev"
     },
-    
+
     renderPrevButton: () => (
       <button className="swiper-button-prev ht-swiper-button-nav">
         <i className="pe-7s-angle-left" />
@@ -133,7 +107,7 @@ const Main = ({ products }) => {
                         </div>
                       </div>
                     </div>
-                    </div>
+                  </div>
                 );
               })}
           </Swiper>
@@ -180,8 +154,7 @@ const Main = ({ products }) => {
           <div className="row five-column">
             <Fragment>
               {prod.map((product, index) => {
-
-                return (
+                return product.enable ? (
                   <div key={index._id} className={`col-xl-3 col-md-6 col-lg-4 col-sm-6`}>
                     <div className={`product-wrap-2 mb-25`}>
                       <div className="product-img">
@@ -239,8 +212,11 @@ const Main = ({ products }) => {
                       </div>
                     </div>
                   </div>
-                );
-              })}
+                ) : 
+                (<>
+                </>)
+              }
+              )}
             </Fragment>
           </div>
         </div>

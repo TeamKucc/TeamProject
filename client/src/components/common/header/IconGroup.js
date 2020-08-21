@@ -56,7 +56,7 @@ const IconGroup = ({
               <>
                 <li>
                   <Link to={`/userInfo/${UserId}`}>
-                    my account
+                    내정보
                 </Link>
                 </li>
                 <li>
@@ -68,11 +68,11 @@ const IconGroup = ({
             ) : (
                 <>
                   <li>
-                    <Link to={"/login"}>Login</Link>
+                    <Link to={"/login"}>로그인</Link>
                   </li>
                   <li>
                   <Link to={"/register"}>
-                      Register
+                      회원가입
                     </Link>
                   </li>
                 </>

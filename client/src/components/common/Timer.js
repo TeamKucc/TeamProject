@@ -35,7 +35,7 @@ const TimeTest = ({ match, product }) => {
             setStop(true)
             dispatch(endTime({ product: product._id }))
         }
-        if (days === 0) {
+        if (days <= 0) {
             let result = hours + ": "
                 + minutes + ": " + seconds + " 남음"
             setResult(result)

@@ -63,7 +63,7 @@ const Header = ({
             </div>
             <div className="col-xl-8 col-lg-8 d-none d-lg-block">
               {/* Nav menu */}
-              <NavMenu />
+              <NavMenu user={user} onLogout={onLogout} />
             </div>
             <div className="col-xl-2 col-lg-2 col-md-6 col-8">
               {/* Icon group */}
