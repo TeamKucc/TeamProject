@@ -10,7 +10,7 @@ import Review from '../../models/review';
 import path from 'path';
 import AWS from 'aws-sdk';
 import Payment from '../../models/payment';
-import delivery from '../../../front/src/modules/delivery';
+
 
 AWS.config.loadFromPath('config/awsconfig.json');
 

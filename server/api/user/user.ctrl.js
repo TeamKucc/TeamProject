@@ -2,7 +2,7 @@ import User from '../../models/user';
 import Pay from '../../models/payment'
 import Product from '../../models/product';
 import Deal from '../../models/deal'
-import user from '../../../front/src/modules/user';
+
 
 export const list = (req, res) => {
     if (!req.decode.admin) {
