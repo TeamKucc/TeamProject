@@ -1,24 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { endTime } from '../../modules/landing';
+import { endTime, unloadProduct } from '../../modules/landing';
 import { withRouter } from 'react-router-dom';
 
 const TimeTest = ({ match, product }) => {
     const dispatch = useDispatch()
     const [start, setStart] = useState(0);
     const [end, setEnd] = useState(0)
-    const [tresult, setResult] = useState(null)
+    const [TimerResult, setResult] = useState(null)
     const [stop, setStop] = useState(false)
-   
+
+
     useEffect(() => {
-        if (!stop) {
-            setTimeout(() => {
+        if (!stop && product) {
+            const timer = setTimeout(() => {
                 count()
             }, 1000)
+            return () => {
+                clearTimeout(timer)
+            }
         }
-       return()=>{
-           clearTimeout()
-       }
     })
     if (!product) return null
     const count = () => {
@@ -47,9 +48,9 @@ const TimeTest = ({ match, product }) => {
 
 
     return (
-            <div className="product-img-badges">
-                <span>{tresult}</span>
-            </div>
+        <div className="product-img-badges">
+            <span>{TimerResult}</span>
+        </div>
     )
 }
 

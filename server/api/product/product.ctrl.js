@@ -42,6 +42,10 @@ let upload = multer({
   }),
 }).single('file');
 
+const timeCheck = (product)=>{
+  
+}
+
 export const uploadImage = (req, res) => {
   console.log(req.body);
   upload(req, res, (err) => {
@@ -268,7 +272,6 @@ export const endTime = (req,res)=>{
       message:err,
       success:false
     })
-
     res.status(200).json(result)
   })
 }

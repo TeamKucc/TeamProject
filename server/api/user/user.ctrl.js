@@ -113,13 +113,14 @@ export const joinDeal = (req, res) => {
     console.log(req.body)
 
     Deal.findOneAndUpdate({ _id: req.body._id }, { $push: { user: req.body.user } }, (err, result) => {
-        console.log(result)
+        console.log("length:"+result.user.length)
         if (err) res.status(400).json({
             success: false,
             message: err
         })
         Product.findOne({ _id: result.product }, (err, resP) => {
-            if (resP.person === result.user.length + 1) {
+            console.log("person:"+resP.person)
+            if (resP.person === result.user.length+1 ) {
                 Deal.findOneAndUpdate({ product: resP._id }, { complete: true }, (err, resultD) => {
                     console.log(resultD)
                 })
@@ -133,19 +134,19 @@ export const joinDeal = (req, res) => {
 
 export const checkDeal = (req, res) => {
     console.log(req.body)
-    Deal.findOne({ user: req.body.user }, (err, result) => {
-        console.log(result.complete)
+    Deal.findOne({ $and: [{ product: req.body.product }, { user: req.body.user }] }, (err, result) => {
+        console.log(result)
         if (err) return res.status(500).json({
             success: false,
             message: 'server error'
         })
-        if (result.complete) {
-            res.status(200).json(result.complete)
-        } else {
+        if (!result) {
             res.status(409).json({
                 success: false,
                 message: '딜에 참여해주세요!'
             })
+        } else {
+            res.status(200).json(result.complete)
 
         }
     })

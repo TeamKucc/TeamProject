@@ -3,6 +3,7 @@ import moment from 'moment';
 
 const DealSchema = new Schema({
     user: { type: Array, required: true },
+    userName:{type:String,required:true},
     product:{type:mongoose.Types.ObjectId,required:true},
     complete: { type: Boolean,default:false },
     join:{type:Number},

@@ -160,11 +160,11 @@ const Main = ({ products }) => {
                       <div className="product-img">
                         <Timer product={product} />
                         <Link to={`/item/${product._id}`}>
-                          <img
+                          {<img
                             className="default-img"
                             src={`${product.thumbnails[0].image.location}`}
                             alt={`productImg-${index}`}
-                          />
+                          />}
 
                           {product.thumbnails.length > 1 ? (
                             <img

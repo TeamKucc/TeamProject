@@ -12,10 +12,11 @@ import ProductDescriptionTab from '../../components/product/ReviewTap'
 
 const ProductTes = ({ match, history, location }) => {
     const dispatch = useDispatch();
-    const { product, user, deal, complete, error, write, review, rating } = useSelector(({ landing, user, upload, review }) => ({
+    const { product, user, deal,dealError, complete, error, write, review, rating } = useSelector(({ landing, user, upload, review }) => ({
         product: landing.productDetail,
         user: user.user,
         deal: upload.deal,
+        dealError:user.dealError,
         complete: user.complete,
         error: review.error,
         write: review.write,
@@ -44,7 +45,7 @@ const ProductTes = ({ match, history, location }) => {
     }, [dispatch])
 
     const onCheck = () => {
-        dispatch(checkDeal(user))
+        dispatch(checkDeal({user:user,product:product._id}))
     }
 
     const onClick = () => {
@@ -91,7 +92,11 @@ const ProductTes = ({ match, history, location }) => {
             alert('상품을 구매해주세요!')
         }
     }, [dispatch, error])
-
+    useEffect(()=>{
+        if(dealError){
+            alert('딜에 참여해주세요!')
+        }
+    })
     return (
         <div className="shop-area pt-100  ">
             <div className="container">
