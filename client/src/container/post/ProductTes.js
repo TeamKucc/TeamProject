@@ -80,23 +80,28 @@ const ProductTes = ({ match, history, location }) => {
             })
         )
     }
- 
+    ///Deal 참여&&성공 여부 확인시 결제 페이지로 이동
     useEffect(() => {
         if (complete) {
             history.push(`/product/order/${product._id}`)
         }
     }, [dispatch, complete])
-
+    //?? 정리해야할듯 아래 사항과 중복
     useEffect(() => {
         if (error) {
             alert('상품을 구매해주세요!')
         }
     }, [dispatch, error])
+
+    //딜 미참여시 예외처리
     useEffect(()=>{
         if(dealError){
             alert('딜에 참여해주세요!')
         }
-    })
+    },[dispatch,dealError])
+
+
+
     return (
         <div className="shop-area pt-100  ">
             <div className="container">

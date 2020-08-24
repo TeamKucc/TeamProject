@@ -7,6 +7,8 @@ const DealSchema = new Schema({
     product:{type:mongoose.Types.ObjectId,required:true},
     complete: { type: Boolean,default:false },
     join:{type:Number},
+    enable:{type:Boolean,default:true},
+    created:{type:Date,default:Date.now}
     // time:{type:Number,default:}
 },{
     versionKey:false

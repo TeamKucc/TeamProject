@@ -16,7 +16,7 @@ router.post('/findDeal',userCtrl.findDeal)
 router.post('/joinDeal',userCtrl.joinDeal)
 router.post('/checkDeal',userCtrl.checkDeal)
 
-
+router.post('/endDeal',userCtrl.endDeal)
 
 
 export default router;

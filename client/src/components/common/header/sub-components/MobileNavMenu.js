@@ -30,7 +30,7 @@ const MobileNavMenu = ({ user, onLogout }) => {
               </Link>
             </li>
             <li>
-              <Link onClick={onLogout}>
+              <Link to={'/'} onClick={onLogout}>
                 로그아웃
               </Link>
             </li>

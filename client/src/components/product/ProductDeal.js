@@ -16,7 +16,7 @@ const ProductDeal = ({ user, product, deal, review }) => {
         if (user) {
             console.log(user.product)
             dispatch(makeDeal({ user, product: product._id }))
-            // window.location.reload()
+            window.location.reload()
         } else {
             alert('로그인 필요!')
         }
@@ -31,13 +31,9 @@ const ProductDeal = ({ user, product, deal, review }) => {
         }
     }
 
-    useEffect(() => {
-        // const interval = setInterval(() => {
-        //     setIndex((state) => (state + 1) % items.length);
-        // }, 4000);
-        // return () => clearInterval(interval);
-    }, []);
+    
     const [index, setIndex] = useState(0);
+ 
     const [items, setItems] = useState([
         { title: 'GraphQL changed the way we create software', id: 0 },
         { title: 'Learn about GraphQL language for free in the browser', id: 1 },
@@ -50,6 +46,9 @@ const ProductDeal = ({ user, product, deal, review }) => {
         config: { tension: 220, friction: 120 },
     });
 
+    const onToggle=()=>{
+
+    }
 
     if (!deal) return null;
     console.log(deal)
@@ -77,7 +76,6 @@ const ProductDeal = ({ user, product, deal, review }) => {
                         </>
                     )
                 }
-
             </div>
         </div>
     )

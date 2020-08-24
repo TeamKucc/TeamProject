@@ -78,12 +78,20 @@ export const findDeal = (req, res) => {
     })
 }
 
-export const makeDeal = (req, res) => {
-    console.log('make call')
-    const deal = new Deal(req.body)
-    console.log(req.body)
-    const user = req.body.user
+function Info(user) {
+    console.log("user:"+user)
+    return User.findOne({ _id: user })
+}
 
+export const makeDeal = async(req, res) => {
+    console.log('make call')
+    const { user, product } = req.body
+    const userName = await Info(user)
+    const deal = new Deal({
+        user: user,
+        product: product,
+        userName: userName.name
+    })
     Deal.findOne({ $and: [{ product: req.body.product }, { user: req.body.user }] }, (err, result) => {
         console.log("deal:" + result)
         if (result) {
@@ -107,20 +115,19 @@ export const makeDeal = (req, res) => {
 }
 
 
-
 export const joinDeal = (req, res) => {
     console.log('call')
     console.log(req.body)
 
     Deal.findOneAndUpdate({ _id: req.body._id }, { $push: { user: req.body.user } }, (err, result) => {
-        console.log("length:"+result.user.length)
+        console.log("length:" + result.user.length)
         if (err) res.status(400).json({
             success: false,
             message: err
         })
         Product.findOne({ _id: result.product }, (err, resP) => {
-            console.log("person:"+resP.person)
-            if (resP.person === result.user.length+1 ) {
+            console.log("person:" + resP.person)
+            if (resP.person === result.user.length + 1) {
                 Deal.findOneAndUpdate({ product: resP._id }, { complete: true }, (err, resultD) => {
                     console.log(resultD)
                 })
@@ -149,6 +156,20 @@ export const checkDeal = (req, res) => {
             res.status(200).json(result.complete)
 
         }
+    })
+}
+
+export const endDeal = (req,res)=>{
+    console.log(req.body)
+    Deal.findOneAndUpdate({_id:req.body._id},{enable:false},(err,result)=>{
+        if(err) return res.status(409).json({
+            success:false,
+            message:"Error:"+err
+        })
+        res.status(200).json({
+            success:true,
+            message:"Deal End!!!!"
+        })
     })
 }
 

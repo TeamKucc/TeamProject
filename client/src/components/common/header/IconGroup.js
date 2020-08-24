@@ -60,7 +60,7 @@ const IconGroup = ({
                 </Link>
                 </li>
                 <li>
-                  <Link onClick={onLogout}>
+                  <Link to={'/'} onClick={onLogout}>
                     로그아웃
                   </Link>
                 </li>
@@ -68,7 +68,7 @@ const IconGroup = ({
             ) : (
                 <>
                   <li>
-                    <Link to={"/login"}>로그인</Link>
+                    <Link to={`/login`}>로그인</Link>
                   </li>
                   <li>
                   <Link to={"/register"}>

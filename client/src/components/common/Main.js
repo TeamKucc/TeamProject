@@ -79,7 +79,7 @@ const Main = ({ products }) => {
               sliderData.map((single, index) => {
                 return (
                   <div key={index}>
-                    <div
+                    <div 
                       className={`single-slider-2 slider-height-2 d-flex align-items-center bg-img swiper-slide`}
                       style={{
                         backgroundImage: `url(${
@@ -121,7 +121,7 @@ const Main = ({ products }) => {
             {featureIconData &&
               featureIconData.map((single, index) => {
                 return (
-                  <div key={index._id} className="col-md-4">
+                  <div key={index} className="col-md-4">
                     <div
                       className={`support-wrap-2 support-shape mb-30 text-center`}
                     >
@@ -155,7 +155,7 @@ const Main = ({ products }) => {
             <Fragment>
               {prod.map((product, index) => {
                 return product.enable ? (
-                  <div key={index._id} className={`col-xl-3 col-md-6 col-lg-4 col-sm-6`}>
+                  <div key={index} className={`col-xl-3 col-md-6 col-lg-4 col-sm-6`}>
                     <div className={`product-wrap-2 mb-25`}>
                       <div className="product-img">
                         <Timer product={product} />
@@ -180,14 +180,6 @@ const Main = ({ products }) => {
                               />
                             )}
                         </Link>
-                        {/* <div className="product-action-2">
-                          <button
-                            // onClick={() => setModalShow()}
-                            title="미리보기"
-                          >
-                            <i className="fa fa-eye"></i>
-                          </button>
-                        </div> */}
                       </div>
                       <div className="product-content-2">
                         <div

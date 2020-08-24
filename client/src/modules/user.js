@@ -43,6 +43,11 @@ const [
     CHECK_DEAL_FAILURE
 ] = createRequestActionTypes('user/CHECK_DEAL')
 
+const [
+    END_DEAL,
+    END_DEAL_SUCCESS,
+    END_DEAL_FAILURE
+]=createRequestActionTypes('user/END_DEAL')
 
 //create redux actions
 export const tempSetUser = createAction(TEMP_SET_USER, user => user)
@@ -55,7 +60,7 @@ export const sellerHistory = createAction(SELLER_HISTORY, user => user)
 export const makeDeal = createAction(MAKE_DEAL, ({ user, product }) => ({ user, product }))
 export const joinDeal = createAction(JOIN_DEAL, ({ user, product, _id }) => ({ user, product, _id }))
 export const checkDeal = createAction(CHECK_DEAL, ({user,product}) => ({user,product}))
-
+export const endDeal = createAction(END_DEAL,_id=>_id)
 
 const getHistorySaga = createRequestSaga(GET_HISTORY, userCtrl.gethistory)
 const sellerHistorySaga = createRequestSaga(SELLER_HISTORY, userCtrl.sellerHistory)
@@ -64,6 +69,7 @@ const userUpdateSaga = createRequestSaga(USER_UPDATE, userCtrl.userupdate)
 const makeDealSaga = createRequestSaga(MAKE_DEAL, userCtrl.makeDeal)
 const joinDealSaga = createRequestSaga(JOIN_DEAL, userCtrl.joinDeal)
 const checkDealSaga = createRequestSaga(CHECK_DEAL,userCtrl.checkDeal)
+const endDealSaga  =createRequestSaga(END_DEAL,userCtrl.endDeal)
 
 function* logoutSaga() {
     console.log('logout saga')
@@ -84,6 +90,7 @@ export function* userSaga() {
     yield takeLatest(MAKE_DEAL, makeDealSaga)
     yield takeLatest(JOIN_DEAL, joinDealSaga)
     yield takeLatest(CHECK_DEAL,checkDealSaga)
+    yield takeLatest(END_DEAL,endDealSaga)
 }
 
 const initialState = {
@@ -95,6 +102,8 @@ const initialState = {
     seller: null,
     complete:false,
     dealError:null,
+    endDeal:null,
+    endDealError:null
 }
 
 export default handleActions(
@@ -140,6 +149,14 @@ export default handleActions(
         [CHECK_DEAL_FAILURE]:(state,{payload:dealError})=>({
             ...state,
             dealError
+        }),
+        [END_DEAL_SUCCESS]:(state,{payload:endDeal})=>({
+            ...state,
+            endDeal
+        }),
+        [END_DEAL_FAILURE]:(state,{payload:endDealError})=>({
+            ...state,
+            endDealError
         })
     },
     initialState,
