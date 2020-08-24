@@ -6,7 +6,7 @@ import { setOriginalUpload } from '../../modules/upload'
 import StockDetail from '../../components/management/StockDetail';
 // import { stockDetail } from '../../lib/api/product';
 
-const StockDetailContainer = ({ match, history }) => {
+const StockDetailContainer = ({ match, history, location }) => {
   const { id } = match.params;
   console.log(id)
   const dispatch = useDispatch();
