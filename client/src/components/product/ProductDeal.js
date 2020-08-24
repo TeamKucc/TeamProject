@@ -67,7 +67,17 @@ const ProductDeal = ({ user, product, deal, review }) => {
                     </div>
                 }
                 )} */}
-                <List deal={deal} join={join} />
+
+                {deal.length == 0 ? (
+                    <>
+                    </>
+                ) : (
+                        <>
+                            <List deal={deal} join={join} />
+                        </>
+                    )
+                }
+
             </div>
         </div>
     )

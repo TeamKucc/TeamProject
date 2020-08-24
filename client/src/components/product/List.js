@@ -10,7 +10,7 @@ const List = ({deal,join}) => {
     }, []);
     const [index, setIndex] = useState(0);
     const [items] = useState(deal);
-    const fadingTextPropsTransition = useTransition(items[index], item => item._id, {
+    const fadingTextPropsTransition = useTransition(items[index], item => item.id, {
         from: { opacity: 0 },
         enter: { opacity: 1 },
         leave: { opacity: 0 },

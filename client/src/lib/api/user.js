@@ -13,7 +13,7 @@ export const makeDeal = ({ user, product }) => client.post('/api/user/makeDeal',
 
 export const joinDeal = ({ user, product, _id }) => client.post('/api/user/joinDeal', { user, product, _id })
 
-export const checkDeal = user => client.post('/api/user/checkDeal', { user })
+export const checkDeal = ({user,product}) => client.post('/api/user/checkDeal', { user,product })
 
 
 

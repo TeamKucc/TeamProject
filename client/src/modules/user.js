@@ -54,7 +54,7 @@ export const sellerHistory = createAction(SELLER_HISTORY, user => user)
 
 export const makeDeal = createAction(MAKE_DEAL, ({ user, product }) => ({ user, product }))
 export const joinDeal = createAction(JOIN_DEAL, ({ user, product, _id }) => ({ user, product, _id }))
-export const checkDeal = createAction(CHECK_DEAL, user => user)
+export const checkDeal = createAction(CHECK_DEAL, ({user,product}) => ({user,product}))
 
 
 const getHistorySaga = createRequestSaga(GET_HISTORY, userCtrl.gethistory)
@@ -94,6 +94,7 @@ const initialState = {
     deal: null,
     seller: null,
     complete:false,
+    dealError:null,
 }
 
 export default handleActions(
@@ -136,9 +137,9 @@ export default handleActions(
             ...state,
             complete
         }),
-        [CHECK_DEAL_FAILURE]:(state,{payload:error})=>({
+        [CHECK_DEAL_FAILURE]:(state,{payload:dealError})=>({
             ...state,
-            error
+            dealError
         })
     },
     initialState,

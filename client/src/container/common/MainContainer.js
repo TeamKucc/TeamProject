@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Main from '../../components/common/Main'
 import { withRouter } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { landingProduct } from '../../modules/landing'
+import { landingProduct, unloadProduct } from '../../modules/landing'
 
 const MainContainer = () => {
 
@@ -13,6 +13,9 @@ const MainContainer = () => {
 
 	useEffect(() => {
 		dispatch(landingProduct({}))
+		return()=>{
+			dispatch(unloadProduct())
+		}
 	}, [dispatch])
 
 	return (

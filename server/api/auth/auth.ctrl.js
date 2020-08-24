@@ -63,7 +63,7 @@ export const login = (req, res) => {
         res.cookie("w_auth", user.token)
           .status(200)
           .json({
-            login: true, userId: user._id,role:user.role
+            login: true, userId: user._id,role:user.role,userName:user.name
           })
       })
     })
