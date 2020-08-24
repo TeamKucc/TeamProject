@@ -7,18 +7,18 @@ import {
   // setActiveSort,
 } from '../../helpers/product';
 
-function Landing({ Products, onClick, cate }) {
-  // const [layout, setLayout] = useState('grid three-column');
-  const [layout, setLayout] = useState("list");
+function Landing({ Products, onClick, cate, onChange, onSearch }) {
+  const [layout, setLayout] = useState('list');
 
   const productCount = Products.length;
 
   let Prod = Object.keys(Products).map(function (key) {
     return Products[key];
   });
+
   const uniqueCategories = getIndividualCategories(Prod);
-  
-  const getLayout = layout => {
+
+  const getLayout = (layout) => {
     setLayout(layout);
   };
 
@@ -54,107 +54,11 @@ function Landing({ Products, onClick, cate }) {
     }
   };
 
-  // 별점
-  const ProductRating = ({ ratingValue }) => {
-    let rating = [];
-    for (let i = 0; i < 5; i++) {
-      rating.push(<i className="fa fa-star-o" key={i}></i>);
-    }
-
-    if (ratingValue && ratingValue > 0) {
-      for (let i = 0; i <= ratingValue - 1; i++) {
-        rating[i] = <i className="fa fa-star-o yellow" key={i}></i>;
-      }
-    }
-    return <Fragment>{rating}</Fragment>;
-  };
-
   const productLanding = Prod.map((product, index) => {
     if (!product) return null;
-    
-    const category = changeCategory(cate)
-    if (product.category == category) {
-    return (
-      <Fragment>
-        <div>
-          <div className="shop-list-wrap mb-30">
-            <div className="row">
-              <div className="col-xl-4 col-md-5 col-sm-6">
-                <div className="product-list-image-wrap">
-                  <div className="product-img">
-                    <Link to={`/item/${product._id}`}>
-                      <img
-                        className="default-img img-fluid"
-                        src={`${product.thumbnails[0].image.location}`}
-                        alt={`productImg-${index}`}
-                      />
-                      {product.thumbnails.length > 1 ? (
-                        <img
-                          className="hover-img img-fluid"
-                          src={`${product.thumbnails[1].image.location}`}
-                          alt=""
-                        />
-                      ) : (
-                        <img
-                          className="hover-img"
-                          src={`${product.thumbnails[0].image.location}`}
-                          alt=""
-                        />
-                      )}
-                    </Link>
-                      <div className="product-img-badges">
-                          <span className="pink">
-                            -{product.discount}%
-                          </span>
-                      </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-xl-8 col-md-7 col-sm-6">
-                <div className="shop-list-content">
-                  <h3>
-                    <Link to={`/item/${product._id}`}>
-                      {product.title}
-                    </Link>
-                  </h3>
-                  <div className="product-list-price">
-                    <Fragment>
-                      <span>{product.discount}</span>{' '}
-                      <span className="old">
-                        {product.price}
-                      </span>
-                    </Fragment>
-                  </div>
-                  {product.stock && product.stock > 0 ? (
-                    <div className="rating-review">
-                      <div className="product-list-rating">
-                        <ProductRating ratingValue={product.stock} />
-                      </div>
-                    </div>
-                  ) : (
-                    ''
-                  )}
-                  <p>{product.description}</p>
 
-                  <div className="shop-list-actions d-flex align-items-center">
-                    <div className="shop-list-btn btn-hover">
-                        <a
-                        href={'/item/' + product._id}
-                          rel="noopener noreferrer"
-                          target="_blank"
-                        >
-                          {' '}
-                          PRODUCT DETAIL{' '}
-                        </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Fragment>
-    )} else if (cate == 'all') {
+    const category = changeCategory(cate);
+    if (product.category == category) {
       return (
         <Fragment>
           <div>
@@ -183,50 +87,35 @@ function Landing({ Products, onClick, cate }) {
                           />
                         )}
                       </Link>
-                        <div className="product-img-badges">
-                            <span className="pink">
-                              -{product.discount}%
-                            </span>
-                        </div>
+                      <div className="product-img-badges">
+                        <span className="pink">-{product.discount}%</span>
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div className="col-xl-8 col-md-7 col-sm-6">
                   <div className="shop-list-content">
                     <h3>
-                      <Link to={`/item/${product._id}`}>
-                        {product.title}
-                      </Link>
+                      <Link to={`/item/${product._id}`}>{product.title}</Link>
                     </h3>
                     <div className="product-list-price">
                       <Fragment>
                         <span>{product.discount}</span>{' '}
-                        <span className="old">
-                          {product.price}
-                        </span>
+                        <span className="old">{product.price}</span>
                       </Fragment>
                     </div>
-                    {product.stock && product.stock > 0 ? (
-                      <div className="rating-review">
-                        <div className="product-list-rating">
-                          <ProductRating ratingValue={product.stock} />
-                        </div>
-                      </div>
-                    ) : (
-                      ''
-                    )}
                     <p>{product.description}</p>
-  
+
                     <div className="shop-list-actions d-flex align-items-center">
                       <div className="shop-list-btn btn-hover">
-                          <a
+                        <a
                           href={'/item/' + product._id}
-                            rel="noopener noreferrer"
-                            target="_blank"
-                          >
-                            {' '}
-                            PRODUCT DETAIL{' '}
-                          </a>
+                          rel="noopener noreferrer"
+                          target="_blank"
+                        >
+                          {' '}
+                          PRODUCT DETAIL{' '}
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -235,10 +124,76 @@ function Landing({ Products, onClick, cate }) {
             </div>
           </div>
         </Fragment>
-      )
+      );
+    } else if (cate == 'all') {
+      return (
+        <Fragment>
+          <div>
+            <div className="shop-list-wrap mb-30">
+              <div className="row">
+                <div className="col-xl-4 col-md-5 col-sm-6">
+                  <div className="product-list-image-wrap">
+                    <div className="product-img">
+                      <Link to={`/item/${product._id}`}>
+                        <img
+                          className="default-img img-fluid"
+                          src={`${product.thumbnails[0].image.location}`}
+                          alt={`productImg-${index}`}
+                        />
+                        {product.thumbnails.length > 1 ? (
+                          <img
+                            className="hover-img img-fluid"
+                            src={`${product.thumbnails[1].image.location}`}
+                            alt=""
+                          />
+                        ) : (
+                          <img
+                            className="hover-img"
+                            src={`${product.thumbnails[0].image.location}`}
+                            alt=""
+                          />
+                        )}
+                      </Link>
+                      <div className="product-img-badges">
+                        <span className="pink">-{product.discount}%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-xl-8 col-md-7 col-sm-6">
+                  <div className="shop-list-content">
+                    <h3>
+                      <Link to={`/item/${product._id}`}>{product.title}</Link>
+                    </h3>
+                    <div className="product-list-price">
+                      <Fragment>
+                        <span>{product.discount}</span>{' '}
+                        <span className="old">{product.price}</span>
+                      </Fragment>
+                    </div>
+                    <p>{product.description}</p>
+
+                    <div className="shop-list-actions d-flex align-items-center">
+                      <div className="shop-list-btn btn-hover">
+                        <a
+                          href={'/item/' + product._id}
+                          rel="noopener noreferrer"
+                          target="_blank"
+                        >
+                          {' '}
+                          PRODUCT DETAIL{' '}
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Fragment>
+      );
     }
-  })
-  
+  });
 
   return (
     <Fragment>
@@ -247,14 +202,18 @@ function Landing({ Products, onClick, cate }) {
           <div className="row">
             <div className="col-lg-3 order-2 order-lg-1">
               <div className={`sidebar-style mr-30`}>
-
                 {/* shop search */}
                 <div className="sidebar-widget">
                   <h4 className="pro-sidebar-title">Search </h4>
                   <div className="pro-sidebar-search mb-50 mt-25">
                     <form className="pro-sidebar-search-form" action="#">
-                      <input type="text" placeholder="Search here..." />
-                      <button>
+                      <input
+                        type="text"
+                        placeholder="Search here..."
+                        name="word"
+                        onChange={onChange}
+                      />
+                      <button onClick={onSearch}>
                         <i className="pe-7s-search" />
                       </button>
                     </form>
@@ -312,9 +271,7 @@ function Landing({ Products, onClick, cate }) {
               {/* shop page content default */}
               <div className="shop-bottom-area mt-35">
                 <div className={`row`}>
-                  <Fragment>
-                    {productLanding}
-                  </Fragment>
+                  <Fragment>{productLanding}</Fragment>
                 </div>
               </div>
             </div>
