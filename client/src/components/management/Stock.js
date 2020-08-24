@@ -12,12 +12,11 @@ import ImageSlider from './ImageSlider';
 // import DeleteConfirm from './DeleteConfirm'
 
 // 상품코드, 상품명, 창고재고, 주문대기, 재고수정, 판매, 품절, 수정버튼
-const Stock = ({ Products, onCheckedChange }) => {
+const Stock = ({ Products }) => {
   
   let Prod = Object.keys(Products).map(function (key) {
     return Products[key];
   });
-  console.log(Prod)
 
   return (
     <Paper>
@@ -30,7 +29,6 @@ const Stock = ({ Products, onCheckedChange }) => {
             <TableCell>원가</TableCell>
             <TableCell>판매가</TableCell>
             {/* <TableCell>재고수정</TableCell> */}
-            <TableCell>주문수</TableCell>
             <TableCell>판매</TableCell>
             <TableCell>품절</TableCell>
             <TableCell></TableCell>
@@ -43,49 +41,43 @@ const Stock = ({ Products, onCheckedChange }) => {
               <TableRow key={index}>
                 <TableCell width="15%">{product._id}</TableCell>
                 <TableCell width="20px">
-                <img
-                        style={{ maxHeight: "100px" }}
-                        alt={`productImg-${index}`}
-                        src={`${product.thumbnails[0].image.location}`}
-                    />
+                  <img
+                    style={{ maxHeight: '100px' }}
+                    alt={`productImg-${index}`}
+                    src={`${product.thumbnails[0].image.location}`}
+                  />
                 </TableCell>
                 <TableCell width="20%">{product.title}</TableCell>
                 <TableCell>{product.price}</TableCell>
                 <TableCell>{product.discount}</TableCell>
-                <TableCell>주문수</TableCell>
-                { product.enable === null ? 
-                <>
-                <TableCell>대기중</TableCell>
-                <TableCell>대기중</TableCell>
-                </> : 
-                <>
-                <TableCell>
-                <Checkbox
-                  checked={product.enable === true}
-                  onChange={onCheckedChange}
-                  value={true}
-                  name={product._id}
-                  aria-label="판매"
-                />
-              </TableCell>
-              <TableCell>
-                <Checkbox
-                  checked={product.enable === false}
-                  onChange={onCheckedChange}
-                  value={false}
-                  name={product._id}
-                  aria-label="품절"
-                />
-              </TableCell>
-              </>
-          }
+                {product.enable === null ? (
+                  <>
+                    <TableCell>대기중</TableCell>
+                    <TableCell>대기중</TableCell>
+                  </>
+                ) : (
+                  <>
+                    <TableCell>
+                      <Checkbox
+                        checked={product.enable === true}
+                        value={true}
+                        name={product._id}
+                        aria-label="판매"
+                      />
+                    </TableCell>
+                    <TableCell>
+                      <Checkbox
+                        checked={product.enable === false}
+                        value={false}
+                        name={product._id}
+                        aria-label="품절"
+                      />
+                    </TableCell>
+                  </>
+                )}
                 <TableCell width="5%">
                   <Link to={`/product/upload/${product._id}`}>상세</Link>
                 </TableCell>
-                {/* <TableCell width="5%">
-                  <Button onClick={onDeleteClick}>삭제</Button>
-                  <DeleteConfirm visible={del} onDelete={onDelete} onCancel={onCancel}/>
-                </TableCell> */}
               </TableRow>
             );
           })}

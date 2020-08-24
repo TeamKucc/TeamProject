@@ -92,7 +92,6 @@ const UploadContainer = ({ history }) => {
           enable,
           category,
         }))
-        return
     }
     dispatch(
       productUpload({
@@ -109,7 +108,8 @@ const UploadContainer = ({ history }) => {
         category,
       }),
       alert("제품이 등록되었습니다!"),
-      history.push('/product/stock')
+      history.push('/product/stock'),
+      window.location.reload()
     );
   };
 
