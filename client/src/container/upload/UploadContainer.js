@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {
@@ -6,11 +6,16 @@ import {
   changeField,
   initialize,
   updateUpload,
+  imageUpload,
+  imagedDelete,
+  thumbnailUpload,
+  thumbnailDelete
 } from '../../modules/upload';
 import UploadProduct from '../../components/upload/UploadProduct2';
 
 const UploadContainer = ({ history }) => {
   const dispatch = useDispatch();
+  const [error, setError] = useState(null)
 
   const {
     seller,
@@ -53,7 +58,25 @@ const UploadContainer = ({ history }) => {
     category,
   };
 
-  const onPublish = () => {
+  console.log(images)
+  const onPublish = (e) => {
+    e.preventDefault();
+
+    if([title, description, price, discount, person, stock].includes('')) {
+      setError('빈칸을 모두 입력해주세요')
+      return
+    }
+
+    if(images[0] == null) {
+      setError('이미지를 등록해주세요')
+      return
+    }
+
+    if(thumbnails[0] == null) {
+      setError('썸네일 등록해주세요')
+      return
+    }
+
     if (productId) {
       dispatch(
         updateUpload({
@@ -101,11 +124,44 @@ const UploadContainer = ({ history }) => {
     );
   };
 
+  const imageDrop = (files) => {
+    console.log(files)
+    dispatch(
+      imageUpload({
+        files
+      }))
+  }
+
+  const imageDelete = (image) => {
+    const currentIndex = images.indexOf(image);
+    dispatch(imagedDelete(currentIndex))
+  }
+
+  const thumbnailDrop = (files) => {
+    dispatch(
+      thumbnailUpload({
+        files
+      }))
+  };
+
+  const thumbDelete = (thumbnail) => {
+    const currentIndex = thumbnails.indexOf(thumbnail);
+    dispatch(thumbnailDelete(currentIndex))
+  }
+
+
   return (
     <UploadProduct
       onPublish={onPublish}
       onChange={onChange}
       product={product}
+      imageDrop={imageDrop}
+      imageDelete={imageDelete}
+      images={images}
+      thumbnailDrop={thumbnailDrop} 
+      thumbnailDelete={thumbDelete}
+      thumbnails={thumbnails}
+      error={error}
     />
   );
 };

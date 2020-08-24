@@ -36,12 +36,12 @@ const ProductTes = ({ match, history, location }) => {
         }
     }, [dispatch])
 
-    useEffect(() => {
-        dispatch(
-            readReview(id)
-        )
-        console.log(id)
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(
+    //         readReview(id)
+    //     )
+    //     console.log(id)
+    // }, [dispatch])
 
     const onCheck = () => {
         dispatch(checkDeal(user))

@@ -1,87 +1,209 @@
-import React from 'react';
-import { Button, Form, Input } from 'antd';
-import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import PropTypes from 'prop-types';
+import React, { Fragment} from 'react';
+import Tab from 'react-bootstrap/Tab';
+import Nav from 'react-bootstrap/Nav';
+import Dropzone from 'react-dropzone';
 
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-}));
 
-const { TextArea } = Input;
-
-function UploadProduct({ onPublish, onChange, product }) {
-  
-  console.log(product)
-
-  const classes = useStyles();
+function UploadProduct({ onPublish, onChange, product, imageDrop, imageDelete, images, thumbnailDrop, thumbnailDelete, thumbnails, error }) {
 
   return (
-    <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
-      <Form onSubmit={onPublish}>
-        <label>제품명</label>
-        <Input onChange={onChange} name="title" value={product.title}/>
-        <br />
-        <br />
+    <Fragment>
+      {/* breadcrumb */}
+      <div className="login-register-area pt-50 pb-100">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-7 col-md-12 ml-auto mr-auto">
+              <div className="login-register-wrapper">
+                <Tab.Container defaultActiveKey="login">
+                  <Tab.Content>
+                    <Tab.Pane eventKey="login">
+                      <div className="login-form-container">
+                        <div className="login-register-form">
+                          <div
+                            style={{ maxWidth: '700px', margin: '2rem auto' }}
+                          >
+                            <div
+                              style={{
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                              }}
+                            >
+                              <Dropzone
+                                onDrop={imageDrop}
+                                multiple={false}
+                                maxSize={800000000}
+                              >
+                                {({ getRootProps, getInputProps }) => (
+                                  <div
+                                    style={{
+                                      width: '200px',
+                                      height: '200px',
+                                      border: '1px solid lightgray',
+                                      display: 'flex',
+                                      alignItems: 'center',
+                                      justifyContent: 'center',
+                                      textAlign: 'center',
+                                    }}
+                                    {...getRootProps()}
+                                  >
+                                    <input {...getInputProps()} />
+                                    DETAIL IMAGE
+                                    {/* <br/><br/>"click here and upload image" */}
+                                  </div>
+                                )}
+                              </Dropzone>
 
-        <label>제품설명</label>
-        <TextArea onChange={onChange} name="description" value={product.description}/>
-        <br />
-        <br />
+                              <div
+                                style={{
+                                  display: 'flex',
+                                  width: '300px',
+                                  height: '200px',
+                                  overflowX: 'scroll',
+                                }}
+                              >
+                                {images.map((image, index) => (
+                                  <div
+                                    key={index}
+                                    onClick={() => imageDelete(image)}
+                                  >
+                                    <img
+                                      style={{
+                                        minWidth: '300px',
+                                        width: '300px',
+                                        height: '240px',
+                                      }}
+                                      alt={`productImg-${index}`}
+                                      src={`${images[index].image.location}`}
+                                    />
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            style={{ maxWidth: '700px', margin: '2rem auto' }}
+                          >
+                            <div
+                              style={{
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                              }}
+                            >
+                              <Dropzone
+                                onDrop={thumbnailDrop}
+                                multiple={false}
+                                maxSize={800000000}
+                              >
+                                {({ getRootProps, getInputProps }) => (
+                                  <div
+                                    style={{
+                                      width: '200px',
+                                      height: '200px',
+                                      border: '1px solid lightgray',
+                                      display: 'flex',
+                                      alignItems: 'center',
+                                      justifyContent: 'center',
+                                      textAlign: 'center',
+                                    }}
+                                    {...getRootProps()}
+                                  >
+                                    <input {...getInputProps()} />
+                                    THUMBNALE IMAGE
+                                    {/* <br/><br/>"click here and upload image" */}
+                                  </div>
+                                )}
+                              </Dropzone>
 
-        <label>원가</label>
-        <Input onChange={onChange} name="price" value={product.price}/>
-        <br />
-        <br />
-
-        <label>할인가</label>
-        <Input onChange={onChange} name="discount" value={product.discount}/>
-        <br />
-        <br />
-
-        <label>할인인원</label>
-        <Input onChange={onChange} name="person" value={product.person}/>
-        <br />
-        <br />
-
-        <label>재고수량</label>
-        <Input onChange={onChange} name="stock" value={product.stock}/>
-        <br />
-        <br />
-
-        <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label">카테고리</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-					name="category"
-					value={product.category}
-          onChange={onChange}
-        >
-          <MenuItem value={"패션의류"}>패션의류</MenuItem>
-          <MenuItem value={"패션잡화"}>패션잡화</MenuItem>
-          <MenuItem value={"뷰티"}>뷰티</MenuItem>
-          <MenuItem value={"식품"}>식품</MenuItem>
-          <MenuItem value={"출산/유아동"}>출산/유아동</MenuItem>
-          <MenuItem value={"디지털/가전"}>디지털/가전</MenuItem>
-          <MenuItem value={"인테리어"}>인테리어</MenuItem>
-          <MenuItem value={"스포츠/레저"}>스포츠/레저</MenuItem>
-          <MenuItem value={"생활"}>생활</MenuItem>
-        </Select>
-      </FormControl>
-      <br/>
-      <br/>
-        <Button onClick={onPublish}>Submit</Button>
-      </Form>
-    </div>
+                              <div
+                                style={{
+                                  display: 'flex',
+                                  width: '300px',
+                                  height: '200px',
+                                  overflowX: 'scroll',
+                                }}
+                              >
+                                {thumbnails.map((image, index) => (
+                                  <div
+                                    key={index}
+                                    onClick={() => thumbnailDelete(image)}
+                                  >
+                                    <img
+                                      style={{
+                                        minWidth: '300px',
+                                        width: '300px',
+                                        height: '240px',
+                                      }}
+                                      alt={`productImg-${index}`}
+                                      src={`${thumbnails[index].image.location}`}
+                                    />
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                          <form onSubmit={onPublish}>
+                            <input
+                              type="text"
+                              name="title"
+                              placeholder="Title"
+                              value={product.title}
+                              onChange={onChange}
+                            />
+                            <input
+                              name="description"
+                              placeholder="Description"
+                              value={product.discription}
+                              onChange={onChange}
+                            />
+                            <input
+                              type="text"
+                              name="price"
+                              placeholder="Price"
+                              value={product.price}
+                              onChange={onChange}
+                            />
+                            <input
+                              type="text"
+                              name="discount"
+                              placeholder="Discount Price"
+                              value={product.discount}
+                              onChange={onChange}
+                            />
+                            <input
+                              type="text"
+                              name="person"
+                              placeholder="Person"
+                              value={product.person}
+                              onChange={onChange}
+                            />
+                            <input
+                              type="text"
+                              name="stock"
+                              placeholder="Stock"
+                              value={product.stock}
+                              onChange={onChange}
+                            />
+                            <br />
+                            <div className="button-box">
+                              <button type="submit">
+                                <span>Register</span>
+                              </button>
+                              <br/><br/>
+                              {error == null ? '' : '* ' + error }
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </Tab.Pane>
+                  </Tab.Content>
+                </Tab.Container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Fragment>
   );
 }
 

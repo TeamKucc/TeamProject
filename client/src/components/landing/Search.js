@@ -62,35 +62,6 @@ const Search = ({ Products, id }) => {
                 />
               )}
             </Link>
-            <div className="product-action">
-              <div className="pro-same-action pro-wishlist">
-                <a
-                  href={'/product/order/' + product._id}
-                  rel="noopener noreferrer"
-                  title="결제하기"
-                >
-                  <i className="pe-7s-piggy" />
-                </a>
-              </div>
-              <div className="pro-same-action pro-cart">
-                <a
-                  href={product._id}
-                  rel="noopener noreferrer"
-                  // target="_blank"
-                >
-                  {' '}
-                  제품상세{' '}
-                </a>
-              </div>
-              <div className="pro-same-action pro-quickview">
-                <button
-                  // onClick={() => setModalShow(true)}
-                  title="미리보기"
-                >
-                  <i className="pe-7s-look" />
-                </button>
-              </div>
-            </div>
           </div>
           <div className="product-content text-center">
             <h3>
@@ -128,7 +99,10 @@ const Search = ({ Products, id }) => {
               {/* 카드 업로드 */}
               <div className="slider-content-3 slider-animated-1 text-center">
                 <p className="animated">
-                  '{id}' 에 대한 검색결과 입니다 <br />
+                  {!Products[0] ?
+                  <div>'{id}' 에 대한 검색결과가 없습니다 </div> 
+                : <div>'{id}' 에 대한 검색결과 입니다 </div>
+                }
                 </p>
               </div>
               <div className="shop-bottom-area mt-35">

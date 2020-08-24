@@ -249,14 +249,14 @@ export function* productSaga() {
 
 export const initialState = {
   productId: null,
-  stock: 0,
+  stock: '',
   thumbnails: [],
   title: '',
   description: '',
-  price: 0,
+  price: '',
   images: [],
-  discount: 0,
-  person: 0,
+  discount: '',
+  person: '',
   upload: null,
   uploadError: null,
   enable: null,

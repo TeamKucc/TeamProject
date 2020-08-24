@@ -32,7 +32,12 @@ const HeaderContainer = (props) => {
     }, [dispatch])
 
     const onClick = (e) => {
+        if(!word) {
+            alert ('검색어를 입력해주세요!')
+            props.history.push('/')
+        } else {
         props.history.push('/product/search/' + word)
+        }
     }
 
     const onChange = (e) => {
