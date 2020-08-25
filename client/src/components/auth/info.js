@@ -7,8 +7,12 @@ import Accordion from "react-bootstrap/Accordion";
 
 const Info = ({ onSubmit, form, user, onChange, error, Phistory }) => {
 
-    console.log(Phistory)
     if (!Phistory) return null
+
+    const onButton = () => {
+        alert('배송정보가 등록되어 있지 않습니다')
+    }
+
     return (
         <>
             <div className="myaccount-area pb-80 pt-100">
@@ -21,7 +25,7 @@ const Info = ({ onSubmit, form, user, onChange, error, Phistory }) => {
                                         <Card.Header className="panel-heading">
                                             <Accordion.Toggle variant="link" eventKey="0">
                                                 <h3 className="panel-title">
-                                                    <span>1 .</span> 내정보수정{" "}
+                                                    <span>1 .</span> 내정보{" "}
                                                 </h3>
                                             </Accordion.Toggle>
                                         </Card.Header>
@@ -30,7 +34,7 @@ const Info = ({ onSubmit, form, user, onChange, error, Phistory }) => {
                                                 <form onSubmit={onSubmit}>
                                                     <div className="myaccount-info-wrapper">
                                                         <div className="account-info-wrapper">
-                                                            <h4>내정보</h4>
+                                                            <h4>내정보 수정</h4>
                                                         </div>
                                                         <div className="row">
                                                             <div className="col-lg-12 col-md-12">
@@ -87,20 +91,71 @@ const Info = ({ onSubmit, form, user, onChange, error, Phistory }) => {
                                             <Card.Body>
                                                 <div className="myaccount-info-wrapper">
                                                     <div className="account-info-wrapper">
-                                                        <h4>내정보</h4>
+                                                        <h4>구매기록 상세</h4>
                                                     </div>
                                                     <div className="row">
                                                         <div className="col-lg-12 col-md-12">
                                                             {Phistory.map((index) => {
-                                                                return <div className="billing-info" key={index._id}>
-                                                                    <label>구매정보</label>
+                                                                return (
+                                                                  <div
+                                                                    className="billing-info"
+                                                                    key={
+                                                                      index._id
+                                                                    }
+                                                                  >
                                                                     <div className="billing-info">
-                                                                        상품:{index.productInfo.title}
+                                                                      <label>
+                                                                        상품명
+                                                                      </label>
+                                                                      <input
+                                                                        type="text"
+                                                                        value={
+                                                                          index
+                                                                            .productInfo
+                                                                            .title
+                                                                        }
+                                                                      />
+                                                                    </div><div className="billing-info">
+                                                                      <label>
+                                                                        상품가
+                                                                      </label>
+                                                                      <input
+                                                                        type="text"
+                                                                        value={
+                                                                          index
+                                                                            .productInfo
+                                                                            .discount
+                                                                        }
+                                                                      />
                                                                     </div>
                                                                     <div className="billing-info">
-                                                                        배송현황: <a href={"https://tracker.delivery/#/" + index.delivery + "/" + index.deliveryNumber } target="_blank">배송조회</a>
+                                                                      <div className="billing-back-btn">
+                                                                        <div className="billing-btn">
+                                                                          {index.deliveryNumber !==
+                                                                          'not yet' ? (
+                                                                            <a
+                                                                              href={
+                                                                                'https://tracker.delivery/#/' +
+                                                                                index.delivery +
+                                                                                '/' +
+                                                                                index.deliveryNumber
+                                                                              }
+                                                                              target="_blank"
+                                                                            >
+                                                                              <button>
+                                                                                배송조회
+                                                                              </button>
+                                                                            </a>
+                                                                          ) : (
+                                                                              <button onClick={onButton}>
+                                                                                배송조회
+                                                                              </button>
+                                                                          )}
+                                                                        </div>
+                                                                      </div>
                                                                     </div>
-                                                                </div>
+                                                                  </div>
+                                                                );
                                                             })
                                                             }
                                                         </div>

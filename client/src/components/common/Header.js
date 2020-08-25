@@ -54,14 +54,14 @@ const Header = ({
       >
         <div className={layout === "container-fluid" ? layout : "container"}>
           <div className="row">
-            <div className="col-xl-2 col-lg-2 col-md-6 col-4 logo">
+            <div className="col-xl-2 col-lg-2 col-md-6 col-4 logo pb-30">
               {/* header logo */}
               {/* <Logo imageUrl="/assets/img/logo/logo.png" logoClass="logo" /> */}
               <Link to="/">
-                <img className="logo" src={logo} alt="로고"/>
+                <img src={logo} alt="로고" />
               </Link>
             </div>
-            <div className="col-xl-8 col-lg-8 d-none d-lg-block">
+            <div className="col-xl-8 col-lg-8 d-none d-lg-block pt-10">
               {/* Nav menu */}
               <NavMenu user={user} onLogout={onLogout} />
             </div>

@@ -18,10 +18,10 @@ let s3 = new AWS.S3();
 
 const ObjectId = mongoose.Types.ObjectId;
 
-let upload2 = multer({
+let upload = multer({
   storage: multerS3({
     s3: s3,
-    bucket: 'teamkucc',
+    bucket: 'teamkucc2',
     key: function (req, file, cb) {
       let extension = path.extname(file.originalname);
       cb(null, Date.now().toString() + extension);
@@ -30,10 +30,10 @@ let upload2 = multer({
   }),
 }).single('file');
 
-let upload = multer({
+let upload2 = multer({
   storage: multerS3({
     s3: s3,
-    bucket: 'teamkucc2',
+    bucket: 'teamkucc',
     key: function (req, file, cb) {
       let extension = path.extname(file.originalname);
       cb(null, Date.now().toString() + extension);
