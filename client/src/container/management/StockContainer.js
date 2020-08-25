@@ -15,11 +15,16 @@ const StockContainer = ({ match, history }) => {
     management: management.management,
     seller: user.user,
   }));
-
+  console.log("seller:"+seller)
   useEffect(() => {
     dispatch(stockManagement({seller}));
+    return()=>{
+      
+    }
   }, [dispatch]);
+  console.log(management)
 
+  
   return (
     <Stock
       Products={management}

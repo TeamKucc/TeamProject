@@ -4,14 +4,14 @@ import Tab from 'react-bootstrap/Tab';
 import Nav from 'react-bootstrap/Nav';
 import StarRatings from 'react-star-ratings';
 
-const ProductDescriptionTab = ({ onChange, onClick, changeRating, review, product }) => {
+const ProductDescriptionTab = ({ onChange, onClick, changeRating, review, product,rating }) => {
   
   let Review = Object.keys(review).map(function (key) {
     return review[key];
   });
 
   if(!product) return null;
-
+  console.log(rating)
   const ProductRating = ({ ratingValue }) => {
     let rating = [];
     for (let i = 0; i < 5; i++) {
@@ -95,9 +95,9 @@ const ProductDescriptionTab = ({ onChange, onClick, changeRating, review, produc
                                   <span>Your rating:</span>
                                   <div className="ratting-star">
                                     <StarRatings
-                                      value={review.rating}
+                                      rating={rating}
                                       starDimension="20px"
-                                      starRatedColor="blue"
+                                      starRatedColor="red"
                                       changeRating={changeRating}
                                       numberOfStars={5}
                                       name="rating"

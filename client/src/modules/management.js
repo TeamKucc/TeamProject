@@ -48,6 +48,7 @@ export function* managementSaga() {
 
 const initialState = {
   management: {},
+  manegementDetail:{},
   error: null,
 };
 
@@ -63,7 +64,7 @@ const management = handleActions(
     }),
     [STOCK_DETAIL_SUCCESS]: (state, action) => ({
       ...state,
-      management: action.payload,
+      manegementDetail: action.payload,
     }),
     [STOCK_DETAIL_FAILURE]: (state, action) => ({
       ...state,

@@ -79,6 +79,7 @@ function* logoutSaga() {
     try {
         yield call(authCtrl.logout);
         localStorage.removeItem('userId')
+        localStorage.removeItem('role')
         console.log('remove')
     } catch (error) {
         console.log(error)
@@ -105,6 +106,8 @@ const initialState = {
     seller: null,
     complete:false,
     dealError:null,
+    makeDeal:false,
+    makeDealError:null,
     endDeal:null,
     endDealError:null
 }
@@ -160,6 +163,14 @@ export default handleActions(
         [END_DEAL_FAILURE]:(state,{payload:endDealError})=>({
             ...state,
             endDealError
+        }),
+        [MAKE_DEAL_SUCCESS]:(state,{payload:makeDeal})=>({
+            ...state,
+            makeDeal:true
+        }),
+        [MAKE_DEAL_FAILURE]:(state,{payload:makeDealError})=>({
+            ...state,
+            makeDealError
         }),
         [UNLOAD_USER]:()=>initialState,
     },

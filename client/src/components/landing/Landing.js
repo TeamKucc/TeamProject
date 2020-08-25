@@ -6,6 +6,7 @@ import {
   getIndividualCategories,
   // setActiveSort,
 } from '../../helpers/product';
+import Timer from '../common/Timer';
 
 function Landing({ Products, onClick, cate, onChange, onSearch }) {
   const [layout, setLayout] = useState('list');
@@ -154,9 +155,7 @@ function Landing({ Products, onClick, cate, onChange, onSearch }) {
                           />
                         )}
                       </Link>
-                      <div className="product-img-badges">
-                        <span className="pink">-{product.discount}%</span>
-                      </div>
+                        <Timer product={product}/>
                     </div>
                   </div>
                 </div>

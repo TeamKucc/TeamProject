@@ -12,10 +12,11 @@ import ProductDescriptionTab from '../../components/product/ReviewTap'
 
 const ProductTes = ({ match, history, location }) => {
     const dispatch = useDispatch();
-    const { product, user, deal,dealError, complete, error, write, review, rating } = useSelector(({ landing, user, upload, review }) => ({
+    const { product, user, deal,makeDeal,dealError, complete, error, write, review, rating } = useSelector(({ landing, user, upload, review }) => ({
         product: landing.productDetail,
         user: user.user,
         deal: upload.deal,
+        makeDeal:upload.makeDeal,
         dealError:user.dealError,
         complete: user.complete,
         error: review.error,
@@ -101,6 +102,11 @@ const ProductTes = ({ match, history, location }) => {
         }
     },[dispatch,dealError])
 
+    useEffect(()=>{
+        if(makeDeal){
+            window.location.reload()
+        }
+    },[makeDeal])
 
 
     return (
@@ -136,6 +142,7 @@ const ProductTes = ({ match, history, location }) => {
                         changeRating={changeRating}
                         review={review}
                         product={product}
+                        rating={rating}
                     />
                     
             </div>

@@ -15,7 +15,8 @@ const Stock = ({ Products }) => {
   let Prod = Object.keys(Products).map(function (key) {
     return Products[key];
   });
-
+  if(!Products) return null
+  // console.log("stock:"+Prod[0].id)
   return (
     <Paper>
       <Table>

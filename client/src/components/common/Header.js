@@ -8,9 +8,6 @@ import { Link } from 'react-router-dom';
 import logo from '../../assets/img/logo2.png'
 
 const Header = ({
-  layout,
-  top,
-  borderStyle,
   headerPaddingClass,
   headerPositionClass,
   headerBgClass,
@@ -19,7 +16,6 @@ const Header = ({
   onClick,
   onChange,
 }) => {
-  console.log(headerBgClass,)
   let UserId = null;
   if (user) {
     UserId = user.replace(/['"]+/g, '')

@@ -46,9 +46,9 @@ const ProductDeal = ({ user, product, deal, review }) => {
         config: { tension: 220, friction: 120 },
     });
 
-    const onToggle=()=>{
+  
 
-    }
+    
 
     if (!deal) return null;
     console.log(deal)
