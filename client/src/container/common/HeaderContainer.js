@@ -9,11 +9,11 @@ import { withRouter } from 'react-router-dom'
 
 const HeaderContainer = (props) => {
 
-    const { user, word, landing } = useSelector(({ user, landing }) => ({ 
+    const { user, word, landing } = useSelector(({ user, landing }) => ({
         user: user.user,
         word: landing.word,
         landing: landing.landing
-     }))
+    }))
     const dispatch = useDispatch()
 
     const onLogout = () => {
@@ -32,17 +32,17 @@ const HeaderContainer = (props) => {
     }, [dispatch])
 
     const onClick = (e) => {
-        if(!word) {
-            alert ('검색어를 입력해주세요!')
+        if (!word) {
+            alert('검색어를 입력해주세요!')
             props.history.push('/')
         } else {
-        props.history.push('/product/search/' + word)
+            props.history.push('/product/search/' + word)
         }
     }
 
     const onChange = (e) => {
         console.log(e.target.value)
-        const{ value, name } = e.target
+        const { value, name } = e.target
         dispatch(
             changeField({
                 key: name,
@@ -51,8 +51,17 @@ const HeaderContainer = (props) => {
         )
     }
 
-    return  <Header onLogout={onLogout} user={user} onClick={onClick} onChange={onChange} />
-    
+    return (
+        <Header
+            onLogout={onLogout}
+            user={user}
+            onClick={onClick}
+            onChange={onChange}
+            layout={"container-fluid"}
+            headerPaddingClass={"header-padding-1"}
+            />
+            )
+
 }
 
 export default withRouter(HeaderContainer);

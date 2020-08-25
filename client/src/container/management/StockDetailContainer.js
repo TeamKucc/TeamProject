@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { stockDetail } from '../../modules/management';
+import { stockDetail, unloadStock } from '../../modules/management';
 import { setOriginalUpload } from '../../modules/upload'
 import StockDetail from '../../components/management/StockDetail';
+import { unloadUser } from '../../modules/user';
 // import { stockDetail } from '../../lib/api/product';
 
 const StockDetailContainer = ({ match, history }) => {
@@ -16,6 +17,10 @@ const StockDetailContainer = ({ match, history }) => {
 
   useEffect(() => {
     dispatch(stockDetail(id));
+    return()=>{
+      dispatch(unloadStock())
+      dispatch(unloadUser())
+    }
   }, [dispatch]);
 
   console.log(management)

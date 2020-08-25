@@ -49,10 +49,13 @@ const [
     END_DEAL_FAILURE
 ]=createRequestActionTypes('user/END_DEAL')
 
+const UNLOAD_USER = 'user/UNLOAD_USER'
+
 //create redux actions
 export const tempSetUser = createAction(TEMP_SET_USER, user => user)
 export const logout = createAction(LOGOUT);
 export const userUpdate = createAction(USER_UPDATE, ({ userID, name, password, email, _id }) => ({ userID, name, password, email, _id }))
+export const unloadUser = createAction(UNLOAD_USER)
 
 export const getHistory = createAction(GET_HISTORY, user => user)
 export const sellerHistory = createAction(SELLER_HISTORY, user => user)
@@ -157,7 +160,8 @@ export default handleActions(
         [END_DEAL_FAILURE]:(state,{payload:endDealError})=>({
             ...state,
             endDealError
-        })
+        }),
+        [UNLOAD_USER]:()=>initialState,
     },
     initialState,
 )

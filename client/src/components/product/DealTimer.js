@@ -36,15 +36,15 @@ const TimeTest = ({deal }) => {
             dispatch(endTime({ _id: deal._id }))
         }
             let result = hours + ": "
-                + minutes + ": " + seconds + " 남음"
+                + minutes + ": " + seconds 
             setResult(result)
     }
 
 
     return (
-        
-            <span>{TimerResult}</span>
-        
+            <>
+            <span>{TimerResult}</span> <span>남음</span>
+            </>
     )
 }
 

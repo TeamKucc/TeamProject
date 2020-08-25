@@ -4,7 +4,8 @@ import NavMenu from "./header/NavMenu";
 import IconGroup from "./header/IconGroup";
 import MobileMenu from "./header/MobileMenu";
 import { Link } from 'react-router-dom';
-import logo from '../../assets/img/logo/logo.png'
+// import Logo from './header/Logo'
+import logo from '../../assets/img/logo2.png'
 
 const Header = ({
   layout,
@@ -18,6 +19,7 @@ const Header = ({
   onClick,
   onChange,
 }) => {
+  console.log(headerBgClass,)
   let UserId = null;
   if (user) {
     UserId = user.replace(/['"]+/g, '')
@@ -52,14 +54,14 @@ const Header = ({
           scroll > headerTop ? "stick" : ""
           }`}
       >
-        <div className={layout === "container-fluid" ? layout : "container"}>
+        <div className="container">
           <div className="row">
-            <div className="col-xl-2 col-lg-2 col-md-6 col-4 logo">
+            <div className="col-xl-2 col-lg-2 col-md-6 col-4">
               {/* header logo */}
-              {/* <Logo imageUrl="/assets/img/logo/logo.png" logoClass="logo" /> */}
-              <Link to="/">
-                <img className="logo" src={logo} alt="로고"/>
-              </Link>
+              {/* <Logo imageUrl="../../assets/img/logo2.png" logoClass="logo" /> */}
+                
+                  <img className="logo" src={logo} alt="로고" href="/" />
+               
             </div>
             <div className="col-xl-8 col-lg-8 d-none d-lg-block">
               {/* Nav menu */}

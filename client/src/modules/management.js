@@ -17,6 +17,8 @@ const [
   STOCK_DETAIL_FAILURE,
 ] = createRequestActionTypes('management/STOCK_DETAIL')
 
+const UNLOAD_STOCK='management/UNLOAD_STOCK'
+
 export const stockManagement = createAction(
   STOCK_MANAGEMENT,
   seller => seller,
@@ -26,6 +28,8 @@ export const stockDetail = createAction(
   STOCK_DETAIL,
   id => id,
 )
+
+export const unloadStock = createAction(UNLOAD_STOCK)
 
 const stockManagementSaga = createRequestSaga(
   STOCK_MANAGEMENT,
@@ -65,6 +69,7 @@ const management = handleActions(
       ...state,
       error: action.payload,
     }),
+    [UNLOAD_STOCK]:()=>initialState,
   },
   initialState,
 );

@@ -53,20 +53,9 @@ const ProductDeal = ({ user, product, deal, review }) => {
     if (!deal) return null;
     console.log(deal)
     return (
-        <div className="product-details-content ml-70">
+        <div className="deal">
             <Button onClick={make} variant="outline-dark">딜생성</Button>
             <div className="product-list-bg">
-                {/* {deal.map((index) => {
-                    return <div className="pro-details-cart btn-hover" key={index._id}>
-                        <div className="pro-details-quality">
-                            <span key={index.user}>
-                                {index.user + " "}
-                            </span> <button className="btn-full" onClick={() => { join(index._id) }}>Join</button>
-                        </div>
-                    </div>
-                }
-                )} */}
-
                 {deal.length == 0 ? (
                     <>
                     </>
