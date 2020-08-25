@@ -4,10 +4,12 @@ import Tab from 'react-bootstrap/Tab';
 import Nav from 'react-bootstrap/Nav';
 import StarRatings from 'react-star-ratings';
 
-const ProductDescriptionTab = ({ onChange, onClick, changeRating, review }) => {
+const ProductDescriptionTab = ({ onChange, onClick, changeRating, review, product }) => {
   let Review = Object.keys(review).map(function (key) {
     return review[key];
   });
+
+  if(!product) return null;
 
   const ProductRating = ({ ratingValue }) => {
     let rating = [];
@@ -61,27 +63,21 @@ const ProductDescriptionTab = ({ onChange, onClick, changeRating, review }) => {
                 <Nav.Link eventKey="productReviews">Reviews</Nav.Link>
               </Nav.Item>
             </Nav>
-            <Tab.Content className="description-review-bottom">
+            <Tab.Content className="description-review-bottom text-center">
               <Tab.Pane eventKey="productDescription">
-                <div className="row">
-                  <div className="col-lg-7">
-                    <input
-                      name="write"
-                      onChange={onChange}
-                      placeholder="상품에 대한 리뷰를 작성해주세요!"
-                    />
-                    <button onClick={onClick}>등록하기</button>
-                    <StarRatings
-                      value={review.rating}
-                      starDimension="20px"
-                      starRatedColor="red"
-                      changeRating={changeRating}
-                      numberOfStars={5}
-                      name="rating"
-                    />
-                    {Reviews}
-                  </div>
-                </div>
+                {product.images
+                  ? product.images.map((image, index) => (
+                      <div key={index}>
+                        <img
+                          style={{
+                            maxWidth: '700px',
+                          }}
+                          alt={`productImg-${index}`}
+                          src={`${product.images[index].image.location}`}
+                        />
+                      </div>
+                    ))
+                  : ''}
               </Tab.Pane>
               <Tab.Pane eventKey="productReviews">
                 <div className="row">
