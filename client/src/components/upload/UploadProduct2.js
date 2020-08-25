@@ -15,14 +15,19 @@ function UploadProduct({ onPublish, onChange, product, imageDrop, imageDelete, i
           <div className="row">
             <div className="col-lg-7 col-md-12 ml-auto mr-auto">
               <div className="login-register-wrapper">
-                <Tab.Container defaultActiveKey="login">
+                <Tab.Container defaultActiveKey="product">
+                  <Nav variant="pills" className="login-register-tab-list">
+                    <Nav.Item>
+                      <Nav.Link>
+                        <h4>PRODUCT REGISTER</h4>
+                      </Nav.Link>
+                    </Nav.Item>
+                  </Nav>
                   <Tab.Content>
-                    <Tab.Pane eventKey="login">
+                    <Tab.Pane eventKey="product">
                       <div className="login-form-container">
                         <div className="login-register-form">
-                          <div
-                            style={{ maxWidth: '700px', margin: '2rem auto' }}
-                          >
+                          <div style={{ maxWidth: '700px', margin: 'auto' }}>
                             <div
                               style={{
                                 display: 'flex',
@@ -53,7 +58,6 @@ function UploadProduct({ onPublish, onChange, product, imageDrop, imageDelete, i
                                   </div>
                                 )}
                               </Dropzone>
-
                               <div
                                 style={{
                                   display: 'flex',
@@ -189,8 +193,9 @@ function UploadProduct({ onPublish, onChange, product, imageDrop, imageDelete, i
                               <button type="submit">
                                 <span>Register</span>
                               </button>
-                              <br/><br/>
-                              {error == null ? '' : '* ' + error }
+                              <br />
+                              <br />
+                              {error == null ? '' : '* ' + error}
                             </div>
                           </form>
                         </div>

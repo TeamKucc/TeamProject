@@ -135,6 +135,7 @@ const ProductTes = ({ match, history, location }) => {
                         onClick={onClick}
                         changeRating={changeRating}
                         review={review}
+                        product={product}
                     />
                     
             </div>
