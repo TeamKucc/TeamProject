@@ -103,10 +103,10 @@ const initialState = {
     error: null,
     deal: null,
     seller: null,
-    complete:false,
-    dealError:null,
-    endDeal:null,
-    endDealError:null
+    complete: false,
+    dealError: null,
+    endDeal: null,
+    endDealError: null
 }
 
 export default handleActions(
@@ -161,7 +161,7 @@ export default handleActions(
             ...state,
             endDealError
         }),
-        [UNLOAD_USER]:()=>initialState,
+        [UNLOAD_USER]: () => initialState,
     },
     initialState,
 )

@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom';
 import {
   productUpload,
   changeField,
-  initialize,
   updateUpload,
   imageUpload,
   imagedDelete,
@@ -62,7 +61,7 @@ const UploadContainer = ({ history }) => {
   const onPublish = (e) => {
     e.preventDefault();
 
-    if([title, description, price, discount, person, stock].includes('')) {
+    if([title, description, price, discount, person, stock, category].includes('')) {
       setError('빈칸을 모두 입력해주세요')
       return
     }
@@ -114,7 +113,7 @@ const UploadContainer = ({ history }) => {
   };
 
   const onChange = (e) => {
-    console.log('call');
+    console.log(e.target);
     const { value, name } = e.target;
     dispatch(
       changeField({

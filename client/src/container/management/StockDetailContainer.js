@@ -5,7 +5,6 @@ import { stockDetail, unloadStock } from '../../modules/management';
 import { setOriginalUpload } from '../../modules/upload'
 import StockDetail from '../../components/management/StockDetail';
 import { unloadUser } from '../../modules/user';
-// import { stockDetail } from '../../lib/api/product';
 
 const StockDetailContainer = ({ match, history, location }) => {
   const { id } = match.params;

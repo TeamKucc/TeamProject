@@ -68,7 +68,7 @@ const Info = ({ onSubmit, form, user, onChange, error, Phistory }) => {
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div className="billing-back-btn">
+                                                        <div className="billing-back-btn text-center">
                                                             <div className="billing-btn">
                                                                 <button type="submit">수정하기</button>
                                                             </div>

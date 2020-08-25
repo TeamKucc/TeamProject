@@ -86,13 +86,14 @@ const RegisterForm = ({
                               onChange={onChange}
                               disabled={success == true ? true : false}
                             />
-                            <div >
-                              {/* {success == '' ? '' : (success == true ? '사업자 성공' : '사업자 실패')} */}
-                            {message(success)}
-                            </div>
+                            <div>{message(success)}</div>
                             <br />
                             <div className="button-box">
-                              <button type="button" className="mr-20" onClick={onClick}>
+                              <button
+                                type="button"
+                                className="mr-20"
+                                onClick={onClick}
+                              >
                                 <span>Business Confirm</span>
                               </button>
                               <button type="submit">
@@ -100,7 +101,7 @@ const RegisterForm = ({
                               </button>
                             </div>
                             <br />
-                            {error}
+                            <div className="error text-center">{error == null ? '' : '* ' + error}</div>
                           </form>
                         </div>
                       </div>
