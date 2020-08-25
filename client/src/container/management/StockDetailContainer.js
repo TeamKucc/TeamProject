@@ -6,7 +6,6 @@ import { setOriginalUpload } from '../../modules/upload'
 import StockDetail from '../../components/management/StockDetail';
 import { unloadUser } from '../../modules/user';
 
-
 const StockDetailContainer = ({ match, history, location }) => {
   const { id } = match.params;
   console.log(id)

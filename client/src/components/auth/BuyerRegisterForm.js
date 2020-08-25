@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 import Tab from "react-bootstrap/Tab";
 import Nav from "react-bootstrap/Nav";
 
-const RegisterForm = ( { form, onChange, onSubmit }) => {
+const RegisterForm = ( { form, onChange, onSubmit, error }) => {
 
     return (
       <Fragment>
@@ -61,10 +61,15 @@ const RegisterForm = ( { form, onChange, onSubmit }) => {
                                 value={form.email}
                                 onChange={onChange}
                               />
-                              <div className="button-box">
+                              <div className="button-box text-center">
                                 <button type="submit">
                                   <span>Register</span>
                                 </button>
+                                <br />
+                                <br />
+                                <div className="error">
+                                  {error == null ? '' : '* ' + error}
+                                </div>
                               </div>
                             </form>
                           </div>

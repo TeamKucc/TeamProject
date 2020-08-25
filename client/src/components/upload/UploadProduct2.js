@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, { Fragment} from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Nav from 'react-bootstrap/Nav';
@@ -114,7 +113,7 @@ function UploadProduct({ onPublish, onChange, product, imageDrop, imageDelete, i
                                   >
                                     <input {...getInputProps()} />
                                     THUMBNALE IMAGE
-                                    {/* <br/><br/>"click here and upload image" */}
+                                    <br/>700 x 700
                                   </div>
                                 )}
                               </Dropzone>
@@ -189,13 +188,27 @@ function UploadProduct({ onPublish, onChange, product, imageDrop, imageDelete, i
                               onChange={onChange}
                             />
                             <br />
-                            <div className="button-box">
+                            <select name="category" onChange={onChange}>
+                              <option value="" hidden>Category</option>
+                              <option value={'패션의류'}>패션의류</option>
+                              <option value={'패션잡화'}>패션잡화</option>
+                              <option value={'뷰티'}>뷰티</option>
+                              <option value={'식품'}>식품</option>
+                              <option value={'출산/유아동'}>출산/유아동</option>
+                              <option value={'디지털/가전'}>디지털/가전</option>
+                              <option value={'인테리어'}>인테리어</option>
+                              <option value={'스포츠/레저'}>스포츠/레저</option>
+                              <option value={'생활'}>생활</option>
+                            </select>
+                            <div className="button-box pt-30 text-center">
                               <button type="submit">
                                 <span>Register</span>
                               </button>
                               <br />
                               <br />
+                              <div className="error">
                               {error == null ? '' : '* ' + error}
+                              </div>
                             </div>
                           </form>
                         </div>

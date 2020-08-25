@@ -4,8 +4,7 @@ import NavMenu from "./header/NavMenu";
 import IconGroup from "./header/IconGroup";
 import MobileMenu from "./header/MobileMenu";
 import { Link } from 'react-router-dom';
-// import Logo from './header/Logo'
-import logo from '../../assets/img/logo2.png'
+import logo from '../../assets/img/logo/logo.png'
 
 const Header = ({
   headerPaddingClass,
