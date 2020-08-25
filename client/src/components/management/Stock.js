@@ -8,8 +8,6 @@ import TableCell from '@material-ui/core/TableCell';
 import Button from '@material-ui/core/Button';
 import { Checkbox } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import ImageSlider from './ImageSlider';
-// import DeleteConfirm from './DeleteConfirm'
 
 // 상품코드, 상품명, 창고재고, 주문대기, 재고수정, 판매, 품절, 수정버튼
 const Stock = ({ Products }) => {
@@ -28,11 +26,9 @@ const Stock = ({ Products }) => {
             <TableCell></TableCell>
             <TableCell>원가</TableCell>
             <TableCell>판매가</TableCell>
-            {/* <TableCell>재고수정</TableCell> */}
             <TableCell>판매</TableCell>
             <TableCell>품절</TableCell>
             <TableCell></TableCell>
-            {/* <TableCell></TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -41,11 +37,15 @@ const Stock = ({ Products }) => {
               <TableRow key={index}>
                 <TableCell width="15%">{product._id}</TableCell>
                 <TableCell width="20px">
-                  <img
-                    style={{ maxHeight: '100px' }}
-                    alt={`productImg-${index}`}
-                    src={`${product.thumbnails[0].image.location}`}
-                  />
+                  {product.thumbnails ? (
+                    <img
+                      style={{ maxHeight: '100px' }}
+                      alt={`productImg-${index}`}
+                      src={`${product.thumbnails[0].image.location}`}
+                    />
+                  ) : (
+                    ''
+                  )}
                 </TableCell>
                 <TableCell width="20%">{product.title}</TableCell>
                 <TableCell>{product.price}</TableCell>

@@ -5,6 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import StarRatings from 'react-star-ratings';
 
 const ProductDescriptionTab = ({ onChange, onClick, changeRating, review, product }) => {
+  
   let Review = Object.keys(review).map(function (key) {
     return review[key];
   });
