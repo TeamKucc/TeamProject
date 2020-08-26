@@ -205,8 +205,7 @@ const Main = ({ products }) => {
                     </div>
                   </div>
                 ) : 
-                (<>
-                </>)
+                ('')
               }
               )}
             </Fragment>

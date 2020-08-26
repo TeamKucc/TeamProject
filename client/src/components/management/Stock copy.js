@@ -1,22 +1,38 @@
+<<<<<<< HEAD
 import React, {useState,Fragment } from 'react';
+=======
+import React, {useState} from 'react';
+>>>>>>> Seung
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
+<<<<<<< HEAD
 import Button from '@material-ui/core/Button';
+=======
+>>>>>>> Seung
 import { Checkbox } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 // 상품코드, 상품명, 창고재고, 주문대기, 재고수정, 판매, 품절, 수정버튼
 const Stock = ({ Products }) => {
   
+<<<<<<< HEAD
   let Prod = Object.keys(Products).map(function (key) {
     return Products[key];
   });
   if(!Products) return null
   // console.log("stock:"+Prod[0].id)
+=======
+  if(!Products) return null
+
+  let Prod = Object.keys(Products).map(function (key) {
+    return Products[key];
+  });
+
+>>>>>>> Seung
   return (
     <Paper>
       <Table>
