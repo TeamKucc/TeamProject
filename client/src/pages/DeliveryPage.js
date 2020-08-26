@@ -3,9 +3,9 @@ import DeliveryContainer from '../container/management/DeliveryContainer'
 
 const DeliveryPage = () => {
 	return (
-		<div>
+		<>
 			<DeliveryContainer/>
-		</div>
+		</>
 	);
 };
 

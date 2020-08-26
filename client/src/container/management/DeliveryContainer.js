@@ -5,9 +5,8 @@ import { withRouter } from 'react-router-dom';
 import { deliveryUpload, changeField } from '../../modules/delivery';
 import { Button } from '@material-ui/core'
 
-const DeliveryContainer = () => {
+const DeliveryContainer = ({id,close}) => {
   const dispatch = useDispatch();
-
   const { delivery, deliveryNumber } = useSelector(({ delivery }) => ({
     delivery: delivery.delivery,
     deliveryNumber: delivery.deliveryNumber,
@@ -25,7 +24,7 @@ const DeliveryContainer = () => {
     );
 	};
   
-  const onPublish = (id) => {
+  const onPublish = () => {
     console.log(id)
 		dispatch(
 			deliveryUpload({
@@ -43,6 +42,7 @@ const DeliveryContainer = () => {
         onPublish={onPublish}
         delivery={delivery}
         deliveryNumber={deliveryNumber}
+        close={close}
       />
     </div>
   );

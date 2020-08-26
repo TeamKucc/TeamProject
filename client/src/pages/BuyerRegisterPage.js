@@ -4,9 +4,7 @@ import BuyerRegisterForm from '../container/auth/BuyerRegisterForm';
 
 const BuyerRegisterPage = () => {
   return (
-    // <Template>
       <BuyerRegisterForm />
-    // </Template>
   );
 };
 

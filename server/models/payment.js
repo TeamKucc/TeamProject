@@ -15,7 +15,7 @@ const paySchema = new Schema(
       required: true
     },
     delivery: { type: String ,default: "not yet"},
-    deliveryNumber: { type: String, default: "not yet" },
+    deliveryNumber: { type: String },
     productInfo: {
       type: Object,
       required: true

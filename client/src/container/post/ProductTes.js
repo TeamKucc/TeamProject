@@ -35,7 +35,6 @@ const ProductTes = ({ match, history, location }) => {
         dispatch(readReview(id))
         return () => {
             dispatch(unloadProduct())
-            dispatch(unloadUser())
         }
     }, [dispatch])
 

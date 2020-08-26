@@ -1,12 +1,14 @@
 import { createAction, handleActions } from 'redux-actions';
 import { takeLatest, call, take } from 'redux-saga/effects';
 import * as authCtrl from '../lib/api/auth';
-import * as userCtrl from '../lib/api/user'
-import createRequestSaga, { createRequestActionTypes } from '../lib/createRequestsaga'
+import * as userCtrl from '../lib/api/user';
+import produce from 'immer';
+import createRequestSaga, { createRequestActionTypes } from '../lib/createRequestsaga';
 
 
 const TEMP_SET_USER = 'user/TEMP_SET_USER';
 const LOGOUT = 'user/LOGOUT'
+const CHANGE_FIELD = 'user/CHANGE_FIELD';
 const [
     USER_UPDATE,
     USER_UPDATE_SUCCESS,
@@ -64,6 +66,11 @@ export const makeDeal = createAction(MAKE_DEAL, ({ user, product }) => ({ user, 
 export const joinDeal = createAction(JOIN_DEAL, ({ user, product, _id }) => ({ user, product, _id }))
 export const checkDeal = createAction(CHECK_DEAL, ({user,product}) => ({user,product}))
 export const endDeal = createAction(END_DEAL,_id=>_id)
+
+export const UserchangeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
+    key,
+    value,
+  }));
 
 const getHistorySaga = createRequestSaga(GET_HISTORY, userCtrl.gethistory)
 const sellerHistorySaga = createRequestSaga(SELLER_HISTORY, userCtrl.sellerHistory)

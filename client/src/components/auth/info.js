@@ -114,6 +114,7 @@ const Info = ({ onSubmit, form, user, onChange, error, Phistory }) => {
                                                                             .productInfo
                                                                             .title
                                                                         }
+                                                                        disabled
                                                                       />
                                                                     </div><div className="billing-info">
                                                                       <label>
@@ -126,6 +127,7 @@ const Info = ({ onSubmit, form, user, onChange, error, Phistory }) => {
                                                                             .productInfo
                                                                             .discount
                                                                         }
+                                                                        disabled
                                                                       />
                                                                     </div>
                                                                     <div className="billing-info">

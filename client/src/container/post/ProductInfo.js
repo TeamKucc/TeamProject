@@ -21,9 +21,7 @@ const ProductInfo = ({ match, history, location }) => {
         }
     }, [dispatch])
 
-    const makeDeal = ()=>{
-        
-    }
+
 
     const onClick = () => {
         if (!user) {

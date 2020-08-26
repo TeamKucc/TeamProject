@@ -16,19 +16,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Delivery = ({ onChange, onPublish, delivery, deliveryNumber }) => {
+const Delivery = ({ onChange, onPublish, delivery, deliveryNumber,close }) => {
 
   const classes = useStyles();
-  
+
   return (
-    <div>
+    <>
+      <div className="Modal-overlay" />
+      <div className="Modal" >
       <FormControl className={classes.formControl}>
         <InputLabel id="demo-simple-select-label">택배사</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-					name="delivery"
-					value={delivery}
+          name="delivery"
+          value={delivery}
           onChange={onChange}
         >
           <MenuItem value={"kr.chunilps"}>천일택배</MenuItem>
@@ -58,8 +60,9 @@ const Delivery = ({ onChange, onPublish, delivery, deliveryNumber }) => {
       <br />
       <Input onChange={onChange} name="deliveryNumber" value={deliveryNumber} />
       <br />
-      <Button onClick={onPublish}>택배등록</Button>
+      <Button onClick={onPublish}>택배등록</Button><span/><Button onClick={close}>닫기</Button>
     </div>
+    </>
   );
 };
 

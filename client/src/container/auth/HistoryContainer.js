@@ -8,8 +8,8 @@ import History from '../../components/auth/History'
 
 const HistoryContainer = () => {
     const dispatch = useDispatch()
-    const { history, user } = useSelector(({ user }) => ({
-        history: user.history,
+    const { Sellhistory, user } = useSelector(({ user }) => ({
+        Sellhistory: user.history,
         user: user.user,
     }))
     useEffect(() => {
@@ -23,7 +23,7 @@ const HistoryContainer = () => {
 
     return (
         <div>
-            <History history={history} user={user} />
+            <History Sellhistory={Sellhistory} user={user} />
         </div>
     )
 }
