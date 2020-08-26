@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import UserInfo from '../../components/auth/UserInfo';
-import Info from '../../components/auth/info'
+import Info from '../../components/auth/Info'
 import { changeField, userInfo, } from '../../modules/auth';
 import { userUpdate, getHistory } from '../../modules/user'
 import {withRouter} from 'react-router-dom'

@@ -35,16 +35,8 @@ const ProductTes = ({ match, history, location }) => {
         dispatch(readReview(id))
         return () => {
             dispatch(unloadProduct())
-            dispatch(unloadUser())
         }
     }, [dispatch])
-
-    // useEffect(() => {
-    //     dispatch(
-    //         readReview(id)
-    //     )
-    //     console.log(id)
-    // }, [dispatch])
 
     const onCheck = () => {
         dispatch(checkDeal({user:user,product:product._id}))
@@ -82,12 +74,14 @@ const ProductTes = ({ match, history, location }) => {
             })
         )
     }
+
     ///Deal 참여&&성공 여부 확인시 결제 페이지로 이동
     useEffect(() => {
         if (complete) {
             history.push(`/product/order/${product._id}`)
         }
     }, [dispatch, complete])
+    
     //?? 정리해야할듯 아래 사항과 중복
     useEffect(() => {
         if (error) {
