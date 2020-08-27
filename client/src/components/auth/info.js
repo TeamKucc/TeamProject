@@ -7,6 +7,7 @@ import Accordion from "react-bootstrap/Accordion";
 
 const Info = ({ onSubmit, form, user, onChange, error, Phistory }) => {
 
+    console.log(Phistory)
     if (!Phistory) return null
 
     const onButton = () => {
@@ -134,7 +135,7 @@ const Info = ({ onSubmit, form, user, onChange, error, Phistory }) => {
                                                                       <div className="billing-back-btn">
                                                                         <div className="billing-btn">
                                                                           {index.deliveryNumber !==
-                                                                          'not yet' ? (
+                                                                          '' ? (
                                                                             <a
                                                                               href={
                                                                                 'https://tracker.delivery/#/' +

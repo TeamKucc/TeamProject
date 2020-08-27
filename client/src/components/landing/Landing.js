@@ -60,7 +60,7 @@ function Landing({ Products, onClick, cate, onChange, onSearch }) {
   const productLanding = (product, index) => {
     return (
       <Fragment>
-        <div>
+        <div key={index}>
           <div className="shop-list-wrap mb-30">
             <div className="row">
               <div className="col-xl-4 col-md-5 col-sm-6">

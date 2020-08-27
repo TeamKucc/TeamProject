@@ -5,6 +5,7 @@ import Dropzone from 'react-dropzone';
 
 
 const StockDetail = ({ product, onEdit }) => {
+  
   window.onbeforeunload = function (e) {
     return alert('정보 작성중');
   }
@@ -112,7 +113,7 @@ const StockDetail = ({ product, onEdit }) => {
                             <h5>Description</h5>
                             <input
                               name="description"
-                              value={product.discription}
+                              value={product.description}
                             />
 
                             <h5>Price</h5>

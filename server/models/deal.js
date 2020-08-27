@@ -9,7 +9,6 @@ const DealSchema = new Schema({
     join:{type:Number},
     enable:{type:Boolean,default:true},
     created:{type:Date,default:Date.now}
-    // time:{type:Number,default:}
 },{
     versionKey:false
 })

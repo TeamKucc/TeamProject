@@ -1,12 +1,14 @@
 import React from 'react';
-import DeliveryContainer from '../container/management/DeliveryContainer'
+import DeliveryContainer from '../container/management/DeliveryContainer';
+import HeaderContainer from '../container/common/HeaderContainer';
 
 const DeliveryPage = () => {
-	return (
-		<>
-			<DeliveryContainer/>
-		</>
-	);
+  return (
+    <>
+      <HeaderContainer />
+      <DeliveryContainer />
+    </>
+  );
 };
 
 export default DeliveryPage;

@@ -113,13 +113,25 @@ export const makeDeal = async(req, res) => {
     }
     )
 }
-
+const DealCompleteCheck = (id)=>{
+    Deal.find({_id:id},(err,result)=>{
+        console.log(result)
+        if(result.complete){
+            return false
+        }
+    })
+}
 
 export const joinDeal = (req, res) => {
     console.log('call')
-    console.log(req.body)
-
-    Deal.findOneAndUpdate({ _id: req.body._id }, { $push: { user: req.body.user } }, (err, result) => {
+    
+    const Complete = DealCompleteCheck(req.body._id)
+    if(Complete){
+        res.status(409).json({
+        success:false,
+        message:"Completed Deal:"+err
+    })}else{
+        Deal.findOneAndUpdate({ _id: req.body._id }, { $push: { user: req.body.user } }, (err, result) => {
         console.log("length:" + result.user.length)
         if (err) res.status(400).json({
             success: false,
@@ -137,6 +149,8 @@ export const joinDeal = (req, res) => {
             message: 'join success'
         })
     })
+    }
+    
 }
 
 export const checkDeal = (req, res) => {

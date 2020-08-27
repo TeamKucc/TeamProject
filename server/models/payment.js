@@ -14,7 +14,7 @@ const paySchema = new Schema(
       type: mongoose.Types.ObjectId,
       required: true
     },
-    delivery: { type: String ,default: "not yet"},
+    delivery: { type: String },
     deliveryNumber: { type: String },
     productInfo: {
       type: Object,
