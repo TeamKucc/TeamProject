@@ -119,7 +119,7 @@ dist
 
 #text
 *.txt
-*.scss
+
 *.css
 *.ttf
 *.eot

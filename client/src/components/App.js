@@ -31,6 +31,7 @@ import TimeTest from './common/Timer'
 const App = () => {
   useEffect(() => {
   }, [])
+
   return (
     <>
       {/* <Route component={LandingPage} exact path={['/home', '/']} /> */}

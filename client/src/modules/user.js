@@ -6,9 +6,16 @@ import produce from 'immer';
 import createRequestSaga, { createRequestActionTypes } from '../lib/createRequestsaga';
 
 
-const TEMP_SET_USER = 'user/TEMP_SET_USER';
 const LOGOUT = 'user/LOGOUT'
 const CHANGE_FIELD = 'user/CHANGE_FIELD';
+const TEMP_SET_USER = 'user/TEMP_SET_USER';
+
+const [
+    USER_ROLECHECK,
+    USER_ROLECHECK_SUCCESS,
+    USER_ROLECHECK_FAILURE
+]= createRequestActionTypes('user/USER_ROLECHECK')
+
 const [
     USER_UPDATE,
     USER_UPDATE_SUCCESS,
@@ -55,6 +62,7 @@ const UNLOAD_USER = 'user/UNLOAD_USER'
 
 //create redux actions
 export const tempSetUser = createAction(TEMP_SET_USER, user => user)
+export const roleCheck = createAction(USER_ROLECHECK,({user,role})=>({user,role}))
 export const logout = createAction(LOGOUT);
 export const userUpdate = createAction(USER_UPDATE, ({ userID, name, password, email, _id }) => ({ userID, name, password, email, _id }))
 export const unloadUser = createAction(UNLOAD_USER)
@@ -72,6 +80,7 @@ export const UserchangeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
     value,
   }));
 
+const userRoleCheckSaga = createRequestSaga(USER_ROLECHECK,userCtrl.roleCheck)
 const getHistorySaga = createRequestSaga(GET_HISTORY, userCtrl.gethistory)
 const sellerHistorySaga = createRequestSaga(SELLER_HISTORY, userCtrl.sellerHistory)
 const userUpdateSaga = createRequestSaga(USER_UPDATE, userCtrl.userupdate)
@@ -87,7 +96,7 @@ function* logoutSaga() {
         yield call(authCtrl.logout);
         localStorage.removeItem('userId')
         localStorage.removeItem('role')
-        console.log('remove')
+
     } catch (error) {
         console.log(error)
     }
@@ -102,6 +111,7 @@ export function* userSaga() {
     yield takeLatest(JOIN_DEAL, joinDealSaga)
     yield takeLatest(CHECK_DEAL,checkDealSaga)
     yield takeLatest(END_DEAL,endDealSaga)
+    yield takeLatest(USER_ROLECHECK,userRoleCheckSaga)
 }
 
 const initialState = {
@@ -116,7 +126,9 @@ const initialState = {
     makeDeal:false,
     makeDealError:null,
     endDeal:null,
-    endDealError:null
+    endDealError:null,
+    admit:false,
+    admitError:null,
 }
 
 export default handleActions(
@@ -124,6 +136,14 @@ export default handleActions(
         [TEMP_SET_USER]: (state, { payload: user }) => ({
             ...state,
             user,
+        }),
+        [USER_ROLECHECK_SUCCESS]:(state,{payload:admit})=>({
+            ...state,
+            admit
+        }),
+        [USER_ROLECHECK_FAILURE]:(state,{payload:admitError})=>({
+            ...state,
+            admitError
         }),
         [LOGOUT]: state => ({
             ...state,

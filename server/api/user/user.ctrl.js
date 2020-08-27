@@ -68,22 +68,28 @@ export const sellHistory = (req, res) => {
 
 export const findDeal = (req, res) => {
     console.log("product:" + req.body._id)
-    Deal.find({ product: req.body._id }, (err, result) => {
+    const result = []
+    Deal.find({ product: req.body._id }, (err, DealResult) => {
         console.log(result)
         if (err) res.status(400).json({
             success: false,
             message: err
+        })
+        DealResult.forEach(elemet => {
+            if (!elemet.complete && elemet.enable) {
+                result.push(elemet)
+            }
         })
         res.json(result)
     })
 }
 
 function Info(user) {
-    console.log("user:"+user)
+    console.log("user:" + user)
     return User.findOne({ _id: user })
 }
 
-export const makeDeal = async(req, res) => {
+export const makeDeal = async (req, res) => {
     console.log('make call')
     const { user, product } = req.body
     const userName = await Info(user)
@@ -115,28 +121,43 @@ export const makeDeal = async(req, res) => {
 }
 
 
-export const joinDeal = (req, res) => {
+const DealCompleteCheck = (id) => {
+   return Deal.findOne({ _id: id }, (err, result) => {
+        if (result.complete) return false
+    })
+}
+
+export const joinDeal = async (req, res) => {
     console.log('call')
     console.log(req.body)
-
-    Deal.findOneAndUpdate({ _id: req.body._id }, { $push: { user: req.body.user } }, (err, result) => {
-        console.log("length:" + result.user.length)
-        if (err) res.status(400).json({
+    const Complete = await DealCompleteCheck(req.body._id)
+    if (Complete.complete) {
+        res.status(409).json({
             success: false,
-            message: err
+            message: "Completed Deal"
         })
-        Product.findOne({ _id: result.product }, (err, resP) => {
-            console.log("person:" + resP.person)
-            if (resP.person === result.user.length + 1) {
-                Deal.findOneAndUpdate({ product: resP._id }, { complete: true }, (err, resultD) => {
-                    console.log(resultD)
-                })
-            }
-        });
-        res.status(200).json({
-            message: 'join success'
+        console.log('done')
+    } else {
+        Deal.findOneAndUpdate({ _id: req.body._id }, { $push: { user: req.body.user } }, (err, result) => {
+            console.log("length:" + result.user.length)
+            if (err) res.status(400).json({
+                success: false,
+                message: err
+            })
+            Product.findOne({ _id: result.product }, (err, resP) => {
+                console.log("person:" + resP.person)
+                if (resP.person === result.user.length + 1) {
+                    Deal.findOneAndUpdate({ _id: req.body._id }, { complete: true }, (err, resultD) => {
+                        console.log(resultD)
+                    })
+                }
+            });
+            res.status(200).json({
+                message: 'join success'
+            })
         })
-    })
+    }
+
 }
 
 export const checkDeal = (req, res) => {
@@ -159,17 +180,33 @@ export const checkDeal = (req, res) => {
     })
 }
 
-export const endDeal = (req,res)=>{
+export const endDeal = (req, res) => {
     console.log(req.body)
-    Deal.findOneAndUpdate({_id:req.body._id},{enable:false},(err,result)=>{
-        if(err) return res.status(409).json({
-            success:false,
-            message:"Error:"+err
+    Deal.findOneAndUpdate({ _id: req.body._id }, { enable: false }, (err, result) => {
+        if (err) return res.status(409).json({
+            success: false,
+            message: "Error:" + err
         })
         res.status(200).json({
-            success:true,
-            message:"Deal End!!!!"
+            success: true,
+            message: "Deal End!!!!"
         })
     })
 }
 
+export const roleCheck = (req, res) => {
+    console.log(req.cookies)
+    const { role } = req.body
+    let token = req.cookies.w_auth;
+    User.findOne({ _id: req.body.user }, (err, result) => {
+        if (err) return res.status(409).json({
+            success: false,
+            message: "Error" + err
+        })
+        if (result.role != role || result.token != token) {
+            res.send(false);
+        } else {
+            res.send(true);
+        }
+    });
+}

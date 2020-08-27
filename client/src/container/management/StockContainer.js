@@ -5,6 +5,7 @@ import { getHistory,UserchangeField } from '../../modules/user';
 import { useSelector, useDispatch } from 'react-redux';
 import { stockManagement } from '../../modules/management';
 
+
 const StockContainer = ({ match, history }) => {
 
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const StockContainer = ({ match, history }) => {
     management: management.management,
     seller: user.user,
     Sellhistory: user.history,
-    user: user.user,
+    user:user.user
   }));
   console.log("seller:"+seller)
   useEffect(() => {

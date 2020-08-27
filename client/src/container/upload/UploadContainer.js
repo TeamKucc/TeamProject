@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {
@@ -29,6 +29,7 @@ const UploadContainer = ({ history }) => {
     enable,
     productId,
     category,
+    admit
   } = useSelector(({ upload, user }) => ({
     seller: user.user,
     stock: upload.stock,
@@ -42,6 +43,7 @@ const UploadContainer = ({ history }) => {
     enable: upload.enable,
     productId: upload.productId,
     category: upload.category,
+    admit:user.admit,
   }));
 
   const product = {
@@ -57,7 +59,7 @@ const UploadContainer = ({ history }) => {
     category,
   };
 
-  console.log(images)
+
   const onPublish = (e) => {
     e.preventDefault();
 

@@ -7,6 +7,7 @@ const router = express.Router();
 router.get('/list',userCtrl.list)
 router.get('/userinfo/:_id',userCtrl.userInfo)
 router.post('/userUpdate',userCtrl.userUpdate)
+router.post('/roleCheck',userCtrl.roleCheck)
 
 router.post('/gethistory',userCtrl.gethistory)
 router.post('/sellerHistory',userCtrl.sellHistory)

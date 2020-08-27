@@ -74,7 +74,10 @@ export const logout = (req, res) => {
   console.log(req.user._id)
   User.findOneAndUpdate({ _id: req.user._id }, { token: "", tokenExp: "" }, (err, doc) => {
     if (err) return res.status(400).json({ logout: false, message: err })
-    return res.status(200).send({
+    return res.status(200)
+    .cookie("w_auth",null)
+    .cookie("w_authEXP", null)
+    .send({
       logoutsuccess: true
     })
   })
@@ -139,3 +142,4 @@ export const business = (req, res) => {
     });
   }
 };
+
