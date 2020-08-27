@@ -92,7 +92,7 @@
       }
     }
     .billing-back-btn {
-      display: flex;
+      // display: flex;
       justify-content: flex-end;
       margin-top: 26px;
       align-items: center;
@@ -132,7 +132,6 @@
         }
       }
     }
-
     .entries-wrapper {
       border: 1px solid #eaeaea;
       position: relative;
@@ -144,7 +143,7 @@
       }
       &::before {
         position: absolute;
-        content: '';
+        content: "";
         height: 100%;
         width: 1px;
         left: 50%;

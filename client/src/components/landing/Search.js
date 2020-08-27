@@ -6,22 +6,6 @@ const Search = ({ Products, id }) => {
     return Products[key];
   });
 
-  // 별점
-  const ProductRating = ({ ratingValue }) => {
-    let rating = [];
-
-    for (let i = 0; i < 5; i++) {
-      rating.push(<i className="fa fa-star-o" key={i}></i>);
-    }
-
-    if (ratingValue && ratingValue > 0) {
-      for (let i = 0; i <= ratingValue - 1; i++) {
-        rating[i] = <i className="fa fa-star-o yellow" key={i}></i>;
-      }
-    }
-    return <Fragment>{rating}</Fragment>;
-  };
-
   const renderCards = Prod.map((product, index) => {
     if (!product) return null;
 
@@ -31,17 +15,6 @@ const Search = ({ Products, id }) => {
           <br />
           <div className="product-img">
             <Link to={`/item/${product._id}`}>
-              {/* {product.thumbnails.map((image, index) => {
-                return (
-                  <div key={index}>
-                    <img
-                      className="default-img"
-                      src={`${product.thumbnails[index].image.location}`}
-                      alt={`productImg-${index}`}
-                    />
-                  </div>
-                );
-              })} */}
               <img
                 className="default-img"
                 src={`${product.thumbnails[0].image.location}`}
@@ -67,13 +40,6 @@ const Search = ({ Products, id }) => {
             <h3>
               <Link to={`/item/${product._id}`}>{product.title}</Link>
             </h3>
-            {product.stock && product.stock > 0 ? (
-              <div className="product-rating">
-                <ProductRating ratingValue={product.stock} />
-              </div>
-            ) : (
-              ''
-            )}
             <div className="product-price">
               {product.discount !== null ? (
                 <Fragment>

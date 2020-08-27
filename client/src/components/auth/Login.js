@@ -48,11 +48,6 @@ const LoginRegister = ({ form, onChange, onSubmit }) => {
                                 onChange={onChange}
                               />
                               <div className="button-box">
-                                <div className="login-toggle-btn">
-                                  <Link to={process.env.PUBLIC_URL + '/'}>
-                                    Forgot Password?
-                                  </Link>
-                                </div>
                                 <button type="submit">
                                   <span>Login</span>
                                 </button>

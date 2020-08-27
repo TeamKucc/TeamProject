@@ -61,7 +61,7 @@ const App = () => {
       <Route component={TimeTest} path="/time/test/" exact />
 
       {/* 임시택배조회페이지 */}
-      <Route component={DeliveryPage} exact path="/product/delivery" />
+      <Route component={DeliveryPage} exact path="/product/delivery/:id" />
     </>
   );
 };

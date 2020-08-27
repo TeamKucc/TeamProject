@@ -14,7 +14,7 @@ import UploadProduct from '../../components/upload/UploadProduct2';
 
 const UploadContainer = ({ history }) => {
   const dispatch = useDispatch();
-  const [error, setError] = useState(null)
+  const [error, setError] = useState(null);
 
   const {
     seller,
@@ -58,7 +58,6 @@ const UploadContainer = ({ history }) => {
     enable,
     category,
   };
-
 
   const onPublish = (e) => {
     e.preventDefault();

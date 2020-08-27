@@ -156,7 +156,7 @@ function UploadProduct({ onPublish, onChange, product, imageDrop, imageDelete, i
                             <input
                               name="description"
                               placeholder="Description"
-                              value={product.discription}
+                              value={product.description}
                               onChange={onChange}
                             />
                             <input

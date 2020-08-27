@@ -64,7 +64,7 @@ const management = handleActions(
     }),
     [STOCK_DETAIL_SUCCESS]: (state, action) => ({
       ...state,
-      manegementDetail: action.payload,
+      management: action.payload,
     }),
     [STOCK_DETAIL_FAILURE]: (state, action) => ({
       ...state,

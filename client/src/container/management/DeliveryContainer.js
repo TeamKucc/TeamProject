@@ -1,20 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Delivery from '../../components/management/Delivery';
 import { withRouter } from 'react-router-dom';
 import { deliveryUpload, changeField } from '../../modules/delivery';
-import { Button } from '@material-ui/core'
 
-const DeliveryContainer = ({id,close}) => {
+const DeliveryContainer = ({ match, history }) => {
+
   const dispatch = useDispatch();
+  const [error, setError] = useState(null);
   const { delivery, deliveryNumber } = useSelector(({ delivery }) => ({
     delivery: delivery.delivery,
     deliveryNumber: delivery.deliveryNumber,
   }));
 
+  const {id} = match.params;
+
   const onChange = (e) => {
-		console.log(e.target.value)
-		console.log(e.target.name)
     const { value, name } = e.target;
     dispatch(
       changeField({
@@ -24,15 +25,23 @@ const DeliveryContainer = ({id,close}) => {
     );
 	};
   
-  const onPublish = () => {
-    console.log(id)
-		dispatch(
-			deliveryUpload({
-        id,
-				delivery,
-        deliveryNumber,
-			})
-		)
+  const onPublish = (e) => {
+    e.preventDefault();
+    
+    if([delivery, deliveryNumber].includes('')) {
+      setError('송장번호와 택배사를 입력해주세요')
+      return
+    }
+
+      dispatch(
+        deliveryUpload({
+          id,
+          delivery,
+          deliveryNumber,
+        }),
+        alert("제품이 등록되었습니다!"),
+        history.push('/product/stock')
+      )
 	};
 
   return (
@@ -42,7 +51,7 @@ const DeliveryContainer = ({id,close}) => {
         onPublish={onPublish}
         delivery={delivery}
         deliveryNumber={deliveryNumber}
-        close={close}
+        error={error}
       />
     </div>
   );

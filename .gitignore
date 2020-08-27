@@ -119,7 +119,10 @@ dist
 
 #text
 *.txt
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7055db1d6d8155a1c0b20ba2b6c1f16ff682d86b
 *.css
 *.ttf
 *.eot

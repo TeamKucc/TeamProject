@@ -10,8 +10,8 @@ const StockDetailContainer = ({ match, history, location }) => {
   const { id } = match.params;
   console.log(id)
   const dispatch = useDispatch();
-  const { manegementDetail } = useSelector(({ management }) => ({
-    manegementDetail: management.manegementDetail,
+  const { management } = useSelector(({ management }) => ({
+    management: management.management,
   }));
 
   useEffect(() => {
@@ -21,15 +21,14 @@ const StockDetailContainer = ({ match, history, location }) => {
     }
   }, [dispatch]);
 
-  console.log(manegementDetail)
   const onEdit = () => {
-    dispatch(setOriginalUpload(manegementDetail));
+    dispatch(setOriginalUpload(management));
     history.push('/product/upload')
   };
 
   return (
     <div>
-      <StockDetail product={manegementDetail} onEdit={onEdit} />
+      <StockDetail product={management} onEdit={onEdit} />
     </div>
   );
 };

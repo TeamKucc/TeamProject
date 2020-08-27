@@ -55,144 +55,74 @@ function Landing({ Products, onClick, cate, onChange, onSearch }) {
     }
   };
 
-  const productLanding = Prod.map((product, index) => {
-    if (!product) return null;
+  const productLand = () => {};
 
-    const category = changeCategory(cate);
-    if (product.category == category) {
-      return (
-        <Fragment>
-          <div>
-            <div className="shop-list-wrap mb-30">
-              <div className="row">
-                <div className="col-xl-4 col-md-5 col-sm-6">
-                  <div className="product-list-image-wrap">
-                    <div className="product-img">
-                      <Link to={`/item/${product._id}`}>
+  const productLanding = (product, index) => {
+    return (
+      <Fragment>
+        <div key={index}>
+          <div className="shop-list-wrap mb-30">
+            <div className="row">
+              <div className="col-xl-4 col-md-5 col-sm-6">
+                <div className="product-list-image-wrap">
+                  <div className="product-img">
+                    <Link to={`/item/${product._id}`}>
+                      <img
+                        className="default-img img-fluid"
+                        src={`${product.thumbnails[0].image.location}`}
+                        alt={`productImg-${index}`}
+                      />
+                      {product.thumbnails.length > 1 ? (
                         <img
-                          className="default-img img-fluid"
-                          src={`${product.thumbnails[0].image.location}`}
-                          alt={`productImg-${index}`}
+                          className="hover-img img-fluid"
+                          src={`${product.thumbnails[1].image.location}`}
+                          alt=""
                         />
-                        {product.thumbnails.length > 1 ? (
-                          <img
-                            className="hover-img img-fluid"
-                            src={`${product.thumbnails[1].image.location}`}
-                            alt=""
-                          />
-                        ) : (
-                          <img
-                            className="hover-img"
-                            src={`${product.thumbnails[0].image.location}`}
-                            alt=""
-                          />
-                        )}
-                      </Link>
-                      <div className="product-img-badges">
-                        <span className="pink">-{product.discount}%</span>
-                      </div>
-                    </div>
+                      ) : (
+                        <img
+                          className="hover-img"
+                          src={`${product.thumbnails[0].image.location}`}
+                          alt=""
+                        />
+                      )}
+                    </Link>
+                    <Timer product={product} />
                   </div>
                 </div>
-                <div className="col-xl-8 col-md-7 col-sm-6">
-                  <div className="shop-list-content">
-                    <h3>
-                      <Link to={`/item/${product._id}`}>{product.title}</Link>
-                    </h3>
-                    <div className="product-list-price">
-                      <Fragment>
-                        <span>{product.discount}</span>{' '}
-                        <span className="old">{product.price}</span>
-                      </Fragment>
-                    </div>
-                    <p>{product.description}</p>
+              </div>
+              <div className="col-xl-8 col-md-7 col-sm-6">
+                <div className="shop-list-content">
+                  <h3>
+                    <Link to={`/item/${product._id}`}>{product.title}</Link>
+                  </h3>
+                  <div className="product-list-price">
+                    <Fragment>
+                      <span>{product.discount}</span>{' '}
+                      <span className="old">{product.price}</span>
+                    </Fragment>
+                  </div>
+                  <p>{product.description}</p>
 
-                    <div className="shop-list-actions d-flex align-items-center">
-                      <div className="shop-list-btn btn-hover">
-                        <a
-                          href={'/item/' + product._id}
-                          rel="noopener noreferrer"
-                          target="_blank"
-                        >
-                          {' '}
-                          PRODUCT DETAIL{' '}
-                        </a>
-                      </div>
+                  <div className="shop-list-actions d-flex align-items-center">
+                    <div className="shop-list-btn btn-hover">
+                      <a
+                        href={'/item/' + product._id}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        {' '}
+                        PRODUCT DETAIL{' '}
+                      </a>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </Fragment>
-      );
-    } else if (cate == 'all') {
-      return (
-        <Fragment>
-          <div>
-            <div className="shop-list-wrap mb-30">
-              <div className="row">
-                <div className="col-xl-4 col-md-5 col-sm-6">
-                  <div className="product-list-image-wrap">
-                    <div className="product-img">
-                      <Link to={`/item/${product._id}`}>
-                        <img
-                          className="default-img img-fluid"
-                          src={`${product.thumbnails[0].image.location}`}
-                          alt={`productImg-${index}`}
-                        />
-                        {product.thumbnails.length > 1 ? (
-                          <img
-                            className="hover-img img-fluid"
-                            src={`${product.thumbnails[1].image.location}`}
-                            alt=""
-                          />
-                        ) : (
-                          <img
-                            className="hover-img"
-                            src={`${product.thumbnails[0].image.location}`}
-                            alt=""
-                          />
-                        )}
-                      </Link>
-                        <Timer product={product}/>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xl-8 col-md-7 col-sm-6">
-                  <div className="shop-list-content">
-                    <h3>
-                      <Link to={`/item/${product._id}`}>{product.title}</Link>
-                    </h3>
-                    <div className="product-list-price">
-                      <Fragment>
-                        <span>{product.discount}</span>{' '}
-                        <span className="old">{product.price}</span>
-                      </Fragment>
-                    </div>
-                    <p>{product.description}</p>
-
-                    <div className="shop-list-actions d-flex align-items-center">
-                      <div className="shop-list-btn btn-hover">
-                        <a
-                          href={'/item/' + product._id}
-                          rel="noopener noreferrer"
-                          target="_blank"
-                        >
-                          {' '}
-                          PRODUCT DETAIL{' '}
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Fragment>
-      );
-    }
-  });
+        </div>
+      </Fragment>
+    );
+  };
 
   return (
     <Fragment>
@@ -270,7 +200,22 @@ function Landing({ Products, onClick, cate, onChange, onSearch }) {
               {/* shop page content default */}
               <div className="shop-bottom-area mt-35">
                 <div className={`row`}>
-                  <Fragment>{productLanding}</Fragment>
+                  <Fragment>
+                    {Prod.map((product, index) => {
+                      if (!product) return null;
+
+                      const category = changeCategory(cate);
+                      if (product.category == category) {
+                        return product.enable
+                          ? productLanding(product, index)
+                          : '';
+                      } else if (cate == 'all') {
+                        return product.enable
+                          ? productLanding(product, index)
+                          : '';
+                      }
+                    })}
+                  </Fragment>
                 </div>
               </div>
             </div>

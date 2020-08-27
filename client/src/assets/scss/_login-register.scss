@@ -48,7 +48,7 @@
   .login-form-container {
     background: transparent none repeat scroll 0 0;
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
-    padding: 100px;
+    padding: 80px;
     text-align: left;
     @media #{$lg-layout} {
       padding: 80px 50px;
@@ -114,117 +114,6 @@
               color: #fff;
             }
           }
-        }
-      }
-    }
-    .register{
-      display: flex;
-      position: relative;
-      text-align: center;
-      justify-content: space-around;
-      button {
-        background-color: #f1f1f1;
-        box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
-        border: medium none;
-        color: #333;
-        cursor: pointer;
-        font-size: 14px;
-        font-weight: 500;
-        line-height: 1;
-        padding: 30px 50px;
-        text-transform: uppercase;
-        transition: all 0.3s ease 0s;
-        &:hover {
-          background-color: $theme-color;
-          color: #fff;
-        }
-      }
-    }
-  }
-  .stock-form-container {
-   
-
-    .login-register-form {
-      form {
-        input {
-          background-color: transparent;
-          border: 1px solid #ebebeb;
-          color: #333;
-          font-size: 14px;
-          height: 45px;
-          margin-bottom: 30px;
-          padding: 0 15px;
-        }
-        input[type="checkbox"] {
-          height: 15px;
-          margin: 0;
-          position: relative;
-          top: 1px;
-          width: 17px;
-        }
-        .button-box {
-          .login-toggle-btn {
-            padding: 10px 0 19px;
-            label {
-              color: #242424;
-              font-size: 15px;
-              font-weight: 400;
-              @media #{$xs-layout} {
-                font-size: 14px;
-              }
-            }
-            a {
-              color: #242424;
-              float: right;
-              font-size: 15px;
-              @media #{$xs-layout} {
-                font-size: 14px;
-              }
-              transition: all 0.3s ease 0s;
-              &:hover {
-                color: $theme-color;
-              }
-            }
-          }
-          button {
-            background-color: #f2f2f2;
-            border: medium none;
-            color: #333;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            line-height: 1;
-            padding: 11px 30px;
-            text-transform: uppercase;
-            transition: all 0.3s ease 0s;
-            &:hover {
-              background-color: $theme-color;
-              color: #fff;
-            }
-          }
-        }
-      }
-    }
-    .register{
-      display: flex;
-      position: relative;
-      text-align: center;
-      justify-content: space-around;
-      button {
-        background-color: #f1f1f1;
-        box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
-        border: medium none;
-        color: #333;
-        cursor: pointer;
-        font-size: 14px;
-        font-weight: 500;
-        line-height: 1;
-        padding: 30px 50px;
-        text-transform: uppercase;
-        transition: all 0.3s ease 0s;
-        &:hover {
-          background-color: $theme-color;
-          color: #fff;
         }
       }
     }

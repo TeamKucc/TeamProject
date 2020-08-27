@@ -91,10 +91,7 @@
   }
 }
 .logo {
-  display: flex;
-  width: 200px;
-  height: 50px;
-  margin-top: 8px;
+  margin-top: 32px;
   @media #{$md-layout} {
     margin-top: 0;
   }
@@ -102,7 +99,7 @@
     margin-top: 0;
   }
   &.logo-hm5 {
-    margin-top: 8px;
+    margin-top: 41px;
     a.sticky-block {
       display: none;
       @media #{$md-layout,
