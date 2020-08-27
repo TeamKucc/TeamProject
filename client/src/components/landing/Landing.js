@@ -1,14 +1,13 @@
 import React, { useState, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { setActiveSort, setActiveLayout } from '../../helpers/product';
+import { setActiveLayout } from '../../helpers/product';
 import {
-  toggleShopTopFilter,
   getIndividualCategories,
-  // setActiveSort,
 } from '../../helpers/product';
 import Timer from '../common/Timer';
 
 function Landing({ Products, onClick, cate, onChange, onSearch }) {
+
   const [layout, setLayout] = useState('list');
 
   const productCount = Products.length;
@@ -19,6 +18,7 @@ function Landing({ Products, onClick, cate, onChange, onSearch }) {
 
   const uniqueCategories = getIndividualCategories(Prod);
 
+  console.log(uniqueCategories);
   const getLayout = (layout) => {
     setLayout(layout);
   };

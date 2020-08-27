@@ -4,29 +4,32 @@ import Tab from 'react-bootstrap/Tab';
 import Nav from 'react-bootstrap/Nav';
 import StarRatings from 'react-star-ratings';
 
-const ProductDescriptionTab = ({ onChange, onClick, changeRating, review, product,rating }) => {
+const ProductDescriptionTab = ({ onChange, onClick, changeRating, review, product, rating, ratingError }) => {
   
   let Review = Object.keys(review).map(function (key) {
     return review[key];
   });
 
   if(!product) return null;
-  console.log(rating)
+
   const ProductRating = ({ ratingValue }) => {
     let rating = [];
+    
     for (let i = 0; i < 5; i++) {
       rating.push(<i className="fa fa-star-o" key={i}></i>);
     }
 
     if (ratingValue && ratingValue > 0) {
       for (let i = 0; i <= ratingValue - 1; i++) {
-        rating[i] = <i className="fa fa-star-o yellow" key={i}></i>;
+        rating[i] = <i className="fa fa-star" key={i}></i>;
       }
     }
+    
     return <>{rating}</>;
   };
 
   const Reviews = Review.map((review, index) => {
+
     return (
       <div className="review-wrapper" key={index}>
         <div className="single-review">
@@ -70,8 +73,10 @@ const ProductDescriptionTab = ({ onChange, onClick, changeRating, review, produc
                   ? product.images.map((image, index) => (
                       <div key={index}>
                         <img
+                          className="pb-10"
                           style={{
-                            maxWidth: '700px',
+                            width: '100%',
+                            maxWidth: '800px'
                           }}
                           alt={`productImg-${index}`}
                           src={`${product.images[index].image.location}`}
@@ -123,6 +128,9 @@ const ProductDescriptionTab = ({ onChange, onClick, changeRating, review, produc
                                   type="button"
                                   defaultValue="등록하기"
                                 />
+                                <div className="error pt-20">
+                                {ratingError == null ? '' : '* ' + ratingError}
+                                </div>
                               </div>
                             </div>
                           </div>
