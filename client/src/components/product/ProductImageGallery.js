@@ -56,11 +56,7 @@ const ProductImageGallery = ({ product }) => {
                     )}
                 <LightgalleryProvider>
                     <Swiper {...gallerySwiperParams}>
-<<<<<<< HEAD
                         {product.thumbnails.map((img,index) => {
-=======
-                        {product.thumbnails.map((img, index) => {
->>>>>>> Seung
                                 return (
                                     <div key={index}>
                                         <LightgalleryItem
