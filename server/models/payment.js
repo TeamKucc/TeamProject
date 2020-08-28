@@ -12,18 +12,18 @@ const paySchema = new Schema(
     },
     seller: {
       type: mongoose.Types.ObjectId,
-      required: true
+      required: true,
     },
     delivery: { type: String },
     deliveryNumber: { type: String },
     productInfo: {
       type: Object,
-      required: true
+      required: true,
     },
     payInfo: {
-      type:Object,
-      required: true
-    }
+      type: Object,
+      required: true,
+    },
   },
   {
     versionKey: false,

@@ -10,7 +10,7 @@ const UserSchema = new Schema(
     password: { type: String, required: true, minlength: 6 },
     address: { type: String },
     email: { type: String, trim: true, unique: 1 },
-    role: { type: Number, default: 0 },//2번이 admin
+    role: { type: Number, default: 0 }, //2번이 admin
     token: { type: String },
     tokenExp: { type: Number },
     business: { type: Number, maxlength: 10 },
@@ -47,21 +47,19 @@ UserSchema.pre('save', function (next) {
 UserSchema.pre('findOneAndUpdate', function (next) {
   const update = this.getUpdate();
   if (update.password) {
-    console.log('passs')
+    console.log('passs');
     bcrypt.genSalt(5, (err, salt) => {
       bcrypt.hash(update.password, salt, (err, hash) => {
         if (err) return err;
         this.getUpdate().password = hash;
-        console.log(this.getUpdate().password)
+        console.log(this.getUpdate().password);
         next();
-      })
-    })
+      });
+    });
   } else {
     next();
   }
-})
-
-
+});
 
 UserSchema.statics.findByUsername = function (username) {
   console.log(username);
@@ -74,12 +72,6 @@ UserSchema.methods.verify = function (password, sv) {
     sv(null, isMatch);
   });
 };
-
-// UserSchema.methods.assignAdmin = function () {
-//     console.log("admin call")
-//     this.admin = true
-//     return this.save()
-// }
 
 UserSchema.methods.generateToken = function (sv) {
   console.log('Token call');

@@ -1,12 +1,9 @@
 require('dotenv').config();
 import User from '../../models/user';
-import jwt, { decode } from 'jsonwebtoken';
 import axios from 'axios';
 import xml2js from 'xml2js';
 
-
 export const register = async (req, res) => {
-  console.log(req.body)
   const user = new User(req.body);
   const { userID } = user;
 
@@ -27,7 +24,6 @@ export const register = async (req, res) => {
 };
 
 export const dregister = async (req, res) => {
-  console.log(req.body)
   const user = new User(req.body);
   const { userID } = user;
 
@@ -48,43 +44,48 @@ export const dregister = async (req, res) => {
 };
 
 export const login = (req, res) => {
-  console.log(req.body)
   User.findOne({ userID: req.body.userID }, (err, user) => {
-    if (!user) return res.json({
-      loginSuccess: false,
-      message: "Login Failed,ID not Found"
-    });
+    if (!user)
+      return res.json({
+        loginSuccess: false,
+        message: 'Login Failed,ID not Found',
+      });
     user.verify(req.body.password, (err, isMatch) => {
-      if (!isMatch) return res.json({ login: false, message: "wrong password" })
+      if (!isMatch)
+        return res.json({ login: false, message: 'wrong password' });
       user.generateToken((err, user) => {
-        console.log(user)
+        console.log(user);
         if (err) return res.status(400).send(err);
-        res.cookie("w_authEXP", user.tokenExp)
-        res.cookie("w_auth", user.token)
-          .status(200)
-          .json({
-            login: true, userId: user._id,role:user.role,userName:user.name
-          })
-      })
-    })
+        res.cookie('w_authEXP', user.tokenExp);
+        res.cookie('w_auth', user.token).status(200).json({
+          login: true,
+          userId: user._id,
+          role: user.role,
+          userName: user.name,
+        });
+      });
+    });
   });
 };
 
 export const logout = (req, res) => {
-  console.log(req.user._id)
-  User.findOneAndUpdate({ _id: req.user._id }, { token: "", tokenExp: "" }, (err, doc) => {
-    if (err) return res.status(400).json({ logout: false, message: err })
-    return res.status(200)
-    .cookie("w_auth",null)
-    .cookie("w_authEXP", null)
-    .send({
-      logoutsuccess: true
-    })
-  })
-}
+  User.findOneAndUpdate(
+    { _id: req.user._id },
+    { token: '', tokenExp: '' },
+    (err, doc) => {
+      if (err) return res.status(400).json({ logout: false, message: err });
+      return res
+        .status(200)
+        .cookie('w_auth', null)
+        .cookie('w_authEXP', null)
+        .send({
+          logoutsuccess: true,
+        });
+    },
+  );
+};
 
 export const business = (req, res) => {
-
   // 국세청 사업자번호 조회 API [POST]
   const postUrl =
     'https://teht.hometax.go.kr/wqAction.do?actionId=ATTABZAA001R08&screenId=UTEABAAA13&popupYn=false&realScreenId=';
@@ -103,12 +104,11 @@ export const business = (req, res) => {
     .then((result) => {
       if (result == '부가가치세 일반과세자 입니다.') {
         return res.status(200).json({
-          businessState: true
+          businessState: true,
         });
       } else {
-        console.log(false)
         return res.status(409).json({
-          businessState: false
+          businessState: false,
         });
       }
     });
@@ -142,4 +142,3 @@ export const business = (req, res) => {
     });
   }
 };
-
