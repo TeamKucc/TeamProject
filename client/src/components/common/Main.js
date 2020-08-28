@@ -153,8 +153,7 @@ const Main = ({ products }) => {
           </div>
           <div className="row five-column">
             <Fragment>
-              {prod.map((product, index) => {
-                return product.enable ? (
+              {prod.map((product, index) => (
                   <div key={index} className={`col-xl-3 col-md-6 col-lg-4 col-sm-6`}>
                     <div className={`product-wrap-2 mb-25`}>
                       <div className="product-img">
@@ -204,9 +203,8 @@ const Main = ({ products }) => {
                       </div>
                     </div>
                   </div>
-                ) : 
-                ('')
-              }
+                
+              )
               )}
             </Fragment>
           </div>
