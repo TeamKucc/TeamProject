@@ -52,7 +52,7 @@ const ProductDescriptionTab = ({
                 <div className="review-name pl-20">
                   <h5>등록일</h5>
                 </div>
-                <h5>등록일</h5>
+                <h5>{review.created}</h5>
               </div>
               <div className="review-left"></div>
             </div>

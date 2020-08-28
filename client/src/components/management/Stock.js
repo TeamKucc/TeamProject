@@ -6,10 +6,10 @@ import DeliveryContainer from '../../container/management/DeliveryContainer';
 
 // 상품코드, 상품명, 창고재고, 주문대기, 재고수정, 판매, 품절, 수정버튼
 const Stock = ({ Products, Sellhistory, onChange, onSubmit }) => {
-
   let Prod = Object.keys(Products).map(function (key) {
     return Products[key];
   });
+
   const [isModalOpen, setOpen] = useState(false);
 
   const openModal = () => {
@@ -21,8 +21,8 @@ const Stock = ({ Products, Sellhistory, onChange, onSubmit }) => {
   };
 
   const numberWithCommas = (x) => {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
 
   if (!Products || !Sellhistory) return null;
 
@@ -49,109 +49,123 @@ const Stock = ({ Products, Sellhistory, onChange, onSubmit }) => {
                   </Nav>
                   <Tab.Content>
                     <Tab.Pane eventKey="management">
-                      <table className="table">
-                        <thead className="thead">
-                          <tr>
-                            <td>상품코드</td>
-                            <td width="20px">썸네일</td>
-                            <td width="20%">상품명</td>
-                            <td width="10%">판매가</td>
-                            <td width="10%">재고</td>
-                            <td width="10%">판매</td>
-                            <td width="10%">품절</td>
-                            <td width="10%">상세</td>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {Prod.map((product, index) => {
-                            return (
-                              <tr key={index}>
-                                <td>{product._id}</td>
-                                <td>
-                                  {product.thumbnails ? (
-                                    <img
-                                      style={{ maxHeight: '100px' }}
-                                      alt={`productImg-${index}`}
-                                      src={`${product.thumbnails[0].image.location}`}
-                                    />
-                                  ) : (
-                                    ''
-                                  )}
-                                </td>
-                                <td>{numberWithCommas(product.title)}</td>
-                                <td>{numberWithCommas(product.discount)}</td>
-                                <td className="red">{numberWithCommas(product.stock)}</td>
-                                {product.enable === null ? (
-                                  <>
-                                    <td>대기중</td>
-                                    <td>대기중</td>
-                                  </>
-                                ) : (
-                                  <>
-                                    {product.enable === true ? (
-                                      <>
-                                        <td>o</td>
-                                        <td>x</td>
-                                      </>
+                      {Prod[0] ? (
+                        <table className="table">
+                          <thead className="thead">
+                            <tr>
+                              <td>상품코드</td>
+                              <td width="20px">썸네일</td>
+                              <td width="20%">상품명</td>
+                              <td width="10%">판매가</td>
+                              <td width="10%">재고</td>
+                              <td width="10%">판매</td>
+                              <td width="10%">품절</td>
+                              <td width="10%">상세</td>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {Prod.map((product, index) => {
+                              return (
+                                <tr key={index}>
+                                  <td>{product._id}</td>
+                                  <td>
+                                    {product.thumbnails ? (
+                                      <img
+                                        style={{ maxHeight: '100px' }}
+                                        alt={`productImg-${index}`}
+                                        src={`${product.thumbnails[0].image.location}`}
+                                      />
                                     ) : (
-                                      <>
-                                        <td>x</td>
-                                        <td>o</td>
-                                      </>
+                                      ''
                                     )}
-                                  </>
-                                )}
-                                <td>
-                                  <Link to={`/product/upload/${product._id}`}>
-                                    상세
-                                  </Link>
-                                </td>
-                              </tr>
-                            );
-                          })}
-                        </tbody>
-                      </table>
+                                  </td>
+                                  <td>{numberWithCommas(product.title)}</td>
+                                  <td>{numberWithCommas(product.discount)}</td>
+                                  <td className="red">
+                                    {numberWithCommas(product.stock)}
+                                  </td>
+                                  {product.enable === null ? (
+                                    <>
+                                      <td>대기중</td>
+                                      <td>대기중</td>
+                                    </>
+                                  ) : (
+                                    <>
+                                      {product.enable === true ? (
+                                        <>
+                                          <td>o</td>
+                                          <td>x</td>
+                                        </>
+                                      ) : (
+                                        <>
+                                          <td>x</td>
+                                          <td>o</td>
+                                        </>
+                                      )}
+                                    </>
+                                  )}
+                                  <td>
+                                    <Link to={`/product/upload/${product._id}`}>
+                                      상세
+                                    </Link>
+                                  </td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </table>
+                      ) : (
+                        <div className="text-center pt-20">
+                          <h4>'등록된 제품이 없습니다'</h4>
+                        </div>
+                      )}
                     </Tab.Pane>
                     <Tab.Pane eventKey="payment">
-                      <table className="table">
-                        <thead className="thead">
-                          <tr>
-                            <td width="30%">결제코드</td>
-                            <td width="30%">상품코드</td>
-                            <td width="30%">운송장번호</td>
-                            <td width="10%">택배</td>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {Sellhistory.map((history, index) => {
-                            return (
-                              <tr key={index}>
-                                <td>{history._id}</td>
-                                <td>{history.product}</td>
-                                {history.deliveryNumber ? (
-                                  <>
-                                    <td>{history.deliveryNumber}</td>
-                                    <td className="red">완료 </td>
-                                  </>
-                                ) : (
-                                  <>
-                                    <td className="blue">
-                                      배송정보를 등록해주세요
-                                    </td>
-                                    <td>
-                                      <Link
-                                        to={`/product/delivery/${history._id}`}
-                                      >
-                                        등록
-                                      </Link>
-                                    </td>
-                                  </>
-                                )}
-                              </tr>
-                            );
-                          })}
-                        </tbody>
-                      </table>
+                      {Sellhistory[0] ? (
+                        <table className="table">
+                          <thead className="thead">
+                            <tr>
+                              <td width="30%">결제코드</td>
+                              <td width="30%">상품코드</td>
+                              <td width="30%">운송장번호</td>
+                              <td width="10%">택배</td>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {Sellhistory.map((history, index) => {
+                              return (
+                                <tr key={index}>
+                                  <td>{history._id}</td>
+                                  <td>{history.product}</td>
+                                  {history.deliveryNumber ? (
+                                    <>
+                                      <td>{history.deliveryNumber}</td>
+                                      <td className="red">완료 </td>
+                                    </>
+                                  ) : (
+                                    <>
+                                      <td className="blue">
+                                        배송정보를 등록해주세요
+                                      </td>
+                                      <td>
+                                        <Link
+                                          to={`/product/delivery/${history._id}`}
+                                        >
+                                          등록
+                                        </Link>
+                                      </td>
+                                    </>
+                                  )}
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </table>
+                      ) : (
+                        <div className="text-center pt-20">
+                          <h4>'등록된 제품이 없습니다'</h4>
+                        </div>
+                      )}
                     </Tab.Pane>
                   </Tab.Content>
                 </Tab.Container>
