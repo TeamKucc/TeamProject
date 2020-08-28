@@ -92,19 +92,19 @@ const Main = ({ products }) => {
                     >
                       <div className="container">
                         <div className="row">
-                          <div className="col-xl-6 col-lg-7 col-md-8 col-12 ml-auto">
+                          <div className="col-xl-3 col-lg-7 col-md-8 col-12 ml-auto">
                             <div className="slider-content-3 slider-animated-1 text-center">
-                              <h3 className="animated">{single.title}</h3>
-                              <h1 className="animated">{single.subtitle}</h1>
+                              {/* <h3 className="animated">{single.title}</h3> */}
+                              {/* <h1 className="animated">{single.subtitle}</h1>
                               <p className="animated">{single.text}</p>
-                              <div className="slider-btn btn-hover">
-                                <Link
+                              <div className="slider-btn btn-hover"> */}
+                                {/* <Link
                                   className="animated"
                                   to="/product/landing/all"
                                 >
                                   DEAL NOW
-                                </Link>
-                              </div>
+                                </Link> */}
+                              {/* </div> */}
                             </div>
                           </div>
                         </div>
