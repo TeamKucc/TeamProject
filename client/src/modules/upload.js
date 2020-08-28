@@ -188,11 +188,12 @@ function* imageUploadSaga(action) {
   yield put(startLoading('product/IMAGE_UPLOAD'));
   try {
     const files = action.payload.files.files;
-    console.log(files);
     let formData = new FormData();
+
     const config = {
       header: { 'content-type': 'multipart/form-data' },
     };
+
     formData.append('file', files[0]);
     const image = yield call(
       [axios, 'post'],
@@ -256,7 +257,7 @@ export const initialState = {
   price: '',
   images: [],
   discount: '',
-  person: '',
+  person: '2',
   upload: null,
   uploadError: null,
   enable: null,
