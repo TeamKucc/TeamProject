@@ -1,11 +1,11 @@
 import React from "react";
 
-const MobileSearch = () => {
+const MobileSearch = ({onChange,onClick}) => {
   return (
     <div className="offcanvas-mobile-search-area">
       <form action="#">
-        <input type="search" placeholder="Search ..." />
-        <button type="submit">
+        <input type="search" placeholder="Search ..." name="word" onChange={onChange}/>
+        <button type="submit" onClick={onClick}>
           <i className="fa fa-search" />
         </button>
       </form>

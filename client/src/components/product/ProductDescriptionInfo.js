@@ -7,14 +7,8 @@ import { Link } from 'react-router-dom';
 const ProductDescriptionInfo = ({
   product,
   discountedPrice,
-  makeDeal,
   onCheck,
-  onChange,
-  onClick,
-  changeRating,
-  review,
 }) => {
-  const [productStock, setProductStock] = useState(0);
 
   if (!product) return null;
 
@@ -32,12 +26,13 @@ const ProductDescriptionInfo = ({
             <span className="old">{numberWithCommas(product.price)} 원</span>
           </Fragment>
         ) : (
-          <span></span>
-        )}
+            <span></span>
+          )}
       </div>
-
       <div className="pro-details-list">
-        <p>{product.description}</p>
+        <p>
+          {product.description}
+        </p>
       </div>
       <div className="pro-details-quality">
         <div className="pro-details-cart btn-hover">
@@ -46,8 +41,8 @@ const ProductDescriptionInfo = ({
               결제하기
             </button>
           ) : (
-            <button disabled>Out of Stock</button>
-          )}
+              <button disabled>Out of Stock</button>
+            )}
         </div>
       </div>
       <div></div>
@@ -71,10 +66,10 @@ const ProductDescriptionInfo = ({
           </ul>
         </div>
       ) : (
-        ''
-      )}
+          ''
+        )}
 
-      
+
     </div>
   );
 };

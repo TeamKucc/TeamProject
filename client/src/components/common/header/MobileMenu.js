@@ -3,7 +3,7 @@ import MobileMenuSearch from "./sub-components/MobileSearch";
 import MobileNavMenu from "./sub-components/MobileNavMenu";
 
 
-const MobileMenu = ({user,onLogout}) => {
+const MobileMenu = ({user,onLogout,onChange,onClick}) => {
   useEffect(() => {
     const offCanvasNav = document.querySelector("#offcanvas-navigation");
     const offCanvasNavSubMenu = offCanvasNav.querySelectorAll(".sub-menu");
@@ -55,7 +55,7 @@ const MobileMenu = ({user,onLogout}) => {
       <div className="offcanvas-wrapper">
         <div className="offcanvas-inner-content">
           {/* mobile search */}
-          <MobileMenuSearch />
+          <MobileMenuSearch onClick={onClick} onChange={onChange}  />
 
           {/* mobile nav menu */}
           <MobileNavMenu user={user} onLogout={onLogout} />

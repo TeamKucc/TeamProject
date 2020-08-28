@@ -19,7 +19,10 @@ const ProductDescriptionTab = ({
 
   console.log(review);
   if (!product) return null;
-
+  const convertDate =(InputDate)=>{
+    const date = new Date(InputDate);
+    return date.getFullYear()+'/' + (date.getMonth()+1) + '/'+date.getDate()
+  }
   const ProductRating = ({ ratingValue }) => {
     let rating = [];
 
@@ -52,7 +55,7 @@ const ProductDescriptionTab = ({
                 <div className="review-name pl-20">
                   <h5>등록일</h5>
                 </div>
-                <h5>{review.created}</h5>
+                <h5>{convertDate(review.created)}</h5>
               </div>
               <div className="review-left"></div>
             </div>

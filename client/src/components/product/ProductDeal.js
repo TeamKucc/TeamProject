@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { makeDeal, joinDeal } from '../../modules/user'
 import { useDispatch } from 'react-redux'
 import { Button } from 'react-bootstrap';
-import List from './List'
+import List from './DealList'
 
 
 const ProductDeal = ({ user, product, deal }) => {

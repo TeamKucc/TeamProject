@@ -66,8 +66,8 @@ const Search = ({ Products, id }) => {
               <div className="slider-content-3 slider-animated-1 text-center">
                 <p className="animated">
                   {!Products[0] ?
-                  <div>'{id}' 에 대한 검색결과가 없습니다 </div> 
-                : <div>'{id}' 에 대한 검색결과 입니다 </div>
+                  <span>'{id}' 에 대한 검색결과가 없습니다 </span> 
+                : <span>'{id}' 에 대한 검색결과 입니다 </span>
                 }
                 </p>
               </div>

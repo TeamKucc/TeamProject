@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter, Route } from 'react-router-dom';
 import { changeField, initializeForm, login } from '../../modules/auth'
-import AuthForm from '../../components/auth/LoginForm'
 import Login from '../../components/auth/Login'
 import { check, tempSetUser } from '../../modules/user'
 

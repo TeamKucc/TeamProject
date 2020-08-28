@@ -15,16 +15,11 @@ import ProductPage from '../pages/ProductPage';
 import UserHistory from '../pages/UserHistory'
 import StockDetailPage from '../pages/StockDetailPage'
 import DeliveryPage from '../pages/DeliveryPage'
-import HeaderOne from '../pages/Test'
-import Test2 from '../pages/Test2';
-import LoginRegister from '../pages/RG';
-import ProductTT from './product/ProductTT'
-import ProductTes from '../container/post/ProductTes';
 import SellerPage from '../pages/SellerPage';
 import OrderPage from '../pages/OrderPage'
 import RegisterCompletePage from '../pages/RegisterCompletePage'
 import SearchPage from '../pages/SearchPage'
-import TimeTest from './common/Timer'
+
 
 
 
@@ -35,7 +30,6 @@ const App = () => {
   return (
     <>
       {/* <Route component={LandingPage} exact path={['/home', '/']} /> */}
-      
       <Route component={LoginPage} exact path="/login" />
       <Route component={MainPage} exact path={['/home', '/']} />
       <Route component={LandingPage} path="/product/landing/:id" exact />
@@ -47,18 +41,14 @@ const App = () => {
       <Route component={Loading} path="loading" />
       <Route component={UploadProductPage} exact path="/product/upload" />
       <Route component={StockPage} exact path="/product/stock" />
-  
       <Route component={SellerPage} exact path="/seller/paid" />
       <Route component={ProductPage} path="/item/:id" exact />
       <Route component={StockDetailPage} exact path="/product/upload/:id" />
       <Route component={UserHistory} exact path="/user/userhistory" />
-      <Route component={Test2} path="/test/test" exact />
-      <Route component={LoginRegister} path="/test/Rg" exact />
-      {/* <Route component={ProductTes}  path="/:id" exact /> */}
       <Route component={OrderPage} path="/product/order/:id" exact />
       <Route component={RegisterCompletePage} path="/register/complete" exact />
       <Route component={SearchPage} path="/product/search/:id" exact />
-      <Route component={TimeTest} path="/time/test/" exact />
+
 
       {/* 임시택배조회페이지 */}
       <Route component={DeliveryPage} exact path="/product/delivery/:id" />
