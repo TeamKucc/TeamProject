@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Nav from 'react-bootstrap/Nav';
@@ -17,12 +16,13 @@ const ProductDescriptionTab = ({
     return review[key];
   });
 
-  console.log(review);
   if (!product) return null;
-  const convertDate =(InputDate)=>{
+  const convertDate = (InputDate) => {
     const date = new Date(InputDate);
-    return date.getFullYear()+'/' + (date.getMonth()+1) + '/'+date.getDate()
-  }
+    return (
+      date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate()
+    );
+  };
   const ProductRating = ({ ratingValue }) => {
     let rating = [];
 
@@ -164,10 +164,6 @@ const ProductDescriptionTab = ({
       </div>
     </div>
   );
-};
-
-ProductDescriptionTab.propTypes = {
-  spaceBottomClass: PropTypes.string,
 };
 
 export default ProductDescriptionTab;

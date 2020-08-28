@@ -1,57 +1,39 @@
 import React, { useEffect } from 'react';
-import { Route, Redirect, withRouter, Switch } from 'react-router-dom';
-import LoginPage from '../pages/LoginPage';
-import BuyerRegisterPage from '../pages/BuyerRegisterPage';
-import DealRegisterPage from '../pages/DealRegisterPage';
-import RegisterPage from '../pages/RegisterPage';
+import { Route } from 'react-router-dom';
 import MainPage from '../pages/MainPage';
-import UserInfo from '../pages/UserInfo';
-import HEAD from '../components/common/HEAD';
-import Loading from '../pages/Loading';
+import OrderPage from '../pages/OrderPage';
+import StockPage from '../pages/StockPage';
+import LoginPage from '../pages/LoginPage';
+import SearchPage from '../pages/SearchPage';
 import LandingPage from '../pages/LandingPage';
+import DeliveryPage from '../pages/DeliveryPage';
+import UserInfoPage from '../pages/UserInfoPage';
+import RegisterPage from '../pages/RegisterPage';
+import StockDetailPage from '../pages/StockDetailPage';
+import BuyerRegisterPage from '../pages/BuyerRegisterPage';
 import UploadProductPage from '../pages/UploadProductPage';
-import StockPage from '../pages/StockPage'
-import ProductPage from '../pages/ProductPage';
-import UserHistory from '../pages/UserHistory'
-import StockDetailPage from '../pages/StockDetailPage'
-import DeliveryPage from '../pages/DeliveryPage'
-import SellerPage from '../pages/SellerPage';
-import OrderPage from '../pages/OrderPage'
-import RegisterCompletePage from '../pages/RegisterCompletePage'
-import SearchPage from '../pages/SearchPage'
-
-
-
+import ProductDetailPage from '../pages/ProductDetailPage';
+import SellerRegisterPage from '../pages/SellerRegisterPage';
+import RegisterCompletePage from '../pages/RegisterCompletePage';
 
 const App = () => {
-  useEffect(() => {
-  }, [])
-
   return (
     <>
-      {/* <Route component={LandingPage} exact path={['/home', '/']} /> */}
-      <Route component={LoginPage} exact path="/login" />
-      <Route component={MainPage} exact path={['/home', '/']} />
-      <Route component={LandingPage} path="/product/landing/:id" exact />
-      <Route component={RegisterPage} exact path="/register" />
-      <Route component={BuyerRegisterPage} exact path="/register/buyer" />
-      <Route component={DealRegisterPage} exact path="/register/deal" />
-      <Route component={UserInfo} exact path="/userInfo/:user" />
-      <Route component={HEAD} path="/head" />
-      <Route component={Loading} path="loading" />
-      <Route component={UploadProductPage} exact path="/product/upload" />
-      <Route component={StockPage} exact path="/product/stock" />
-      <Route component={SellerPage} exact path="/seller/paid" />
-      <Route component={ProductPage} path="/item/:id" exact />
-      <Route component={StockDetailPage} exact path="/product/upload/:id" />
-      <Route component={UserHistory} exact path="/user/userhistory" />
+      <Route component={LoginPage} path="/login" exact />
+      <Route component={MainPage} path={['/home', '/']}  exact />
+      <Route component={RegisterPage} path="/register"  exact />
+      <Route component={StockPage} path="/product/stock"  exact />
+      <Route component={ProductDetailPage} path="/item/:id" exact />
       <Route component={OrderPage} path="/product/order/:id" exact />
-      <Route component={RegisterCompletePage} path="/register/complete" exact />
+      <Route component={UserInfoPage} path="/userInfo/:user"  exact />
       <Route component={SearchPage} path="/product/search/:id" exact />
-
-
-      {/* 임시택배조회페이지 */}
-      <Route component={DeliveryPage} exact path="/product/delivery/:id" />
+      <Route component={LandingPage} path="/product/landing/:id" exact />
+      <Route component={UploadProductPage} path="/product/upload"  exact />
+      <Route component={BuyerRegisterPage} path="/register/buyer"  exact />
+      <Route component={SellerRegisterPage} path="/register/deal"  exact />
+      <Route component={DeliveryPage} path="/product/delivery/:id"  exact />
+      <Route component={StockDetailPage} path="/product/upload/:id"  exact />
+      <Route component={RegisterCompletePage} path="/register/complete" exact />
     </>
   );
 };

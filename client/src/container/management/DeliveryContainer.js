@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Delivery from '../../components/management/Delivery';
-import { withRouter } from 'react-router-dom';
 import { deliveryUpload, changeField } from '../../modules/delivery';
 
 const DeliveryContainer = ({ match, history }) => {
@@ -32,7 +32,6 @@ const DeliveryContainer = ({ match, history }) => {
       setError('송장번호와 택배사를 입력해주세요')
       return
     }
-
       dispatch(
         deliveryUpload({
           id,

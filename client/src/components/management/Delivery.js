@@ -2,11 +2,9 @@ import React, { Fragment } from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Nav from 'react-bootstrap/Nav';
 
-
 const Delivery = ({ onChange, onPublish, delivery, deliveryNumber, error }) => {
   return (
     <Fragment>
-      {/* breadcrumb */}
       <div className="login-register-area pt-50 pb-100">
         <div className="container">
           <div className="row">
@@ -76,8 +74,8 @@ const Delivery = ({ onChange, onPublish, delivery, deliveryNumber, error }) => {
                               <button onClick={onPublish}>택배등록</button>
                             </div>
                             <div className="error">
-                                {error == null ? '' : '* ' + error}
-                              </div>
+                              {error == null ? '' : '* ' + error}
+                            </div>
                           </form>
                         </div>
                       </div>

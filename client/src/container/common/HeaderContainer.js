@@ -4,8 +4,6 @@ import Header from '../../components/common/Header';
 import { logout } from '../../modules/user'
 import { landingProduct, searchProduct, changeField } from '../../modules/landing'
 import { withRouter } from 'react-router-dom'
-// import Cookies from 'react-cookies'
-// import HEAD from '../../components/common/HEAD'
 
 const HeaderContainer = (props) => {
 
@@ -23,7 +21,6 @@ const HeaderContainer = (props) => {
         localStorage.removeItem('role')
         props.history.push('/')
     }
-    // <HEAD onLogout={onLogout} user={user} />
 
     useEffect(() => {
         dispatch(

@@ -3,18 +3,16 @@ import Tab from 'react-bootstrap/Tab';
 import Nav from 'react-bootstrap/Nav';
 import Dropzone from 'react-dropzone';
 
-
 const StockDetail = ({ product, onEdit }) => {
   
   window.onbeforeunload = function (e) {
     return alert('정보 작성중');
-  }
+  };
 
-  if(!product) return null
+  if (!product) return null;
 
   return (
     <Fragment>
-      {/* breadcrumb */}
       <div className="login-register-area pt-50 pb-100">
         <div className="container">
           <div className="row">

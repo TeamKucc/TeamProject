@@ -1,19 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
 import { useTransition, animated } from 'react-spring';
 import Timer from '../common/Timer';
 import DealTimer from './DealTimer';
 
 const List = ({ deal, join, product, onCheck, make }) => {
-  console.log(product);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((state) => (state + 1) % items.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
-
   const [index, setIndex] = useState(0);
   const [display, setDisplay] = useState(true);
   const [items] = useState(deal);
@@ -35,6 +25,13 @@ const List = ({ deal, join, product, onCheck, make }) => {
       setDisplay(true);
     }
   };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((state) => (state + 1) % items.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <>
@@ -91,7 +88,7 @@ const List = ({ deal, join, product, onCheck, make }) => {
                           </td>
                           <td className="td-button">
                             <button
-                            className="button"
+                              className="button"
                               onClick={() => {
                                 join(item._id);
                               }}

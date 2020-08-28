@@ -4,24 +4,30 @@ import {
   changeField,
   initializeForm,
   dregister,
-  businessNumber
+  businessNumber,
 } from '../../modules/auth';
-import DealRegisterForm from '../../components/auth/DealRegisterForm';
+import SellerRegister from '../../components/auth/SellerRegister';
 import { withRouter } from 'react-router-dom';
 
-const BuyerRegisterForm = ({ history }) => {
+const SellerRegisterContainer = ({ history }) => {
   const dispatch = useDispatch();
   const [success, setSuccess] = useState('');
   const [error, setError] = useState(null);
-  const { form, auth, authError, user, businessState, businessError } = useSelector(({ auth, user }) => ({
+  const {
+    form,
+    auth,
+    authError,
+    user,
+    businessState,
+    businessError,
+  } = useSelector(({ auth, user }) => ({
     form: auth.dregister,
     auth: auth.auth,
     authError: auth.authError,
     user: user.user,
     businessState: auth.businessState,
-    businessError:auth.error
+    businessError: auth.error,
   }));
-
 
   //인풋 변경이벤트
   const onChange = (e) => {
@@ -36,10 +42,10 @@ const BuyerRegisterForm = ({ history }) => {
     );
   };
 
-  const { business } = form
+  const { business } = form;
 
   const onSubmit = (e) => {
-    console.log("call")
+    console.log('call');
     e.preventDefault();
     const { userID, name, password, passwordConfirm, email } = form;
 
@@ -53,18 +59,18 @@ const BuyerRegisterForm = ({ history }) => {
       setError('비밀번호가 다릅니다');
       return;
     }
-    if(success != true) {
-      setError('사업자번호 인증이 필요합니다')
+    if (success != true) {
+      setError('사업자번호 인증이 필요합니다');
       return;
     }
     dispatch(dregister({ userID, name, password, business, email }));
-    history.push('/register/complete')
+    history.push('/register/complete');
   };
-  
+
   const onClick = () => {
-    dispatch( 
+    dispatch(
       businessNumber({
-        business
+        business,
       }),
     );
   };
@@ -74,12 +80,12 @@ const BuyerRegisterForm = ({ history }) => {
     dispatch(initializeForm('dregister'));
   }, [dispatch]);
 
-  useEffect(()=>{
-    if(businessState){
-      setSuccess(true)
-      setError('')
+  useEffect(() => {
+    if (businessState) {
+      setSuccess(true);
+      setError('');
     }
-  }, [businessState])
+  }, [businessState]);
 
   useEffect(() => {
     if (auth) {
@@ -110,7 +116,7 @@ const BuyerRegisterForm = ({ history }) => {
 
   return (
     <div>
-      <DealRegisterForm
+      <SellerRegister
         type="dregister"
         form="form"
         onChange={onChange}
@@ -123,4 +129,4 @@ const BuyerRegisterForm = ({ history }) => {
   );
 };
 
-export default withRouter(BuyerRegisterForm);
+export default withRouter(SellerRegisterContainer);

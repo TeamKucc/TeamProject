@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Tab from 'react-bootstrap/Tab';
 import Nav from 'react-bootstrap/Nav';
 
-const RegisterForm = ({
+const SellerRegister = ({
   form,
   onChange,
   onSubmit,
@@ -117,8 +117,8 @@ const RegisterForm = ({
   );
 };
 
-RegisterForm.propTypes = {
+SellerRegister.propTypes = {
   location: PropTypes.object,
 };
 
-export default RegisterForm;
+export default SellerRegister;

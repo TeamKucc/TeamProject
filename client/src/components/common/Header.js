@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from "prop-types";
-import NavMenu from "./header/NavMenu";
-import IconGroup from "./header/IconGroup";
-import MobileMenu from "./header/MobileMenu";
+import PropTypes from 'prop-types';
+import NavMenu from './header/NavMenu';
+import IconGroup from './header/IconGroup';
+import MobileMenu from './header/MobileMenu';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/img/logo/logo.png'
+import logo from '../../assets/img/logo/logo.png';
 
 const Header = ({
   headerPaddingClass,
@@ -15,19 +15,18 @@ const Header = ({
   onClick,
   onChange,
 }) => {
-  let UserId = null;
-  if (user) {
-    UserId = user.replace(/['"]+/g, '')
-  }
   const [scroll, setScroll] = useState(0);
   const [headerTop, setHeaderTop] = useState(0);
+  let UserId = null;
+
+  if (user) {
+    UserId = user.replace(/['"]+/g, '');
+  }
 
   useEffect(() => {
-    const header = document.querySelector(".sticky-bar");
-    setHeaderTop(header.offsetTop);
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -35,19 +34,12 @@ const Header = ({
     setScroll(window.scrollY);
   };
 
-
   return (
-    <header
-      className={`header-area clearfix ${headerBgClass ? headerBgClass : ""} ${
-        headerPositionClass ? headerPositionClass : ""
-        }`}
-    >
+    <header className={`header-area clearfix`}>
       <div
-        className={` ${
-          headerPaddingClass ? headerPaddingClass : ""
-          } sticky-bar header-res-padding clearfix ${
-          scroll > headerTop ? "stick" : ""
-          }`}
+        className={`sticky-bar header-res-padding clearfix ${
+          scroll > headerTop ? 'stick' : ''
+        }`}
       >
         <div className="container">
           <div className="row">
@@ -64,25 +56,25 @@ const Header = ({
             </div>
             <div className="col-xl-2 col-lg-2 col-md-6 col-8">
               {/* Icon group */}
-              <IconGroup user={user} onLogout={onLogout} onClick={onClick} onChange={onChange} />
+              <IconGroup
+                user={user}
+                onLogout={onLogout}
+                onClick={onClick}
+                onChange={onChange}
+              />
             </div>
           </div>
         </div>
-        {/* mobile menu */}
-        <MobileMenu user={user} onLogout={onLogout} onClick={onClick} onChange={onChange} />
+
+        <MobileMenu
+          user={user}
+          onLogout={onLogout}
+          onClick={onClick}
+          onChange={onChange}
+        />
       </div>
     </header>
   );
-
-}
-Header.propTypes = {
-  borderStyle: PropTypes.string,
-  headerPaddingClass: PropTypes.string,
-  headerPositionClass: PropTypes.string,
-  layout: PropTypes.string,
-  top: PropTypes.string
 };
 
-
 export default Header;
-

@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 import Tab from "react-bootstrap/Tab";
 import Nav from "react-bootstrap/Nav";
 
-const RegisterForm = ( { form, onChange, onSubmit, error }) => {
+const BuyerRegister = ( { form, onChange, onSubmit, error }) => {
 
     return (
       <Fragment>
@@ -86,8 +86,8 @@ const RegisterForm = ( { form, onChange, onSubmit, error }) => {
     );
 }
 
-RegisterForm.propTypes = {
+BuyerRegister.propTypes = {
     location: PropTypes.object
 };
 
-export default RegisterForm;
+export default BuyerRegister;

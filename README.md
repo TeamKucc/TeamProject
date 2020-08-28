@@ -18,3 +18,9 @@
 4. 회원구매내역 / 판매자 판매내역 :man: 김선규
 5. 사업자번호인증 / 배송추적 (API) :woman: 어성미
 6. 결제 (API) :man: 김선규
+
+## 수정사항
+:man: 김선규 확인 후 수정
+1. components - common - header 에 들어있는 파일 확인
+2. components - common - Timer / components - product - DealTimer 둘중에 어떤파일 써야 하는지 확인, 페이지마다 통일시켜줘야 함
+3. 홈페이지 테스트시에 DB에 있는 데이터 리셋하고 확인

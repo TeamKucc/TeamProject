@@ -1,13 +1,10 @@
 import React, { useState, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { setActiveLayout } from '../../helpers/product';
-import {
-  getIndividualCategories,
-} from '../../helpers/product';
+import { getIndividualCategories } from '../../helpers/product';
 import Timer from '../common/Timer';
 
 function Landing({ Products, onClick, cate, onChange, onSearch }) {
-
   const [layout, setLayout] = useState('list');
 
   const productCount = Products.length;
@@ -18,7 +15,6 @@ function Landing({ Products, onClick, cate, onChange, onSearch }) {
 
   const uniqueCategories = getIndividualCategories(Prod);
 
-  console.log(uniqueCategories);
   const getLayout = (layout) => {
     setLayout(layout);
   };
@@ -56,8 +52,8 @@ function Landing({ Products, onClick, cate, onChange, onSearch }) {
   };
 
   const numberWithCommas = (x) => {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
 
   const productLanding = (product, index) => {
     return (
@@ -100,7 +96,9 @@ function Landing({ Products, onClick, cate, onChange, onSearch }) {
                   <div className="product-list-price">
                     <Fragment>
                       <span>{numberWithCommas(product.discount)} 원</span>{' '}
-                      <span className="old">{numberWithCommas(product.price)} 원</span>
+                      <span className="old">
+                        {numberWithCommas(product.price)} 원
+                      </span>
                     </Fragment>
                   </div>
                   <p>{product.description}</p>
@@ -133,7 +131,6 @@ function Landing({ Products, onClick, cate, onChange, onSearch }) {
           <div className="row">
             <div className="col-lg-3 order-2 order-lg-1">
               <div className={`sidebar-style mr-30`}>
-                {/* shop search */}
                 <div className="sidebar-widget">
                   <h4 className="pro-sidebar-title">제품검색</h4>
                   <div className="pro-sidebar-search mb-50 mt-25">
@@ -150,8 +147,6 @@ function Landing({ Products, onClick, cate, onChange, onSearch }) {
                     </form>
                   </div>
                 </div>
-
-                {/* filter by categories */}
                 <div className="sidebar-widget">
                   <h4 className="pro-sidebar-title">카테고리</h4>
                   <div className="sidebar-widget-list mt-30">
@@ -180,7 +175,6 @@ function Landing({ Products, onClick, cate, onChange, onSearch }) {
             </div>
             <div className="col-lg-9 order-1 order-lg-2">
               <Fragment>
-                {/* shop top action */}
                 <div className="shop-top-bar mb-35">
                   <div className="select-shoing-wrap">
                     <p></p>

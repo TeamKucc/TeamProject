@@ -1,10 +1,8 @@
 import React from 'react';
-import BuyerRegisterForm from '../container/auth/BuyerRegisterForm';
+import BuyerRegisterContainer from '../container/auth/BuyerRegisterContainer';
 
 const BuyerRegisterPage = () => {
-  return (
-      <BuyerRegisterForm />
-  );
+  return <BuyerRegisterContainer />;
 };
 
 export default BuyerRegisterPage;

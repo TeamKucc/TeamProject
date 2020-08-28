@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeField, initializeForm, register } from '../../modules/auth';
-import RegisterForm from '../../components/auth/BuyerRegisterForm'
+import BuyerRegister from '../../components/auth/BuyerRegister'
 import { check } from '../../modules/user';
 import { withRouter } from 'react-router-dom'
 
@@ -81,7 +81,7 @@ const BuyerRegisterForm = ({ history }) => {
 
     return (
         <div>
-            <RegisterForm
+            <BuyerRegister
                 type="register"
                 form="form"
                 onChange={onChange}

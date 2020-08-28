@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import ProductDescriptionInfo from '../../components/product/ProductDescriptionInfo';
-import ProductImageGallery from '../../components/product/ProductImageGallery';
+import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import ReviewTap from '../../components/product/ProductReview';
+import ProductDeal from '../../components/product/ProductDeal';
+import ProductImageGallery from '../../components/product/ProductImageGallery';
+import ProductDetail from '../../components/product/ProductDetail';
 import { readProduct, unloadProduct } from '../../modules/landing';
 import { changeField, reviewUpload, readReview } from '../../modules/review';
-import { makeDeal, checkDeal, unloadUser, completeReset } from '../../modules/user';
-import ProductDeal from '../../components/product/ProductDeal';
+import { checkDeal, completeReset } from '../../modules/user';
 import { findDeal } from '../../modules/upload';
-import { withRouter } from 'react-router-dom';
-import ReviewTap from '../../components/product/ReviewTap';
 
-const ProductInfo = ({ match, history, location }) => {
+const ProductDetailContainer = ({ match, history, location }) => {
   const dispatch = useDispatch();
-  const [ratingError, setRatingError] = useState(null)
+  const [ratingError, setRatingError] = useState(null);
+  const { id } = match.params;
 
   const {
     product,
@@ -38,8 +39,6 @@ const ProductInfo = ({ match, history, location }) => {
     review: review.review,
   }));
 
-  const { id } = match.params;
-
   useEffect(() => {
     const { id } = match.params;
     dispatch(readProduct(id));
@@ -50,17 +49,46 @@ const ProductInfo = ({ match, history, location }) => {
     };
   }, [dispatch]);
 
+  // Deal 참여&&성공 여부 확인시 결제 페이지로 이동
+  useEffect(() => {
+    if (complete) {
+      history.push(`/product/order/${product._id}`);
+    }
+    return () => {
+      dispatch(completeReset());
+    };
+  }, [dispatch, complete]);
+
+  // ?? 정리해야할듯 아래 사항과 중복
+  useEffect(() => {
+    if (error) {
+      alert('상품을 구매해주세요!');
+    }
+  }, [dispatch, error]);
+
+  // 딜 미참여시 예외처리
+  useEffect(() => {
+    if (dealError) {
+      alert('딜에 참여해주세요!');
+    }
+  }, [dispatch, dealError]);
+
+  useEffect(() => {
+    if (makeDeal) {
+      window.location.reload();
+    }
+  }, [makeDeal]);
+
   const onCheck = () => {
     dispatch(checkDeal({ user: user, product: product._id }));
   };
 
   const onClick = (e) => {
     e.preventDefault();
-    if([write, rating].includes('')){
-        setRatingError('별점과 리뷰를 등록해주세요')
-        return
+    if ([write, rating].includes('')) {
+      setRatingError('별점과 리뷰를 등록해주세요');
+      return;
     }
-    console.log(user)
     dispatch(
       reviewUpload({
         user,
@@ -83,7 +111,6 @@ const ProductInfo = ({ match, history, location }) => {
   };
 
   const changeRating = (value) => {
-    console.log(value);
     dispatch(
       changeField({
         key: 'rating',
@@ -91,36 +118,6 @@ const ProductInfo = ({ match, history, location }) => {
       }),
     );
   };
-
-  ///Deal 참여&&성공 여부 확인시 결제 페이지로 이동
-  useEffect(() => {
-    if (complete) {
-      history.push(`/product/order/${product._id}`);
-    }
-    return()=>{
-      dispatch(completeReset())
-    }
-  }, [dispatch,complete]);
-
-  //?? 정리해야할듯 아래 사항과 중복
-  useEffect(() => {
-    if (error) {
-      alert('상품을 구매해주세요!');
-    }
-  }, [dispatch, error]);
-
-  //딜 미참여시 예외처리
-  useEffect(() => {
-    if (dealError) {
-      alert('딜에 참여해주세요!');
-    }
-  }, [dispatch, dealError]);
-
-  useEffect(() => {
-    if (makeDeal) {
-      window.location.reload();
-    }
-  }, [makeDeal]);
 
   return (
     <div className="shop-area pt-100  ">
@@ -130,7 +127,7 @@ const ProductInfo = ({ match, history, location }) => {
             <ProductImageGallery product={product} />
           </div>
           <div className="col-lg-6 col-md-6">
-            <ProductDescriptionInfo
+            <ProductDetail
               spaceTopClass="pt-100"
               spaceBottomClass="pb-100"
               complete={complete}
@@ -163,4 +160,4 @@ const ProductInfo = ({ match, history, location }) => {
   );
 };
 
-export default withRouter(ProductInfo);
+export default withRouter(ProductDetailContainer);

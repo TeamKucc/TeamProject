@@ -1,12 +1,11 @@
-import PropTypes from "prop-types";
-import React from "react";
-import { Link } from "react-router-dom";
-
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const MobileNavMenu = ({ user, onLogout }) => {
   let UserId = null;
   if (user) {
-    UserId = user.replace(/['"]+/g, '')
+    UserId = user.replace(/['"]+/g, '');
   }
 
   return (
@@ -15,9 +14,7 @@ const MobileNavMenu = ({ user, onLogout }) => {
         {user ? (
           <>
             <li>
-              <Link to={`/userInfo/${UserId}`}>
-                내정보
-              </Link>
+              <Link to={`/userInfo/${UserId}`}>내정보</Link>
             </li>
             <li>
               <Link to={'/'} onClick={onLogout}>
@@ -26,21 +23,18 @@ const MobileNavMenu = ({ user, onLogout }) => {
             </li>
           </>
         ) : (
-            <>
-              <li>
-                <Link to={"/login"}>로그인</Link>
-              </li>
-              <li>
-                <Link to={"/register"}>
-                  회원가입
-            </Link>
-              </li>
-            </>
-          )}
+          <>
+            <li>
+              <Link to={'/login'}>로그인</Link>
+            </li>
+            <li>
+              <Link to={'/register'}>회원가입</Link>
+            </li>
+          </>
+        )}
       </ul>
     </nav>
   );
 };
-
 
 export default MobileNavMenu;

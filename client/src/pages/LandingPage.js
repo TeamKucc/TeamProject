@@ -1,15 +1,14 @@
-import React from "react"
-import LandingContainer from "../container/landing/LandingContainer"
-import HeaderContainer from "../container/common/HeaderContainer"
-import Header from '../components/common/Header'
+import React from 'react';
+import HeaderContainer from '../container/common/HeaderContainer';
+import LandingContainer from '../container/landing/LandingContainer';
+
 const LandingPage = () => {
   return (
     <div>
-      {/* <Header/> */}
-      <HeaderContainer/>
-      <LandingContainer/>
+      <HeaderContainer />
+      <LandingContainer />
     </div>
-  )
-}
+  );
+};
 
-export default LandingPage
+export default LandingPage;

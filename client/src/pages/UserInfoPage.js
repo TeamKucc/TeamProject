@@ -1,8 +1,8 @@
 import React from 'react';
-import UserInfoContainer from '../container/auth/UserInfoContainer';
 import HeaderContainer from '../container/common/HeaderContainer';
+import UserInfoContainer from '../container/auth/UserInfoContainer';
 
-const UserInfo = () => {
+const UserInfoPage = () => {
   return (
     <div>
       <HeaderContainer />
@@ -11,4 +11,4 @@ const UserInfo = () => {
   );
 };
 
-export default UserInfo;
+export default UserInfoPage;

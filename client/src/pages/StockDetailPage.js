@@ -1,6 +1,6 @@
 import React from 'react';
-import StockDetailContainer from '../container/management/StockDetailContainer';
 import HeaderContainer from '../container/common/HeaderContainer';
+import StockDetailContainer from '../container/management/StockDetailContainer';
 
 const ProductEditPage = () => {
   return (

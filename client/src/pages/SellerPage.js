@@ -1,13 +1,13 @@
 import React from 'react';
-import SellerContainer from '../container/management/SellerContainer'
 import HeaderContainer from '../container/common/HeaderContainer';
+import SellerContainer from '../container/management/SellerContainer';
 
 const SellerPage = () => {
-    return (
-        <>
-            <HeaderContainer />
-            <SellerContainer />
-        </>
-    )
-}
-export default SellerPage
+  return (
+    <div>
+      <HeaderContainer />
+      <SellerContainer />
+    </div>
+  );
+};
+export default SellerPage;

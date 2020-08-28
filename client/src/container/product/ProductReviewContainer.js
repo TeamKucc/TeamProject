@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import ProductDescriptionInfo from '../../components/product/ProductTT';
-import ProductImageGallery from '../../components/product/ProductImageGallery';
+import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import ProductDeal from '../../components/product/ProductDeal';
+import ProductReview from '../../components/product/ProductReview';
+import ProductDetail from '../../components/product/ProductDetail';
+import ProductImageGallery from '../../components/product/ProductImageGallery';
+import { findDeal } from '../../modules/upload';
+import { checkDeal, completeReset } from '../../modules/user';
 import { readProduct, unloadProduct } from '../../modules/landing';
 import { changeField, reviewUpload, readReview } from '../../modules/review';
-import { makeDeal, checkDeal, unloadUser, completeReset } from '../../modules/user';
-import ProductDeal from '../../components/product/ProductDeal';
-import { findDeal } from '../../modules/upload';
-import { withRouter } from 'react-router-dom';
-import ReviewTap from '../../components/product/ReviewTap';
 
-const ProductTes = ({ match, history, location }) => {
+const ProductReviewContainer = ({ match, history }) => {
   const dispatch = useDispatch();
   const [ratingError, setRatingError] = useState(null)
 
@@ -84,7 +84,6 @@ const ProductTes = ({ match, history, location }) => {
   };
 
   const changeRating = (value) => {
-    console.log(value);
     dispatch(
       changeField({
         key: 'rating',
@@ -131,24 +130,15 @@ const ProductTes = ({ match, history, location }) => {
             <ProductImageGallery product={product} />
           </div>
           <div className="col-lg-6 col-md-6">
-            <ProductDescriptionInfo
-              // spaceTopClass="pt-100"
-              // spaceBottomClass="pb-100"
-              // complete={complete}
+            <ProductDetail
               product={product}
-              // makeDeal={makeDeal}
-              // onCheck={onCheck}
-              // onChange={onChange}
-              // onClick={onClick}
-              // changeRating={changeRating}
-              // review={review}
             />
             <div className="col-lg-6 col-md-6">
               <ProductDeal user={user} product={product} deal={deal} onCheck={onCheck}/>
             </div>
           </div>
         </div>
-        <ReviewTap
+        <ProductReview
           makeDeal={makeDeal}
           onCheck={onCheck}
           onChange={onChange}
@@ -164,4 +154,4 @@ const ProductTes = ({ match, history, location }) => {
   );
 };
 
-export default withRouter(ProductTes);
+export default withRouter(ProductReviewContainer);

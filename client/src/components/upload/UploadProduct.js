@@ -1,11 +1,20 @@
-import React, { Fragment} from 'react';
+import React, { Fragment } from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Nav from 'react-bootstrap/Nav';
 import Dropzone from 'react-dropzone';
 
-
-function UploadProduct({ onPublish, onChange, product, imageDrop, imageDelete, images, thumbnailDrop, thumbnailDelete, thumbnails, error }) {
-
+function UploadProduct({
+  onPublish,
+  onChange,
+  product,
+  imageDrop,
+  imageDelete,
+  images,
+  thumbnailDrop,
+  thumbnailDelete,
+  thumbnails,
+  error,
+}) {
   return (
     <Fragment>
       {/* breadcrumb */}
@@ -113,7 +122,8 @@ function UploadProduct({ onPublish, onChange, product, imageDrop, imageDelete, i
                                   >
                                     <input {...getInputProps()} />
                                     썸네일 이미지
-                                    <br/>700 x 700
+                                    <br />
+                                    700 x 700
                                   </div>
                                 )}
                               </Dropzone>
@@ -189,7 +199,9 @@ function UploadProduct({ onPublish, onChange, product, imageDrop, imageDelete, i
                             />
                             <br />
                             <select name="category" onChange={onChange}>
-                              <option value="" hidden>카테고리</option>
+                              <option value="" hidden>
+                                카테고리
+                              </option>
                               <option value={'패션의류'}>패션의류</option>
                               <option value={'패션잡화'}>패션잡화</option>
                               <option value={'뷰티'}>뷰티</option>
@@ -207,7 +219,7 @@ function UploadProduct({ onPublish, onChange, product, imageDrop, imageDelete, i
                               <br />
                               <br />
                               <div className="error">
-                              {error == null ? '' : '* ' + error}
+                                {error == null ? '' : '* ' + error}
                               </div>
                             </div>
                           </form>
