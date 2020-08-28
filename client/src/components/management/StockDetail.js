@@ -32,7 +32,7 @@ const StockDetail = ({ product, onEdit }) => {
                     <Tab.Pane eventKey="product">
                       <div className="login-form-container">
                         <div className="login-register-form">
-                          <h5> Detail Image</h5>
+                          <h5> 상세 이미지</h5>
                           <div style={{ maxWidth: '700px', margin: 'auto' }}>
                             <div
                               style={{
@@ -67,7 +67,7 @@ const StockDetail = ({ product, onEdit }) => {
                             </div>
                           </div>
                           <br />
-                          <h5>Thumbnail Image</h5>
+                          <h5>썸네일 이미지</h5>
                           <div style={{ maxWidth: '700px', margin: 'auto' }}>
                             <div
                               style={{
@@ -103,7 +103,7 @@ const StockDetail = ({ product, onEdit }) => {
                           </div>
                           <br />
                           <form>
-                            <h5>Title</h5>
+                            <h5>제목</h5>
                             <input
                               type="text"
                               name="title"
@@ -111,14 +111,14 @@ const StockDetail = ({ product, onEdit }) => {
                               readOnly
                             />
 
-                            <h5>Description</h5>
+                            <h5>제품정보</h5>
                             <input
                               name="description"
                               value={product.description || ''}
                               readOnly
                             />
 
-                            <h5>Price</h5>
+                            <h5>원가</h5>
                             <input
                               type="text"
                               name="price"
@@ -126,7 +126,7 @@ const StockDetail = ({ product, onEdit }) => {
                               readOnly
                             />
 
-                            <h5>Discount Price</h5>
+                            <h5>할인가</h5>
                             <input
                               type="text"
                               name="discount"
@@ -134,7 +134,7 @@ const StockDetail = ({ product, onEdit }) => {
                               readOnly
                             />
 
-                            <h5>Person</h5>
+                            <h5>딜인원</h5>
                             <input
                               type="text"
                               name="person"
@@ -142,7 +142,7 @@ const StockDetail = ({ product, onEdit }) => {
                               readOnly
                             />
 
-                            <h5>Stock</h5>
+                            <h5>재고</h5>
                             <input
                               type="text"
                               name="stock"
@@ -153,7 +153,7 @@ const StockDetail = ({ product, onEdit }) => {
 
                             <div className="button-box">
                               <button onClick={onEdit}>
-                                <span>EDIT</span>
+                                <span>수정</span>
                               </button>
                             </div>
                           </form>
