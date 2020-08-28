@@ -9,6 +9,7 @@ import createRequestSaga, { createRequestActionTypes } from '../lib/createReques
 const LOGOUT = 'user/LOGOUT'
 const CHANGE_FIELD = 'user/CHANGE_FIELD';
 const TEMP_SET_USER = 'user/TEMP_SET_USER';
+const COMPLETE_RESET = 'user/COMPLETE_RESET'
 
 const [
     USER_ROLECHECK,
@@ -65,6 +66,7 @@ export const tempSetUser = createAction(TEMP_SET_USER, user => user)
 export const roleCheck = createAction(USER_ROLECHECK,({user,role})=>({user,role}))
 export const logout = createAction(LOGOUT);
 export const userUpdate = createAction(USER_UPDATE, ({ userID, name, password, email, _id }) => ({ userID, name, password, email, _id }))
+export const completeReset = createAction(COMPLETE_RESET)
 export const unloadUser = createAction(UNLOAD_USER)
 
 export const getHistory = createAction(GET_HISTORY, user => user)
@@ -198,6 +200,10 @@ export default handleActions(
         [MAKE_DEAL_FAILURE]:(state,{payload:makeDealError})=>({
             ...state,
             makeDealError
+        }),
+        [COMPLETE_RESET]:(state,{payload:complete})=>({
+            ...state,
+            complete:false
         }),
         [UNLOAD_USER]:()=>initialState,
     },

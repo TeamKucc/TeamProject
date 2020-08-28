@@ -42,9 +42,7 @@ let upload2 = multer({
   }),
 }).single('file');
 
-const timeCheck = (product)=>{
-  
-}
+
 
 export const uploadImage = (req, res) => {
   console.log(req.body);
@@ -103,13 +101,19 @@ export const productPaidSeller = (req, res) => {
 };
 
 export const getProducts = (req, res) => {
+  const product = []
   Product.find({}, (err, result) => {
     if (err)
       return res.status(409).json({
         success: false,
         err,
       });
-    res.json(result);
+      result.forEach((element)=>{
+        if(element.enable){
+          product.push(element)
+        }
+      })
+    res.json(product);
   });
 };
 
@@ -221,8 +225,21 @@ export const searchProduct = (req, res) => {
   });
 };
 
+const existReview =(req)=>{
+   return Review.findOne({$and:[{id:req.body.id},{user:req.body.user}]},(err,result)=>{
+        if(err) return err;
+        result
+        return result
+    })
+}
+
 export const reviewUpload = (req, res) => {
   console.log(req.body)
+  const exist = existReview(req)
+  if(exist) return res.status(409).json({
+    message:'Review already exist',
+    success:false
+  })
   const review = new Review(req.body);
   Payment.findOne(
     { $and: [{ product: req.body.id }, { user: req.body.user }] },
@@ -231,6 +248,7 @@ export const reviewUpload = (req, res) => {
       console.log("*************************")
       if (result) {
         review.save((err) => {
+          console.log('save!')
           if (err)
             return res.status(400).json({ success: false, Message: err });
           return res.status(200).json({ success: true });
@@ -245,8 +263,10 @@ export const reviewUpload = (req, res) => {
   );
 };
 
+
+
 export const readReview = (req, res) => {
-  console.log('readReview: ' + req.body.id);
+  console.log(req.body);
   Review.find({ id: req.body.id }, (err, result) => {
     if (err) return res.status(400).json({ success: false, Message: err });
     return res.json(result.sort((a,b)=>a.created-b.created));

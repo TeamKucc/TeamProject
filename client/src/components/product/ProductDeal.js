@@ -36,13 +36,13 @@ const ProductDeal = ({ user, product, deal }) => {
 
     return (
         <div className="deal">
-            <Button onClick={make} variant="outline-dark">딜생성</Button>
+                <Button onClick={make} variant="outline-dark">딜생성</Button>
             <div className="product-list-bg">
                 {deal.length == 0 ? (
                     <>
                     </>
                 ) : (
-                        <>
+                    <>
                             <List deal={deal} join={join} />
                         </>
                     )

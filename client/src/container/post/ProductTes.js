@@ -4,7 +4,7 @@ import ProductImageGallery from '../../components/product/ProductImageGallery';
 import { useDispatch, useSelector } from 'react-redux';
 import { readProduct, unloadProduct } from '../../modules/landing';
 import { changeField, reviewUpload, readReview } from '../../modules/review';
-import { makeDeal, checkDeal, unloadUser } from '../../modules/user';
+import { makeDeal, checkDeal, unloadUser, completeReset } from '../../modules/user';
 import ProductDeal from '../../components/product/ProductDeal';
 import { findDeal } from '../../modules/upload';
 import { withRouter } from 'react-router-dom';
@@ -97,6 +97,9 @@ const ProductTes = ({ match, history, location }) => {
   useEffect(() => {
     if (complete) {
       history.push(`/product/order/${product._id}`);
+    }
+    return()=>{
+      dispatch(completeReset())
     }
   }, [dispatch, complete]);
 

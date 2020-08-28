@@ -85,7 +85,6 @@ export const findDeal = (req, res) => {
 }
 
 function Info(user) {
-    console.log("user:" + user)
     return User.findOne({ _id: user })
 }
 

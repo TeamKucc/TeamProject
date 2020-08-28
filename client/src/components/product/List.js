@@ -32,9 +32,7 @@ const List = ({ deal, join }) => {
     return (
         <>
             <div className="Timer">
-                <div className="more">
-                <button  onClick={onToggle}>더보기</button>
-                </div>
+
                 {display ? (
                     <>
                         {fadingTextPropsTransition.map(({ item, props, key }) => (
@@ -50,15 +48,18 @@ const List = ({ deal, join }) => {
                 ) : (
                         <>
                             {
-                                deal.map((item,index) => (
+                                deal.map((item, index) => (
                                     <div key={index} className="deal-content">
                                         <span>{item.userName}</span>
-                                        <DealTimer deal={item} /><button className="btn-timer"  onClick={() => { join(item._id) }}>참여하기</button>
+                                        <DealTimer deal={item} /><button className="btn-timer" onClick={() => { join(item._id) }}>참여하기</button>
                                     </div>
                                 ))
                             }
                         </>
                     )}
+                <div className="more">
+                    <button onClick={onToggle}>더보기</button>
+                </div>
             </div>
         </>
     )
