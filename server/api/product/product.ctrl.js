@@ -222,11 +222,13 @@ export const searchProduct = (req, res) => {
 };
 
 export const reviewUpload = (req, res) => {
-  console.log(req.body.write)
+  console.log(req.body)
   const review = new Review(req.body);
-  Deal.find(
-    { $and: [{ id: req.body.id }, { user: req.body.user }] },
+  Payment.findOne(
+    { $and: [{ product: req.body.id }, { user: req.body.user }] },
     (err, result) => {
+      console.log("This is result:"+typeof(result))
+      console.log("*************************")
       if (result) {
         review.save((err) => {
           if (err)
@@ -247,7 +249,7 @@ export const readReview = (req, res) => {
   console.log('readReview: ' + req.body.id);
   Review.find({ id: req.body.id }, (err, result) => {
     if (err) return res.status(400).json({ success: false, Message: err });
-    return res.json(result);
+    return res.json(result.sort((a,b)=>a.created-b.created));
   });
 };
 

@@ -73,10 +73,12 @@ export const updateUpload = ({
   });
 export const readProduct = (id) =>
   client.post(`/api/product/readProduct/${id}`);
+
 export const removeProduct = ({ _id }) => client.delete(`/api/product/${_id}`);
 
 export const productPaid = ({ user, product, detail, seller, productInfo, payInfo }) =>
   client.post('/api/product/paid', { user, product, detail, seller, productInfo, payInfo });
+
 export const stockDetail = (id) =>
   client.post(`/api/product/stockDetail/${id}`);
 
@@ -92,6 +94,7 @@ export const findDeal = _id =>
 export const searchProduct = (id) => client.post(`/api/product/searchProduct/${id}`)
 
 export const reviewUpload = ({ user, id, write, rating }) => client.post('/api/product/reviewUpload', { user, id, write, rating })
+
 export const readReview = (id) => client.post('/api/product/readReview', { id })
 
 export const endTime = id => client.post('/api/product/endTime', id)
