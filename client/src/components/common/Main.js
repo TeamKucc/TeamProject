@@ -29,17 +29,17 @@ const Main = ({ products }) => {
   featureIconData.push({
     image: 'support-1.png',
     title: '무료배송',
-    subtitle: '딜사이트의 전상품 무료배송',
+    subtitle: '전상품 무료배송',
   });
   featureIconData.push({
     image: 'support-2.png',
-    title: '48시간 2일',
+    title: '24/2',
     subtitle: '모든딜은 2일동안 참여가능',
   });
   featureIconData.push({
     image: 'support-3.png',
     title: '딜할인',
-    subtitle: '2명이상 딜참여시 할인가능',
+    subtitle: '2명이상 딜참여시 할인',
   });
 
   const params = {
@@ -68,7 +68,10 @@ const Main = ({ products }) => {
     ),
   };
 
-  console.log(sliderData);
+  const numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   return (
     <Fragment>
       {/* 메인 썸네일 */}
@@ -193,10 +196,10 @@ const Main = ({ products }) => {
                           <div className="price-2">
                             <Fragment>
                               <span>
-                                {product.discount}
+                                {numberWithCommas(product.discount)} 원
                               </span>{' '}
                               <span className="old">
-                                {product.price}
+                              {numberWithCommas(product.price)} 원
                               </span>
                             </Fragment>
                           </div>

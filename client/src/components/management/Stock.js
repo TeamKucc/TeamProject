@@ -6,6 +6,7 @@ import DeliveryContainer from '../../container/management/DeliveryContainer';
 
 // 상품코드, 상품명, 창고재고, 주문대기, 재고수정, 판매, 품절, 수정버튼
 const Stock = ({ Products, Sellhistory, onChange, onSubmit }) => {
+
   let Prod = Object.keys(Products).map(function (key) {
     return Products[key];
   });
@@ -14,11 +15,17 @@ const Stock = ({ Products, Sellhistory, onChange, onSubmit }) => {
   const openModal = () => {
     setOpen(true);
   };
+
   const closeModal = () => {
     setOpen(false);
   };
+
+  const numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   if (!Products || !Sellhistory) return null;
-  console.log(Sellhistory);
+
   return (
     <Fragment>
       {/* breadcrumb */}
@@ -71,9 +78,9 @@ const Stock = ({ Products, Sellhistory, onChange, onSubmit }) => {
                                     ''
                                   )}
                                 </td>
-                                <td>{product.title}</td>
-                                <td>{product.discount}</td>
-                                <td className="red">{product.stock}</td>
+                                <td>{numberWithCommas(product.title)}</td>
+                                <td>{numberWithCommas(product.discount)}</td>
+                                <td className="red">{numberWithCommas(product.stock)}</td>
                                 {product.enable === null ? (
                                   <>
                                     <td>대기중</td>

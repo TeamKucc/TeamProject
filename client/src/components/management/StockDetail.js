@@ -107,41 +107,47 @@ const StockDetail = ({ product, onEdit }) => {
                             <input
                               type="text"
                               name="title"
-                              value={product.title}
+                              value={product.title || ''}
+                              readOnly
                             />
 
                             <h5>Description</h5>
                             <input
                               name="description"
-                              value={product.description}
+                              value={product.description || ''}
+                              readOnly
                             />
 
                             <h5>Price</h5>
                             <input
                               type="text"
                               name="price"
-                              value={product.price}
+                              value={product.price || ''}
+                              readOnly
                             />
 
                             <h5>Discount Price</h5>
                             <input
                               type="text"
                               name="discount"
-                              value={product.discount}
+                              value={product.discount || ''}
+                              readOnly
                             />
 
                             <h5>Person</h5>
                             <input
                               type="text"
                               name="person"
-                              value={product.person}
+                              value={product.person || ''}
+                              readOnly
                             />
 
                             <h5>Stock</h5>
                             <input
                               type="text"
                               name="stock"
-                              value={product.stock}
+                              value={product.stock || ''}
+                              readOnly
                             />
                             <br />
 
