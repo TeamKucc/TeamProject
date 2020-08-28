@@ -1,68 +1,122 @@
 import React, { useEffect, useState } from 'react';
-import { useTransition, animated } from 'react-spring'
+import { Button } from 'react-bootstrap';
+import { useTransition, animated } from 'react-spring';
 import Timer from '../common/Timer';
 import DealTimer from './DealTimer';
 
+const List = ({ deal, join, product, onCheck, make }) => {
+  console.log(product);
 
-const List = ({ deal, join }) => {
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setIndex((state) => (state + 1) % items.length);
-        }, 4000);
-        return () => clearInterval(interval);
-    }, []);
-    const [index, setIndex] = useState(0);
-    const [display, setDisplay] = useState(true)
-    const [items] = useState(deal);
-    const fadingTextPropsTransition = useTransition(items[index], item => item.id, {
-        from: { opacity: 0 },
-        enter: { opacity: 1 },
-        leave: { opacity: 0 },
-        config: { tension: 220, friction: 120 },
-    });
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((state) => (state + 1) % items.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
-    const onToggle = () => {
-        if (display) {
-            setDisplay(false)
-        } else {
-            setDisplay(true)
-        }
+  const [index, setIndex] = useState(0);
+  const [display, setDisplay] = useState(true);
+  const [items] = useState(deal);
+  const fadingTextPropsTransition = useTransition(
+    items[index],
+    (item) => item.id,
+    {
+      from: { opacity: 0 },
+      enter: { opacity: 1 },
+      leave: { opacity: 0 },
+      config: { tension: 220, friction: 120 },
+    },
+  );
+
+  const onToggle = () => {
+    if (display) {
+      setDisplay(false);
+    } else {
+      setDisplay(true);
     }
+  };
 
-    return (
-        <>
-            <div className="Timer">
-
-                {display ? (
-                    <>
-                        {fadingTextPropsTransition.map(({ item, props, key }) => (
-                            <animated.div
-                                key={key}
-                                className="deal-content"
+  return (
+    <>
+      <div className="product-details-content ml-40">
+        <div className="pro-details-quality">
+          <div className="pro-details-cart btn-hover text-center">
+            <button className="button mr-20" onClick={make}>
+              딜생성
+            </button>
+            <button className="button-pay mb-40" onClick={onCheck}>
+              결제하기
+            </button>
+            {display ? (
+              <>
+                {fadingTextPropsTransition.map(({ item, props, key }) => (
+                  <animated.div key={key} className="deal-content">
+                    <table className="list-table mt-10">
+                      <tbody>
+                        <tr>
+                          <td className="td-name">
+                            <span>{item.userName}</span>
+                          </td>
+                          <td className="td-timer">
+                            <DealTimer deal={item} />
+                          </td>
+                          <td className="td-button">
+                            <button
+                              className="button"
+                              onClick={() => {
+                                join(item._id);
+                              }}
                             >
-                                <span>{item.userName}</span>
-                                <DealTimer deal={item} /><button onClick={() => { join(item._id) }}>참여하기</button>
-                            </animated.div>
-                        ))}
-                    </>
-                ) : (
-                        <>
-                            {
-                                deal.map((item, index) => (
-                                    <div key={index} className="deal-content">
-                                        <span>{item.userName}</span>
-                                        <DealTimer deal={item} /><button className="btn-timer" onClick={() => { join(item._id) }}>참여하기</button>
-                                    </div>
-                                ))
-                            }
-                        </>
-                    )}
-                <div className="more">
-                    <button onClick={onToggle}>더보기</button>
-                </div>
+                              딜참여
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </animated.div>
+                ))}
+              </>
+            ) : (
+              <>
+                {deal.map((item, index) => (
+                  <div key={index} className="deal-content">
+                    <table className="list-table mt-10">
+                      <tbody>
+                        <tr>
+                          <td className="td-name">
+                            <span>{item.userName}</span>
+                          </td>
+                          <td className="td-timer">
+                            <DealTimer deal={item} />
+                          </td>
+                          <td className="td-button">
+                            <button
+                            className="button"
+                              onClick={() => {
+                                join(item._id);
+                              }}
+                            >
+                              딜참여
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                ))}
+              </>
+            )}
+            <div>
+              <button className="button-more mt-30" onClick={onToggle}>
+                더보기
+              </button>
             </div>
-        </>
-    )
-}
+            <br />
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
 
-export default List
+export default List;

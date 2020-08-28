@@ -132,19 +132,19 @@ const ProductTes = ({ match, history, location }) => {
           </div>
           <div className="col-lg-6 col-md-6">
             <ProductDescriptionInfo
-              spaceTopClass="pt-100"
-              spaceBottomClass="pb-100"
-              complete={complete}
+              // spaceTopClass="pt-100"
+              // spaceBottomClass="pb-100"
+              // complete={complete}
               product={product}
-              makeDeal={makeDeal}
-              onCheck={onCheck}
-              onChange={onChange}
-              onClick={onClick}
-              changeRating={changeRating}
-              review={review}
+              // makeDeal={makeDeal}
+              // onCheck={onCheck}
+              // onChange={onChange}
+              // onClick={onClick}
+              // changeRating={changeRating}
+              // review={review}
             />
-            <div>
-              <ProductDeal user={user} product={product} deal={deal} />
+            <div className="col-lg-6 col-md-6">
+              <ProductDeal user={user} product={product} deal={deal} onCheck={onCheck}/>
             </div>
           </div>
         </div>

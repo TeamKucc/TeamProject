@@ -13,13 +13,13 @@ const Main = ({ products }) => {
 
   const sliderData = [];
   sliderData.push({
-    image: 'main1.jpg',
+    image: 'main1.png',
     title: 'stylish',
     subtitle: 'Fashion',
     text: 'Fashion Deal Collection',
   });
   sliderData.push({
-    image: 'main2.jpg',
+    image: 'main2.png',
     title: 'eating',
     subtitle: 'Food',
     text: 'Food Deal Collection',
@@ -151,8 +151,8 @@ const Main = ({ products }) => {
       <div className="product-area pb-60 section-padding-1">
         <div className="container-fluid">
           <div className={`section-title-2 text-center mb-60 pt-100`}>
-            <h2>New Arrival</h2>
-            <p>새로운 딜목록</p>
+            <h2>새로운 딜목록</h2>
+            <p>매일 새로운 상품을 만나보세요!</p>
           </div>
           <div className="row five-column">
             <Fragment>
