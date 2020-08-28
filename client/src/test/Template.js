@@ -40,4 +40,3 @@ const Template =({children})=>{
     )
 }
 
-export default Template

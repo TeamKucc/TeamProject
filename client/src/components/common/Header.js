@@ -69,7 +69,7 @@ const Header = ({
           </div>
         </div>
         {/* mobile menu */}
-        <MobileMenu user={user} onLogout={onLogout} />
+        <MobileMenu user={user} onLogout={onLogout} onClick={onClick} onChange={onChange} />
       </div>
     </header>
   );

@@ -22,7 +22,7 @@
 }
 
 td {
-  text-align:center;
+  text-align: center;
   border: 1px solid #ccc;
 }
 
@@ -612,12 +612,14 @@ td {
   .pro-details-list {
     margin: 20px 0 34px;
     padding: 0 0 37px;
-
     border-bottom: 1px solid #e5e5e5;
+    p {
+      word-break: break-all;
+      width: 300px;
+    }
     ul {
       li {
         margin: 0 0 5px;
-
         color: #333;
         &:last-child {
           margin: 0;
@@ -3954,69 +3956,69 @@ td {
   background-color: rgba(148, 148, 148, 0.219);
   display: inline-block;
   margin-bottom: auto;
-  .timer{
+  .timer {
     vertical-align: middle;
     align-items: center;
   }
 }
 
-.Modal-overlay{
+.Modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: rgba(0,0,0,0.16);
+  background-color: rgba(0, 0, 0, 0.16);
 }
-.Modal{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 320px;
-    border-radius: 10px;
-    background-color: white;
-    box-shadow: 0px 3px 6px rgba(0,0,0,0.16);
-    & > * {
-      &:first-child{
-        margin-top: 16px;
-      }
-      margin-left: 16px;
-      margin-right: 16px;
-    }
-    p.title{
-      font-size: 16pt;
-      font-weight: bold;
-      color: #333;
-    }
-    .content{
-      border-top: 1px solid #bebebe;
+.Modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  & > * {
+    &:first-child {
       margin-top: 16px;
-      p{
-        padding: 8px;
-        font-size: 12pt;
-        color: #999;
-      }
     }
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+  p.title {
+    font-size: 16pt;
+    font-weight: bold;
+    color: #333;
+  }
+  .content {
+    border-top: 1px solid #bebebe;
+    margin-top: 16px;
+    p {
+      padding: 8px;
+      font-size: 12pt;
+      color: #999;
+    }
+  }
 
-    .button-wrap{
-      margin: 0;
-      margin-top: 8px;
-      button{
-        width: 100%;
-        padding: 12px 0;
-        border-radius: 0 0 10px 10px;
-        background-color: #ad7cef;
-        font-size: 13pt;
-        color: white;
-        border: 0;
-        cursor: pointer;
-        &:hover{
-          background-color: #7f49c8;
-        }
-        &:active{
-          background-color: #7e49c8;
-        }
+  .button-wrap {
+    margin: 0;
+    margin-top: 8px;
+    button {
+      width: 100%;
+      padding: 12px 0;
+      border-radius: 0 0 10px 10px;
+      background-color: #ad7cef;
+      font-size: 13pt;
+      color: white;
+      border: 0;
+      cursor: pointer;
+      &:hover {
+        background-color: #7f49c8;
+      }
+      &:active {
+        background-color: #7e49c8;
       }
     }
   }
+}

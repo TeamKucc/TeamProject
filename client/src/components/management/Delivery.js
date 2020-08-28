@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Nav from 'react-bootstrap/Nav';
-import Dropzone from 'react-dropzone';
+
 
 const Delivery = ({ onChange, onPublish, delivery, deliveryNumber, error }) => {
   return (

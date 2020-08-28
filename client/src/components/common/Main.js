@@ -3,9 +3,6 @@ import { Link } from 'react-router-dom';
 import Swiper from 'react-id-swiper';
 import Timer from './Timer'
 const Main = ({ products }) => {
-  const [start, setStart] = useState(0);
-  const [end, setEnd] = useState(0)
-
 
   let prod = Object.keys(products).map(function (key) {
     return products[key];

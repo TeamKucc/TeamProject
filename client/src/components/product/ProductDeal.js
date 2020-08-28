@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { makeDeal, joinDeal } from '../../modules/user';
 import { useDispatch } from 'react-redux';
 import { Button } from 'react-bootstrap';
+<<<<<<< HEAD
 import List from './List';
 
 const ProductDeal = ({ user, product, deal, onCheck }) => {
@@ -15,6 +16,24 @@ const ProductDeal = ({ user, product, deal, onCheck }) => {
       window.location.reload();
     } else {
       alert('로그인 필요!');
+=======
+import List from './DealList'
+
+
+const ProductDeal = ({ user, product, deal }) => {
+
+
+    const dispatch = useDispatch()
+    console.log(deal)
+    const make = () => {
+        if (user) {
+            console.log(user.product)
+            dispatch(makeDeal({ user, product: product._id }))
+            window.location.reload()
+        } else {
+            alert('로그인 필요!')
+        }
+>>>>>>> dcbe6a327a43a18ad336a9cb2a878c4ed6a70cd0
     }
   };
 

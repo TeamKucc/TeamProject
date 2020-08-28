@@ -1,12 +1,12 @@
 import React from 'react';
-import ProductTes from '../container/post/ProductTes'
+import ProductInfo from '../container/post/ProductInfo'
 import HeaderContainer from "../container/common/HeaderContainer"
 
 const ProductPage = () => {
   return (
     <div>
       <HeaderContainer />
-      <ProductTes/>
+      <ProductInfo/>
     </div>
   );
 };

@@ -118,4 +118,4 @@ LoginRegister.propTypes = {
     location: PropTypes.object
 };
 
-export default LoginRegister;
+// export default LoginRegister;

@@ -226,21 +226,23 @@ export const searchProduct = (req, res) => {
 };
 
 const existReview =(req)=>{
-   return Review.findOne({$and:[{id:req.body.id},{user:req.body.user}]},(err,result)=>{
+  console.log(req.body)
+  Review.findOne({$and:[{id:req.body.id},{user:req.body.user}]},(err,result)=>{
+        console.log("result"+result)
         if(err) return err;
-        result
         return result
     })
 }
 
 export const reviewUpload = (req, res) => {
-  console.log(req.body)
   const exist = existReview(req)
+  console.log("exist:"+exist)
   if(exist) return res.status(409).json({
     message:'Review already exist',
     success:false
   })
   const review = new Review(req.body);
+  console.log(req.body.user)
   Payment.findOne(
     { $and: [{ product: req.body.id }, { user: req.body.user }] },
     (err, result) => {

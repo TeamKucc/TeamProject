@@ -162,7 +162,6 @@ export const joinDeal = async (req, res) => {
 export const checkDeal = (req, res) => {
     console.log(req.body)
     Deal.findOne({ $and: [{ product: req.body.product }, { user: req.body.user }] }, (err, result) => {
-        console.log(result)
         if (err) return res.status(500).json({
             success: false,
             message: 'server error'
@@ -173,8 +172,8 @@ export const checkDeal = (req, res) => {
                 message: '딜에 참여해주세요!'
             })
         } else {
+            console.log(result.complete)
             res.status(200).json(result.complete)
-
         }
     })
 }
