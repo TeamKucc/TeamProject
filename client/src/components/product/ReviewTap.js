@@ -4,17 +4,25 @@ import Tab from 'react-bootstrap/Tab';
 import Nav from 'react-bootstrap/Nav';
 import StarRatings from 'react-star-ratings';
 
-const ProductDescriptionTab = ({ onChange, onClick, changeRating, review, product, rating, ratingError }) => {
-  
+const ProductDescriptionTab = ({
+  onChange,
+  onClick,
+  changeRating,
+  review,
+  product,
+  rating,
+  ratingError,
+}) => {
   let Review = Object.keys(review).map(function (key) {
     return review[key];
   });
 
-  if(!product) return null;
+  console.log(review);
+  if (!product) return null;
 
   const ProductRating = ({ ratingValue }) => {
     let rating = [];
-    
+
     for (let i = 0; i < 5; i++) {
       rating.push(<i className="fa fa-star-o" key={i}></i>);
     }
@@ -24,12 +32,11 @@ const ProductDescriptionTab = ({ onChange, onClick, changeRating, review, produc
         rating[i] = <i className="fa fa-star" key={i}></i>;
       }
     }
-    
+
     return <>{rating}</>;
   };
 
   const Reviews = Review.map((review, index) => {
-
     return (
       <div className="review-wrapper" key={index}>
         <div className="single-review">
@@ -37,11 +44,15 @@ const ProductDescriptionTab = ({ onChange, onClick, changeRating, review, produc
             <div className="review-top-wrap">
               <div className="review-left">
                 <div className="review-name">
-                  <h4>White Lewis</h4>
+                  <h5>상품만족도</h5>
                 </div>
                 <div className="review-rating">
                   <ProductRating ratingValue={review.rating} />
                 </div>
+                <div className="review-name pl-20">
+                  <h5>등록일</h5>
+                </div>
+                <h5>등록일</h5>
               </div>
               <div className="review-left"></div>
             </div>
@@ -61,10 +72,10 @@ const ProductDescriptionTab = ({ onChange, onClick, changeRating, review, produc
           <Tab.Container defaultActiveKey="productDescription">
             <Nav variant="pills" className="description-review-topbar">
               <Nav.Item>
-                <Nav.Link eventKey="productDescription">Description</Nav.Link>
+                <Nav.Link eventKey="productDescription">제품상세</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="productReviews">Reviews</Nav.Link>
+                <Nav.Link eventKey="productReviews">제품리뷰</Nav.Link>
               </Nav.Item>
             </Nav>
             <Tab.Content className="description-review-bottom text-center">
@@ -76,7 +87,7 @@ const ProductDescriptionTab = ({ onChange, onClick, changeRating, review, produc
                           className="pb-10"
                           style={{
                             width: '100%',
-                            maxWidth: '800px'
+                            maxWidth: '800px',
                           }}
                           alt={`productImg-${index}`}
                           src={`${product.images[index].image.location}`}
@@ -87,17 +98,19 @@ const ProductDescriptionTab = ({ onChange, onClick, changeRating, review, produc
               </Tab.Pane>
               <Tab.Pane eventKey="productReviews">
                 <div className="row">
-                  <div className="col-lg-7">{Reviews}</div>
+                  <div className="col-lg-7">
+                    {review[0] ? Reviews : '등록된 리뷰가 없습니다'}
+                  </div>
                   <div className="col-lg-5">
                     <div className="ratting-form-wrapper pl-50">
-                      <h3>Add a Review</h3>
+                      <h3>리뷰쓰기</h3>
                       <div className="ratting-form">
                         <form action="#">
                           <div className="row">
                             <div className="col-md-10">
                               <div className="rating-form-style mb-10">
                                 <div className="star-box">
-                                  <span>Your rating:</span>
+                                  <span>상품만족도</span>
                                   <div className="ratting-star">
                                     <StarRatings
                                       rating={rating}
@@ -126,10 +139,12 @@ const ProductDescriptionTab = ({ onChange, onClick, changeRating, review, produc
                                 <input
                                   onClick={onClick}
                                   type="button"
-                                  defaultValue="등록하기"
+                                  defaultValue="등록"
                                 />
                                 <div className="error pt-20">
-                                {ratingError == null ? '' : '* ' + ratingError}
+                                  {ratingError == null
+                                    ? ''
+                                    : '* ' + ratingError}
                                 </div>
                               </div>
                             </div>

@@ -62,7 +62,7 @@ const UploadContainer = ({ history }) => {
   const onPublish = (e) => {
     e.preventDefault();
 
-    if([title, description, price, discount, person, stock, category].includes('')) {
+    if([title, description, price, discount, stock, category].includes('')) {
       setError('빈칸을 모두 입력해주세요')
       return
     }

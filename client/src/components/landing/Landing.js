@@ -55,12 +55,14 @@ function Landing({ Products, onClick, cate, onChange, onSearch }) {
     }
   };
 
-  const productLand = () => {};
+  const numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
 
   const productLanding = (product, index) => {
     return (
-      <Fragment>
-        <div key={index}>
+      <Fragment key={index}>
+        <div>
           <div className="shop-list-wrap mb-30">
             <div className="row">
               <div className="col-xl-4 col-md-5 col-sm-6">
@@ -97,8 +99,8 @@ function Landing({ Products, onClick, cate, onChange, onSearch }) {
                   </h3>
                   <div className="product-list-price">
                     <Fragment>
-                      <span>{product.discount}</span>{' '}
-                      <span className="old">{product.price}</span>
+                      <span>{numberWithCommas(product.discount)} 원</span>{' '}
+                      <span className="old">{numberWithCommas(product.price)} 원</span>
                     </Fragment>
                   </div>
                   <p>{product.description}</p>
@@ -111,7 +113,7 @@ function Landing({ Products, onClick, cate, onChange, onSearch }) {
                         target="_blank"
                       >
                         {' '}
-                        PRODUCT DETAIL{' '}
+                        상품상세{' '}
                       </a>
                     </div>
                   </div>
@@ -133,12 +135,12 @@ function Landing({ Products, onClick, cate, onChange, onSearch }) {
               <div className={`sidebar-style mr-30`}>
                 {/* shop search */}
                 <div className="sidebar-widget">
-                  <h4 className="pro-sidebar-title">Search </h4>
+                  <h4 className="pro-sidebar-title">제품검색</h4>
                   <div className="pro-sidebar-search mb-50 mt-25">
                     <form className="pro-sidebar-search-form" action="#">
                       <input
                         type="text"
-                        placeholder="Search here..."
+                        placeholder="검색어를 입력해주세요"
                         name="word"
                         onChange={onChange}
                       />
@@ -151,7 +153,7 @@ function Landing({ Products, onClick, cate, onChange, onSearch }) {
 
                 {/* filter by categories */}
                 <div className="sidebar-widget">
-                  <h4 className="pro-sidebar-title">Categories</h4>
+                  <h4 className="pro-sidebar-title">카테고리</h4>
                   <div className="sidebar-widget-list mt-30">
                     {uniqueCategories ? (
                       <ul>
@@ -170,7 +172,7 @@ function Landing({ Products, onClick, cate, onChange, onSearch }) {
                         })}
                       </ul>
                     ) : (
-                      'No categories found'
+                      '진행중인 딜이 없습니다'
                     )}
                   </div>
                 </div>
@@ -181,7 +183,7 @@ function Landing({ Products, onClick, cate, onChange, onSearch }) {
                 {/* shop top action */}
                 <div className="shop-top-bar mb-35">
                   <div className="select-shoing-wrap">
-                    <p>Showing {productCount} of result</p>
+                    <p></p>
                   </div>
 
                   <div className="shop-tab">

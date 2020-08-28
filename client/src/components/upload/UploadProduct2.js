@@ -18,7 +18,7 @@ function UploadProduct({ onPublish, onChange, product, imageDrop, imageDelete, i
                   <Nav variant="pills" className="login-register-tab-list">
                     <Nav.Item>
                       <Nav.Link>
-                        <h4>PRODUCT REGISTER</h4>
+                        <h4>제품등록</h4>
                       </Nav.Link>
                     </Nav.Item>
                   </Nav>
@@ -52,7 +52,7 @@ function UploadProduct({ onPublish, onChange, product, imageDrop, imageDelete, i
                                     {...getRootProps()}
                                   >
                                     <input {...getInputProps()} />
-                                    DETAIL IMAGE
+                                    상세 이미지
                                     {/* <br/><br/>"click here and upload image" */}
                                   </div>
                                 )}
@@ -112,7 +112,7 @@ function UploadProduct({ onPublish, onChange, product, imageDrop, imageDelete, i
                                     {...getRootProps()}
                                   >
                                     <input {...getInputProps()} />
-                                    THUMBNALE IMAGE
+                                    썸네일 이미지
                                     <br/>700 x 700
                                   </div>
                                 )}
@@ -149,47 +149,47 @@ function UploadProduct({ onPublish, onChange, product, imageDrop, imageDelete, i
                             <input
                               type="text"
                               name="title"
-                              placeholder="Title"
+                              placeholder="제목"
                               value={product.title}
                               onChange={onChange}
                             />
                             <input
                               name="description"
-                              placeholder="Description"
+                              placeholder="제품정보"
                               value={product.description}
                               onChange={onChange}
                             />
                             <input
                               type="text"
                               name="price"
-                              placeholder="Price"
+                              placeholder="원가"
                               value={product.price}
                               onChange={onChange}
                             />
                             <input
                               type="text"
                               name="discount"
-                              placeholder="Discount Price"
+                              placeholder="할인가"
                               value={product.discount}
                               onChange={onChange}
                             />
                             <input
                               type="text"
                               name="person"
-                              placeholder="Person"
                               value={product.person}
                               onChange={onChange}
+                              disabled
                             />
                             <input
                               type="text"
                               name="stock"
-                              placeholder="Stock"
+                              placeholder="재고"
                               value={product.stock}
                               onChange={onChange}
                             />
                             <br />
                             <select name="category" onChange={onChange}>
-                              <option value="" hidden>Category</option>
+                              <option value="" hidden>카테고리</option>
                               <option value={'패션의류'}>패션의류</option>
                               <option value={'패션잡화'}>패션잡화</option>
                               <option value={'뷰티'}>뷰티</option>
@@ -202,7 +202,7 @@ function UploadProduct({ onPublish, onChange, product, imageDrop, imageDelete, i
                             </select>
                             <div className="button-box pt-30 text-center">
                               <button type="submit">
-                                <span>Register</span>
+                                <span>등록</span>
                               </button>
                               <br />
                               <br />

@@ -18,17 +18,21 @@ const ProductDescriptionInfo = ({
 
   if (!product) return null;
 
+  const numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   return (
     <div className="product-details-content ml-70">
       <h2>{product.title}</h2>
       <div className="product-details-price">
         {discountedPrice !== null ? (
           <Fragment>
-            <span>{product.discount}</span>{' '}
-            <span className="old">{product.price}</span>
+            <span>{numberWithCommas(product.discount)} 원</span>{' '}
+            <span className="old">{numberWithCommas(product.price)} 원</span>
           </Fragment>
         ) : (
-          <span>빈칸</span>
+          <span></span>
         )}
       </div>
 
