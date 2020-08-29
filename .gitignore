@@ -119,17 +119,7 @@ dist
 
 #text
 *.txt
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> 7055db1d6d8155a1c0b20ba2b6c1f16ff682d86b
-=======
 *.scss
->>>>>>> Seung
-=======
->>>>>>> a49655ffc303478acc209921e265f2ea9ed1cf49
 *.css
 *.scss
 *.ttf
