@@ -1,19 +1,21 @@
 import React, { useState, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { setActiveLayout } from '../../helpers/product';
-import { getIndividualCategories } from '../../helpers/product';
 import Timer from '../common/Timer';
 
 function Landing({ Products, onClick, cate, onChange, onSearch }) {
   const [layout, setLayout] = useState('list');
 
-  const productCount = Products.length;
-
   let Prod = Object.keys(Products).map(function (key) {
     return Products[key];
   });
 
-  const uniqueCategories = getIndividualCategories(Prod);
+  const productCategories = [];
+  const uniqueCategories = Prod.map((product) => {
+    return productCategories.push(product.category);
+    return productCategories.filter(function (v, i, self) {
+      return i === self.indexOf(v);
+    });
+  });
 
   const getLayout = (layout) => {
     setLayout(layout);
@@ -150,9 +152,9 @@ function Landing({ Products, onClick, cate, onChange, onSearch }) {
                 <div className="sidebar-widget">
                   <h4 className="pro-sidebar-title">카테고리</h4>
                   <div className="sidebar-widget-list mt-30">
-                    {uniqueCategories ? (
+                    {productCategories ? (
                       <ul>
-                        {uniqueCategories.map((category, key) => {
+                        {productCategories.map((category, key) => {
                           return (
                             <li key={key}>
                               <div className="sidebar-widget-list-left">
@@ -174,26 +176,6 @@ function Landing({ Products, onClick, cate, onChange, onSearch }) {
               </div>
             </div>
             <div className="col-lg-9 order-1 order-lg-2">
-              <Fragment>
-                <div className="shop-top-bar mb-35">
-                  <div className="select-shoing-wrap">
-                    <p></p>
-                  </div>
-
-                  <div className="shop-tab">
-                    <button
-                      onClick={(e) => {
-                        getLayout('list');
-                        setActiveLayout(e);
-                      }}
-                    >
-                      <i className="fa fa-list-ul" />
-                    </button>
-                  </div>
-                </div>
-              </Fragment>
-
-              {/* shop page content default */}
               <div className="shop-bottom-area mt-35">
                 <div className={`row`}>
                   <Fragment>
