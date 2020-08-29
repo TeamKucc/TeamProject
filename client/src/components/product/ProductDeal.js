@@ -27,17 +27,12 @@ const ProductDeal = ({ user, product, deal, onCheck }) => {
 
   return (
     <div>
-      {deal.length == 0 ? (
-        ''
-      ) : (
-        <List
-          deal={deal}
-          join={join}
-          product={product}
-          onCheck={onCheck}
-          make={make}
-        />
-      )}
+      <List
+        deal={deal}
+        join={join}
+        onCheck={onCheck}
+        make={make}
+      />
     </div>
   );
 };

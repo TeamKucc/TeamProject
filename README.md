@@ -21,6 +21,5 @@
 
 ## 수정사항
 :man: 김선규 확인 후 수정
-1. components - common - header 에 들어있는 파일 확인
-2. components - common - Timer / components - product - DealTimer 둘중에 어떤파일 써야 하는지 확인, 페이지마다 통일시켜줘야 함
-3. 홈페이지 테스트시에 DB에 있는 데이터 리셋하고 확인
+1. components - common - Timer / components - product - DealTimer 둘중에 어떤파일 써야 하는지 확인, 페이지마다 통일시켜줘야 함
+2. 상품상세 - 딜관련해서 다 오류뜨고 작동안됨

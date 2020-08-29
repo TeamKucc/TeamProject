@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useTransition, animated } from 'react-spring';
-import Timer from '../common/Timer';
 import DealTimer from './DealTimer';
 
-const List = ({ deal, join, product, onCheck, make }) => {
+const List = ({ deal, join, onCheck, make }) => {
+  
   const [index, setIndex] = useState(0);
   const [display, setDisplay] = useState(true);
   const [items] = useState(deal);
+
   const fadingTextPropsTransition = useTransition(
     items[index],
     (item) => item.id,
@@ -18,6 +19,13 @@ const List = ({ deal, join, product, onCheck, make }) => {
     },
   );
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((state) => (state + 1) % items.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
   const onToggle = () => {
     if (display) {
       setDisplay(false);
@@ -25,13 +33,6 @@ const List = ({ deal, join, product, onCheck, make }) => {
       setDisplay(true);
     }
   };
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((state) => (state + 1) % items.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <>
