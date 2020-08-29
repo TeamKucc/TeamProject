@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import MobileMenuSearch from "./sub-components/MobileSearch";
-import MobileNavMenu from "./sub-components/MobileNavMenu";
+import MobileMenuSearch from "./MobileSearch";
+import MobileNavMenu from "./MobileNavMenu";
 
 
 const MobileMenu = ({user,onLogout,onChange,onClick}) => {
