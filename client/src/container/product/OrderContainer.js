@@ -92,11 +92,7 @@ const OrderContainer = ({ match, history }) => {
   };
   return (
     <div>
-      <Order
-        product={product}
-        onPay={onPay}
-        onPayChange={onPayChange}
-      />
+      <Order product={product} onPay={onPay} onPayChange={onPayChange} />
     </div>
   );
 };
