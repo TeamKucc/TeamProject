@@ -45,13 +45,13 @@ export const landingProduct = createAction(
 );
 
 export const readProduct = createAction(READ_PRODUCT, (_id) => _id);
-export const unloadProduct = createAction(UNLOAD_PRODUCT);
 export const searchProduct = createAction(SEARCH_PRODUCT, (id) => id)
 export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
   key,
   value
 }))
 export const endTime = createAction(END_TIME,id=>id)
+export const unloadProduct = createAction(UNLOAD_PRODUCT);
 
 // export const reviewProduct = createAction(
 //   REVIEW_PRODUCT,

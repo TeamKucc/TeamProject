@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import Main from '../../components/landing/Main';
 import { landingProduct, unloadProduct } from '../../modules/landing';
+import Main from '../../components/landing/Main';
 
 const MainContainer = () => {
   const dispatch = useDispatch();

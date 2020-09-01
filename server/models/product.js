@@ -58,6 +58,10 @@ const productSchema = new Schema(
       type: String,
       default: null,
     },
+    isDelete:{
+      type:Boolean,
+      default:false
+    }
   },
   {
     versionkey: false,
