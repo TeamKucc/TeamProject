@@ -26,7 +26,7 @@ const NavMenu = ({ menuWhiteClass, sidebarMenu, user }) => {
             <Link to="/product/landing/all">Product</Link>
           </li>
           <li>
-            <Link to="/">Q&A</Link>
+            <Link to="/qna">Q&A</Link>
           </li>
           {role == 0 ? (
             <>

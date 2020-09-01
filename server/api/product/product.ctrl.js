@@ -4,7 +4,6 @@ import multer from 'multer';
 import multerS3 from 'multer-s3';
 import mongoose from 'mongoose';
 import Deal from '../../models/deal';
-import Delivery from '../../models/delivery';
 import Seller from '../../models/seller';
 import Review from '../../models/review';
 import path from 'path';

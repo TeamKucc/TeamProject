@@ -113,7 +113,7 @@ const List = ({ deal, join, onCheck, make }) => {
               </div>
             ) : (
               <table className="list-table mt-10">
-              <div>'새로운 딜을 생성해주세요!'</div>
+              <div>* 새로운 딜을 생성해주세요</div>
               </table>
             )}
             <br />

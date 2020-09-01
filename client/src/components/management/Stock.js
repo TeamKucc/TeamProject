@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import Tab from 'react-bootstrap/Tab';
 import Nav from 'react-bootstrap/Nav';
-import { Link } from 'react-router-dom';
 
 // 상품코드, 상품명, 창고재고, 주문대기, 재고수정, 판매, 품절, 수정버튼
 const Stock = ({ products, sellerHistory, onChange, onSubmit }) => {

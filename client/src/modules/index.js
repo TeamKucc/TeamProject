@@ -8,6 +8,7 @@ import landing, { landingSaga } from './landing';
 import management, { managementSaga } from './management';
 import delivery, { deliverySaga } from './delivery';
 import review, { reviewSaga } from './review'
+import qna, { qnaSaga } from './qna';
 
 const rootReducer = combineReducers({
   loading,
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
   landing,
   management,
   delivery,
-  review
+  review,
+  qna,
 });
 
 export function* rootSaga() {
@@ -29,6 +31,7 @@ export function* rootSaga() {
     managementSaga(),
     deliverySaga(),
     reviewSaga(),
+    qnaSaga(),
   ]);
 }
 
