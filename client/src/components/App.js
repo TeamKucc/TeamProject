@@ -18,6 +18,9 @@ import SellerRegisterPage from '../pages/SellerRegisterPage';
 import RegisterCompletePage from '../pages/RegisterCompletePage';
 import QuestionPage from '../pages/QuestionPage';
 import AnswerPage from '../pages/AnswerPage'
+import DealAdmin from './admin/Admin';
+import AdminProductPage from '../pages/AdminProductPage'
+import AdminMemberPage from '../pages/AdminMemberPage'
 
 const App = () => {
   return (
@@ -40,6 +43,9 @@ const App = () => {
       <Route component={DeliveryPage} path="/product/delivery/:id" exact />
       <Route component={StockDetailPage} path="/product/upload/:id" exact />
       <Route component={RegisterCompletePage} path="/register/complete" exact />
+      <Route component={DealAdmin} path="/admin" exact/>
+      <Route component={AdminMemberPage} path="/admin/member"/>
+      <Route component={AdminProductPage} path="/admin/product"/>
     </>
   );
 };

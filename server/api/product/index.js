@@ -8,6 +8,7 @@ router.post('/uploadThumbnail', productCtrl.uploadThumbnail);
 
 router.post('/productUpload', productCtrl.productUpload);
 router.post('/updateUpload', productCtrl.updateUpload);
+router.post('/productDelete',productCtrl.productDelete)
 router.post('/searchProduct/:id', productCtrl.searchProduct);
 
 router.get('/getProducts', productCtrl.getProducts);

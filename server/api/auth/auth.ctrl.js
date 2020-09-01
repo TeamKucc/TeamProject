@@ -50,6 +50,10 @@ export const login = (req, res) => {
         loginSuccess: false,
         message: 'Login Failed,ID not Found',
       });
+    if(user.isDelete) return res.json({
+      loginSuccess:false,
+      message:'Deleted Member'
+    })
     user.verify(req.body.password, (err, isMatch) => {
       if (!isMatch)
         return res.json({ login: false, message: 'wrong password' });
@@ -84,6 +88,25 @@ export const logout = (req, res) => {
     },
   );
 };
+
+export const getUser=(req,res)=>{
+  User.find({},(err,result)=>{
+    if(err) return res.status(409).json({
+      message:'error!:'+err
+    })
+    res.status(200).json(result)
+  })
+}
+
+export const memberDelete =(req,res)=>{
+  User.findOneAndUpdate({_id:req.body.id},{isDelete:true},(err,result)=>{
+    if(err) return res.status(400).json({
+      message:'error!:'+err
+    })
+    res.json(result)
+  })
+}
+
 
 export const business = (req, res) => {
   // 국세청 사업자번호 조회 API [POST]

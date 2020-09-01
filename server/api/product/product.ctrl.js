@@ -99,7 +99,7 @@ export const getProducts = (req, res) => {
         err,
       });
     result.forEach((element) => {
-      if (element.enable) {
+      if (element.enable&&!element.isDelete) {
         product.push(element);
       }
     });
@@ -114,6 +114,15 @@ export const readProduct = (req, res) => {
     return res.json(result);
   });
 };
+
+export const productDelete = (req,res)=>{
+  Product.findOneAndUpdate({_id:req.body.id},{isDelete:true},(err,result)=>{
+    if(err) return res.status(400).json({
+      message:'error!:'+err
+    })
+    res.json(result)
+  })
+}
 
 export const config = (req, res) => {
   const { headers } = req;

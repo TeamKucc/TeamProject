@@ -14,6 +14,7 @@ const UserSchema = new Schema(
     token: { type: String },
     tokenExp: { type: Number },
     business: { type: Number, maxlength: 10 },
+    isDelete:{type:Boolean,default:false}
   },
   {
     versionKey: false,
