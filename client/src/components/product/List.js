@@ -3,7 +3,6 @@ import { useTransition, animated } from 'react-spring';
 import DealTimer from './DealTimer';
 
 const List = ({ deal, join, onCheck, make }) => {
-  
   const [index, setIndex] = useState(0);
   const [display, setDisplay] = useState(true);
   const [items] = useState(deal);
@@ -45,46 +44,77 @@ const List = ({ deal, join, onCheck, make }) => {
             <button className="button-pay mb-40" onClick={onCheck}>
               결제하기
             </button>
-            {display ? (
-              <>
-                {fadingTextPropsTransition.map(({ item, props, key }) => (
-                  <animated.div key={key} className="deal-content">
-                    <table className="list-table mt-10">
-                      <tbody>
-                        <tr>
-                          <td className="td-name">
-                            <span>{item.userName}</span>
-                          </td>
-                          <td className="td-timer">
-                            <DealTimer deal={item} />
-                          </td>
-                          <td className="td-button">
-                            <button
-                              className="button"
-                              onClick={() => {
-                                join(item._id);
-                              }}
-                            >
-                              딜참여
-                            </button>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </animated.div>
-                ))}
-              </>
+
+            {deal.length !== 0 ? (
+              <div>
+                {display ? (
+                  <div>
+                    {fadingTextPropsTransition.map(({ item, key }) => (
+                      <animated.div key={key} className="deal-content">
+                        <table className="list-table mt-10">
+                          <tbody>
+                            <tr>
+                              <td className="td-name">
+                                <span>{item.userName}</span>
+                              </td>
+                              <td className="td-timer">
+                                <DealTimer deal={item} />
+                              </td>
+                              <td className="td-button">
+                                <button
+                                  className="button"
+                                  onClick={() => {
+                                    join(item._id);
+                                  }}
+                                >
+                                  딜참여
+                                </button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </animated.div>
+                    ))}
+                    <button className="button-more mt-30" onClick={onToggle}>
+                      더보기
+                    </button>
+                  </div>
+                ) : (
+                  <>
+                    {deal.map((item, index) => (
+                      <div key={index} className="deal-content">
+                        <table className="list-table mt-10">
+                          <tbody>
+                            <tr>
+                              <td className="td-name">
+                                <span>{item.userName}</span>
+                              </td>
+                              <td className="td-timer">
+                                <DealTimer deal={item} />
+                              </td>
+                              <td className="td-button">
+                                <button
+                                  className="button"
+                                  onClick={() => {
+                                    join(item._id);
+                                  }}
+                                >
+                                  딜참여
+                                </button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    ))}
+                  </>
+                )}
+              </div>
             ) : (
               <table className="list-table mt-10">
-              <div>* 새로운 딜을 생성해주세요</div>
+                <div>* 새로운 딜을 생성해주세요</div>
               </table>
             )}
-            <div>
-              <button className="button-more mt-30" onClick={onToggle}>
-                더보기
-              </button>
-            </div>
-            <br />
           </div>
         </div>
       </div>
