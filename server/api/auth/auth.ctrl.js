@@ -90,15 +90,22 @@ export const logout = (req, res) => {
 };
 
 export const getUser=(req,res)=>{
+  let member =[]
   User.find({},(err,result)=>{
     if(err) return res.status(409).json({
       message:'error!:'+err
     })
-    res.status(200).json(result)
+    result.forEach(element=>{
+      if(!element.isDelete){
+        member.push(element)
+      }
+    })
+    res.status(200).json(member)
   })
 }
 
 export const memberDelete =(req,res)=>{
+  console.log(req.body)
   User.findOneAndUpdate({_id:req.body.id},{isDelete:true},(err,result)=>{
     if(err) return res.status(400).json({
       message:'error!:'+err

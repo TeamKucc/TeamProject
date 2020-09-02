@@ -8,7 +8,7 @@ const router = express.Router();
 router.post('/register', authctrl.register);
 router.post('/dregister', authctrl.dregister);
 router.get('/getuser',authctrl.getUser)
-router.post('/memeberDelete',authctrl.memberDelete)
+router.post('/memberDelete',authctrl.memberDelete)
 
 router.post('/login', authctrl.login);
 router.post('/business', authctrl.business);

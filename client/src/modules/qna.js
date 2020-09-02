@@ -1,7 +1,7 @@
 import { createAction, handleActions } from 'redux-actions';
+import { takeLatest } from 'redux-saga/effects';
 import createRequestSaga, { createRequestActionTypes } from '../lib/createRequestsaga';
 import * as qnaAPI from '../lib/api/qna';
-import { takeLatest } from 'redux-saga/effects';
 
 const CHANGE_FIELD = 'qna/CHANGE_FIELD';
 const [
