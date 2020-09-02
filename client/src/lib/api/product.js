@@ -114,4 +114,4 @@ export const readReview = (id) =>
 export const endTime = (id) => client.post('/api/product/endTime', id);
 
 export const productDelete = (id) =>
-  client.post('/api/product/productDelte', id);
+  client.post('/api/product/productDelete', {id:id});

@@ -23,4 +23,4 @@ export const logout = () => client.get('/api/auth/logout');
 export const business = ({ business }) =>
   client.post('/api/auth/business', { business });
 
-export const memberDelete = (id) => client.post('/api/auth/memberDelete', id);
+export const memberDelete = (id) => client.post('/api/auth/memberDelete', {id:id});

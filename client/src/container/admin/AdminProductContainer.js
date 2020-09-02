@@ -26,6 +26,7 @@ const AdminProductContainer = () => {
   },[dispatch,result])
 
   const productDelete=(id)=>{
+    console.log(id)
     dispatch(deleteProduct(id))
   }
 

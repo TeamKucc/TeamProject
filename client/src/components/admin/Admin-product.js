@@ -21,7 +21,7 @@ const Product = ({ product, productDelete }) => {
   let prod = Object.keys(product).map(function (key) {
     return product[key];
   });
-  console.log(product);
+
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
@@ -44,7 +44,7 @@ const Product = ({ product, productDelete }) => {
               <TableCell align="right">{item.title}</TableCell>
               <TableCell align="right">{item.seller}</TableCell>
               <TableCell align="right">
-                <Button color="primary">삭제하기</Button>
+                <Button color="primary" onClick={()=>productDelete(item._id)}>삭제하기</Button>
               </TableCell>
             </TableRow>
           ))}

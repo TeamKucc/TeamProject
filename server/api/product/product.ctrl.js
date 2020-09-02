@@ -116,6 +116,8 @@ export const readProduct = (req, res) => {
 };
 
 export const productDelete = (req,res)=>{
+  console.log('call')
+  console.log(req.body)
   Product.findOneAndUpdate({_id:req.body.id},{isDelete:true},(err,result)=>{
     if(err) return res.status(400).json({
       message:'error!:'+err
