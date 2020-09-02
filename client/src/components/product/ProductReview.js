@@ -23,6 +23,7 @@ const ProductDescriptionTab = ({
       date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate()
     );
   };
+  
   const ProductRating = ({ ratingValue }) => {
     let rating = [];
 

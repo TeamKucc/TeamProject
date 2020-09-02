@@ -24,12 +24,17 @@ export const answerUpload = (req, res) => {
 };
 
 export const readQnA = (req, res) => {
-    const qna = [];
     QnA.find({}, (err, result) => {
-        if (err) return res.status(409).json({ success: false, err });
-        result.forEach((element) => {
-            if (element.enable) qna.push(element);
-        });
-        res.json(qna);
-    })
-}
+      if (err) return res.status(409).json({ success: false, err });
+      res.json(result);
+    });
+};
+
+export const qnaDetail = (req, res) => {
+    const { id } = req.params;
+    console.log(id)
+    QnA.findOne(({ _id: id }), (err, result) => {
+        if(err) return res.status(400).json({ success: false, Message: err });
+        return res.json(result);
+    });
+};

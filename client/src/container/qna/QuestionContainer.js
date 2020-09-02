@@ -4,21 +4,24 @@ import { useSelector, useDispatch } from 'react-redux';
 import Question from '../../components/qna/Question';
 import { questionUpload, changeField } from '../../modules/qna';
 
-const QuestionContainer = () => {
+const QuestionContainer = ({ history }) => {
 
     const dispatch = useDispatch();
-    const [error, setError] = useState(null);
-    const { user, type, title, question, created } = useSelector(({ user, qna }) => ({
+    const [error, setError] = useState('');
+    const { user, type, title, question } = useSelector(({ user, qna }) => ({
         user: user.user,
         type: qna.type,
         title: qna.title,
         question: qna.question,
-        created: qna.created,
         qna: qna.qna,
     }))
 
     const onSubmit = (e) => {
         e.preventDefault();
+        if([ type, title, question ].includes('')) {
+            setError('빈칸을 모두 입력해주세요');
+            return;
+        }
 
         dispatch(
             questionUpload({
@@ -28,6 +31,8 @@ const QuestionContainer = () => {
                 question,
             })
         )
+        alert('Q&A가 등록되었습니다')
+        history.push('/qna')
     }
 
     const onChange = (e) => {
@@ -38,6 +43,7 @@ const QuestionContainer = () => {
                 value,
             }),
         )
+        setError('');
     }
 
     return (

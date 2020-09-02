@@ -9,7 +9,7 @@ const List = ({ deal, join, onCheck, make }) => {
 
   const fadingTextPropsTransition = useTransition(
     items[index],
-    (item) => item.id,
+    (item) => index,
     {
       from: { opacity: 0 },
       enter: { opacity: 1 },
