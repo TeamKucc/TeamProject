@@ -25,25 +25,35 @@ const [
     DELETE_MEMBER_FAILURE
 ]=createRequestActionTypes('admin/DELETE_MEMBER')
 
+const [
+    RECOVER_MEMBER,
+    RECOVER_MEMBER_SUCCESS,
+    RECOVER_MEMBER_FAILURE
+]=createRequestActionTypes('admin/RECOVER_MEMBER')
 
 export const deleteProduct = createAction(DELETE_PRODUCT,id=>id)
 export const deleteMember = createAction(DELETE_MEMBER,id=>id)
+export const recoverMember =createAction(RECOVER_MEMBER,id=>id)
 export const getUser = createAction(GET_USER)
 export const unloadUser = createAction(UNLOAD_USER)
 
+
 const deleteProductSaga = createRequestsaga(DELETE_PRODUCT,productAPI.productDelete)
 const deleteMemberSaga  =createRequestsaga(DELETE_MEMBER,authAPI.memberDelete)
+const recoverMemberSaga = createRequestsaga(RECOVER_MEMBER,authAPI.memberRecover)
 const getUserSaga = createRequestsaga(GET_USER,authAPI.getUser)
 
 export function* adminSaga(){
    yield takeLatest(DELETE_PRODUCT,deleteProductSaga)
    yield takeLatest(GET_USER,getUserSaga)
    yield takeLatest(DELETE_MEMBER,deleteMemberSaga)
+   yield takeLatest(RECOVER_MEMBER,recoverMemberSaga)
 }
 
 const initialState ={
     member:null,
     product:null,
+    recover:null,
     userlist:null,
     error:null
 }
@@ -56,6 +66,15 @@ const admin = handleActions(
             error:null,
         }),
         [GET_USER_FAILURE]:(state,{payload:error})=>({
+            ...state,
+            error
+        }),
+        [RECOVER_MEMBER_SUCCESS]:(state,{payload:recover})=>({
+            ...state,
+            recover,
+            error:null
+        }),
+        [RECOVER_MEMBER_FAILURE]:(state,{payload:error})=>({
             ...state,
             error
         }),

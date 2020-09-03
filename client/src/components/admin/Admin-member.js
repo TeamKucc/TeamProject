@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Member = ({ user, userDelete }) => {
+const Member = ({ user, userDelete,userRecover }) => {
   const classes = useStyles();
   console.log(typeof(user))
   if(!user) return null;
@@ -27,9 +27,9 @@ const Member = ({ user, userDelete }) => {
           <TableHead>
             <TableRow>
               <TableCell>고유ID</TableCell>
-              <TableCell align="right">Category</TableCell>
-              <TableCell align="right">Title</TableCell>
-              <TableCell align="right">판매자고유ID</TableCell>
+              <TableCell align="right">회원이름</TableCell>
+              <TableCell align="right">이메일</TableCell>
+              <TableCell align="right">회원ID</TableCell>
               <TableCell align="right"></TableCell>
             </TableRow>
           </TableHead>
@@ -43,9 +43,19 @@ const Member = ({ user, userDelete }) => {
                 <TableCell align="right">{item.email}</TableCell>
                 <TableCell align="right">{item.userID}</TableCell>
                 <TableCell align="right">
-                  <Button color="primary" onClick={() => userDelete(item._id)}>
-                    삭제하기
+                {item.isDelete?(
+                    <>
+                    <Button color="primary" onClick={() => userRecover(item._id)}>
+                     복구
                   </Button>
+                    </>
+                ):(
+                    <>
+                    <Button color="primary" onClick={() => userDelete(item._id)}>
+                     회원정지
+                  </Button>
+                  </>
+                )}
                 </TableCell>
               </TableRow>
             ))}

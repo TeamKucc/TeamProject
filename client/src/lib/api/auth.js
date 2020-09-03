@@ -24,3 +24,4 @@ export const business = ({ business }) =>
   client.post('/api/auth/business', { business });
 
 export const memberDelete = (id) => client.post('/api/auth/memberDelete', {id:id});
+export const memberRecover =(id) => client.post('/api/auth/memberRecover', {id:id});

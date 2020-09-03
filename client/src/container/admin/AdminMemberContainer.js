@@ -1,6 +1,6 @@
 import React,{useEffect} from 'react';
 import {useSelector,useDispatch} from 'react-redux'
-import { getUser, unloadUser, deleteMember } from '../../modules/admin';
+import { getUser, unloadUser, deleteMember, recoverMember } from '../../modules/admin';
 import Member from '../../components/admin/Admin-member';
 
 const AdminMemberContainer =()=>{
@@ -19,13 +19,24 @@ const AdminMemberContainer =()=>{
     useEffect(()=>{
         if(member){
             alert('완료 되었습니다')
+            window.location.reload()
         }
-    },[member])
+    },[userlist,member])
+
     const userDelete =(id)=>{
-        
-        let check = window.confirm(`정말 회원 ${id}을 정지 하시겠습니까?`)
-        if(check){
+        let DeleteCheck = window.confirm(`정말 회원 ${id}을 정지 하시겠습니까?`)
+        if(DeleteCheck){
             disPatch(deleteMember(id))
+            alert('정지되었습니다')
+        }else{
+            alert('취소되었습니다')
+        }
+    }
+    
+    const userRecover =(id)=>{
+        let RecoverCheck = window.confirm(`정말 회원 ${id}을 복구 하시겠습니까?`)
+        if(RecoverCheck){
+            disPatch(recoverMember(id))   
             alert('정지되었습니다')
         }else{
             alert('취소되었습니다')
@@ -34,7 +45,7 @@ const AdminMemberContainer =()=>{
 
     return(
         <>
-        <Member user={userlist} userDelete={userDelete}/>
+        <Member user={userlist} userDelete={userDelete} userRecover={userRecover}/>
         </>
     )
 }
