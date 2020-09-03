@@ -9,6 +9,7 @@ const QnA = ({ qna }) => {
     return qna[key];
   });
 
+  console.log(qnas)
   const convertDate = (InputDate) => {
     const date = new Date(InputDate);
     return (
@@ -55,7 +56,7 @@ const QnA = ({ qna }) => {
                         {qnas.map((q, index) => {
                           return (
                             <tr key={index}>
-                              <td>{q.user}</td>
+                              <td>{q.userID}</td>
                               <td>{q.type}</td>
                               <td>
                                 <Link to={`/qna/answer/${q._id}`}>

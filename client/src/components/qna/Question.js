@@ -41,10 +41,9 @@ const Question = ({ onChange, onSubmit, error }) => {
                             //   value={qna.title}
                               onChange={onChange}
                             />
-                            <input
+                            <textarea
                               name="question"
                               placeholder="문의사항"
-                            //   value={qna.question}
                               onChange={onChange}
                             />
                             <br />

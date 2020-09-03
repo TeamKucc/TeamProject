@@ -18,6 +18,3 @@ export const joinDeal = ({ user, product, _id }) => client.post('/api/user/joinD
 export const checkDeal = ({user,product}) => client.post('/api/user/checkDeal', { user,product })
 
 export const endDeal = _id=>client.post('/api/user/endDeal',{_id})
-
-
-

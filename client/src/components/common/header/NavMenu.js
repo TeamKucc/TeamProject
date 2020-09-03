@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const NavMenu = ({ menuWhiteClass, sidebarMenu, user }) => {
+const NavMenu = ({ menuWhiteClass, sidebarMenu }) => {
   const role = localStorage.getItem('role');
 
   return (

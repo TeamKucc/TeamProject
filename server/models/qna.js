@@ -5,6 +5,9 @@ const qnaSchema = new Schema({
     type: mongoose.Types.ObjectId,
     required: true,
   },
+  userID: {
+    type: String,
+  },
   type: {
     type: String,
   },

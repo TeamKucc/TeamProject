@@ -183,11 +183,11 @@ function Landing({ Products, onClick, cate, onChange, onSearch }) {
                       if (!product) return null;
 
                       const category = changeCategory(cate);
-                      if (product.category == category) {
+                      if (product.category === category) {
                         return product.enable
                           ? productLanding(product, index)
                           : '';
-                      } else if (cate == 'all') {
+                      } else if (cate === 'all') {
                         return product.enable
                           ? productLanding(product, index)
                           : '';

@@ -15,7 +15,8 @@ const QuestionContainer = ({ history }) => {
         question: qna.question,
         qna: qna.qna,
     }))
-
+    const userID = localStorage.getItem('userName');
+    
     const onSubmit = (e) => {
         e.preventDefault();
         if([ type, title, question ].includes('')) {
@@ -26,6 +27,7 @@ const QuestionContainer = ({ history }) => {
         dispatch(
             questionUpload({
                 user,
+                userID,
                 type,
                 title,
                 question,

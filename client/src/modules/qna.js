@@ -36,7 +36,7 @@ export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
 
 export const questionUpload = createAction(
     QUESTION_UPLOAD,
-  ({ user, type, title, question }) => ({ user, type, title, question }),
+  ({ user, userID, type, title, question }) => ({ user, userID, type, title, question }),
 );
 
 export const answerUpload = createAction(
@@ -46,7 +46,7 @@ export const answerUpload = createAction(
 
 export const readQnA = createAction(
   READ_QNA,
-  ({ user, type, title, created }) => ({ user, type, title, created }),
+  ({ user, userID, type, title, created }) => ({ user, userID, type, title, created }),
 );
 
 export const qnaDetail = createAction(
@@ -83,6 +83,7 @@ export function* qnaSaga() {
 
 export const initialState = {
   user: '',
+  userID: '',
   type: '',
   title: '',
   question: '',

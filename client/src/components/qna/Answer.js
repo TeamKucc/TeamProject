@@ -49,21 +49,22 @@ const Answer = ({ qna, onChange, onSubmit }) => {
                             />
 
                             <h5>문의사항</h5>
-                            <input
-                              type="text"
+                            <textarea
                               name="question"
                               value={qna.question || ""}
                               readOnly
                             />
+                            <br/>
+                            <br/>
 
                             {!qna.answer ? (
                               <div>
                                 <h5 className="red">* 답변을 등록해주세요</h5>
-                                <input
-                                  type="text"
+                                <textarea
                                   name="answer"
                                   onChange={onChange}
                                 />
+                                <br />
                                 <br />
 
                                 <div className="button-box text-center">
@@ -75,8 +76,7 @@ const Answer = ({ qna, onChange, onSubmit }) => {
                             ) : (
                               <>
                                 <h5>답변</h5>
-                                <input
-                                  type="text"
+                                <textarea
                                   name="answer"
                                   value={qna.answer || ""}
                                   readOnly
