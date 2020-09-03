@@ -68,14 +68,16 @@ const Main = ({ products }) => {
               sliderData.map((single, index) => {
                 return (
                   <div key={index}>
-                    <div
-                      className={`single-slider-2 slider-height-2 d-flex align-items-center bg-img swiper-slide`}
-                      style={{
-                        backgroundImage: `url(${
-                          'http://localhost:4000/uploads/main/' + single
-                        })`,
-                      }}
-                    ></div>
+                    <Link to={`/product/landing/all`}>
+                      <div
+                        className={`single-slider-2 slider-height-2 d-flex align-items-center bg-img swiper-slide`}
+                        style={{
+                          backgroundImage: `url(${
+                            'http://localhost:4000/uploads/main/' + single
+                          })`,
+                        }}
+                      ></div>
+                    </Link>
                   </div>
                 );
               })}

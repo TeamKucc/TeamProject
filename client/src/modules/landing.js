@@ -114,24 +114,24 @@ const landing = handleActions(
     [UNLOAD_PRODUCT]: () => initialState,
     [SEARCH_PRODUCT_SUCCESS]: (state, { payload: search }) => ({
       ...state,
-      search
+      search,
     }),
     [SEARCH_PRODUCT_FAILURE]: (state, { payload: error }) => ({
       ...state,
-      error
+      error,
     }),
     [CHANGE_FIELD]: (state, { payload: { key, value } }) => ({
       ...state,
       [key]: value,
     }),
-    [END_TIME_SUCCESS]:(state,{payload:time})=>({
+    [END_TIME_SUCCESS]: (state, { payload: time }) => ({
       ...state,
-      time
+      time,
     }),
-    [END_TIME_FAILURE]:(state,{payload:error})=>({
+    [END_TIME_FAILURE]: (state, { payload: error }) => ({
       ...state,
-      error
-    })
+      error,
+    }),
   },
   initialState,
 );

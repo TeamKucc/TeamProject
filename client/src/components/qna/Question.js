@@ -55,7 +55,7 @@ const Question = ({ onChange, onSubmit, error }) => {
                               <br />
                               <br />
                               <div className="error">
-                                {error == null ? '' : '* ' + error}
+                                {error == '' ? '' : '* ' + error}
                               </div>
                             </div>
                           </form>
