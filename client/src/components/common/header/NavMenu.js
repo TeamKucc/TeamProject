@@ -38,14 +38,14 @@ const NavMenu = ({ menuWhiteClass, sidebarMenu }) => {
               </li>
             </>
           ) : (
-            ''
-              // <li>
-              //   {role == 1 ? (
-              //     <Link to="/">My Deal</Link>
-              //   ) : (
-              //     ""
-              //   )}
-              // </li>
+            
+               <li>
+                 {role == 2 ? (
+                   <Link to="/admin/product">Admin</Link>
+                 ) : (
+                   ""
+                 )}
+               </li>
             )}
         </ul>
       </nav>
