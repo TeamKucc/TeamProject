@@ -115,12 +115,12 @@ dist
 *.svg
 
 #text
-*.txt
-*.ttf
-*.eot
-*.woff
-*.woff2
-*.otf
+# *.txt
+# *.ttf
+# *.eot
+# *.woff
+# *.woff2
+# *.otf
 
 #etc
 *.exe
