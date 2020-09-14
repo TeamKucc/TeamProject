@@ -5,8 +5,11 @@ import cookieParser from 'cookie-parser'
 import bodyparser from 'body-parser'
 import api from './api/index'
 
+
 const app = express();
+const clientApp = path.join(__dirname,'../client/build')
 const { PORT, MONGO_URI } = process.env;
+
 
 mongoose.connect(
   MONGO_URI,
