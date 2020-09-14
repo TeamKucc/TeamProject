@@ -14,8 +14,8 @@
 #### 웹사이트 화면
 | 홈 | 홈(모바일) |
 | ---| --- |
-| <img src="./portfolio/home-1.jpg" width="600px"> | <img src="./portfolio/home-1_mobile.jpg" width="200px"> |
-| <img src="./portfolio/home-2.jpg" width="600px"> | <img src="./portfolio/home-2_mobile.jpg" width="200px"> |
+| <img src="./portfolio/home-1.jpg" width="500px"> | <img src="./portfolio/home-1_mobile.jpg" width="300px"> |
+| <img src="./portfolio/home-2.jpg" width="500px"> | <img src="./portfolio/home-2_mobile.jpg" width="300px"> |
 
 #### 개발사항
 
