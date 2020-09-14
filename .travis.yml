@@ -4,7 +4,7 @@ node_js:
 env:
   -DIR=client
   -DIR=server
-script: cd $DIR && npm install && npm test &&
+script: cd $DIR && npm install && npm test
 branches:
   only:
     - master
