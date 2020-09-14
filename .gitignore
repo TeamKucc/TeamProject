@@ -109,19 +109,13 @@ dist
 .tern-port
 
 #icon
-.ico
 
 #image
-*.png
-*.jpg
 *.webp
 *.svg
 
 #text
 *.txt
-*.scss
-*.css
-*.scss
 *.ttf
 *.eot
 *.woff
