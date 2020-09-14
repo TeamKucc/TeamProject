@@ -1,0 +1,19 @@
+{
+  "name": "teamp",
+  "version": "1.0.0",
+  "description": "* 2명이상 딜 참여시 공동구매가로 구입이 가능한 쇼핑몰 프로젝트",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TeamKucc/TeamProject.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TeamKucc/TeamProject/issues"
+  },
+  "homepage": "https://github.com/TeamKucc/TeamProject#readme"
+}
