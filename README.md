@@ -14,16 +14,16 @@
 #### 웹사이트 화면
 | 홈 | 홈(모바일) |
 | ---| --- |
-| <img src="./portfolio/home-1.jpg" width="500px"> | <img src="./portfolio/home-1_mobile.jpg" width="300px"> |
-| <img src="./portfolio/home-2.jpg" width="500px"> | <img src="./portfolio/home-2_mobile.jpg" width="300px"> |
+| <img src="./portfolio/home-1.jpg" width="600px"> | <img src="./portfolio/home-1_mobile.jpg" width="400px"> |
+| <img src="./portfolio/home-2.jpg" width="600px"> | <img src="./portfolio/home-2_mobile.jpg" width="400px"> |
 
 | 상품랜딩 | 상품랜딩(모바일) |
 | ---| --- |
-| <img src="./portfolio/landing.jpg" width="400px"> | <img src="./portfolio/landing_mobile.jpg" width="400px"> |
+| <img src="./portfolio/landing.jpg" width="600px"> | <img src="./portfolio/landing_mobile.jpg" width="400px"> |
 
 | 상품등록 | 상품관리 |
 | ---| --- |
-| <img src="./portfolio/product_register.jpg" width="400px"> | <img src="./portfolio/product_management.jpg" width="400px"> |
+| <img src="./portfolio/product_register.jpg" width="500px"> | <img src="./portfolio/product_management.jpg" width="500px"> |
 
 
 #### 개발사항
