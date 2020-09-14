@@ -33,7 +33,7 @@ const ProductEditContainer = ({ match, history }) => {
   }));
 
   const { id } = match.params;
-  
+
   useEffect( () => {
     dispatch(readProduct(id))
     dispatch(changeField({
@@ -45,6 +45,7 @@ const ProductEditContainer = ({ match, history }) => {
     };
   }, [dispatch]);
 
+  enable = true;
   const onPublish = async (e) => {
     e.preventDefault();
     await dispatch(

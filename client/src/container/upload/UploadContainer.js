@@ -89,7 +89,7 @@ const UploadContainer = ({ history }) => {
           images,
           discount,
           person,
-          enable,
+          enable:true,
           category,
         }))
     }

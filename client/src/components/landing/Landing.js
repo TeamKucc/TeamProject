@@ -11,10 +11,9 @@ function Landing({ Products, onClick, cate, onChange, onSearch }) {
 
   const productCategories = [];
   const uniqueCategories = Prod.map((product) => {
-    return productCategories.push(product.category);
-    return productCategories.filter(function (v, i, self) {
-      return i === self.indexOf(v);
-    });
+    if (!productCategories.includes(product.category)) {
+      return productCategories.push(product.category);
+    }
   });
 
   const getLayout = (layout) => {
@@ -103,10 +102,14 @@ function Landing({ Products, onClick, cate, onChange, onSearch }) {
                       </span>
                     </Fragment>
                   </div>
-                  <p>{product.description}</p>
+                  <div style={{ maxWidth: '350px' }}>
+                    <pre>
+                      <p>{product.description}</p>
+                    </pre>
+                  </div>
 
                   <div className="shop-list-actions d-flex align-items-center">
-                    <div className="shop-list-btn btn-hover">
+                    <div className="shop-list-btn btn-hover mt-15">
                       <a
                         href={'/item/' + product._id}
                         rel="noopener noreferrer"
