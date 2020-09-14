@@ -112,7 +112,7 @@ dist
 
 #image
 *.webp
-*.svg
+# *.svg
 
 #text
 # *.txt
