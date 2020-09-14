@@ -11,4 +11,4 @@ branches:
 notifications: # 성공 실패 여부 알림 
   email:
     recipients:
-      - sunguekim96@gmail.com
+      # - sunguekim96@gmail.com

@@ -7,7 +7,6 @@ import api from './api/index'
 
 
 const app = express();
-const clientApp = path.join(__dirname,'../client/build')
 const { PORT, MONGO_URI } = process.env;
 
 
