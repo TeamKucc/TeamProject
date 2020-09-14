@@ -163,12 +163,17 @@ function UploadProduct({
                               value={product.title}
                               onChange={onChange}
                             />
-                            <input
+                            <textarea
+                              rows="2"
+                              cols="20"
+                              wrap="hard"
                               name="description"
                               placeholder="제품정보"
                               value={product.description}
                               onChange={onChange}
                             />
+                            <br />
+                            <br />
                             <input
                               type="text"
                               name="price"
