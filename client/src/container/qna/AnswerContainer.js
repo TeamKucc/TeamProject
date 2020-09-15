@@ -14,7 +14,7 @@ const AnswerContainer = ({ match, history }) => {
     const { id } = match.params;
 
     useEffect(() => {
-        dispatch(qnaDetail(id));
+            dispatch(qnaDetail(id));
     }, [dispatch]);
 
     const onSubmit = () => {

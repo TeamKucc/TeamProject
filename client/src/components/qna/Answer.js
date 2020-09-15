@@ -4,6 +4,8 @@ import Nav from 'react-bootstrap/Nav';
 
 const Answer = ({ qna, onChange, onSubmit }) => {
 
+  const role = localStorage.getItem('role');
+
   return (
     <Fragment>
       <div className="login-register-area pt-50 pb-100">
@@ -57,7 +59,7 @@ const Answer = ({ qna, onChange, onSubmit }) => {
                             <br/>
                             <br/>
 
-                            {!qna.answer ? (
+                            {!qna.answer && role === '2' ? (
                               <div>
                                 <h5 className="red">* 답변을 등록해주세요</h5>
                                 <textarea
@@ -76,11 +78,11 @@ const Answer = ({ qna, onChange, onSubmit }) => {
                             ) : (
                               <>
                                 <h5>답변</h5>
-                                <textarea
+                                {qna.answer ? <textarea
                                   name="answer"
                                   value={qna.answer || ""}
                                   readOnly
-                                />
+                                /> : <p>답변이 등록되지 않았습니다!</p>}
                                 <br />
                               </>
                             )}

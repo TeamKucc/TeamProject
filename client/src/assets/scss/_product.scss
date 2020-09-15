@@ -1,4 +1,22 @@
 /*------- 6. Product style  --------*/
+.button-more {
+  font-weight: bold;
+  line-height: 1;
+
+  z-index: 99;
+
+  display: inline-block;
+
+  padding: 8px 10px 8px;
+
+  text-transform: uppercase;
+
+  color: #343538;
+  border: none;
+  background: none;
+  background-color: #fff;
+}
+
 .description {
   width: 100%;
 }
@@ -959,7 +977,7 @@ td {
         margin: 0 17px 0 10px;
       }
       a,
-      button {
+      .button {
         font-weight: bold;
         line-height: 1;
 
@@ -967,7 +985,41 @@ td {
 
         display: inline-block;
 
-        padding: 23px 38px 23px;
+        padding: 15px 20px 15px;
+
+        text-transform: uppercase;
+
+        color: #fff;
+        border: none;
+        background: none;
+        background-color: #343538;
+        @media #{$xs-layout} {
+          padding: 23px 12px 23px;
+        }
+        @media #{$md-layout} {
+          padding: 22px 22px 22px;
+        }
+        &:hover {
+          border: none;
+        }
+
+        &:disabled {
+          cursor: not-allowed;
+          &:before,
+          &:after {
+            display: none;
+          }
+        }
+      }
+      .button-pay {
+        font-weight: bold;
+        line-height: 1;
+
+        z-index: 99;
+
+        display: inline-block;
+
+        padding: 15px 20px 15px;
 
         text-transform: uppercase;
 
