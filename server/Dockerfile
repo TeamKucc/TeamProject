@@ -16,6 +16,8 @@ RUN apk update && apk upgrade \
 # Install dependencies
 RUN npm install
 
+COPY . /app/server
+
 EXPOSE 4000
 
 CMD ["node", "index.js"]
