@@ -1,13 +1,12 @@
 import React, { useState, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import Tab from 'react-bootstrap/Tab';
 import Nav from 'react-bootstrap/Nav';
-import { Link } from 'react-router-dom';
-import DeliveryContainer from '../../container/management/DeliveryContainer';
 
 // 상품코드, 상품명, 창고재고, 주문대기, 재고수정, 판매, 품절, 수정버튼
-const Stock = ({ Products, Sellhistory, onChange, onSubmit }) => {
-  let Prod = Object.keys(Products).map(function (key) {
-    return Products[key];
+const Stock = ({ products, sellerHistory, onChange, onSubmit }) => {
+  let Prod = Object.keys(products).map(function (key) {
+    return products[key];
   });
 
   const [isModalOpen, setOpen] = useState(false);
@@ -24,11 +23,10 @@ const Stock = ({ Products, Sellhistory, onChange, onSubmit }) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
-  if (!Products || !Sellhistory) return null;
+  if (!products || !sellerHistory) return null;
 
   return (
     <Fragment>
-      {/* breadcrumb */}
       <div className="login-register-area pt-100 pb-100">
         <div>
           <div className="row">
@@ -121,7 +119,7 @@ const Stock = ({ Products, Sellhistory, onChange, onSubmit }) => {
                       )}
                     </Tab.Pane>
                     <Tab.Pane eventKey="payment">
-                      {Sellhistory[0] ? (
+                      {sellerHistory[0] ? (
                         <table className="table">
                           <thead className="thead">
                             <tr>
@@ -132,7 +130,7 @@ const Stock = ({ Products, Sellhistory, onChange, onSubmit }) => {
                             </tr>
                           </thead>
                           <tbody>
-                            {Sellhistory.map((history, index) => {
+                            {sellerHistory.map((history, index) => {
                               return (
                                 <tr key={index}>
                                   <td>{history._id}</td>

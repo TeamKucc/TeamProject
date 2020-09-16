@@ -10,7 +10,7 @@ import {
   thumbnailUpload,
   thumbnailDelete
 } from '../../modules/upload';
-import UploadProduct from '../../components/upload/UploadProduct2';
+import UploadProduct from '../../components/upload/UploadProduct';
 
 const UploadContainer = ({ history }) => {
   const dispatch = useDispatch();
@@ -89,7 +89,7 @@ const UploadContainer = ({ history }) => {
           images,
           discount,
           person,
-          enable,
+          enable:true,
           category,
         }))
     }

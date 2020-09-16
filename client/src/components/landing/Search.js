@@ -2,11 +2,13 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 const Search = ({ Products, id }) => {
+  
   let Prod = Object.keys(Products).map(function (key) {
     return Products[key];
   });
 
   const renderCards = Prod.map((product, index) => {
+
     if (!product) return null;
 
     return (
@@ -65,10 +67,11 @@ const Search = ({ Products, id }) => {
               {/* 카드 업로드 */}
               <div className="slider-content-3 slider-animated-1 text-center">
                 <p className="animated">
-                  {!Products[0] ?
-                  <span>'{id}' 에 대한 검색결과가 없습니다 </span> 
-                : <span>'{id}' 에 대한 검색결과 입니다 </span>
-                }
+                  {!Products[0] ? (
+                    <span>'{id}' 에 대한 검색결과가 없습니다 </span>
+                  ) : (
+                    <span>'{id}' 에 대한 검색결과 입니다 </span>
+                  )}
                 </p>
               </div>
               <div className="shop-bottom-area mt-35">

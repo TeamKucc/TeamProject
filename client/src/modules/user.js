@@ -24,6 +24,12 @@ const [
 ] = createRequestActionTypes('user/USER_UPDATE')
 
 const [
+    GET_USER,
+    GET_USER_SUCCESS,
+    GET_USER_FAILURE,
+]=createRequestActionTypes('user/GET_USER')
+
+const [
     GET_HISTORY,
     GET_HISTORY_SUCCESS,
     GET_HISTORY_FAILURE
@@ -68,6 +74,7 @@ export const logout = createAction(LOGOUT);
 export const userUpdate = createAction(USER_UPDATE, ({ userID, name, password, email, _id }) => ({ userID, name, password, email, _id }))
 export const completeReset = createAction(COMPLETE_RESET)
 export const unloadUser = createAction(UNLOAD_USER)
+export const getUser = createAction(GET_USER)
 
 export const getHistory = createAction(GET_HISTORY, user => user)
 export const sellerHistory = createAction(SELLER_HISTORY, user => user)
@@ -86,6 +93,7 @@ const userRoleCheckSaga = createRequestSaga(USER_ROLECHECK,userCtrl.roleCheck)
 const getHistorySaga = createRequestSaga(GET_HISTORY, userCtrl.gethistory)
 const sellerHistorySaga = createRequestSaga(SELLER_HISTORY, userCtrl.sellerHistory)
 const userUpdateSaga = createRequestSaga(USER_UPDATE, userCtrl.userupdate)
+const getUserSaga = createRequestSaga(GET_USER,authCtrl.getUser)
 
 const makeDealSaga = createRequestSaga(MAKE_DEAL, userCtrl.makeDeal)
 const joinDealSaga = createRequestSaga(JOIN_DEAL, userCtrl.joinDeal)
@@ -114,6 +122,7 @@ export function* userSaga() {
     yield takeLatest(CHECK_DEAL,checkDealSaga)
     yield takeLatest(END_DEAL,endDealSaga)
     yield takeLatest(USER_ROLECHECK,userRoleCheckSaga)
+    yield takeLatest(GET_USER,getUserSaga)
 }
 
 const initialState = {
@@ -131,6 +140,7 @@ const initialState = {
     endDealError:null,
     admit:false,
     admitError:null,
+    userlist:null,
 }
 
 export default handleActions(
@@ -150,6 +160,15 @@ export default handleActions(
         [LOGOUT]: state => ({
             ...state,
             user: null
+        }),
+        [GET_USER_SUCCESS]:(state,{payload:userlist})=>({
+            ...state,
+            userlist,
+            error:null
+        }),
+        [GET_HISTORY_FAILURE]:(state,{payload:error})=>({
+            ...state,
+            error
         }),
         [GET_HISTORY_SUCCESS]: (state, { payload: history }) => ({
             ...state,

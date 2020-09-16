@@ -1,0 +1,36 @@
+version: "3"
+
+services:
+  ##########################
+  ### SETUP SERVER CONTAINER
+  ##########################
+  server:
+    # Tells docker-compose which image to pull from docker hub
+    image: <your-docker-username>/<your-project-name>_server:latest
+    environment:
+      - MONGO_URI=mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@${MONGO_URI}
+      - PORT=4000
+    ports:
+      - ${PORT}:${PORT}
+    command: node src/server.js
+    links:
+      - db
+    restart: always
+  ##########################
+  ### SETUP CLIENT CONTAINER
+  ##########################
+  client:
+    image: <your-docker-username>/<your-project-name>_client:latest
+    ports:
+      - 80:80
+    links:
+      - server
+    restart: always
+  ##########################
+  ### SETUP DB CONTAINER
+  ##########################
+  
+# Add this to include data volume for mongo
+# Confirm this is working later
+volumes:
+  ? board-dbdata

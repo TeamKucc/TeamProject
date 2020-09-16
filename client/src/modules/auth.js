@@ -58,7 +58,7 @@ export const businessNumber = createAction(BUSINESS, ({business}) => ({business}
 // export const loginSaga = createRequestsaga(LOGIN, authCtrl.login)
 export const registerSaga = createRequestsaga(REGISTER, authCtrl.register);
 export const dregisterSaga = createRequestsaga(DREGISTER, authCtrl.dregister)
-export const userInfoSaga = createRequestsaga(USERINFO, userCtrl.userinfo);
+export const userInfoSaga = createRequestsaga(USERINFO, userCtrl.userinfo)
 export const businessSaga = createRequestsaga(BUSINESS, authCtrl.business)
 
 function* loginSaga(action) {
@@ -69,6 +69,7 @@ function* loginSaga(action) {
         console.log(userId.data)
         localStorage.setItem('userId', userId.data.userId)
         localStorage.setItem('role',userId.data.role)
+        localStorage.setItem('userName', userId.data.userName)
         if (!userId.data.login) {
             yield put({
                 type: LOGIN_FAILURE,

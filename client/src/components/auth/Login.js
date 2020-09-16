@@ -5,7 +5,7 @@ import Tab from "react-bootstrap/Tab";
 import Nav from "react-bootstrap/Nav";
 
 
-const LoginRegister = ({ form, onChange, onSubmit }) => {
+const Login = ({ form, onChange, onSubmit }) => {
 
     return (
       <Fragment>
@@ -87,8 +87,4 @@ const LoginRegister = ({ form, onChange, onSubmit }) => {
     );
 };
 
-LoginRegister.propTypes = {
-    location: PropTypes.object
-};
-
-export default LoginRegister;
+export default Login;

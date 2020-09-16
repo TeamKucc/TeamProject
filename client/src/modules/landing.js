@@ -45,13 +45,13 @@ export const landingProduct = createAction(
 );
 
 export const readProduct = createAction(READ_PRODUCT, (_id) => _id);
-export const unloadProduct = createAction(UNLOAD_PRODUCT);
 export const searchProduct = createAction(SEARCH_PRODUCT, (id) => id)
 export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
   key,
   value
 }))
 export const endTime = createAction(END_TIME,id=>id)
+export const unloadProduct = createAction(UNLOAD_PRODUCT);
 
 // export const reviewProduct = createAction(
 //   REVIEW_PRODUCT,
@@ -114,24 +114,24 @@ const landing = handleActions(
     [UNLOAD_PRODUCT]: () => initialState,
     [SEARCH_PRODUCT_SUCCESS]: (state, { payload: search }) => ({
       ...state,
-      search
+      search,
     }),
     [SEARCH_PRODUCT_FAILURE]: (state, { payload: error }) => ({
       ...state,
-      error
+      error,
     }),
     [CHANGE_FIELD]: (state, { payload: { key, value } }) => ({
       ...state,
       [key]: value,
     }),
-    [END_TIME_SUCCESS]:(state,{payload:time})=>({
+    [END_TIME_SUCCESS]: (state, { payload: time }) => ({
       ...state,
-      time
+      time,
     }),
-    [END_TIME_FAILURE]:(state,{payload:error})=>({
+    [END_TIME_FAILURE]: (state, { payload: error }) => ({
       ...state,
-      error
-    })
+      error,
+    }),
   },
   initialState,
 );

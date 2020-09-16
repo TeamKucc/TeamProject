@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-dom';
 import { changeField } from '../../modules/landing';
 import { readProduct, unloadProduct } from '../../modules/landing';
 import { updateUpload } from '../../modules/landing';
-import { initialize } from '../../modules/landing';
 
 const ProductEditContainer = ({ match, history }) => {
   const dispatch = useDispatch();
@@ -34,8 +33,7 @@ const ProductEditContainer = ({ match, history }) => {
   }));
 
   const { id } = match.params;
-  console.log(product.price)
-  
+
   useEffect( () => {
     dispatch(readProduct(id))
     dispatch(changeField({
@@ -47,7 +45,7 @@ const ProductEditContainer = ({ match, history }) => {
     };
   }, [dispatch]);
 
-  console.log();
+  enable = true;
   const onPublish = async (e) => {
     e.preventDefault();
     await dispatch(
@@ -69,7 +67,6 @@ const ProductEditContainer = ({ match, history }) => {
   };
 
   const onChange = (e) => {
-    console.log('call');
     const { value, name } = e.target;
     dispatch(
       changeField({

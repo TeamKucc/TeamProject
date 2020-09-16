@@ -1,24 +1,21 @@
 import React, { useState, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { setActiveLayout } from '../../helpers/product';
-import {
-  getIndividualCategories,
-} from '../../helpers/product';
 import Timer from '../common/Timer';
 
 function Landing({ Products, onClick, cate, onChange, onSearch }) {
-
   const [layout, setLayout] = useState('list');
-
-  const productCount = Products.length;
 
   let Prod = Object.keys(Products).map(function (key) {
     return Products[key];
   });
 
-  const uniqueCategories = getIndividualCategories(Prod);
+  const productCategories = [];
+  const uniqueCategories = Prod.map((product) => {
+    if (!productCategories.includes(product.category)) {
+      return productCategories.push(product.category);
+    }
+  });
 
-  console.log(uniqueCategories);
   const getLayout = (layout) => {
     setLayout(layout);
   };
@@ -56,8 +53,8 @@ function Landing({ Products, onClick, cate, onChange, onSearch }) {
   };
 
   const numberWithCommas = (x) => {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
 
   const productLanding = (product, index) => {
     return (
@@ -100,13 +97,19 @@ function Landing({ Products, onClick, cate, onChange, onSearch }) {
                   <div className="product-list-price">
                     <Fragment>
                       <span>{numberWithCommas(product.discount)} 원</span>{' '}
-                      <span className="old">{numberWithCommas(product.price)} 원</span>
+                      <span className="old">
+                        {numberWithCommas(product.price)} 원
+                      </span>
                     </Fragment>
                   </div>
-                  <p>{product.description}</p>
+                  <div style={{ maxWidth: '350px' }}>
+                    <pre>
+                      <p>{product.description}</p>
+                    </pre>
+                  </div>
 
                   <div className="shop-list-actions d-flex align-items-center">
-                    <div className="shop-list-btn btn-hover">
+                    <div className="shop-list-btn btn-hover mt-15">
                       <a
                         href={'/item/' + product._id}
                         rel="noopener noreferrer"
@@ -133,7 +136,6 @@ function Landing({ Products, onClick, cate, onChange, onSearch }) {
           <div className="row">
             <div className="col-lg-3 order-2 order-lg-1">
               <div className={`sidebar-style mr-30`}>
-                {/* shop search */}
                 <div className="sidebar-widget">
                   <h4 className="pro-sidebar-title">제품검색</h4>
                   <div className="pro-sidebar-search mb-50 mt-25">
@@ -150,22 +152,20 @@ function Landing({ Products, onClick, cate, onChange, onSearch }) {
                     </form>
                   </div>
                 </div>
-
-                {/* filter by categories */}
                 <div className="sidebar-widget">
                   <h4 className="pro-sidebar-title">카테고리</h4>
                   <div className="sidebar-widget-list mt-30">
-                    {uniqueCategories ? (
+                    {productCategories ? (
                       <ul>
-                        {uniqueCategories.map((category, key) => {
+                        {productCategories.map((category, key) => {
                           return (
                             <li key={key}>
-                              <div className="sidebar-widget-list-left">
-                                <button onClick={onClick} value={category}>
-                                  {' '}
-                                  <span className="checkmark" />
-                                  {category}{' '}
+                              <div className="sidebar-widget-list-left btn-hover">
+                                <button className="btn-hover" onClick={onClick} value={category}>
+                                <i className="pe-7s-angle-right"></i>
+                                &nbsp; {category}
                                 </button>
+                              
                               </div>
                             </li>
                           );
@@ -179,27 +179,6 @@ function Landing({ Products, onClick, cate, onChange, onSearch }) {
               </div>
             </div>
             <div className="col-lg-9 order-1 order-lg-2">
-              <Fragment>
-                {/* shop top action */}
-                <div className="shop-top-bar mb-35">
-                  <div className="select-shoing-wrap">
-                    <p></p>
-                  </div>
-
-                  <div className="shop-tab">
-                    <button
-                      onClick={(e) => {
-                        getLayout('list');
-                        setActiveLayout(e);
-                      }}
-                    >
-                      <i className="fa fa-list-ul" />
-                    </button>
-                  </div>
-                </div>
-              </Fragment>
-
-              {/* shop page content default */}
               <div className="shop-bottom-area mt-35">
                 <div className={`row`}>
                   <Fragment>
@@ -207,11 +186,11 @@ function Landing({ Products, onClick, cate, onChange, onSearch }) {
                       if (!product) return null;
 
                       const category = changeCategory(cate);
-                      if (product.category == category) {
+                      if (product.category === category) {
                         return product.enable
                           ? productLanding(product, index)
                           : '';
-                      } else if (cate == 'all') {
+                      } else if (cate === 'all') {
                         return product.enable
                           ? productLanding(product, index)
                           : '';
