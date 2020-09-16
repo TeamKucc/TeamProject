@@ -124,7 +124,7 @@ const Main = ({ products }) => {
                           <img
                             className="default-img"
                             src={`${product.thumbnails[0].image.location}`}
-                            alt={`productImg-${index}`}
+                            alt="메인 이미지"
                           />
                         }
 

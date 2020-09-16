@@ -16,7 +16,7 @@ const MainContainer = () => {
       dispatch(unloadProduct());
     };
   }, [dispatch]);
-
+  if(!product) return null
   return (
     <div>
       <Main products={product} />
