@@ -21,10 +21,12 @@ import AnswerPage from '../pages/AnswerPage'
 import DealAdmin from './admin/Admin';
 import AdminProductPage from '../pages/AdminProductPage'
 import AdminMemberPage from '../pages/AdminMemberPage'
+import AboutPage from '../pages/AboutPage';
 
 const App = () => {
   return (
     <>
+      <Route component={AboutPage} path="/about" />
       <Route component={QnAPage} path="/qna" exact />
       <Route component={LoginPage} path="/login" exact />
       <Route component={MainPage} path={['/home', '/']} exact />
@@ -43,9 +45,9 @@ const App = () => {
       <Route component={DeliveryPage} path="/product/delivery/:id" exact />
       <Route component={StockDetailPage} path="/product/upload/:id" exact />
       <Route component={RegisterCompletePage} path="/register/complete" exact />
-      <Route component={DealAdmin} path="/admin" exact/>
-      <Route component={AdminMemberPage} path="/admin/member"/>
-      <Route component={AdminProductPage} path="/admin/product"/>
+      <Route component={DealAdmin} path="/admin" exact />
+      <Route component={AdminMemberPage} path="/admin/member" />
+      <Route component={AdminProductPage} path="/admin/product" />
     </>
   );
 };

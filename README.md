@@ -16,6 +16,10 @@
 | ---| --- |
 | <img src="./portfolio/home-1.jpg" width="500px"> | <img src="./portfolio/home-2.jpg" width="500px"> |
 
+| 사이트소개 | 관리자 |
+| ---| --- |
+| <img src="./portfolio/about.jpg" width="500px"> | <img src="./portfolio/admin.jpg" width="500px"> |
+
 | 상품전체 | 상품상세 |
 | ---| --- |
 | <img src="./portfolio/landing.jpg" width="500px"> | <img src="./portfolio/landing-detail.jpg" width="500px"> |
@@ -27,7 +31,6 @@
 | 상품주문 | 내정보, 주문정보 |
 | ---| --- |
 | <img src="./portfolio/order.jpg" width="500px"> | <img src="./portfolio/userinfo.jpg" width="500px"> |
-
 
 | 상품등록 | 상품관리 |
 | ---| --- |
