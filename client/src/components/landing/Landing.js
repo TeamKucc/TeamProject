@@ -160,12 +160,12 @@ function Landing({ Products, onClick, cate, onChange, onSearch }) {
                         {productCategories.map((category, key) => {
                           return (
                             <li key={key}>
-                              <div className="sidebar-widget-list-left">
-                                <button onClick={onClick} value={category}>
-                                  {' '}
-                                  <span className="checkmark" />
-                                  {category}{' '}
+                              <div className="sidebar-widget-list-left btn-hover">
+                                <button className="btn-hover" onClick={onClick} value={category}>
+                                <i className="pe-7s-angle-right"></i>
+                                &nbsp; {category}
                                 </button>
+                              
                               </div>
                             </li>
                           );

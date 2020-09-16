@@ -1,11 +1,24 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Swiper from 'react-id-swiper';
-import Timer from '../common/Timer'
+import Timer from '../common/Timer';
 const Main = ({ products }) => {
   let prod = Object.keys(products).map(function (key) {
     return products[key];
   });
+
+  const params = {
+    spaceBetween: 30,
+    centeredSlides: true,
+    autoplay: {
+      delay: 500,
+      disableOnInteraction: false
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true
+    },
+  };
 
   const sliderData = ['main1.png', 'main2.png'];
 
@@ -27,32 +40,7 @@ const Main = ({ products }) => {
     },
   ];
 
-  const params = {
-    effect: 'fade',
-    loop: true,
-    speed: 1000,
-    autoplay: {
-      delay: 0,
-      disableOnInteraction: false,
-    },
-    watchSlidesVisibility: true,
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
 
-    renderPrevButton: () => (
-      <button className="swiper-button-prev ht-swiper-button-nav">
-        <i className="pe-7s-angle-left" />
-      </button>
-    ),
-    
-    renderNextButton: () => (
-      <button className="swiper-button-next ht-swiper-button-nav">
-        <i className="pe-7s-angle-right" />
-      </button>
-    ),
-  };
 
   const numberWithCommas = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -67,18 +55,17 @@ const Main = ({ products }) => {
             {sliderData &&
               sliderData.map((single, index) => {
                 return (
-                  <div key={index}>
-                    <Link to={`/product/landing/all`}>
-                      <div
-                        className={`single-slider-2 slider-height-2 d-flex align-items-center bg-img swiper-slide`}
-                        style={{
-                          backgroundImage: `url(${
-                            'http://localhost:4000/uploads/main/' + single
-                          })`,
-                        }}
-                      ></div>
-                    </Link>
-                  </div>
+                  <Link to={`/product/landing/all`}>
+                    <div
+                      key={index}
+                      className={`single-slider-2 slider-height-2 d-flex align-items-center bg-img swiper-slide`}
+                      style={{
+                        backgroundImage: `url(${
+                          'http://localhost:4000/uploads/main/' + single
+                        })`,
+                      }}
+                    ></div>
+                  </Link>
                 );
               })}
           </Swiper>

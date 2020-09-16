@@ -1,4 +1,7 @@
 /*----- 3. Slider style  ------*/
+.purple {
+  color: #a749ff;
+}
 
 .slider-height-1 {
   height: 750px;
@@ -171,17 +174,20 @@
 
 .swiper-slide-active {
   .slider-animated-1 {
-    h3 {
+    h4 {
       -webkit-animation-name: fadeInUp;
               animation-name: fadeInUp;
       -webkit-animation-delay: 1.0s;
               animation-delay: 1.0s;
+              color: gray;
     }
     h1 {
       -webkit-animation-name: fadeInUp;
               animation-name: fadeInUp;
       -webkit-animation-delay: 1.3s;
               animation-delay: 1.3s;
+              color: #a749ff;
+              font-weight: bold;
     }
     h5 {
       -webkit-animation-name: fadeInUp;

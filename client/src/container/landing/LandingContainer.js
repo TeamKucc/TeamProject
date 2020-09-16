@@ -43,7 +43,7 @@ const LandingContainer = ({ match, history }) => {
   };
 
   const onClick = (e) => {
-    console.log(e.target.value);
+    console.log(e.target);
     const cate = e.target.value;
 
     const changeCategory = (cate) => {
