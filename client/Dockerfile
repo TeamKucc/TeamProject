@@ -1,10 +1,14 @@
 # Build in this container
-FROM node:alpine as builder 
+FROM node:12.18-alpine as builder 
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 COPY package.json /usr/src/app
+
+RUN apk update && apk upgrade \
+  && apk --no-cache add --virtual builds-deps build-base python \
+  && yarn add node-gyp node-pre-gyp
 
 
 # Set production flag so dev dependencies aren't installed
@@ -13,6 +17,7 @@ RUN npm install
 COPY . /usr/src/app
 
 # Build the production build
+RUN npm rebuild node-sass --force
 RUN npm run build
 
 # Start and nginx container
