@@ -10,7 +10,6 @@ services:
     environment:
       - MONGO_URI=mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@${MONGO_URI}
       - PORT=4000
-      - NODE_ENV=${NODE_ENV}
     ports:
       - ${PORT}:${PORT}
     command: node src/server.js

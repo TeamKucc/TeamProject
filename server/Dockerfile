@@ -1,10 +1,12 @@
-FROM node:12.18.0 as builder
+FROM node:alpine
+
+RUN npm install -g nodemon
 
 RUN mkdir -p /app/server
 WORKDIR /app/server
 
 COPY package*.json /app/server/
-COPY yarn* /app/server/
+
 
 #! Install the build requirements for bcrypt
 RUN apk update && apk upgrade \
@@ -12,18 +14,8 @@ RUN apk update && apk upgrade \
   && yarn add node-gyp node-pre-gyp
 
 # Install dependencies
-RUN yarn install --production=true
+RUN npm install
 
-# Copy the server files over
-COPY . /app/server/
-
-FROM node:10.9.0-alpine
-
-# Create and set the working directory
-RUN mkdir -p /app/server
-WORKDIR /app/server
-
-# Copy the server from the build container
-COPY --from=builder /app/server /app/server
+EXPOSE 4000
 
 CMD ["node", "index.js"]

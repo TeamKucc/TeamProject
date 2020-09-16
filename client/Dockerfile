@@ -1,14 +1,14 @@
 # Build in this container
-FROM node:12.18.0 as builder
+FROM node:alpine
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-COPY package* /usr/src/app
-COPY yarn* /usr/src/app
+COPY package.json /usr/src/app
+
 
 # Set production flag so dev dependencies aren't installed
-RUN yarn install --production=true
+RUN npm install
 
 COPY . /usr/src/app
 
