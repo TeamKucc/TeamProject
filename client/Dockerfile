@@ -17,7 +17,6 @@ RUN npm install
 COPY . /usr/src/app
 
 # Build the production build
-RUN npm rebuild node-sass --force
 RUN npm run build
 
 # Start and nginx container
