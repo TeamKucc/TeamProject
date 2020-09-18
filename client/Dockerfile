@@ -18,8 +18,6 @@ COPY . /usr/src/app
 
 RUN npm run build
 
-
-
 FROM nginx:1.16.0-alpine
 COPY --from=build /usr/src/app/build /usr/share/nginx/html
 RUN chown nginx.nginx /usr/share/nginx/html/ -R
