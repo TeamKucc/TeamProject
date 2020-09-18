@@ -2,10 +2,9 @@ FROM node:alpine
 
 RUN npm install -g nodemon
 
-RUN mkdir -p /app/server
-WORKDIR /app/server
+WORKDIR /app
 
-COPY package*.json /app/server/
+COPY ./package.json ./
 
 
 #! Install the build requirements for bcrypt
@@ -16,8 +15,8 @@ RUN apk update && apk upgrade \
 # Install dependencies
 RUN npm install
 
-COPY . /app/server
+COPY . .
 
-EXPOSE 4000
+EXPOSE 80
 
 CMD ["node", "index.js"]

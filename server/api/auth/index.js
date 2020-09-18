@@ -15,4 +15,5 @@ router.post('/login', authctrl.login);
 router.post('/business', authctrl.business);
 router.get('/logout', authCheck, authctrl.logout);
 
+
 export default router;
