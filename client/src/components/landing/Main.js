@@ -2,6 +2,13 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Swiper from 'react-id-swiper';
 import Timer from '../common/Timer';
+import main1 from '../../assets/img/main/main1'
+import main2 from '../../assets/img/main/main2'
+import support1 from '../../assets/img/icon/support1'
+import support2 from '../../assets/img/icon/support2'
+import support3 from '../../assets/img/icon/support3'
+
+
 const Main = ({ products }) => {
   let prod = Object.keys(products).map(function (key) {
     return products[key];
@@ -20,21 +27,21 @@ const Main = ({ products }) => {
     },
   };
 
-  const sliderData = ['main1.png', 'main2.png'];
+  const sliderData = [main1, main2];
 
   const featureIconData = [
     {
-      image: 'support-1.png',
+      image: support1,
       title: '무료배송',
       subtitle: '전상품 무료배송',
     },
     {
-      image: 'support-2.png',
+      image: support2,
       title: '24/2',
       subtitle: '모든딜은 2일동안 참여가능',
     },
     {
-      image: 'support-3.png',
+      image: support3,
       title: '딜할인',
       subtitle: '2명이상 딜참여시 할인',
     },
@@ -60,9 +67,7 @@ const Main = ({ products }) => {
                       key={index}
                       className={`single-slider-2 slider-height-2 d-flex align-items-center bg-img swiper-slide`}
                       style={{
-                        backgroundImage: `url(${
-                          'http://localhost:4000/uploads/main/' + single
-                        })`,
+                        backgroundImage: `url(${single})`,
                       }}
                     ></div>
                   </Link>
@@ -86,10 +91,7 @@ const Main = ({ products }) => {
                       <div className="support-content-2">
                         <img
                           className="animated"
-                          src={
-                            'http://localhost:4000/uploads/icon/' + single.image
-                          }
-                          alt=""
+                          src={single.image}
                         />
                         <h5>{single.title}</h5>
                         <p>{single.subtitle}</p>

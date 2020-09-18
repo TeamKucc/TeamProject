@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Swiper from 'react-id-swiper';
+import about1 from '../../assets/img/about/about1'
+import about2 from '../../assets/img/about/about2'
 
 const About = () => {
   return (
@@ -11,7 +13,7 @@ const About = () => {
             <div
               className={`mt-50 single-slider-2 slider-height-5 d-flex align-items-center bg-img`}
               style={{
-                backgroundImage: `url(${'http://localhost:4000/uploads/about/about-1.jpg'})`,
+                backgroundImage: `url(${about1})`,
               }}
             >
               <div className="container">
@@ -35,7 +37,7 @@ const About = () => {
       </div>
       <img
 				className="about mt-150"
-        src={`http://localhost:4000/uploads/about/about-2.jpg`}
+        src={about2}
       />
     </Fragment>
   );
