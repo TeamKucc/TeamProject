@@ -21,6 +21,12 @@ const MobileNavMenu = ({ user, onLogout }) => {
                 로그아웃
               </Link>
             </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/product/landing/all">Product</Link>
+            </li>
           </>
         ) : (
           <>
@@ -29,6 +35,12 @@ const MobileNavMenu = ({ user, onLogout }) => {
             </li>
             <li>
               <Link to={'/register'}>회원가입</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/product/landing/all">Product</Link>
             </li>
           </>
         )}
