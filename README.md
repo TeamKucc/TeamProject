@@ -11,7 +11,7 @@
 * Nodejs, Express, mongoDB Atlas
 * AWS(EC2/S3), RESTful API
 
-#### 웹사이트 화면
+#### 웹사이트 화면 http://54.180.99.71/#Demo
 | 홈 (상단) | 홈 (하단) |
 | ---| --- |
 | <img src="./portfolio/home-1.jpg" width="500px"> | <img src="./portfolio/home-2.jpg" width="500px"> |
