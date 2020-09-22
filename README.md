@@ -11,7 +11,8 @@
 * Nodejs, Express, mongoDB Atlas
 * AWS(EC2/S3), RESTful API
 
-#### 웹사이트 화면 <A href="http://54.180.99.71/"> Demo </A>
+#### 웹사이트 화면
+#Live Demo:<A href="http://teamkuc.tech/">http://teamkuc.tech/</A>
 | 홈 (상단) | 홈 (하단) |
 | ---| --- |
 | <img src="./portfolio/home-1.jpg" width="500px"> | <img src="./portfolio/home-2.jpg" width="500px"> |
