@@ -13,7 +13,7 @@
 * AWS(EC2/S3), RESTful API, NginX, Docker, TravisCI, route53
 
 ### 웹사이트 화면
-* Live Demo [http://teamkuc.tech/](http://teamkuc.tech)
+* Live Demo [http://teamkuc.tech](http://teamkuc.tech)
 
 | 홈 (상단) | 홈 (하단) |
 | ---| --- |
