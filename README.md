@@ -5,12 +5,11 @@
 * 개발기간 : 2020/07/27 ~ 2020/08/21
 * 개발인원 : 김선규, 어성미
 
-
 ### 적용 기술
 * Sass, BootStrap
 * React, Redux, Redux-Saga
 * Nodejs, Express, mongoDB Atlas
-* AWS(EC2/S3), RESTful API, NginX, Docker, TravisCI, route53
+* AWS(EC2/S3), Swiper, RESTful API, NginX, Docker, TravisCI, route53
 
 ### 웹사이트 화면
 * Live Demo [http://teamkuc.tech](http://teamkuc.tech)
